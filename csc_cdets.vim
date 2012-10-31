@@ -14,7 +14,6 @@ cmap dcr<CR> :call DoDumpCR(expand("<cWORD>"))<CR>
 cmap dcrad<CR> :call DoDumpCRAttachmentDownload(expand("%:p"),expand("<cWORD>"))<CR>
 cmap dcra<CR> :call DoDumpCRAttachmentOpen(expand("%:t:r"),expand("<cWORD>"))<CR>
 cmap fcrs<CR> :call DoFixCRChangeState(expand("<cWORD>"))<CR>
-cmap fcrr<CR> :call DoFixCRChangeStateResolved(expand("<cWORD>"))<CR> 
 cmap note<CR> :call DoNote(expand("%:p"))<CR>
 cmap anote<CR> :call DoAddNote(expand("%:p"))<CR>
 cmap afile<CR> :call DoAddFile(expand("<cWORD>"))<CR> 
@@ -32,6 +31,7 @@ nmap ~unitt     <Esc>:call AddUnitTest(expand("%:p"))<CR>
 nmap ~query     <Esc>:call DoFindAskFilters()<CR>
 nmap ~datt      <Esc>:call DoDumpCRAttachmentDownload(expand("%:p"),expand("<cWORD>"))<CR>
 nmap ~csti      <Esc>:call DoFixCRChangeStateInfoReq(expand("%:p"))<CR> 
+nmap ~cstr      <Esc>:call DoFixCRChangeStateResolved(expand("%:p"))<CR> 
 
 let g:CachePath='/ws/lakskuma-bgl/prs/downloads/'
 let g:CrefPath='/users/mitgblds/integration'
@@ -164,18 +164,42 @@ function! DoFixCRChangeStateInfoReq(ddts_dir)
   let s:ddts = "CSC" . strpart (a:ddts_dir, 31, 2) . strpart (a:ddts_dir, 34, 5)
   let s:cmdSubmitter = "cbugval -i " . s:ddts . " Submitter"
   let s:Submitter = substitute(system(s:cmdSubmitter), '[\]\|[[:cntrl:]]', '', 'g')
-  let s:cmdName = "fixcr -i " . s:ddts . " -n I-comments -f " . a:ddts_dir . " Status I Info-awaiting " . s:Submitter 
+  let s:note_title = input("Enter I-comments-title (empty for I-comments):")
+  if empty(s:note_title)
+    let s:note_title = "I-comments"
+  endif
+  let s:cmdName = "fixcr -i " . s:ddts . " -n " . s:note_title . " -f " . a:ddts_dir . " Status I Info-awaiting " . s:Submitter 
   silent execute "0r !" . s:cmdName
 endfunction
 
-function! DoFixCRChangeStateResolved(ddts) "Fixcr..Change State of PR to Resolved
-  let s:cmdName = "fixcr " 
-  echohl Keyword
-  let s:cmdOpt = input("Enter \"fixcr\" options : ","-i " . a:ddts . " Status R Origin \"new code\" Category \"function\" Reason \"missing\" Behavior-changed N")
-  echohl None
-  let s:cmdName .= s:cmdOpt
-  silent execute "0r !" . s:cmdName
-  call DoFindCR()
+" Execute this after typing your R-comments in a new file
+function! DoFixCRChangeStateResolved(ddts_dir) 
+  let s:ddts = "CSC" . strpart (a:ddts_dir, 31, 2) . strpart (a:ddts_dir, 34, 5)
+  let s:origin1 = input("Enter Origin (requirements|design|base code|new code|bad codefix|porting damage|synch/merge damage):")
+  if empty(s:origin1)
+    let s:origin1 = "base code"
+  endif
+  let s:origin = '''' . s:origin1 . ''''
+  if (s:origin1 == "bad codefix" ) 
+    let s:badcodeid = input("Enter bad-code-fix id:")
+    let s:origin = s:origin . " BadcodefixId " . s:badcodeid
+  endif
+  let s:category = input("Enter Category (algorithm/logic|datahandling/initializ|error handling|external/userinterface|function|internalinterface|standards|timing/serialization|user documentation):")
+  if empty(s:category)
+    let s:category = "algorithm/logic"
+  endif
+  let s:reason = input("Enter reason (extra|missing|not clear|wrong):")
+  if empty(s:reason)
+    let s:reason = "missing"
+  endif
+  let s:note_title = input("Enter R-comments-title (R-comments):")
+  if empty(s:note_title)
+    let s:note_title = "R-comments"
+  endif
+  let s:cmdName = '!fixcr -i ' . s:ddts . ' -n ' . s:note_title . ' -f ' . a:ddts_dir . ' Status R Origin ' . s:origin . ' Category ''' . s:category . ''' Reason ''' . s:reason . ''' Behavior-changed N Dev-escape N Dev-escape-activity Not-A-Dev-Escape'
+  echo "Executing " . s:cmdName
+  let s:discard = input ("You can press ^C now if you find the above command not correct or type y:")
+  execute "0r " . s:cmdName
 endfunction
 
 function! DoNote(ddts_dir) "Add notes to PR. Does not attach. Use DoAddNote later
