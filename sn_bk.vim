@@ -1,5 +1,6 @@
 cmap bke<CR> :call DoBKEdit(expand("%"))<CR>
 cmap bka<CR> :call DoBKAnnotate(expand("%"))<CR>
+cmap bkra<CR> :call DoBKRevAnnotate()<CR>
 cmap bkl<CR> :call DoBKLog(expand("%"))<CR>
 cmap bks<CR> :call ShowBKSfiles()<CR>
 cmap bkd<CR> :call ShowBKDiff(expand("%"))<CR>
@@ -23,6 +24,25 @@ function! DoBKAnnotate(filename)
   echo "Current line " s:lnum
   execute "new annotate"
   let s:cmdName = "bk annotate -Adur " . a:filename
+  silent execute "0r !" . s:cmdName
+  set nomodified
+  setlocal buftype=nofile
+  setlocal bufhidden=hide
+  setlocal noswapfile
+  "execute "normal buffer annotate"
+  let s:cmdName = "normal " . s:lnum . "G"
+  execute s:cmdName
+endfunction
+
+function! DoBKRevAnnotate()
+  if bufexists("annotate")
+        execute "bd! annotate"
+  endif
+  let s:lnum = line(".")
+  echo "Current line " s:lnum
+  let s:cmdOpt = input("Enter Revision number:")
+  execute "new annotate"
+  let s:cmdName = "bk annotate -Adur -r" . s:cmdOpt . " " . g:currentLoggedFile
   silent execute "0r !" . s:cmdName
   set nomodified
   setlocal buftype=nofile
