@@ -1,12 +1,15 @@
+"What i use:
 cmap bke<CR> :call DoBKEdit(expand("%"))<CR>
 cmap bka<CR> :call DoBKAnnotate(expand("%"))<CR>
 cmap bkra<CR> :call DoBKRevAnnotate()<CR>
 cmap bkl<CR> :call DoBKLog(expand("%"))<CR>
-cmap bks<CR> :call ShowBKSfiles()<CR>
 cmap bkd<CR> :call ShowBKDiff(expand("%"))<CR>
 cmap bkrd<CR> :call DoBKRevDiff(expand("<cWORD>"))<CR>
+cmap bkc<CR>  :call DoListCsetFiles(expand("<cWORD>"))<CR>
+
+"Historic
+cmap bks<CR> :call ShowBKSfiles()<CR>
 cmap bkfd<CR> :call ShowBKFileDiff(expand("<cfile>"))<CR>
-cmap bkc<CR> :call ShowBKChange()<CR>
 cmap bkrs<CR> :call ShowBKRset(expand("<cWORD>"))<CR>
 cmap bkrfd<CR> :call ShowBKRsetFileDiff(expand("<cWORD>"))<CR>
 
@@ -90,6 +93,21 @@ function! DoBKRevDiff(revision)
   execute "wincmd l"
   execute "diffthis"
   execute "normal 1G"
+endfunction
+
+function! DoListCsetFiles(crevision)
+  if bufexists("cset_files")
+        execute "bd! cset_files"
+  endif
+  let s:cmdName = "echo " . a:crevision . " | cut -c11- | sed 's/,//' "
+  let s:revision = system(s:cmdName)
+  execute "vnew cset_files"
+  let s:cmdName = "bk cset -r@" . s:revision
+  silent execute "0r !" . s:cmdName
+  set nomodified
+  setlocal buftype=nofile
+  setlocal bufhidden=hide
+  setlocal noswapfile
 endfunction
 
 function! ShowBKRset(revno)
