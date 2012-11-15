@@ -6,6 +6,7 @@ cmap bkl<CR> :call DoBKLog(expand("%"))<CR>
 cmap bkd<CR> :call ShowBKDiff(expand("%"))<CR>
 cmap bkrd<CR> :call DoBKRevDiff(expand("<cWORD>"))<CR>
 cmap bkc<CR>  :call DoListCsetFiles(expand("<cWORD>"))<CR>
+cmap bkcrd<CR> :call DoBKCsetRevDiff(expand("<cWORD>"))<CR>
 
 "Historic
 cmap bks<CR> :call ShowBKSfiles()<CR>
@@ -69,7 +70,8 @@ function! DoBKLog(filename)
 endfunction
 
 function! DoBKRevDiff(revision)
-  let s:parent_rev = system("bk diffs -u -R" . a:revision . " " . g:currentLoggedFile . " | head -1 | awk ' { print $3 } ' ")
+  let s:cmdName = "bk diffs -u -R" . a:revision . " " . g:currentLoggedFile . " | head -1 | awk ' { print $3 } ' "
+  let s:parent_rev = system(s:cmdName)
   let s:parent_rev = substitute(s:parent_rev, '\s*\n\s*', '', '')
   let s:pfile = "tmpfile" 
   let s:cmdName = "bk get -p -r" . s:parent_rev . " " . g:currentLoggedFile . " > " . s:pfile
@@ -108,6 +110,20 @@ function! DoListCsetFiles(crevision)
   setlocal buftype=nofile
   setlocal bufhidden=hide
   setlocal noswapfile
+endfunction
+
+function! DoBKCsetRevDiff(rev_file_line)
+  let s:cmdName = "echo '" . a:rev_file_line . "' | cut -d'|' -f 1"
+  let g:currentLoggedFile = system(s:cmdName)
+  let g:currentLoggedFile = substitute ( g:currentLoggedFile, "\n" , '', "g")
+  let s:cmdName = "echo '" . a:rev_file_line . "' | cut -d'|' -f 2"
+  let s:revision = system(s:cmdName)
+  echo g:currentLoggedFile
+  echo s:revision
+  let s:cmdName = 'call DoBKRevDiff("' . s:revision . '")'
+  let s:cmdName = substitute ( s:cmdName, "\n" , '', "g")
+  echo s:cmdName
+  execute s:cmdName
 endfunction
 
 function! ShowBKRset(revno)
