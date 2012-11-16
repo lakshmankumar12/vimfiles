@@ -5,8 +5,13 @@ cmap bkra<CR> :call DoBKRevAnnotate()<CR>
 cmap bkl<CR> :call DoBKLog(expand("%"))<CR>
 cmap bkd<CR> :call ShowBKDiff(expand("%"))<CR>
 cmap bkrd<CR> :call DoBKRevDiff(expand("<cWORD>"))<CR>
+cmap bkrc<CR> :call DoBKRevCsetFiles(expand("<cWORD>"))<CR>
 cmap bkc<CR>  :call DoListCsetFiles(expand("<cWORD>"))<CR>
 cmap bkcrd<CR> :call DoBKCsetRevDiff(expand("<cWORD>"))<CR>
+"I make typo's often .. so let all freq combos too be the same!
+cmap bkrcd<CR> :call DoBKCsetRevDiff(expand("<cWORD>"))<CR> 
+cmap bkrdc<CR> :call DoBKCsetRevDiff(expand("<cWORD>"))<CR> 
+cmap bkcdr<CR> :call DoBKCsetRevDiff(expand("<cWORD>"))<CR> 
 
 "Historic
 cmap bks<CR> :call ShowBKSfiles()<CR>
@@ -95,6 +100,22 @@ function! DoBKRevDiff(revision)
   execute "wincmd l"
   execute "diffthis"
   execute "normal 1G"
+endfunction
+
+function! DoBKRevCsetFiles(revision)
+  if bufexists("cset_files")
+        execute "bd! cset_files"
+  endif
+  let s:cmdName = "bk r2c -r" . a:revision . " " . g:currentLoggedFile 
+  let s:cset_rev = system(s:cmdName)
+  echo s:cset_rev
+  execute "vnew cset_files"
+  silent execute "0r !bk cset -r@" . s:cset_rev
+  silent execute "0r !bk changes -r@" . s:cset_rev
+  set nomodified
+  setlocal buftype=nofile
+  setlocal bufhidden=hide
+  setlocal noswapfile
 endfunction
 
 function! DoListCsetFiles(crevision)
