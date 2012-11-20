@@ -30,6 +30,7 @@ nmap ~ask       <Esc>:call AskDumpCR()<CR>
 nmap ~unitt     <Esc>:call AddUnitTest(expand("%:p"))<CR>
 nmap ~query     <Esc>:call DoFindAskFilters()<CR>
 nmap ~datt      <Esc>:call DoDumpCRAttachmentDownload(expand("%:p"),expand("<cWORD>"))<CR>
+nmap ~dhtt      <Esc>:call DoDumpCRAttachmentURLS(expand("%:p"))<CR>
 nmap ~csti      <Esc>:call DoFixCRChangeStateInfoReq(expand("%:p"))<CR> 
 nmap ~cstr      <Esc>:call DoFixCRChangeStateResolved(expand("%:p"))<CR> 
 
@@ -138,6 +139,16 @@ function! DoDumpCRAttachmentDownload(ddts_dir,attachment) "Dumps CR attachment t
   silent execute s:cmdName
   redraw!
 endfunction
+
+function! DoDumpCRAttachmentURLS(ddts_dir) "Dumps all http links in CR attachment to a file 
+  let s:ddts = "CSC" . strpart (a:ddts_dir, 31, 2) . strpart (a:ddts_dir, 34, 5)
+  let s:filename_full = g:CachePath . strpart(s:ddts,3,2) . "/" . strpart(s:ddts,5,5) . "/att_links"
+  let s:cmdName =  "!dumpcr -e -a 'http*' " . s:ddts . " > " . s:filename_full  
+  echo "executing " . s:cmdName
+  silent execute s:cmdName
+  redraw!
+endfunction
+
 
 function! DoDumpCRAttachmentOpen(ddts,attachment) "Opens CR attachement in a new tab after downloading it
   let s:filename_full = g:CachePath . a:ddts . "_" . a:attachment

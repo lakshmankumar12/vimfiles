@@ -8,7 +8,7 @@ nmap <special> <F8> :call ViewNormalLogRealign()<CR>
 nmap ~nlog     <Esc>:call ViewNormalLog()<CR>
 nmap ~nrea     <Esc>:call ViewNormalLogRealign()<CR>
 nmap <Page-Down>  <Esc>:call ScrollLogDown()<CR>
-nmap ~findd    <Esc>:call ListFilesInThisDir()<CR>
+nmap ~fdd    <Esc>:call ListFilesInThisDir()<CR>
 
 function! ViewNormalLog()
   execute "only"
