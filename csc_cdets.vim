@@ -27,12 +27,15 @@ nmap ~anly      <Esc>:call OpenAnalysis(expand("%:p"))<CR>
 nmap ~note      <Esc>:call DoNote(expand("%:p"))<CR>
 nmap ~anote     <Esc>:call DoAddNote(expand("%:p"))<CR>
 nmap ~ask       <Esc>:call AskDumpCR()<CR>
+nmap ~asl       <Esc>:call AskDumpCRLite()<CR>
 nmap ~unitt     <Esc>:call AddUnitTest(expand("%:p"))<CR>
 nmap ~query     <Esc>:call DoFindAskFilters()<CR>
 nmap ~datt      <Esc>:call DoDumpCRAttachmentDownload(expand("%:p"),expand("<cWORD>"))<CR>
 nmap ~dhtt      <Esc>:call DoDumpCRAttachmentURLS(expand("%:p"))<CR>
 nmap ~csti      <Esc>:call DoFixCRChangeStateInfoReq(expand("%:p"))<CR> 
 nmap ~cstr      <Esc>:call DoFixCRChangeStateResolved(expand("%:p"))<CR> 
+nmap ~cstd      <Esc>:call DoFixCRChangeStateDuplicate(expand("%:p"))<CR> 
+nmap ~refr      <Esc>:call RefreshCR(expand("<cWORD>"))<CR>
 
 let g:CachePath='/ws/lakskuma-bgl/prs/downloads/'
 let g:CrefPath='/users/mitgblds/integration'
@@ -127,6 +130,25 @@ function! AskDumpCR()
   call DoDumpCR(s:cmdOpt)
 endfunction
 
+function! RefreshCR(ddts)
+  let s:dir_name = g:CachePath . strpart(a:ddts,3,2) . "/" . strpart(a:ddts,5,5) 
+  let s:filename_full = s:dir_name . "/bug_op"
+  silent execute "!rm " . s:filename_full
+  let s:cmdName =  "!dumpcr " . a:ddts . " >> " . s:filename_full 
+  silent execute s:cmdName
+  silent execute "e! " . s:filename_full
+endfunction
+
+function! AskDumpCRLite()
+  let s:ddts = input("Enter Cdets-number (Lite):")
+  let s:dir_name = g:CachePath . strpart(s:ddts,3,2) . "/" . strpart(s:ddts,5,5) 
+  let s:filename_full = s:dir_name . "/bug_op"
+  silent execute "tablast"
+  silent execute "tabnew " . s:filename_full
+  setlocal noswapfile
+  set nowrap
+endfunction
+
 function! DoDumpCRAttachmentDownload(ddts_dir,attachment) "Dumps CR attachment to a file in background
   let s:ddts = "CSC" . strpart (a:ddts_dir, 31, 2) . strpart (a:ddts_dir, 34, 5)
   let s:cmdOpt = input("Enter Attachment-Folder-number:")
@@ -146,7 +168,9 @@ function! DoDumpCRAttachmentURLS(ddts_dir) "Dumps all http links in CR attachmen
   let s:cmdName =  "!dumpcr -e -a 'http*' " . s:ddts . " > " . s:filename_full  
   echo "executing " . s:cmdName
   silent execute s:cmdName
-  redraw!
+  silent execute "tabnew " . s:filename_full
+  setlocal noswapfile
+  set wrap
 endfunction
 
 
@@ -213,6 +237,19 @@ function! DoFixCRChangeStateResolved(ddts_dir)
   execute "0r " . s:cmdName
 endfunction
 
+function! DoFixCRChangeStateDuplicate(ddts_dir) 
+  let s:ddts = "CSC" . strpart (a:ddts_dir, 31, 2) . strpart (a:ddts_dir, 34, 5)
+  let s:duplicateof = input("Enter Duplicate-of:")
+  let s:note_title = input("Enter D-comments-title (D-comments):")
+  if empty(s:note_title)
+    let s:note_title = "D-comments"
+  endif
+  let s:cmdName = '!fixcr -i ' . s:ddts . ' -n ' . s:note_title . ' -f ' . a:ddts_dir . ' Status D Duplicate-of ' . s:duplicateof
+  echo "Executing " . s:cmdName
+  let s:discard = input ("You can press ^C now if you find the above command not correct or type y:")
+  execute "0r " . s:cmdName
+endfunction
+
 function! DoNote(ddts_dir) "Add notes to PR. Does not attach. Use DoAddNote later
   let s:ddts = "CSC" . strpart (a:ddts_dir, 31, 2) . strpart (a:ddts_dir, 34, 5)
   let s:noteName = input("Enter Note-Name:")
@@ -222,7 +259,7 @@ endfunction
 
 function! DoAddNote(ddts_dir) "Add notes to PR. 
   let s:ddts = "CSC" . strpart (a:ddts_dir, 31, 2) . strpart (a:ddts_dir, 34, 5)
-  let s:type = input("Enter type (R-comments/N-comments/D-comments/A-comments/Unit-test):")
+  let s:type = input("Enter type (R-comments/N-comments/D-comments/A-comments/Unit-test/Eng-notes):")
   let s:title = input("Enter title:")
   let s:cmdName = '!addnote '  . '-m -t ' . s:type . ' ' . s:ddts . ' "' . s:title . '" ' . a:ddts_dir
   silent execute s:cmdName
