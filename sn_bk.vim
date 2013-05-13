@@ -7,6 +7,7 @@ cmap bkd<CR> :call ShowBKDiff(expand("%"))<CR>
 cmap bkrd<CR> :call DoBKRevDiff(expand("<cWORD>"))<CR>
 cmap bkrc<CR> :call DoBKRevCsetFiles(expand("<cWORD>"))<CR>
 cmap bkc<CR>  :call DoListCsetFiles(expand("<cWORD>"))<CR>
+cmap bkrask<CR> :call DoAskAndDiff(expand("<cWORD>"))<CR>
 cmap bkcrd<CR> :call DoBKCsetRevDiff(expand("<cWORD>"))<CR>
 "I make typo's often .. so let all freq combos too be the same!
 cmap bkrcd<CR> :call DoBKCsetRevDiff(expand("<cWORD>"))<CR> 
@@ -74,23 +75,27 @@ function! DoBKLog(filename)
   execute "normal gg"
 endfunction
 
-function! DoBKRevDiff(revision)
-  let s:cmdName = "bk diffs -u -R" . a:revision . " " . g:currentLoggedFile . " | head -1 | awk ' { print $3 } ' "
-  let s:parent_rev = system(s:cmdName)
-  let s:parent_rev = substitute(s:parent_rev, '\s*\n\s*', '', '')
+function! DoAskAndDiff(filename)
+  echo "Diff for file" . a:filename
+  let s:revision1 = input("Enter Left Revision:")
+  let s:revision2 = input("Enter Right Revision:")
+  call DoBKRevDiffAnyTwoRev(a:filename, s:revision1, s:revision2)
+endfunction
+
+function! DoBKRevDiffAnyTwoRev(file,revision1,revision2)
   let s:pfile = "tmpfile" 
-  let s:cmdName = "bk get -p -r" . s:parent_rev . " " . g:currentLoggedFile . " > " . s:pfile
+  let s:cmdName = "bk get -p -r" . a:revision1 . " " . a:file . " > " . s:pfile
   silent execute system(s:cmdName)
   let s:pfile2 = "tmpfile2" 
-  let s:cmdName = "bk get -p -r" . a:revision . " " . g:currentLoggedFile . " > " . s:pfile2
+  let s:cmdName = "bk get -p -r" . a:revision2 . " " . a:file . " > " . s:pfile2
   silent execute system(s:cmdName)
-  execute "tabnew " . a:revision
+  execute "tabnew " . a:revision2
   execute "0r " . s:pfile2
   set nomodified
   setlocal buftype=nofile
   setlocal bufhidden=hide
   setlocal noswapfile
-  execute "vnew " . s:parent_rev
+  execute "vnew " . a:revision1
   execute "0r " . s:pfile
   set nomodified
   setlocal buftype=nofile
@@ -100,6 +105,13 @@ function! DoBKRevDiff(revision)
   execute "wincmd l"
   execute "diffthis"
   execute "normal 1G"
+endfunction
+
+function! DoBKRevDiff(revision)
+  let s:cmdName = "bk diffs -u -R" . a:revision . " " . g:currentLoggedFile . " | head -1 | awk ' { print $3 } ' "
+  let s:parent_rev = system(s:cmdName)
+  let s:parent_rev = substitute(s:parent_rev, '\s*\n\s*', '', '')
+  call DoBKRevDiffAnyTwoRev(g:currentLoggedFile,s:parent_rev, a:revision)
 endfunction
 
 function! DoBKRevCsetFiles(revision)
