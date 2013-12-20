@@ -68,7 +68,7 @@ function! OpenCdetsListFile()
 endfunction
 
 function! DoFindCR()
-  let s:cmdName = '!findcr -p CSC.asr5k,CSC.asr5k.general -h -d ";" -D "|" -u lakskuma -s NIAO -w ' . g:InterestedFields . ' -o Severity,Attribute,Status,Est-fix-date -f ' . g:FormatFields . ' > ' . g:tmpCscFile
+  let s:cmdName = '!findcr -p CSC.asr5k,CSC.asr5k.general -h -d ";" -D "|" -u lakskuma -s NMIAO -w ' . g:InterestedFields . ' -o Severity,Attribute,Status,Est-fix-date -f ' . g:FormatFields . ' > ' . g:tmpCscFile
   silent execute s:cmdName
   call OpenCdetsListFile()
 endfunction
@@ -292,9 +292,13 @@ function! AddUnitTest(ddts_dir)
   let s:ddts = "CSC" . strpart (a:ddts_dir, 31, 2) . strpart (a:ddts_dir, 34, 5)
   let s:dir_name = g:CachePath . strpart(s:ddts,3,2) . "/" . strpart(s:ddts,5,5) 
   let s:unit_test = s:dir_name . "/unit_test"
-  let s:cmdName = "!cp /ws/lakskuma-bgl/work/notes/unit_test_template " . s:unit_test
-  silent execute s:cmdName
-  execute "tabnew " . s:unit_test
+  if filereadable(s:unit_test)
+    echo "Unit-test file " . s:unit_test . "already exists for this defect"
+  else 
+    let s:cmdName = "!cp /ws/lakskuma-bgl/work/notes/unit_test_template " . s:unit_test
+    silent execute s:cmdName
+    execute "tabnew " . s:unit_test
+  endif
 endfunction
 
 function! ListFiles(ddts_dir)
