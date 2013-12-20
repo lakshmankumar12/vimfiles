@@ -1,18 +1,19 @@
 "What i use:
 cmap bke<CR> :call DoBKEdit(expand("%"))<CR>
 cmap bka<CR> :call DoBKAnnotate(expand("%"))<CR>
-cmap bkra<CR> :call DoBKRevAnnotate()<CR>
 cmap bkl<CR> :call DoBKLog(expand("%"))<CR>
 cmap bkd<CR> :call ShowBKDiff(expand("%"))<CR>
 cmap bkrd<CR> :call DoBKRevDiff(expand("<cWORD>"))<CR>
 cmap bkrc<CR> :call DoBKRevCsetFiles(expand("<cWORD>"))<CR>
-cmap bkc<CR>  :call DoListCsetFiles(expand("<cWORD>"))<CR>
-cmap bkrask<CR> :call DoAskAndDiff(expand("<cWORD>"))<CR>
-cmap bkcrd<CR> :call DoBKCsetRevDiff(expand("<cWORD>"))<CR>
+cmap bkra<CR> :call DoBKRevAnnotate()<CR>
 "I make typo's often .. so let all freq combos too be the same!
 cmap bkrcd<CR> :call DoBKCsetRevDiff(expand("<cWORD>"))<CR> 
 cmap bkrdc<CR> :call DoBKCsetRevDiff(expand("<cWORD>"))<CR> 
 cmap bkcdr<CR> :call DoBKCsetRevDiff(expand("<cWORD>"))<CR> 
+"Not that often
+cmap bkc<CR>  :call DoListCsetFiles(expand("<cWORD>"))<CR>
+cmap bkrask<CR> :call DoAskAndDiff(expand("<cWORD>"))<CR>
+cmap bkcrd<CR> :call DoBKCsetRevDiff(expand("<cWORD>"))<CR>
 
 "Historic
 cmap bks<CR> :call ShowBKSfiles()<CR>
