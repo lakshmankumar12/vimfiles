@@ -9,6 +9,18 @@ nmap ~nlog     <Esc>:call ViewNormalLog()<CR>
 nmap ~nrea     <Esc>:call ViewNormalLogRealign()<CR>
 nmap <Page-Down>  <Esc>:call ScrollLogDown()<CR>
 nmap ~fdd    <Esc>:call ListFilesInThisDir()<CR>
+nmap ~name        <Esc>:echo expand("%:p")<CR>
+nmap ~nosyn       <Esc>:set syntax=<CR>
+nmap ~ftb         <Esc>:call FoldTillTopBrace()<CR>
+
+function! FoldTillTopBrace()
+  execute "normal mak$mb"
+  let l:a=getline(".")[col(".") - 1]
+  if l:a == '}'
+    execute "normal %"
+  endif
+  execute "normal [{j0zf`b`a"
+endfunction
 
 function! ViewNormalLog()
   execute "only"
