@@ -12,6 +12,7 @@ nmap ~fdd    <Esc>:call ListFilesInThisDir()<CR>
 nmap ~name        <Esc>:echo expand("%:p")<CR>
 nmap ~nosyn       <Esc>:set syntax=<CR>
 nmap ~ftb         <Esc>:call FoldTillTopBrace()<CR>
+nmap ~cmd         <Esc>:call GetCommandOutputOnNewTab()<CR>
 
 function! FoldTillTopBrace()
   execute "normal mak$mb"
@@ -75,6 +76,16 @@ endfunction"
 
 function! ListFilesInThisDir()
   execute "0r !find ."
+  set nomodified
+  setlocal buftype=nofile
+  setlocal bufhidden=hide
+  setlocal noswapfile
+endfunction
+
+function! GetCommandOutputOnNewTab()
+  let s:cmdName = input("Enter command:")
+  execute "tabnew"
+  silent execute "0r !" . s:cmdName
   set nomodified
   setlocal buftype=nofile
   setlocal bufhidden=hide
