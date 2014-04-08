@@ -3,8 +3,9 @@ cmap gitb<CR> :call DoGitBlame(expand("%"))<CR>
 cmap gitl<CR> :call DoGitLog(expand("%"))<CR>
 cmap gitd<CR> :call ShowGitCurrDiff(expand("%"))<CR>
 cmap gitrd<CR> :call ShowGitRevDiff(expand("<cWORD>"))<CR>
-cmap gitrc<CR> :call DoGitRevCommitFiles(expand("<cWORD>"))<CR>
-cmap gits<CR> :call DoGitShowStatus()<CR>
+cmap gitc<CR> :call DoGitRevCommitFiles(expand("<cWORD>"))<CR>
+cmap gitshow<CR> :call DoGitShowStatus()<CR>
+cmap gitset<CR> :call DoGitSetStatus()<CR>
 cmap gitra<CR> :call DoGitRevAnnotate()<CR>
 "I make typo's often .. so let all freq combos too be the same!
 cmap gitrcd<CR> :call DoGitCsetRevDiff(expand("<cWORD>"))<CR> 
@@ -30,19 +31,18 @@ function! DoGitBlame(filename)
 endfunction
 
 function! DoGitRevAnnotate()
-  if bufexists("annotate")
-        execute "bd! annotate"
+  let s:rev = input("Enter revision:")
+  let s:buf_name = g:currentLoggedFile . "_" . s:rev
+  if bufexists(s:buf_name)
+        execute "bd! " . s:buf_name
   endif
-  execute "new annotate"
+  execute "tabnew " . s:buf_name
   let s:cmdName = "git blame " . g:currentRevision . " " . g:currentLoggedFile
   silent execute "0r !" . s:cmdName
   set nomodified
   setlocal buftype=nofile
   setlocal bufhidden=hide
   setlocal noswapfile
-  "execute "normal buffer annotate"
-  let s:cmdName = "normal " . s:lnum . "G"
-  execute s:cmdName
 endfunction
 
 function! DoGitLog(filename)
@@ -137,6 +137,11 @@ function! DoGitShowStatus()
   echo s:a
   let s:a = "Current Revision: " . g:currentRevision
   echo s:a
+endfunction
+
+function! DoGitSetStatus()
+  let s:rev = input("Enter revision:")
+  let g:currentRevision = s:rev
 endfunction
 
 function! DoGitCsetRevDiff(other_file)
