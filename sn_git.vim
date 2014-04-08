@@ -6,7 +6,7 @@ cmap gitrd<CR> :call ShowGitRevDiff(expand("<cWORD>"))<CR>
 cmap gitc<CR> :call DoGitRevCommitFiles(expand("<cWORD>"))<CR>
 cmap gitshow<CR> :call DoGitShowStatus()<CR>
 cmap gitset<CR> :call DoGitSetStatus()<CR>
-cmap gitra<CR> :call DoGitRevAnnotate()<CR>
+cmap gitrb<CR> :call DoGitRevBlame()<CR>
 "I make typo's often .. so let all freq combos too be the same!
 cmap gitrcd<CR> :call DoGitCsetRevDiff(expand("<cWORD>"))<CR> 
 cmap gitrdc<CR> :call DoGitCsetRevDiff(expand("<cWORD>"))<CR> 
@@ -30,14 +30,14 @@ function! DoGitBlame(filename)
   execute s:cmdName
 endfunction
 
-function! DoGitRevAnnotate()
+function! DoGitRevBlame()
   let s:rev = input("Enter revision:")
   let s:buf_name = g:currentLoggedFile . "_" . s:rev
   if bufexists(s:buf_name)
         execute "bd! " . s:buf_name
   endif
   execute "tabnew " . s:buf_name
-  let s:cmdName = "git blame " . g:currentRevision . " " . g:currentLoggedFile
+  let s:cmdName = "git blame " . s:rev . " " . g:currentLoggedFile
   silent execute "0r !" . s:cmdName
   set nomodified
   setlocal buftype=nofile
