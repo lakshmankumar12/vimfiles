@@ -32,7 +32,7 @@ endfunction
 
 function! DoGitRevBlame()
   let s:rev = input("Enter revision:")
-  let s:buf_name = g:currentLoggedFile . "_" . s:rev
+  let s:buf_name = g:currentLoggedFile . "_" . s:rev . "_blame"
   if bufexists(s:buf_name)
         execute "bd! " . s:buf_name
   endif
