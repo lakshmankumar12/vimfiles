@@ -40,30 +40,54 @@ map - <Esc>:cp<CR>
 au FileType make setlocal noexpandtab
 
 "for the ShowFunc.vim plugin.
-let g:showfuncctagsbin = "usr/local/timostools/ctags"
+let g:showfuncctagsbin = "/home/lnara002/software/ctags/ctags-5.8/postinstall/bin/ctags"
 let g:ShowFuncScanType = "current"
 
 "for the ctags.vim plugin.
-let g:ctags_path='/usr/local/timostools/ctags'
+let g:ctags_path="/home/lnara002/software/ctags/ctags-5.8/postinstall/bin/ctags"
 let g:ctags_statusline=1
 let g:ctags_title=0
 let generate_tags=1
 
-if has("gui_running")
-  set bg=light
-else
-  set bg=dark
-endif
+set bg=dark
 
 function! DumpToClipBoard()
-  call writefile(split(@","\n"), '/dev/clipboard')
+  "call writefile(split(@","\n"), '/dev/clipboard')
+  call system("xsel -i -b", getreg("\""))
+  call system("xsel -i -b", getreg("\""))
 endfunction
+
+function! Panosgrep(grepMatter)
+  echo "grepping " . a:grepMatter
+  call system("panosgrep panos ". a:grepMatter)
+  cf grepOp
+endfunction
+
+function! PanosAskGrep(grepMatter)
+  let s:matter = input("what to grep:",a:grepMatter)
+  let s:directory = input("dir:","lte_")
+  let s:ignorecase = input("ic:","n")
+  let s:ic = ""
+  if s:ignorecase == "y"
+    s:ic = "-i "
+  endif 
+  let s:cmd="panosgrep " . s:ic . "'" . s:directory . "' " . s:matter
+  echo "Running " . s:cmd
+  call system(s:cmd)
+  cf grepOp
+endfunction 
+
 
 cmap p$$<CR> call DumpToClipBoard()<CR>
 map ~clip :call DumpToClipBoard()<CR>
 map ~cip :call DumpToClipBoard()<CR>
 map <F2> :call DumpToClipBoard()<CR>
+map <F3> :call PanosAskGrep(expand("<cword>"))<CR>
+map <F5> :call PanosAskGrep("")<CR>
 
+vmap <C-c> y:call DumpToClipBoard()<CR> 
 
+let @r="lte_common|lte_cpm|lte_mgmt|lte_mscp|lte_pmip|mc_red"
 
+set csprg='/home/lnara002/software/cscope/cscope-15.8a/postinstall/bin/cscope'
 
