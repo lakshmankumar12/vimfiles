@@ -1,8 +1,8 @@
 "What i use:
 cmap cvsd<CR> :call ShowCvsCurrDiff(expand("%"))<CR>
+cmap cvsa<CR> :call DoCvsAnnotate(expand("%"))<CR>
+cmap cvslr<CR> :call DoCvsLogRevision(expand("<cWORD>"))<CR>
 
-"cmap cvsa<CR> :call DoCvsAnnotate(expand("%"))<CR>
-"cmap cvsl<CR> :call DoCvsLog(expand("%"))<CR>
 "cmap gitrd<CR> :call ShowGitRevDiff(expand("<cWORD>"))<CR>
 "cmap gitc<CR> :call DoGitRevCommitFiles(expand("<cWORD>"))<CR>
 "cmap gitshow<CR> :call DoGitShowStatus()<CR>
@@ -42,4 +42,38 @@ function! ShowCvsCurrDiff(filename)
   execute "normal ]c"
 endfunction
 
+function! DoCvsAnnotate(filename)
+  let s:filename_t = expand("%:t")
+  let s:filename_h = expand("%:h")
+  let g:currentLoggedFile = s:filename_h . "/" . s:filename_t
+  if bufexists("annotate")
+        execute "bd! annotate"
+  endif
+  let s:lnum = line(".")
+  echo "Current line " s:lnum
+  execute "new annotate"
+  let s:cmdName = "grep '\\<" . s:filename_t . "\\>' " . s:filename_h . "/CVS/Entries | awk -F/ '{print $3}'"
+  let s:file_rev = system(s:cmdName)
+  let s:file_rev = substitute(s:file_rev, '^\s*\(.\{-}\)\s*\n*$', '\1', '')
+  let s:cmdName = "cvs annotate -r" . s:file_rev ." " . g:currentLoggedFile
+  silent execute "0r !" . s:cmdName
+  set nomodified
+  setlocal buftype=nofile
+  setlocal bufhidden=hide
+  setlocal noswapfile
+  "execute "normal buffer annotate"
+  let s:cmdName = "normal " . s:lnum . "G"
+  execute s:cmdName
+endfunction
 
+
+function! DoCvsLogRevision(revision)
+  execute "tabnew " . g:currentLoggedFile . "_log"
+  let s:cmdName = "cvs log -r" . a:revision . "-N " . g:currentLoggedFile
+  silent execute "0r !" . s:cmdName
+  set nomodified
+  setlocal buftype=nofile
+  setlocal bufhidden=hide
+  setlocal noswapfile
+  execute "normal gg"
+endfunction
