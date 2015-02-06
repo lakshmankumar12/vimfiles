@@ -69,7 +69,7 @@ endfunction
 
 function! DoCvsLogRevision(revision)
   execute "tabnew " . g:currentLoggedFile . "_log"
-  let s:cmdName = "cvs log -r" . a:revision . "-N " . g:currentLoggedFile
+  let s:cmdName = "cvs log -r" . a:revision . " -N " . g:currentLoggedFile
   silent execute "0r !" . s:cmdName
   set nomodified
   setlocal buftype=nofile
