@@ -1,8 +1,3 @@
-"Author: Ritesh Agarwal
-"Email : rritesha@cisco.com,riteshja88@gmail.com
-"Created : 5-May-2012
-"Last edited : 20-June-2012
-
 nmap <special> <F8> :call ViewNormalLogRealign()<CR>
 
 nmap ~nlog     <Esc>:call ViewNormalLog()<CR>
@@ -90,4 +85,9 @@ function! GetCommandOutputOnNewTab()
   setlocal buftype=nofile
   setlocal bufhidden=hide
   setlocal noswapfile
+  redir! > /tmp/vimtempfile
+  echo "Buffer number is " . bufnr('%')
+  redir END
+  silent execute "0r !cat /tmp/vimtempfile"
+  silent 
 endfunction
