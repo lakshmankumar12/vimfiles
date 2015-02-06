@@ -1,0 +1,6 @@
+git config alias.meld '!/ws/lakskuma-bgl/anyoneszone/git-meld/git-meld.pl'
+git config alias.changesr '!(git fetch ; git log ..$(git branch -lvv | grep "^*" | cut -d[ -f2 | cut -d] -f1 | cut -d: -f1))'
+git config alias.cset 'diff-tree --no-commit-id --name-only -r'
+git config alias.model '!(git submodule status | grep -v "^-" | awk '"'"' {print $2 }'"'"' | awk -F\/ '"'"' {print $2} '"'"')'
+git config alias.changesrv '!(git fetch ; remote=$(git branch -lvv | grep "^*" | cut -d[ -f2 | cut -d] -f1 | cut -d: -f1); echo "remote: $remote csets" ; git log ..$remote)'
+
