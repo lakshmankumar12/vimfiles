@@ -20,10 +20,10 @@ function! ShowCvsCurrDiff(filename)
   let s:filename_h = expand("%:h")
   let s:temp_name = "__" . s:filename_t
   execute "tabnew " . a:filename
-  if bufexists(s:ftail)
-          execute "bd! " . s:ftail
+  if bufexists(s:temp_name)
+          execute "bd! " . s:temp_name
   endif
-  execute "vnew " . s:ftail
+  execute "vnew " . s:temp_name
   let s:cmdName = "grep '\\<" . s:filename_t . "\\>' " . s:filename_h . "/CVS/Entries | awk -F/ '{print $3}'"
   let s:file_rev = system(s:cmdName)
   let s:file_rev = substitute(s:file_rev, '^\s*\(.\{-}\)\s*\n*$', '\1', '')
