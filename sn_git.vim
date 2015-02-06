@@ -2,6 +2,7 @@
 cmap gitb<CR> :call DoGitBlame(expand("%"))<CR>
 cmap gitl<CR> :call DoGitLog(expand("%"))<CR>
 cmap gitd<CR> :call ShowGitCurrDiff(expand("%"))<CR>
+cmap gitdr<CR> :call ShowGitCurrRevDiff(expand("%"))<CR>
 cmap gitrd<CR> :call ShowGitRevDiff(expand("<cWORD>"))<CR>
 cmap gitc<CR> :call DoGitRevCommitFiles(expand("<cWORD>"))<CR>
 cmap gitshow<CR> :call DoGitShowStatus()<CR>
@@ -67,6 +68,31 @@ function! ShowGitCurrDiff(filename)
   endif
   execute "vnew " . s:ftail
   let s:cmdName = "git show HEAD:" . a:filename
+  silent execute "0r !" . s:cmdName
+  execute "set filetype=" . s:fileType
+  set nomodified
+  setlocal buftype=nofile
+  setlocal bufhidden=hide
+  setlocal noswapfile
+  execute ":diffthis"
+  execute "wincmd l"
+  execute ":diffthis"
+  execute "normal 1G"
+  execute "normal zR"
+  execute "normal ]c"
+endfunction
+
+function!  ShowGitCurrRevDiff(filename)
+  let s:rev = input("Enter revision:")
+  let s:fileType = &ft
+  let s:ftail = expand("%:t")
+  let s:ftail = "__" . s:ftail
+  execute "tabnew " . a:filename
+  if bufexists(s:ftail)
+          execute "bd! " . s:ftail
+  endif
+  execute "vnew " . s:ftail
+  let s:cmdName = "git show " . s:rev . ":" . a:filename
   silent execute "0r !" . s:cmdName
   execute "set filetype=" . s:fileType
   set nomodified
