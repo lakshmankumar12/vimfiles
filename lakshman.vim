@@ -8,6 +8,10 @@ nmap ~name        <Esc>:echo expand("%:p")<CR>
 nmap ~nosyn       <Esc>:set syntax=<CR>
 nmap ~ftb         <Esc>:call FoldTillTopBrace()<CR>
 nmap ~cmd         <Esc>:call GetCommandOutputOnNewTab()<CR>
+nmap ~shedm       <Esc>:call ShedM()<CR>
+"accomodate typo
+nmap ~shemd       <Esc>:call ShedM()<CR>
+nmap ~css         <Esc>:call LoadCscopeToQuickFix(expand("<cword>"))<CR>
 
 function! FoldTillTopBrace()
   execute "normal mak$mb"
@@ -90,4 +94,18 @@ function! GetCommandOutputOnNewTab()
   redir END
   silent execute "0r !cat /tmp/vimtempfile"
   silent 
+endfunction
+
+function! ShedM()
+  execute "%s///g"
+endfunction
+
+function! LoadCscopeToQuickFix(currword)
+  execute "normal mZ"
+  execute "set csqf=s-"
+  execute "cs find s " . a:currword
+  execute "copen"
+  execute "wincmd k"
+  execute "normal `Z"
+  execute "set csqf="
 endfunction
