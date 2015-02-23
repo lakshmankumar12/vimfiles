@@ -83,7 +83,7 @@ function! ShowGitCurrDiff(filename)
 endfunction
 
 function!  ShowGitCurrRevDiff(filename)
-  let s:rev = input("Enter revision:")
+  let s:rev = input("Enter revision:","HEAD~")
   let s:fileType = &ft
   let s:ftail = expand("%:t")
   let s:ftail = "__" . s:ftail
