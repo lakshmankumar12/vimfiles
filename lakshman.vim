@@ -12,6 +12,8 @@ nmap ~shedm       <Esc>:call ShedM()<CR>
 "accomodate typo
 nmap ~shemd       <Esc>:call ShedM()<CR>
 nmap ~css         <Esc>:call LoadCscopeToQuickFix(expand("<cword>"))<CR>
+nmap ~exp         <Esc>:Explore .<CR>
+nmap ~expn        <Esc>:call ExploreOnNewTab()<CR>
 
 function! FoldTillTopBrace()
   execute "normal mak$mb"
@@ -108,4 +110,9 @@ function! LoadCscopeToQuickFix(currword)
   execute "wincmd k"
   execute "normal `Z"
   execute "set csqf="
+endfunction
+
+function! ExploreOnNewTab()
+  execute "tabnew"
+  execute "Explore ."
 endfunction
