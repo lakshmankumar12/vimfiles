@@ -14,6 +14,7 @@ nmap ~shemd       <Esc>:call ShedM()<CR>
 nmap ~css         <Esc>:call LoadCscopeToQuickFix(expand("<cword>"))<CR>
 nmap ~exp         <Esc>:Explore .<CR>
 nmap ~expn        <Esc>:call ExploreOnNewTab()<CR>
+nmap ~adds        <Esc>:call Addspaces()<CR>
 
 function! FoldTillTopBrace()
   execute "normal mak$mb"
@@ -115,4 +116,11 @@ endfunction
 function! ExploreOnNewTab()
   execute "tabnew"
   execute "Explore ."
+endfunction
+
+function! Addspaces()
+  let s:cmdName = input("Enter column:")
+  execute "normal 50A "
+  execute "normal " . s:cmdName ."|D"
+  execute "normal A"
 endfunction
