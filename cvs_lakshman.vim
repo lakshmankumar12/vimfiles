@@ -103,6 +103,7 @@ endfunction
 function! DoMakeFileWritable(file)
   silent execute "!chmod +w " . a:file
   execute "e!"
+  redraw
 endfunction
 
 function! ShowCvsRevDiff(right_ver)

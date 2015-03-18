@@ -3,18 +3,30 @@ nmap <special> <F8> :call ViewNormalLogRealign()<CR>
 nmap ~nlog     <Esc>:call ViewNormalLog()<CR>
 nmap ~nrea     <Esc>:call ViewNormalLogRealign()<CR>
 nmap <Page-Down>  <Esc>:call ScrollLogDown()<CR>
-nmap ~fdd    <Esc>:call ListFilesInThisDir()<CR>
-nmap ~name        <Esc>:echo expand("%:p")<CR>
+nmap <Leader>fdd    <Esc>:call ListFilesInThisDir()<CR>
+nmap <Leader>name        <Esc>:echo expand("%:p")<CR>
 nmap ~nosyn       <Esc>:set syntax=<CR>
-nmap ~ftb         <Esc>:call FoldTillTopBrace()<CR>
-nmap ~cmd         <Esc>:call GetCommandOutputOnNewTab()<CR>
-nmap ~shedm       <Esc>:call ShedM()<CR>
-"accomodate typo
-nmap ~shemd       <Esc>:call ShedM()<CR>
-nmap ~css         <Esc>:call LoadCscopeToQuickFix(expand("<cword>"))<CR>
-nmap ~exp         <Esc>:Explore .<CR>
-nmap ~expn        <Esc>:call ExploreOnNewTab()<CR>
-nmap ~adds        <Esc>:call Addspaces()<CR>
+nmap <Leader>cmd         <Esc>:call GetCommandOutputOnNewTab()<CR>
+nmap <Leader>mshed       <Esc>:call ShedM()<CR>
+nmap <Leader>css         <Esc>:call LoadCscopeToQuickFix(expand("<cword>"),"s")<CR>
+nmap <Leader>csg         <Esc>:call LoadCscopeToQuickFix(expand("<cword>"),"g")<CR>
+nmap <Leader>csc         <Esc>:call LoadCscopeToQuickFix(expand("<cword>"),"c")<CR>
+nmap <Leader>adds        <Esc>:call Addspaces()<CR>
+nmap <Leader>buf         <Esc>:call BufExplorer()<CR>
+nmap <Leader>nerd        <Esc>:NERDTreeToggle<CR>
+nmap [w            <C-w>
+nmap [h            <C-w>h
+nmap [j            <C-w>j
+nmap [k            <C-w>k
+nmap [l            <C-w>l
+nmap ]w            <C-w>
+nmap ]h            <C-w>h
+nmap ]j            <C-w>j
+nmap ]k            <C-w>k
+nmap ]l            <C-w>l
+nmap <Leader>tc   <Esc>:tabclose<CR>
+imap kj           <Esc>
+cmap kj           <Esc>
 
 function! FoldTillTopBrace()
   execute "normal mak$mb"
@@ -103,10 +115,10 @@ function! ShedM()
   execute "%s///g"
 endfunction
 
-function! LoadCscopeToQuickFix(currword)
+function! LoadCscopeToQuickFix(currword, oper)
   execute "normal mZ"
-  execute "set csqf=s-"
-  execute "cs find s " . a:currword
+  execute "set csqf=" . a:oper . "-"
+  execute "cs find " a:oper . " " . a:currword
   execute "copen"
   execute "wincmd k"
   execute "normal `Z"

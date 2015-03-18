@@ -30,11 +30,18 @@ Plugin 'vim-scripts/ctags.vim'
 Plugin 'vim-scripts/MultipleSearch'
 Plugin 'vim-scripts/DirDiff.vim'
 Plugin 'antiAgainst/cscope-macros.vim'
-Plugin 'vim-scripts/winmanager.git'
 Plugin 'jlanzarotta/bufexplorer'
 Plugin 'tpope/vim-fugitive'
 Plugin 'scrooloose/nerdtree'
+"Plugin 'scrooloose/syntastic'
+"Plugin 'bling/vim-airline'
 "Plugin 'Valloric/YouCompleteMe'
+Plugin 'justinmk/vim-sneak'
+Plugin 'edsono/vim-matchit'
+Plugin 'sjl/gundo.vim'
+Plugin 'Lokaltog/vim-easymotion'
+Plugin 'vim-scripts/python_match.vim'
+Plugin 'ntpeters/vim-better-whitespace'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -61,12 +68,12 @@ set previewheight=20
 set ruler
 set nocp
 set history=100
-filetype plugin on
+"filetype plugin on
 
 
-map ~mai i#include<stdio.h><CR><CR>int main(int argc,char *argv[],char *envp[])<CR>{<CR><CR>}<CR><Esc>kka<Tab>
-map ~cmai i#include<iostream><CR><CR>using namespace std;<CR><CR>int main(int argc,char *argv[],char *envp[])<CR>{<CR><CR>return 0;<CR>}<CR><Esc>kka<Tab>
-map ~typ itypedef struct<CR>{<CR><CR>}  ;<Esc>hi
+map <Leader>mai i#include<stdio.h><CR><CR>int main(int argc,char *argv[],char *envp[])<CR>{<CR><CR>}<CR><Esc>kka<Tab>
+map <Leader>cmai i#include<iostream><CR><CR>using namespace std;<CR><CR>int main(int argc,char *argv[],char *envp[])<CR>{<CR><CR>return 0;<CR>}<CR><Esc>kka<Tab>
+map <Leader>typ itypedef struct<CR>{<CR><CR>}  ;<Esc>hi
 
 set incsearch
 set hlsearch
@@ -143,4 +150,26 @@ vmap <C-c> y:call DumpToClipBoard()<CR>
 let @r="lte_common|lte_cpm|lte_mgmt|lte_mscp|lte_pmip|mc_red"
 
 set csprg='/home/lnara002/software/cscope/cscope-15.8a/postinstall/bin/cscope'
+
+
+"easymotion settings
+let g:EasyMotion_do_mapping = 0 " Disable default mappings
+
+" Bi-directional find motion
+" Jump to anywhere you want with minimal keystrokes, with just one key binding.
+" `s{char}{label}`
+nmap S <Plug>(easymotion-s)
+nmap s <Plug>(easymotion-s2)
+
+" Turn on case insensitive feature
+let g:EasyMotion_smartcase = 1
+
+" JK motions: Line motions
+map <Leader>j <Plug>(easymotion-j)
+map <Leader>k <Plug>(easymotion-k)
+
+
+"vim-sneak mapping
+nmap <Leader>s <Plug>(SneakStreak)
+nmap <Leader>S <Plug>(SneakStreakBackward)
 
