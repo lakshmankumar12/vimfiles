@@ -14,6 +14,8 @@ nmap <Leader>csc         <Esc>:call LoadCscopeToQuickFix(expand("<cword>"),"c")<
 nmap <Leader>adds        <Esc>:call Addspaces()<CR>
 nmap <Leader>buf         <Esc>:call BufExplorer()<CR>
 nmap <Leader>nerd        <Esc>:NERDTreeToggle<CR>
+nmap <Leader>pas         <Esc>:set paste<CR>
+nmap <Leader>nopas       <Esc>:set nopaste<CR>
 nmap [w            <C-w>
 nmap [h            <C-w>h
 nmap [j            <C-w>j
