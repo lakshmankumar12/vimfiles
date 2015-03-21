@@ -42,6 +42,7 @@ Plugin 'sjl/gundo.vim'
 Plugin 'Lokaltog/vim-easymotion'
 Plugin 'vim-scripts/python_match.vim'
 Plugin 'ntpeters/vim-better-whitespace'
+Plugin 'jeetsukumaran/vim-buffersaurus'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -173,3 +174,8 @@ map <Leader>k <Plug>(easymotion-k)
 nmap <Leader>s <Plug>(SneakStreak)
 nmap <Leader>S <Plug>(SneakStreakBackward)
 
+"For MultipleSearch.vim
+let g:MultipleSearchMaxColors = 8
+"   foreground and background
+let g:MultipleSearchColorSequence = "red,blue,green,magenta,cyan,gray,brown,yellow"
+let g:MultipleSearchTextColorSequence = "white,white,black,white,black,black,white,black"
