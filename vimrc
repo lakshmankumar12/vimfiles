@@ -179,3 +179,6 @@ let g:MultipleSearchMaxColors = 8
 "   foreground and background
 let g:MultipleSearchColorSequence = "red,blue,green,magenta,cyan,gray,brown,yellow"
 let g:MultipleSearchTextColorSequence = "white,white,black,white,black,black,white,black"
+
+" DirDiff mapping enabled
+let g:DirDiffEnableMappings=1
