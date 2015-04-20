@@ -17,6 +17,7 @@ function! DoGitBlame(filename)
   if bufexists("annotate")
         execute "bd! annotate"
   endif
+  let g:currentLoggedFile = a:filename
   let s:lnum = line(".")
   echo "Current line " s:lnum
   execute "new annotate"
