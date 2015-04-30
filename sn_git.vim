@@ -3,6 +3,7 @@ cmap gitb<CR> :call DoGitBlame(expand("%"))<CR>
 cmap gitl<CR> :call DoGitLog(expand("%"))<CR>
 cmap gitd<CR> :call ShowGitCurrDiff(expand("%"))<CR>
 cmap gitdr<CR> :call ShowGitCurrRevDiff(expand("%"))<CR>
+cmap gitdrr<CR> :call ShowGitRevRevDiff(expand("%"))<CR>
 cmap gitrd<CR> :call ShowGitRevDiff(expand("<cWORD>"))<CR>
 cmap gitc<CR> :call DoGitRevCommitFiles(expand("<cWORD>"))<CR>
 cmap gitshow<CR> :call DoGitShowStatus()<CR>
@@ -94,6 +95,43 @@ function!  ShowGitCurrRevDiff(filename)
   endif
   execute "vnew " . s:ftail
   let s:cmdName = "git show " . s:rev . ":" . a:filename
+  silent execute "0r !" . s:cmdName
+  execute "set filetype=" . s:fileType
+  set nomodified
+  setlocal buftype=nofile
+  setlocal bufhidden=hide
+  setlocal noswapfile
+  execute ":diffthis"
+  execute "wincmd l"
+  execute ":diffthis"
+  execute "normal 1G"
+  execute "normal zR"
+  execute "normal ]c"
+endfunction
+
+function!  ShowGitRevRevDiff(filename)
+  let s:rev1 = input("Enter old/lhs revision:","HEAD~")
+  let s:rev2 = input("Enter new/rhs revision:","HEAD~")
+  let s:fileType = &ft
+  let s:ftail = expand("%:t")
+  let s:ftail1 = "__lhs_" . s:ftail
+  let s:ftail2 = "__rhs_" . s:ftail
+  execute "tabnew "
+  if bufexists(s:ftail1)
+          execute "bd! " . s:ftail1
+  endif
+  if bufexists(s:ftail2)
+          execute "bd! " . s:ftail2
+  endif
+  let s:cmdName = "git show " . s:rev2 . ":" . a:filename
+  silent execute "0r !" . s:cmdName
+  execute "set filetype=" . s:fileType
+  set nomodified
+  setlocal buftype=nofile
+  setlocal bufhidden=hide
+  setlocal noswapfile
+  execute "vnew " . s:ftail
+  let s:cmdName = "git show " . s:rev1 . ":" . a:filename
   silent execute "0r !" . s:cmdName
   execute "set filetype=" . s:fileType
   set nomodified
