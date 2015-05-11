@@ -33,9 +33,6 @@ Plugin 'antiAgainst/cscope-macros.vim'
 Plugin 'jlanzarotta/bufexplorer'
 Plugin 'tpope/vim-fugitive'
 Plugin 'scrooloose/nerdtree'
-"Plugin 'scrooloose/syntastic'
-"Plugin 'bling/vim-airline'
-"Plugin 'Valloric/YouCompleteMe'
 Plugin 'justinmk/vim-sneak'
 Plugin 'edsono/vim-matchit'
 Plugin 'sjl/gundo.vim'
@@ -67,14 +64,12 @@ set term=xterm
 set mouse=a
 set previewheight=20
 set ruler
-set nocp
 set history=100
-"filetype plugin on
-
 
 map <Leader>mai i#include<stdio.h><CR><CR>int main(int argc,char *argv[],char *envp[])<CR>{<CR><CR>}<CR><Esc>kka<Tab>
 map <Leader>cmai i#include<iostream><CR><CR>using namespace std;<CR><CR>int main(int argc,char *argv[],char *envp[])<CR>{<CR><CR>return 0;<CR>}<CR><Esc>kka<Tab>
 map <Leader>typ itypedef struct<CR>{<CR><CR>}  ;<Esc>hi
+map <Leader>pyth i#!/usr/bin/python<CR><CR>def main():<CR>pass<CR><C-D><CR>if __name__ == '__main__':<CR>main()<CR><Esc>kkkk
 
 set incsearch
 set hlsearch
@@ -118,40 +113,10 @@ function! DumpToClipBoard()
   call system("xsel -i -b", getreg("\""))
 endfunction
 
-function! Panosgrep(grepMatter)
-  echo "grepping " . a:grepMatter
-  call system("panosgrep panos ". a:grepMatter)
-  cf grepOp
-endfunction
-
-function! PanosAskGrep(grepMatter)
-  let s:matter = input("what to grep:",a:grepMatter)
-  let s:directory = input("dir:","lte_")
-  let s:ignorecase = input("ic:","n")
-  let s:ic = ""
-  if s:ignorecase == "y"
-    s:ic = "-i "
-  endif 
-  let s:cmd="panosgrep " . s:ic . "'" . s:directory . "' " . s:matter
-  echo "Running " . s:cmd
-  call system(s:cmd)
-  cf grepOp
-endfunction 
-
-
-cmap p$$<CR> call DumpToClipBoard()<CR>
-map ~clip :call DumpToClipBoard()<CR>
-map ~cip :call DumpToClipBoard()<CR>
-map <F2> :call DumpToClipBoard()<CR>
-map <F3> :call PanosAskGrep(expand("<cword>"))<CR>
-map <F5> :call PanosAskGrep("")<CR>
-
-vmap <C-c> y:call DumpToClipBoard()<CR> 
-
-let @r="lte_common|lte_cpm|lte_mgmt|lte_mscp|lte_pmip|mc_red"
+map <Leader>clip :call DumpToClipBoard()<CR>
+vmap <C-c> y:call DumpToClipBoard()<CR>
 
 set csprg='/home/lnara002/software/cscope/cscope-15.8a/postinstall/bin/cscope'
-
 
 "easymotion settings
 let g:EasyMotion_do_mapping = 0 " Disable default mappings

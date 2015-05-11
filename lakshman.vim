@@ -16,6 +16,7 @@ nmap <Leader>buf         <Esc>:call BufExplorer()<CR>
 nmap <Leader>nerd        <Esc>:NERDTreeToggle<CR>
 nmap <Leader>pas         <Esc>:set paste<CR>
 nmap <Leader>nopas       <Esc>:set nopaste<CR>
+nmap <Leader>only        <Esc>:call KeepOnlyWindowWithQuickFix()<CR>
 nmap [w            <C-w>
 nmap [h            <C-w>h
 nmap [j            <C-w>j
@@ -149,6 +150,12 @@ function! ZoomToggle()
     resize vertical resize        
     let t:zoomed = 1   
   endif
+endfunction
+
+function! KeepOnlyWindowWithQuickFix()
+  execute "only"
+  execute "copen"
+  execute "wincmd k"
 endfunction
 
 nnoremap <Leader>zoom <Esc>:call ZoomToggle()<CR>
