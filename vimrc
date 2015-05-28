@@ -40,6 +40,7 @@ Plugin 'Lokaltog/vim-easymotion'
 Plugin 'vim-scripts/python_match.vim'
 Plugin 'ntpeters/vim-better-whitespace'
 Plugin 'jeetsukumaran/vim-buffersaurus'
+Plugin 'vim-scripts/ShowFunc.vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -98,6 +99,8 @@ au FileType make setlocal noexpandtab
 "for the ShowFunc.vim plugin.
 let g:showfuncctagsbin = "/home/lnara002/software/ctags/ctags-5.8/postinstall/bin/ctags"
 let g:ShowFuncScanType = "current"
+map  <Leader>shfn  <Plug>ShowFunc
+map! <Leader>shfn  <Plug>ShowFunc
 
 "for the ctags.vim plugin.
 let g:ctags_path="/home/lnara002/software/ctags/ctags-5.8/postinstall/bin/ctags"
