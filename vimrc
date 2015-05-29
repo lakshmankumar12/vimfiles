@@ -41,6 +41,8 @@ Plugin 'vim-scripts/python_match.vim'
 Plugin 'ntpeters/vim-better-whitespace'
 Plugin 'jeetsukumaran/vim-buffersaurus'
 Plugin 'vim-scripts/ShowFunc.vim'
+Plugin 'sjl/clam.vim'
+Plugin 'vim-scripts/OmniCppComplete'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -80,16 +82,11 @@ set showcmd
 set ai
 set cindent
 
-if !has("gui_running")
-    set t_Co=8
-    set t_Sf=^[[3%p1%dm
-    set t_Sb=^[[4%p1%dm
-endif
-
 syntax enable
 
-highlight search term=standout ctermfg=0 ctermbg=3 guifg=Black guibg=Yellow
-highlight comment term=underline ctermfg=6 guifg=DarkCyan
+set bg=dark
+set diffopt+=vertical
+set csprg='/home/lnara002/software/cscope/cscope-15.8a/postinstall/bin/cscope'
 
 map + <Esc>:cn<CR>
 map - <Esc>:cp<CR>
@@ -108,7 +105,6 @@ let g:ctags_statusline=1
 let g:ctags_title=0
 let generate_tags=1
 
-set bg=dark
 
 function! DumpToClipBoard()
   "call writefile(split(@","\n"), '/dev/clipboard')
@@ -119,7 +115,6 @@ endfunction
 map <Leader>clip :call DumpToClipBoard()<CR>
 vmap <C-c> y:call DumpToClipBoard()<CR>
 
-set csprg='/home/lnara002/software/cscope/cscope-15.8a/postinstall/bin/cscope'
 
 "easymotion settings
 let g:EasyMotion_do_mapping = 0 " Disable default mappings
