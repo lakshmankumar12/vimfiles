@@ -22,11 +22,13 @@ nmap [h            <C-w>h
 nmap [j            <C-w>j
 nmap [k            <C-w>k
 nmap [l            <C-w>l
+nmap [z            <C-w>z
 nmap ]w            <C-w>
 nmap ]h            <C-w>h
 nmap ]j            <C-w>j
 nmap ]k            <C-w>k
 nmap ]l            <C-w>l
+nmap ]z            <C-w>z
 nmap <Leader>tc   <Esc>:tabclose<CR>
 imap kj           <Esc>
 cmap kj           <Esc>

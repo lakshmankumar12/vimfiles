@@ -10,32 +10,14 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim'
 
-" The following are examples of different formats supported.
-" Keep Plugin commands between vundle#begin/end.
-" plugin on GitHub repo
-"Plugin 'tpope/vim-fugitive'
-" plugin from http://vim-scripts.org/vim/scripts.html
-"Plugin 'L9'
-" Git plugin not hosted on GitHub
-"Plugin 'git://git.wincent.com/command-t.git'
-" git repos on your local machine (i.e. when working on your own plugin)
-"Plugin 'file:///home/gmarik/path/to/plugin'
-" The sparkup vim script is in a subdirectory of this repo called vim.
-" Pass the path to set the runtimepath properly.
-"Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
-" Avoid a name conflict with L9
-"Plugin 'user/L9', {'name': 'newL9'}
-
 Plugin 'vim-scripts/ctags.vim'
 Plugin 'vim-scripts/MultipleSearch'
 Plugin 'vim-scripts/DirDiff.vim'
 Plugin 'antiAgainst/cscope-macros.vim'
-Plugin 'jlanzarotta/bufexplorer'
 Plugin 'tpope/vim-fugitive'
 Plugin 'scrooloose/nerdtree'
 Plugin 'justinmk/vim-sneak'
 Plugin 'edsono/vim-matchit'
-Plugin 'sjl/gundo.vim'
 Plugin 'Lokaltog/vim-easymotion'
 Plugin 'vim-scripts/python_match.vim'
 Plugin 'ntpeters/vim-better-whitespace'
@@ -43,6 +25,8 @@ Plugin 'jeetsukumaran/vim-buffersaurus'
 Plugin 'vim-scripts/ShowFunc.vim'
 Plugin 'sjl/clam.vim'
 Plugin 'vim-scripts/OmniCppComplete'
+Plugin 'vim-scripts/vimtabs.vim'
+Plugin 'fholgado/minibufexpl.vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -68,6 +52,7 @@ set mouse=a
 set previewheight=20
 set ruler
 set history=100
+set cursorline
 
 map <Leader>mai i#include<stdio.h><CR><CR>int main(int argc,char *argv[],char *envp[])<CR>{<CR><CR>}<CR><Esc>kka<Tab>
 map <Leader>cmai i#include<iostream><CR><CR>using namespace std;<CR><CR>int main(int argc,char *argv[],char *envp[])<CR>{<CR><CR>return 0;<CR>}<CR><Esc>kka<Tab>
@@ -83,8 +68,8 @@ set ai
 set cindent
 
 syntax enable
-
 set bg=dark
+
 set diffopt+=vertical
 set csprg='/home/lnara002/software/cscope/cscope-15.8a/postinstall/bin/cscope'
 
