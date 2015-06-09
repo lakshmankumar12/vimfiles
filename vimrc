@@ -27,6 +27,7 @@ Plugin 'sjl/clam.vim'
 Plugin 'vim-scripts/OmniCppComplete'
 Plugin 'vim-scripts/vimtabs.vim'
 Plugin 'fholgado/minibufexpl.vim'
+Plugin 'vim-scripts/CursorLineCurrentWindow'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -52,7 +53,7 @@ set mouse=a
 set previewheight=20
 set ruler
 set history=100
-set cursorline
+set lbr
 
 map <Leader>mai i#include<stdio.h><CR><CR>int main(int argc,char *argv[],char *envp[])<CR>{<CR><CR>}<CR><Esc>kka<Tab>
 map <Leader>cmai i#include<iostream><CR><CR>using namespace std;<CR><CR>int main(int argc,char *argv[],char *envp[])<CR>{<CR><CR>return 0;<CR>}<CR><Esc>kka<Tab>
@@ -66,6 +67,8 @@ set expandtab
 set showcmd
 set ai
 set cindent
+set cursorline
+hi CursorLine   cterm=NONE ctermbg=darkcyan ctermfg=white guibg=darkred guifg=white
 
 syntax enable
 set bg=dark
@@ -130,3 +133,4 @@ let g:MultipleSearchTextColorSequence = "white,white,black,white,black,black,whi
 
 " DirDiff mapping enabled
 let g:DirDiffEnableMappings=1
+
