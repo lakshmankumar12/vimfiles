@@ -29,9 +29,19 @@ nmap ]j            <C-w>j
 nmap ]k            <C-w>k
 nmap ]l            <C-w>l
 nmap ]z            <C-w>z
+nmap <c-h>         <C-w>h
+nmap <c-j>         <C-w>j
+nmap <c-k>         <C-w>k
+nmap <c-l>         <C-w>l
+imap <c-h>         <Esc><C-w>h
+imap <c-j>         <Esc><C-w>j
+imap <c-k>         <Esc><C-w>k
+imap <c-l>         <Esc><C-w>l
 nmap <Leader>tc   <Esc>:tabclose<CR>
 imap kj           <Esc>
 cmap kj           <Esc>
+nnoremap <Leader>pd   <Esc>:wincmd P<CR><C-D>:wincmd p<CR>
+nnoremap <Leader>pu   <Esc>:wincmd P<CR><C-U>:wincmd p<CR>
 
 function! FoldTillTopBrace()
   execute "normal mak$mb"
@@ -161,5 +171,38 @@ function! KeepOnlyWindowWithQuickFix()
 endfunction
 
 nnoremap <Leader>zoom <Esc>:call ZoomToggle()<CR>
+
+" set mappings to go to a window
+let i = 1
+while i <= 9
+  execute 'nnoremap <Leader>' . i . ' :' . i . 'wincmd w<CR>'
+  let i = i + 1
+endwhile
+
+"statusline
+function! WindowNumber()
+    let str=tabpagewinnr(tabpagenr())
+    return str
+endfunction
+
+function! GetMode()
+  let l:m = mode()
+  if l:m ==# "i"
+    let mode = 'insert'
+  elseif l:m ==# "R"
+    let mode = 'replace'
+  elseif l:m =~# '\v(v|V||s|S|)'
+    let mode = 'visual'
+  else
+    let mode = 'normal'
+  endif
+  return mode
+endfunction
+
+set laststatus=2
+hi StatusLine term=bold cterm=bold ctermfg=Black ctermbg=White
+hi WindowNumber term=bold cterm=bold ctermfg=Yellow ctermbg=Black guifg=#ffb964
+"This is now set in ctags.vim
+"set statusline=%F%h%m%r\ %h%w%y\ col:%c\ lin:%l\,%L\ buf:%n\ win:%{WindowNumber()}\ reg:%{v:register}\ %=%{TagName()}\ %-15.15(%l,%c%V%)%P
 
 

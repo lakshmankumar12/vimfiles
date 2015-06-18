@@ -10,7 +10,7 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim'
 
-Plugin 'vim-scripts/ctags.vim'
+Plugin 'lakshmankumar12/ctags.vim--Johnson'
 Plugin 'vim-scripts/MultipleSearch'
 Plugin 'vim-scripts/DirDiff.vim'
 Plugin 'antiAgainst/cscope-macros.vim'
@@ -28,6 +28,7 @@ Plugin 'vim-scripts/OmniCppComplete'
 Plugin 'vim-scripts/vimtabs.vim'
 Plugin 'fholgado/minibufexpl.vim'
 Plugin 'vim-scripts/CursorLineCurrentWindow'
+Plugin 'vim-scripts/autopreview'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -110,8 +111,8 @@ let g:EasyMotion_do_mapping = 0 " Disable default mappings
 " Bi-directional find motion
 " Jump to anywhere you want with minimal keystrokes, with just one key binding.
 " `s{char}{label}`
-nmap S <Plug>(easymotion-s)
-nmap s <Plug>(easymotion-s2)
+nmap s <Plug>(easymotion-s)
+nmap S <Plug>(easymotion-s2)
 
 " Turn on case insensitive feature
 let g:EasyMotion_smartcase = 1
@@ -134,3 +135,7 @@ let g:MultipleSearchTextColorSequence = "white,white,black,white,black,black,whi
 " DirDiff mapping enabled
 let g:DirDiffEnableMappings=1
 
+au! Filetype qf setlocal statusline="%t%{exists('w:quickfix_title')? ' '.w:quickfix_title : ''} win:%{WindowNumber()}%=%-15(%l,%c%V%) %P"
+
+" for auto-preview
+let g:AutoPreview_enabled = 1
