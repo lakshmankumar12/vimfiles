@@ -23,12 +23,11 @@ Plugin 'vim-scripts/python_match.vim'
 Plugin 'ntpeters/vim-better-whitespace'
 Plugin 'jeetsukumaran/vim-buffersaurus'
 Plugin 'vim-scripts/ShowFunc.vim'
-Plugin 'sjl/clam.vim'
+Plugin 'sjl/clam.vim'                         "Clam shellcmd
 Plugin 'vim-scripts/OmniCppComplete'
 Plugin 'vim-scripts/vimtabs.vim'
 Plugin 'fholgado/minibufexpl.vim'
 Plugin 'vim-scripts/CursorLineCurrentWindow'
-Plugin 'vim-scripts/autopreview'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -101,9 +100,15 @@ function! DumpToClipBoard()
   call system("xsel -i -b", getreg("\""))
 endfunction
 
+function! DumpNameToClipBoard()
+  "call writefile(split(@","\n"), '/dev/clipboard')
+  call system("xsel -i -b", expand("%:p"))
+  call system("xsel -i -b", expand("%:p"))
+endfunction
+
 map <Leader>clip :call DumpToClipBoard()<CR>
 vmap <C-c> y:call DumpToClipBoard()<CR>
-
+map <Leader>cname :call DumpNameToClipBoard()<CR>
 
 "easymotion settings
 let g:EasyMotion_do_mapping = 0 " Disable default mappings
@@ -137,5 +142,3 @@ let g:DirDiffEnableMappings=1
 
 au! Filetype qf setlocal statusline="%t%{exists('w:quickfix_title')? ' '.w:quickfix_title : ''} win:%{WindowNumber()}%=%-15(%l,%c%V%) %P"
 
-" for auto-preview
-let g:AutoPreview_enabled = 1
