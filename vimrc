@@ -48,7 +48,9 @@ set tabstop=4
 set shiftwidth=2
 set sidescroll=1
 set grepprg=fgrep\ -n
-set term=xterm
+if !has('nvim')
+  set term=xterm
+endif
 set mouse=a
 set previewheight=20
 set ruler
