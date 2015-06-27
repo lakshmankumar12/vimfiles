@@ -10,7 +10,6 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim'
 
-Plugin 'lakshmankumar12/ctags.vim--Johnson'
 Plugin 'vim-scripts/MultipleSearch'
 Plugin 'vim-scripts/DirDiff.vim'
 Plugin 'antiAgainst/cscope-macros.vim'
@@ -28,6 +27,8 @@ Plugin 'vim-scripts/OmniCppComplete'
 Plugin 'vim-scripts/vimtabs.vim'
 Plugin 'fholgado/minibufexpl.vim'
 Plugin 'vim-scripts/CursorLineCurrentWindow'
+Plugin 'bling/vim-airline'
+Plugin 'majutsushi/tagbar'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -49,7 +50,8 @@ set shiftwidth=2
 set sidescroll=1
 set grepprg=fgrep\ -n
 if !has('nvim')
-  set term=xterm
+  set term=xterm-256color
+  set t_Co=256
 endif
 set mouse=a
 set previewheight=20
@@ -144,3 +146,4 @@ let g:DirDiffEnableMappings=1
 
 au! Filetype qf setlocal statusline="%t%{exists('w:quickfix_title')? ' '.w:quickfix_title : ''} win:%{WindowNumber()}%=%-15(%l,%c%V%) %P"
 
+let g:airline#extensions#tagbar#enabled = 1
