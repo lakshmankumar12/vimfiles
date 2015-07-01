@@ -29,6 +29,8 @@ Plugin 'fholgado/minibufexpl.vim'
 Plugin 'vim-scripts/CursorLineCurrentWindow'
 Plugin 'bling/vim-airline'
 Plugin 'majutsushi/tagbar'
+Plugin 'kien/ctrlp.vim'
+
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
