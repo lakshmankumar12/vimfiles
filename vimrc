@@ -30,7 +30,12 @@ Plugin 'vim-scripts/CursorLineCurrentWindow'
 Plugin 'bling/vim-airline'
 Plugin 'majutsushi/tagbar'
 Plugin 'kien/ctrlp.vim'
-
+Plugin 'rking/ag.vim'
+"Plugin 'maxbrunsfeld/vim-yankstack'
+Plugin 'tarmolov/TabLineNumbers.vim'
+Plugin 'Shougo/vimproc.vim'
+Plugin 'Shougo/vimshell.vim'
+Plugin 'trapd00r/neverland-vim-theme'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -149,3 +154,6 @@ let g:DirDiffEnableMappings=1
 au! Filetype qf setlocal statusline="%t%{exists('w:quickfix_title')? ' '.w:quickfix_title : ''} win:%{WindowNumber()}%=%-15(%l,%c%V%) %P"
 
 let g:airline#extensions#tagbar#enabled = 1
+
+"for ag.vim
+let g:agprg="/home/lnara002/software/ag/the_silver_searcher-0.30.0/postinstall/bin/ag --column"
