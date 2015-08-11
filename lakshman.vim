@@ -51,6 +51,7 @@ nmap <Leader>ln   <C-w>h<Esc>:q<CR><C-w>P<C-n>
 nmap <Leader>lp   <C-w>h<Esc>:q<CR><C-w>P<C-p>
 nmap <Leader>hn   :q<CR><C-w>P<C-n>
 nmap <Leader>hp   :q<CR><C-w>P<C-p>
+nnoremap <Leader>gdb  <Esc>:Gdiff base<CR><C-w>lgg
 
 function! FoldTillTopBrace()
   execute "normal mak$mb"
