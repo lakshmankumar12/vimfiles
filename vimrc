@@ -36,6 +36,7 @@ Plugin 'tarmolov/TabLineNumbers.vim'
 Plugin 'Shougo/vimproc.vim'
 Plugin 'Shougo/vimshell.vim'
 Plugin 'trapd00r/neverland-vim-theme'
+Plugin 'vim-scripts/AnsiEsc.vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
