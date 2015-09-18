@@ -95,11 +95,13 @@ map - <Esc>:cp<CR>
 au FileType make setlocal noexpandtab
 
 "for the ShowFunc.vim plugin.
+let g:showfuncctagsbin = "/home/lnara002/software/ctags/ctags-5.8/postinstall/bin/ctags"
 let g:ShowFuncScanType = "current"
 map  <Leader>shfn  <Plug>ShowFunc
 map! <Leader>shfn  <Plug>ShowFunc
 
 "for the ctags.vim plugin.
+let g:ctags_path="/home/lnara002/software/ctags/ctags-5.8/postinstall/bin/ctags"
 let g:ctags_statusline=1
 let g:ctags_title=0
 let generate_tags=1
@@ -155,3 +157,5 @@ au! Filetype qf setlocal statusline="%t%{exists('w:quickfix_title')? ' '.w:quick
 
 let g:airline#extensions#tagbar#enabled = 1
 
+"for ag.vim
+let g:agprg="/home/lnara002/software/ag/the_silver_searcher-0.30.0/postinstall/bin/ag --column"
