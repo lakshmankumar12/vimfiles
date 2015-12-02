@@ -241,3 +241,7 @@ function! ListOfFilesOnLocationList()
   let &errorformat=old_errorformat
 endfunction
 
+"my cscope.out is at a dir one level up!..so
+if has("cscope") && filereadable("../cscope.out")
+  cs add .. ..
+endif
