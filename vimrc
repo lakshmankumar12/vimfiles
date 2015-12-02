@@ -28,7 +28,7 @@ Plugin 'vim-scripts/vimtabs.vim'
 Plugin 'fholgado/minibufexpl.vim'
 Plugin 'vim-scripts/CursorLineCurrentWindow'
 Plugin 'bling/vim-airline'
-Plugin 'majutsushi/tagbar'
+Plugin 'majutsushi/tagbar'                    "Enables the c-function names with g:airline#extensions#tagbar#enabled below.
 Plugin 'kien/ctrlp.vim'
 Plugin 'rking/ag.vim'
 "Plugin 'maxbrunsfeld/vim-yankstack'
