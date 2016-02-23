@@ -38,6 +38,9 @@ Plugin 'Shougo/vimshell.vim'
 Plugin 'trapd00r/neverland-vim-theme'
 Plugin 'vim-scripts/AnsiEsc.vim'
 Plugin 'ofavre/vimcat.git'
+Plugin 'airblade/vim-gitgutter'
+Plugin 'ujihisa/tabpagecolorscheme'
+Plugin 'scrooloose/nerdcommenter'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -156,6 +159,10 @@ let g:DirDiffEnableMappings=1
 au! Filetype qf setlocal statusline="%t%{exists('w:quickfix_title')? ' '.w:quickfix_title : ''} win:%{WindowNumber()}%=%-15(%l,%c%V%) %P"
 
 let g:airline#extensions#tagbar#enabled = 1
+let g:airline#extensions#tagbar#flags = 'f'
+
+"for ctrlp.vim
+let g:ctrlp_cmd = 'CtrlPBuffer'
 
 "for ag.vim
 let g:agprg="/home/lnara002/software/ag/the_silver_searcher-0.30.0/postinstall/bin/ag --column"

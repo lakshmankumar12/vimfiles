@@ -43,6 +43,7 @@ imap <c-j>         <Esc><C-w>j
 imap <c-k>         <Esc><C-w>k
 imap <c-l>         <Esc><C-w>l
 nmap <Leader>tc   <Esc>:tabclose<CR>
+nmap Q            <Esc>:tabclose<CR>
 imap kj           <Esc>
 cmap kj           <Esc>
 nnoremap <Leader>pd   <Esc>:wincmd P<CR><C-D>:wincmd p<CR>
