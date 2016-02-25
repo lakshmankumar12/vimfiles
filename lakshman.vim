@@ -18,6 +18,8 @@ nmap <Leader>nopas       <Esc>:set nopaste<CR>
 nmap <Leader>only        <Esc>:call KeepOnlyWindowWithQuickFix()<CR>
 "remapping to accomodate typos
 nmap <Leader>conly        <Esc>:call KeepOnlyWindowWithQuickFix()<CR>
+nmap <Leader>bgl          <Esc>:set bg=light<CR>
+nmap <Leader>bgd          <Esc>:set bg=dark<CR>
 nmap [w            <C-w>
 nmap [h            <C-w>h
 nmap [j            <C-w>j
