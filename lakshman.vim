@@ -52,6 +52,7 @@ nmap <Leader>ln   <C-w>h<Esc>:q<CR><C-w>P<C-n>
 nmap <Leader>lp   <C-w>h<Esc>:q<CR><C-w>P<C-p>
 nmap <Leader>hn   :q<CR><C-w>P<C-n>
 nmap <Leader>hp   :q<CR><C-w>P<C-p>
+nmap <Leader>gfunc    <Esc>:call FindFunctionFromTags()<CR>
 nnoremap <Leader>gdb  <Esc>:Gdiff base<CR><C-w>lgg
 
 function! FoldTillTopBrace()
@@ -246,3 +247,15 @@ endfunction
 if has("cscope") && filereadable("../cscope.out")
   cs add .. ..
 endif
+
+function! FindFunctionFromTags()
+  let s:f_name=system('percol --tty=$TTY --match-method=regex ../gtp_tags_f | awk '' { print $1 }'' ')
+  if !v:shell_error
+     let s:new_var = substitute(s:f_name, '\n\+$', '', '')
+     echom "got " . s:new_var
+     call LoadCscopeToQuickFix(s:f_name,"s")
+  else
+     echom "Error:" . v:shell_error
+     echom "f_name:" . s:f_name
+  endif
+endfunction
