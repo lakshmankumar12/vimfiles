@@ -29,7 +29,7 @@ Plugin 'fholgado/minibufexpl.vim'
 Plugin 'vim-scripts/CursorLineCurrentWindow'
 Plugin 'bling/vim-airline'
 Plugin 'majutsushi/tagbar'                    "Enables the c-function names with g:airline#extensions#tagbar#enabled below.
-Plugin 'kien/ctrlp.vim'
+Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'rking/ag.vim'
 "Plugin 'maxbrunsfeld/vim-yankstack'
 Plugin 'tarmolov/TabLineNumbers.vim'
@@ -163,6 +163,7 @@ let g:airline#extensions#tagbar#flags = 'f'
 
 "for ctrlp.vim
 let g:ctrlp_cmd = 'CtrlPBuffer'
+let g:ctrlp_working_path_mode = 'c'
 
 "for ag.vim
 let g:agprg="/home/lnara002/software/ag/the_silver_searcher-0.30.0/postinstall/bin/ag --column"
