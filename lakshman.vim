@@ -46,6 +46,9 @@ imap <c-k>         <Esc><C-w>k
 imap <c-l>         <Esc><C-w>l
 nmap <Leader>tc   <Esc>:tabclose<CR>
 nmap Q            <Esc>:tabclose<CR>
+" I rarely use C, if at all i will do a c$. But cclose is something i always
+" want to do
+nmap C            <Esc>:cclose<CR>
 imap kj           <Esc>
 cmap kj           <Esc>
 nnoremap <Leader>pd   <Esc>:wincmd P<CR><C-D>:wincmd p<CR>
