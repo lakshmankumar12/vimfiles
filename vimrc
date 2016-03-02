@@ -156,6 +156,9 @@ let g:MultipleSearchTextColorSequence = "white,white,black,white,black,black,whi
 " DirDiff mapping enabled
 let g:DirDiffEnableMappings=1
 
+" NerdTree
+map <C-n> :NERDTreeToggle<CR>
+
 au! Filetype qf setlocal statusline="%t%{exists('w:quickfix_title')? ' '.w:quickfix_title : ''} win:%{WindowNumber()}%=%-15(%l,%c%V%) %P"
 
 let g:airline#extensions#tagbar#enabled = 1
@@ -163,7 +166,18 @@ let g:airline#extensions#tagbar#flags = 'f'
 
 "for ctrlp.vim
 let g:ctrlp_cmd = 'CtrlPBuffer'
-let g:ctrlp_working_path_mode = 'c'
+let g:ctrlp_working_path_mode = 'a'
+let g:ctrlp_show_hidden = 1
+
+
+" DONT TYPE ANYTHING HERE SO THAT CENTOS-BRANCH CAN
+" SAFELY ADD ITS OVERRIDES WITHOUT ISSUES
+
+
+
+
+
+" ***********
 
 "for ag.vim
 let g:agprg="/home/lnara002/software/ag/the_silver_searcher-0.30.0/postinstall/bin/ag --column"
