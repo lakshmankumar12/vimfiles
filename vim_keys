@@ -1,0 +1,136 @@
+q - recording                                    Q - ex mode. RECLAIM!
+w - word next                                    W - Blank-sep word forward
+e - word end                                     E - Blank-sep word end
+r - remove char                                  R - Remove multi chars
+t - just before char (mnemonic : till)           T - backward-t
+y - yank                                         Y - linewise yank(but same as y) RECLAIM!
+u - undo                                         U - undo changes on a line
+i - insert                                       I - append at start of line
+o - insert next line                             O - append at prev line
+p - paste                                        P - paste before char
+a - append                                       A - append at end of line
+s - substitute  -- RECLAIM!                      S - RECLAIM!
+d - delete                                       D - delete till end of line
+f - find char                                    F - backward-f
+g - go                                           G - end of file
+h - left                                         H - top of window
+j - down                                         J - join lines
+k - up                                           K - man page
+l - right                                        L - end of window
+z - fold                                         Z - RECLAIM!
+x - del                                          X - backspace
+c - change                                       C - change till end of line
+v - visual                                       V - line visual
+b - word-back                                    B - blank-sep word backwardn
+n - find-next                                    N - search back
+m - mark                                         M - Middle of page
+
+
+` - goto mark
+~ - toggle case
+1-9 - repeat count
+0 - beg of line
+! - not sure (RECLAIM?)
+@ - recordplay
+# - search back
+$ - end of line
+% - match brace
+^ - beg of non-white char of line
+& - RECLAIM??
+* - search backwards
+( - para begin
+) - para end
+{} - block navigation
+[] - diff navigation
+-  forward line  RECLAIM
++  backward line RECLAIM
+= - indent
+: repeat F/T
+; repeat f/t
+' to mark
+" to select register for yank/paste
+, RECLAIM  (same as ;)
+. repeast last action
+| goto column
+\ Leader
+/ search
+? search backwards
+
+g is a super powerful key:
+
+ga  - show hex of char under cursor  
+gd  - goto local declaration of word                               gD   --  global delcartion
+ge - got to end of prev word                                       gE   --  prev Non-blank word
+gf - open file under cursor                                        gF   --  file:line num works
+gg - begining of file
+gi - insert at previous insertation stop point                     gI   -- At column 1 (I will be first non-blank)
+gj - go down on screen line                                        gJ   -- like J, but no space
+gk - go upon screen line
+gm - half g0
+gn - next and visual the word                                      gN   -- backward gn
+go - got to nth byte in buffer
+gp - like p, but leave cursor after pasted text                    gP   -- like P/gp, but P'ed effect
+gr - virtual replace (like screen estate useful on file with tabs) gR   -- virt-replace mode
+gs - sleep
+gt - next tab                                                      gT   -- prev tab
+gu - lower case text                                               gU   -- upper-case text
+gv - repeat previous virtual selection
+g0 - screen beg line
+g~ - toggle case (of motion)
+g#/g* - like #/*, but no \<..\>
+g$ - screen-end
+g% - % backwards
+g^ - first non-blank in screen
+g& - repeat last subtittue
+
+
+RECLAIMable in g:
+gb - some netrw bookmark
+gc - none
+gh - enter select mode
+gl - none
+gq - format motion.(can use visual+= instead)
+gw - format motion.
+gx - netrw stuff
+gy - none
+gz - none
+
+gA
+gB
+gC
+gG
+gK
+gL
+gM
+gO
+gS
+gV -- select-mode stuff.
+
+control keys:
+
+C-a : increment
+C-b : screen-back
+C-c : abort
+C-d : screen-down
+C-e : scroll-lines downwards
+C-f : screen-down
+C-g : info on current-file
+C-h : None.. RECLAIM
+C-i : new position in jump list
+C-j : lines downwards . RECLAIM
+C-k : enter digraph
+C-l : refresh screen
+C-m - line downward .. non-white RECLAIM
+C-n : lines downwards . RECLAIM
+C-o : jump older
+C-p : RECLAIM
+C-q : visual block (esp in windows)
+C-r : Redo
+C-s : None
+C-t : tag pop
+C-u : scroll up
+C-v : visual block
+C-w : windows
+C-x : decrement
+C-y : scroll-lines upwards
+C-z : suspend vim
