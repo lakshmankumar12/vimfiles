@@ -3,7 +3,7 @@ w - word next                                    W - Blank-sep word forward
 e - word end                                     E - Blank-sep word end
 r - remove char                                  R - Remove multi chars
 t - just before char (mnemonic : till)           T - backward-t
-y - yank                                         Y - linewise yank(but same as y) RECLAIM!
+y - yank                                         Y - linewise yank(but same as yy). Useful if nmaped to y$
 u - undo                                         U - undo changes on a line
 i - insert                                       I - append at start of line
 o - insert next line                             O - append at prev line
@@ -26,7 +26,7 @@ n - find-next                                    N - search back
 m - mark                                         M - Middle of page
 
 
-` - goto mark
+` - goto mark with column precision
 ~ - toggle case
 1-9 - repeat count
 0 - beg of line
@@ -36,7 +36,7 @@ m - mark                                         M - Middle of page
 $ - end of line
 % - match brace
 ^ - beg of non-white char of line
-& - RECLAIM??
+& - repeat last substitue (:s command)
 * - search backwards
 ( - para begin
 ) - para end
@@ -47,7 +47,7 @@ $ - end of line
 = - indent
 : repeat F/T
 ; repeat f/t
-' to mark
+' goto mark to beg of line
 " to select register for yank/paste
 , RECLAIM  (same as ;)
 . repeast last action
