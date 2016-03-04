@@ -1,5 +1,6 @@
 nmap <special> <F8> :call ViewNormalLogRealign()<CR>
 
+nmap Y y$
 nmap ~nlog     <Esc>:call ViewNormalLog()<CR>
 nmap ~nrea     <Esc>:call ViewNormalLogRealign()<CR>
 nmap <Page-Down>  <Esc>:call ScrollLogDown()<CR>
@@ -48,7 +49,7 @@ nmap <Leader>tc   <Esc>:tabclose<CR>
 nmap Q            <Esc>:tabclose<CR>
 " i dont use Z<anything> much
 nmap Z            <Esc>:cclose<CR>
-nmap <Leader>cadj <Esc>:cclose<CR>:copen<CR>
+nmap gc           <Esc>:call KeepOnlyWindowWithQuickFix()<CR>
 imap kj           <Esc>
 cmap kj           <Esc>
 nnoremap <Leader>pd   <Esc>:wincmd P<CR><C-D>:wincmd p<CR>
