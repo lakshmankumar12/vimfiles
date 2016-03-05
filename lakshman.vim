@@ -21,31 +21,14 @@ nmap <Leader>only        <Esc>:call KeepOnlyWindowWithQuickFix()<CR>
 nmap <Leader>conly        <Esc>:call KeepOnlyWindowWithQuickFix()<CR>
 nmap <Leader>bgl          <Esc>:set bg=light<CR>
 nmap <Leader>bgd          <Esc>:set bg=dark<CR>
-nmap [w            <C-w>
-nmap [h            <C-w>h
-nmap [j            <C-w>j
-nmap [k            <C-w>k
-nmap [l            <C-w>l
-nmap [z            <C-w>z
-nmap [q            <C-w>q
 nmap [u            <C-w>h<C-w>c
-nmap ]w            <C-w>
-nmap ]h            <C-w>h
-nmap ]j            <C-w>j
-nmap ]k            <C-w>k
-nmap ]l            <C-w>l
-nmap ]z            <C-w>z
-nmap ]q            <C-w>q
 nmap ]u            <C-w>l<C-w>c
+nmap [t            <C-w>k<C-w>c
+nmap [b            <C-w>j<C-w>c
 nmap <c-h>         <C-w>h
 nmap <c-j>         <C-w>j
 nmap <c-k>         <C-w>k
 nmap <c-l>         <C-w>l
-imap <c-h>         <Esc><C-w>h
-imap <c-j>         <Esc><C-w>j
-imap <c-k>         <Esc><C-w>k
-imap <c-l>         <Esc><C-w>l
-nmap <Leader>tc   <Esc>:tabclose<CR>
 nmap Q            <Esc>:tabclose<CR>
 " i dont use Z<anything> much
 nmap Z            <Esc>:cclose<CR>

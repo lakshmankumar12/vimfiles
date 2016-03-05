@@ -94,6 +94,7 @@ gw - format motion.
 gx - netrw stuff
 gy - none
 gz - none
+g] - show tags under cursor
 
 gA
 gB
@@ -134,3 +135,73 @@ C-w : windows
 C-x : decrement
 C-y : scroll-lines upwards
 C-z : suspend vim
+
+Insert mode control keys
+
+c-a : repeat previous insertion
+c-b : none
+c-c : exit insert mode
+c-d : del one shift-width indent
+c-e : insert char from below-line
+c-f : some indentation thing
+c-g : navigation (follow with jk)
+c-h : backspace
+c-i : insert tab(or spaces)
+c-j : newline
+c-k : enter-digraph
+c-l : go to normal mode
+c-m : newline
+c-n : next-match-word (auto-complete)
+c-o : execute one command and come back
+c-p : next-match-work (auto-complete)
+c-q : same as c-v, enter sth literally
+c-r : paste register
+c-s : nothing
+c-t : indent one sw
+c-u : del all chars in a line
+c-v : enter sth literally
+c-w : del word
+c-x : control-x submode
+c-y : insert char from above-live
+c-z : suspend vim
+
+Window mgmt keys C-w, then
+
+C-a : none
+C-b : go to bottom most window
+C-c : plain-c closes. Ctrl-c cancels
+C-d : Open new window with macro on curosr
+C-e : nothing
+C-f : like gf, but in a split window!
+C-g : nothing
+C-h : left
+C-i : open new window with same file, ANd bring cursor to first appearance of cur-word
+C-j : down
+C-k : up
+C-l : right
+C-m : nothing
+C-n : new window
+C-o : only
+C-p : prev window
+C-q : quit current window. Dont type! quits vim
+C-r : rotate window (R rever dir) (Useful to exchange and stay in curr file)
+C-s : split current to two horizonltally
+C-t : top
+C-u : nothing
+C-v : split current to two vertically
+C-w : without count, below-right, with count, goto nth window
+C-x : exchange and come to other file.
+C-y : nothing
+C-z : close preview (not quickfix!)
+C-] : split window on defintiion of cur-word
+C-^ : new window on prev-buffer
+C-_ : zoom window horizontally (unfortunatey can't restore that easily. Try =)
+C-| : zoom window vertically (unfortunatey can't restore that easily. Try =)
++/-/</>/= : resize
+H   : MOVE curr-window far left
+J   : bot
+K   : up
+L   : right
+P   : goto preview(not quickfix)
+T   : move window to a new tab
+}   : tag under cursor in preview
