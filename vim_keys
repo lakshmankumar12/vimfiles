@@ -1,4 +1,4 @@
-q - recording                                    Q - ex mode. RECLAIM!
+q - recording                                    Q - ex mode. RECLAIM!                  (Bound to :tabclose)
 w - word next                                    W - Blank-sep word forward
 e - word end                                     E - Blank-sep word end
 r - remove char                                  R - Remove multi chars
@@ -9,7 +9,7 @@ i - insert                                       I - append at start of line
 o - insert next line                             O - append at prev line
 p - paste                                        P - paste before char
 a - append                                       A - append at end of line
-s - substitute  -- RECLAIM!                      S - RECLAIM!
+s - substitute  -- RECLAIM!                      S - RECLAIM!                        (bound s/S to easy-motion)
 d - delete                                       D - delete till end of line
 f - find char                                    F - backward-f
 g - go                                           G - end of file
@@ -17,7 +17,7 @@ h - left                                         H - top of window
 j - down                                         J - join lines
 k - up                                           K - man page
 l - right                                        L - end of window
-z - fold                                         Z - RECLAIM!
+z - fold                                         Z - RECLAIM!                       (bound to :cclose)
 x - del                                          X - backspace
 c - change                                       C - change till end of line
 v - visual                                       V - line visual
@@ -42,8 +42,8 @@ $ - end of line
 ) - para end
 {} - block navigation
 [] - diff navigation
--  forward line  RECLAIM
-+  backward line RECLAIM
+-  forward line  RECLAIM  (Bound to :cprev)
++  backward line RECLAIM  (Bound to :cnext)
 = - indent
 : repeat F/T
 ; repeat f/t
@@ -86,9 +86,9 @@ g& - repeat last subtittue
 
 RECLAIMable in g:
 gb - some netrw bookmark
-gc - none
+gc - none                           (Bound to Keep window with only quickfix)
 gh - enter select mode
-gl - none
+gl - none                           (Bound to FZF)
 gq - format motion.(can use visual+= instead)
 gw - format motion.
 gx - netrw stuff

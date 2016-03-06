@@ -173,6 +173,7 @@ let g:ctrlp_working_path_mode = 'a'
 let g:ctrlp_show_hidden = 1
 
 set rtp+=/home/lnara002/github/fzf
+let g:fzf_command_prefix = 'Fzf'
 
 " DONT TYPE ANYTHING HERE SO THAT CENTOS-BRANCH CAN
 " SAFELY ADD ITS OVERRIDES WITHOUT ISSUES
