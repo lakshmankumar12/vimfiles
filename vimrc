@@ -41,8 +41,8 @@ Plugin 'ofavre/vimcat.git'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'ujihisa/tabpagecolorscheme'
 Plugin 'scrooloose/nerdcommenter'
-Plugin 'Valloric/YouCompleteMe'
-Plugin 'ternjs/tern_for_vim'
+"Plugin 'Valloric/YouCompleteMe'
+"Plugin 'ternjs/tern_for_vim'
 Plugin 'junegunn/fzf.vim'
 
 " All of your Plugins must be added before the following line
