@@ -42,7 +42,8 @@ Plugin 'airblade/vim-gitgutter'
 Plugin 'ujihisa/tabpagecolorscheme'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'Valloric/YouCompleteMe'
-Plugin 'marijnh/tern_for_vim'
+Plugin 'ternjs/tern_for_vim'
+Plugin 'junegunn/fzf.vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -169,6 +170,7 @@ let g:ctrlp_cmd = 'CtrlPBuffer'
 let g:ctrlp_working_path_mode = 'a'
 let g:ctrlp_show_hidden = 1
 
+set rtp+=/home/lnara002/github/fzf
 
 " DONT TYPE ANYTHING HERE SO THAT CENTOS-BRANCH CAN
 " SAFELY ADD ITS OVERRIDES WITHOUT ISSUES
