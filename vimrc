@@ -25,7 +25,7 @@ Plugin 'vim-scripts/ShowFunc.vim'
 Plugin 'sjl/clam.vim'                         "Clam shellcmd
 Plugin 'vim-scripts/OmniCppComplete'
 Plugin 'vim-scripts/vimtabs.vim'
-Plugin 'fholgado/minibufexpl.vim'
+"Plugin 'fholgado/minibufexpl.vim'
 Plugin 'vim-scripts/CursorLineCurrentWindow'
 Plugin 'bling/vim-airline'
 Plugin 'majutsushi/tagbar'                    "Enables the c-function names with g:airline#extensions#tagbar#enabled below.
