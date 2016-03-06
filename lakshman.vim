@@ -249,3 +249,30 @@ function! FindFunctionFromTags()
      echom "f_name:" . s:f_name
   endif
 endfunction
+
+function! PanosTagsSink(line)
+  call LoadCscopeToQuickFix(a:line,"s")
+endfunction
+
+function! PanosTags(file)
+  call fzf#run({
+  \   'source': "sed '/^\\!/d;s/\t.*//' " . a:file . " | uniq",
+  \   'options' : '--exact',
+  \   'sink':   function('PanosTagsSink')})
+endfunction
+
+function! PanosTagsSinkJustGo(line)
+  execute "cs find g " . a:line
+endfunction
+
+function! PanosTagsJustGo(file)
+  call fzf#run({
+  \   'source': "sed '/^\\!/d;s/\t.*//' " . a:file . " | uniq",
+  \   'options' : '--exact',
+  \   'sink':   function('PanosTagsSinkJustGo')})
+endfunction
+
+nmap <Leader>fgpan  <Esc>:call PanosTags("../gtp_tags_f")<CR>
+nmap <Leader>fapan  <Esc>:call PanosTags("../tags_f")<CR>
+nmap <Leader>ggpan  <Esc>:call PanosTagsJustGo("../gtp_tags_f")<CR>
+nmap <Leader>gapan  <Esc>:call PanosTagsJustGo("../tags_f")<CR>
