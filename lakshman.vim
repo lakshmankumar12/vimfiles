@@ -31,9 +31,12 @@ nmap <c-k>         <C-w>k
 nmap <c-l>         <C-w>l
 nmap Q            <Esc>:tabclose<CR>
 " i dont use Z<anything> much
-nmap Z            <Esc>:cclose<CR>
+nmap Z            <Esc>:call QFixToggle(0)<CR>
 nmap gc           <Esc>:call KeepOnlyWindowWithQuickFix()<CR>
 nmap gl           <Esc>:FZF<CR>
+nmap gw           <Esc>:update<CR>
+nmap gx           <Esc>:close<CR>
+nmap gy           <Esc>:set paste!<CR>
 imap kj           <Esc>
 cmap kj           <Esc>
 nnoremap <Leader>pd   <Esc>:wincmd P<CR><C-D>:wincmd p<CR>
