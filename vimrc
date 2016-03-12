@@ -44,6 +44,7 @@ Plugin 'scrooloose/nerdcommenter'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'ternjs/tern_for_vim'
 Plugin 'junegunn/fzf.vim'
+Plugin 'vim-scripts/QFixToggle'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required

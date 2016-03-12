@@ -17,7 +17,7 @@ h - left                                         H - top of window
 j - down                                         J - join lines
 k - up                                           K - man page
 l - right                                        L - end of window
-z - fold                                         Z - RECLAIM!                       (bound to :cclose)
+z - fold                                         Z - RECLAIM!                       (bound to :qfixtoggle)
 x - del                                          X - backspace
 c - change                                       C - change till end of line
 v - visual                                       V - line visual
@@ -90,16 +90,16 @@ gc - none                           (Bound to Keep window with only quickfix)
 gh - enter select mode
 gl - none                           (Bound to FZF)
 gq - format motion.(can use visual+= instead)
-gw - format motion.
-gx - netrw stuff
-gy - none
+gw - format motion.                 (Bound to :update)
+gx - netrw stuff                    (Bound to :close)
+gy - none                           (Bound to set pastetoggle)
 gz - none
 g] - show tags under cursor
 
-gA
+gA                (Bound to tags_s)
 gB
 gC
-gG
+gG                (Bound to tags_f)
 gK
 gL
 gM
@@ -121,8 +121,8 @@ C-i : new position in jump list
 C-j : lines downwards . RECLAIM
 C-k : enter digraph
 C-l : refresh screen
-C-m - line downward .. non-white RECLAIM
-C-n : lines downwards . RECLAIM
+C-m - line downward .. non-white RECLAIM      (Dont mess .. bulbs entering in command-^f prompt)
+C-n : lines downwards . RECLAIM               (NerdTreeToggle)
 C-o : jump older
 C-p : RECLAIM
 C-q : visual block (esp in windows)
@@ -205,3 +205,15 @@ L   : right
 P   : goto preview(not quickfix)
 T   : move window to a new tab
 }   : tag under cursor in preview
+
+
+Other Vim Tips:
+-------------------
+
+In a huge list of cscope-s results on a function-name, to quickly find the function defintion, try
+
+function_name\s*(\s*\w\+\s\+\w.*,
+
+i.e name space* ( space* word+ space* word+ .* ,
+    The idea is only definition will have 2 words min between ( and , arg-type and arg-name, while invocations will have just argname. 
+    The -> and . will separate words in invocations too, but hopefully they dont have space inbetween!
