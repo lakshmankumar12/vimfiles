@@ -190,51 +190,8 @@ function! WindowNumber()
     return str
 endfunction
 
-function! GetMode()
-  let l:m = mode()
-  if l:m ==# "i"
-    let mode = 'Insert'
-  elseif l:m ==# "R"
-    let mode = 'replace'
-  elseif l:m =~# '\v(v|V||s|S|)'
-    let mode = 'visual'
-  else
-    let mode = 'normal'
-  endif
-  return mode
-endfunction
-
-function! InsertStatuslineColor(mode)
-  if a:mode == 'i'
-    hi statusLineModeDisplay term=bold cterm=bold ctermfg=White ctermbg=Red
-  elseif a:mode == 'r'
-    hi statusLineModeDisplay term=bold cterm=bold ctermfg=White ctermbg=Yellow
-  else
-    hi statusLineModeDisplay term=bold cterm=bold ctermfg=White ctermbg=Cyan
-  endif
-endfunction
-
-au InsertEnter * call InsertStatuslineColor(v:insertmode)
-au InsertChange * call InsertStatuslineColor(v:insertmode)
-au InsertLeave * hi statusLineModeDisplay term=bold cterm=bold ctermfg=Yellow ctermbg=Black
-
 set laststatus=2
-hi StatusLine term=bold cterm=bold ctermfg=Black ctermbg=White
-hi statusLineModeDisplay term=bold cterm=bold ctermfg=Yellow ctermbg=Black
-hi WindowNumber term=bold cterm=bold ctermfg=Yellow ctermbg=Black
-"This is now set in ctags.vim
-"set statusline=%F%h%m%r\ %h%w%y\ col:%c\ lin:%l\,%L\ buf:%n\ win:%{WindowNumber()}\ reg:%{v:register}\ %=%{TagName()}\ %-15.15(%l,%c%V%)%P
 
-function! ListOfFilesOnLocationList()
-  let s:cmdName = input("Enter command that will be loaded into location-list:")
-  let old_makeprg=&makeprg
-  let old_errorformat=&errorformat
-  let &makeprg = s:cmdName
-  let &errorformat="%f"
-  lmake
-  let &makeprg=old_makeprg
-  let &errorformat=old_errorformat
-endfunction
 
 "my cscope.out is at a dir one level up!..so
 if has("cscope") && filereadable("../cscope.out")
