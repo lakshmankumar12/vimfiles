@@ -37,6 +37,8 @@ nmap gl           <Esc>:FZF<CR>
 nmap gw           <Esc>:update<CR>
 nmap gx           <Esc>:close<CR>
 nmap gy           <Esc>:set paste!<CR>
+nmap gG           <Esc>:call PanosTags("../tags_f")<CR>
+nmap gA           <Esc>:call PanosTags("../tags_s")<CR>
 imap kj           <Esc>
 cmap kj           <Esc>
 nnoremap <Leader>pd   <Esc>:wincmd P<CR><C-D>:wincmd p<CR>
@@ -197,6 +199,9 @@ set laststatus=2
 if has("cscope") && filereadable("../cscope.out")
   cs add .. ..
 endif
+if filereadable("../tags")
+  set tags+=../tags
+endif
 
 function! FindFunctionFromTags()
   let s:f_name=system('percol --tty=$TTY --match-method=regex ../gtp_tags_f | awk '' { print $1 }'' ')
@@ -212,27 +217,45 @@ endfunction
 
 function! PanosTagsSink(line)
   call LoadCscopeToQuickFix(a:line,"s")
+  execute "cc"
 endfunction
 
 function! PanosTags(file)
   call fzf#run({
   \   'source': "sed '/^\\!/d;s/\t.*//' " . a:file . " | uniq",
   \   'options' : '--exact',
+  \   'right' : '30%',
   \   'sink':   function('PanosTagsSink')})
 endfunction
 
 function! PanosTagsSinkJustGo(line)
-  execute "cs find g " . a:line
+  let g:last_name = a:line
 endfunction
 
 function! PanosTagsJustGo(file)
+  let g:last_name = ""
   call fzf#run({
   \   'source': "sed '/^\\!/d;s/\t.*//' " . a:file . " | uniq",
   \   'options' : '--exact',
+  \   'right' : '30%',
   \   'sink':   function('PanosTagsSinkJustGo')})
+  if !empty(g:last_name)
+    execute ":redraw"
+    echom "Working on " . g:last_name
+    "call confirm("Press enter to continue.. There was just one result")
+    execute ":cs f g " . g:last_name
+  endif
 endfunction
 
-nmap <Leader>fgpan  <Esc>:call PanosTags("../gtp_tags_f")<CR>
-nmap <Leader>fapan  <Esc>:call PanosTags("../tags_f")<CR>
-nmap <Leader>ggpan  <Esc>:call PanosTagsJustGo("../gtp_tags_f")<CR>
-nmap <Leader>gapan  <Esc>:call PanosTagsJustGo("../tags_f")<CR>
+function! Test(last_name)
+    execute ":cs f g " . a:last_name
+endfunction
+
+function OthersDesk()
+  execute ":colorscheme default"
+  execute ":set bg=dark"
+endfunction
+
+nmap <Leader>fpanv  <Esc>:call PanosTags("../tags_v")<CR>
+nmap <Leader>fpand  <Esc>:call PanosTags("../tags_d")<CR>
+nmap <Leader>fpanm  <Esc>:call PanosTags("../tags_m")<CR>
