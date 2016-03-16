@@ -24,12 +24,10 @@ Plugin 'vim-scripts/ShowFunc.vim'
 Plugin 'sjl/clam.vim'                         "Clam shellcmd
 Plugin 'vim-scripts/OmniCppComplete'
 Plugin 'vim-scripts/vimtabs.vim'
-"Plugin 'fholgado/minibufexpl.vim'
 Plugin 'bling/vim-airline'
 Plugin 'majutsushi/tagbar'                    "Enables the c-function names with g:airline#extensions#tagbar#enabled below.
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'rking/ag.vim'
-"Plugin 'maxbrunsfeld/vim-yankstack'
 Plugin 'tarmolov/TabLineNumbers.vim'
 Plugin 'Shougo/vimproc.vim'
 Plugin 'Shougo/vimshell.vim'
@@ -37,7 +35,7 @@ Plugin 'vim-scripts/AnsiEsc.vim'
 Plugin 'ofavre/vimcat.git'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'scrooloose/nerdcommenter'
-Plugin 'Valloric/YouCompleteMe'
+"Plugin 'Valloric/YouCompleteMe'
 "Plugin 'ternjs/tern_for_vim'
 Plugin 'junegunn/fzf.vim'
 Plugin 'vim-scripts/QFixToggle'
@@ -64,7 +62,7 @@ set sidescroll=1
 set grepprg=fgrep\ -n
 if !has('nvim')
   set term=xterm-256color
-  set t_Co=256
+  set t_Co=16
 endif
 set mouse=a
 set previewheight=20
@@ -87,6 +85,9 @@ set cindent
 
 syntax enable
 set bg=dark
+let g:solarized_termcolors=16
+let g:solarized_termtrans=1
+colorscheme solarized
 
 set diffopt+=vertical
 set csprg='/home/lnara002/software/cscope/cscope-15.8a/postinstall/bin/cscope'
@@ -119,6 +120,7 @@ function! DumpNameToClipBoard()
   "call writefile(split(@","\n"), '/dev/clipboard')
   call system("xsel -i -b", expand("%:p"))
   call system("xsel -i -b", expand("%:p"))
+  call system("xsel -i -a", expand("%:p"))
 endfunction
 
 map <Leader>clip :call DumpToClipBoard()<CR>
