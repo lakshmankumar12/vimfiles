@@ -20,13 +20,11 @@ Plugin 'edsono/vim-matchit'
 Plugin 'Lokaltog/vim-easymotion'
 Plugin 'vim-scripts/python_match.vim'
 Plugin 'ntpeters/vim-better-whitespace'
-Plugin 'jeetsukumaran/vim-buffersaurus'
 Plugin 'vim-scripts/ShowFunc.vim'
 Plugin 'sjl/clam.vim'                         "Clam shellcmd
 Plugin 'vim-scripts/OmniCppComplete'
 Plugin 'vim-scripts/vimtabs.vim'
 "Plugin 'fholgado/minibufexpl.vim'
-Plugin 'vim-scripts/CursorLineCurrentWindow'
 Plugin 'bling/vim-airline'
 Plugin 'majutsushi/tagbar'                    "Enables the c-function names with g:airline#extensions#tagbar#enabled below.
 Plugin 'ctrlpvim/ctrlp.vim'
@@ -35,16 +33,15 @@ Plugin 'rking/ag.vim'
 Plugin 'tarmolov/TabLineNumbers.vim'
 Plugin 'Shougo/vimproc.vim'
 Plugin 'Shougo/vimshell.vim'
-Plugin 'trapd00r/neverland-vim-theme'
 Plugin 'vim-scripts/AnsiEsc.vim'
 Plugin 'ofavre/vimcat.git'
 Plugin 'airblade/vim-gitgutter'
-Plugin 'ujihisa/tabpagecolorscheme'
 Plugin 'scrooloose/nerdcommenter'
-"Plugin 'Valloric/YouCompleteMe'
+Plugin 'Valloric/YouCompleteMe'
 "Plugin 'ternjs/tern_for_vim'
 Plugin 'junegunn/fzf.vim'
 Plugin 'vim-scripts/QFixToggle'
+Plugin 'altercation/vim-colors-solarized.git'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -87,8 +84,8 @@ set expandtab
 set showcmd
 set ai
 set cindent
-set cursorline
-hi CursorLine   cterm=NONE ctermbg=darkcyan ctermfg=white guibg=darkred guifg=white
+"set cursorline
+"hi CursorLine   cterm=NONE ctermbg=darkcyan ctermfg=white guibg=darkred guifg=white
 
 syntax enable
 set bg=dark
@@ -175,6 +172,9 @@ let g:ctrlp_show_hidden = 1
 
 set rtp+=/home/lnara002/github/fzf
 let g:fzf_command_prefix = 'Fzf'
+
+" no omnicomplete preview
+set completeopt-=preview
 
 " DONT TYPE ANYTHING HERE SO THAT CENTOS-BRANCH CAN
 " SAFELY ADD ITS OVERRIDES WITHOUT ISSUES
