@@ -37,10 +37,11 @@ nmap gl           <Esc>:FZF<CR>
 nmap gw           <Esc>:update<CR>
 nmap gx           <Esc>:close<CR>
 nmap gy           <Esc>:set paste!<CR>
-nmap gb           <Esc>:FzfBuffers<CR>
-call togglebg#map("gz")
 nmap gG           <Esc>:call PanosTags("../tags_f")<CR>
 nmap gA           <Esc>:call PanosTags("../tags_s")<CR>
+nmap gM           <Esc>:call PanosTags("../tags_m")<CR>
+nmap gb           <Esc>:FzfBuffers<CR>
+call togglebg#map("gz")
 imap kj           <Esc>
 cmap kj           <Esc>
 nnoremap <Leader>pd   <Esc>:wincmd P<CR><C-D>:wincmd p<CR>
@@ -218,6 +219,7 @@ function! FindFunctionFromTags()
 endfunction
 
 function! PanosTagsSink(line)
+  let g:last_name = a:line
   call LoadCscopeToQuickFix(a:line,"s")
   execute "cc"
 endfunction
@@ -253,11 +255,48 @@ function! Test(last_name)
     execute ":cs f g " . a:last_name
 endfunction
 
-function OthersDesk()
+function! OthersDesk()
   execute ":colorscheme default"
   execute ":set bg=dark"
 endfunction
 
+function! MoveToDefintionOfMember(word)
+  let l:save_word = a:word
+  execute "normal mZ"
+  "we are at member. Go past arrow or dot to the var-name of struct
+  execute "normal 2ge"
+  "go to local definition
+  execute "normal gd"
+  "go to type name. It could be a pointer or direct struct
+  execute "normal geb"
+  "split
+  execute ":vsplit"
+  "go to definition
+  execute ":cs find g ". expand("<cword>")
+  "high light word
+  execute "normal ?\\<" . l:save_word . "\\>?s\<CR>"
+  let @/="\\<" . l:save_word . "\\>"
+  execute "normal zz"
+  "go back
+  execute "wincmd l"
+  execute "normal `Z"
+  execute "normal zz"
+endfunction
+
+function! GotoTagLastName()
+  execute "tag ".g:last_name
+endfunction
+
+nmap gS <Esc>:call MoveToDefintionOfMember(expand("<cword>"))<CR>
+nmap gO <Esc>:call GotoTagLastName()<CR>
+
+function! CheckSearch(word)
+  echom "hi"
+  execute "normal /\\<" . a:word . "\\>/s\<CR>"
+endfunction
+
+nmap \test <Esc>:call CheckSearch(expand("<cword>"))<CR>
+
 nmap <Leader>fpanv  <Esc>:call PanosTags("../tags_v")<CR>
 nmap <Leader>fpand  <Esc>:call PanosTags("../tags_d")<CR>
-nmap <Leader>fpanm  <Esc>:call PanosTags("../tags_m")<CR>
+
