@@ -24,7 +24,8 @@ Plugin 'vim-scripts/ShowFunc.vim'
 Plugin 'sjl/clam.vim'                         "Clam shellcmd
 Plugin 'vim-scripts/OmniCppComplete'
 Plugin 'vim-scripts/vimtabs.vim'
-Plugin 'bling/vim-airline'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
 Plugin 'majutsushi/tagbar'                    "Enables the c-function names with g:airline#extensions#tagbar#enabled below.
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'rking/ag.vim'
@@ -125,6 +126,10 @@ endfunction
 
 map <Leader>clip :call DumpToClipBoard()<CR>
 vmap <C-c> y:call DumpToClipBoard()<CR>
+vmap gB    y:call DumpToClipBoard()<CR>
+"in virtual mode, gb is also ok
+vmap gb    y:call DumpToClipBoard()<CR>
+nmap gB    :r !xsel -b<CR>
 map <Leader>cname :call DumpNameToClipBoard()<CR>
 
 "easymotion settings
@@ -164,6 +169,9 @@ au! Filetype qf setlocal statusline="%t%{exists('w:quickfix_title')? ' '.w:quick
 
 let g:airline#extensions#tagbar#enabled = 1
 let g:airline#extensions#tagbar#flags = 'f'
+let g:airline_powerline_fonts=1
+
+
 
 "for ctrlp.vim
 let g:ctrlp_cmd = 'CtrlPBuffer'

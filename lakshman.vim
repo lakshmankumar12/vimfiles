@@ -37,6 +37,8 @@ nmap gl           <Esc>:FZF<CR>
 nmap gw           <Esc>:update<CR>
 nmap gx           <Esc>:close<CR>
 nmap gy           <Esc>:set paste!<CR>
+nmap gb           <Esc>:FzfBuffers<CR>
+call togglebg#map("gz")
 nmap gG           <Esc>:call PanosTags("../tags_f")<CR>
 nmap gA           <Esc>:call PanosTags("../tags_s")<CR>
 imap kj           <Esc>
