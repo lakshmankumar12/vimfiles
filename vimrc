@@ -24,12 +24,11 @@ Plugin 'vim-scripts/ShowFunc.vim'
 Plugin 'sjl/clam.vim'                         "Clam shellcmd
 Plugin 'vim-scripts/OmniCppComplete'
 Plugin 'vim-scripts/vimtabs.vim'
-"Plugin 'fholgado/minibufexpl.vim'
-Plugin 'bling/vim-airline'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
 Plugin 'majutsushi/tagbar'                    "Enables the c-function names with g:airline#extensions#tagbar#enabled below.
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'rking/ag.vim'
-"Plugin 'maxbrunsfeld/vim-yankstack'
 Plugin 'tarmolov/TabLineNumbers.vim'
 Plugin 'Shougo/vimproc.vim'
 Plugin 'Shougo/vimshell.vim'
@@ -64,7 +63,7 @@ set sidescroll=1
 set grepprg=fgrep\ -n
 if !has('nvim')
   set term=xterm-256color
-  set t_Co=256
+  set t_Co=16
 endif
 set mouse=a
 set previewheight=20
@@ -87,6 +86,9 @@ set cindent
 
 syntax enable
 set bg=dark
+let g:solarized_termcolors=16
+let g:solarized_termtrans=1
+colorscheme solarized
 
 set diffopt+=vertical
 set csprg='/home/lnara002/software/cscope/cscope-15.8a/postinstall/bin/cscope'
@@ -117,10 +119,15 @@ function! DumpNameToClipBoard()
   "call writefile(split(@","\n"), '/dev/clipboard')
   call system("xsel -i -b", expand("%:p"))
   call system("xsel -i -b", expand("%:p"))
+  call system("xsel -i -a", expand("%:p"))
 endfunction
 
 map <Leader>clip :call DumpToClipBoard()<CR>
 vmap <C-c> y:call DumpToClipBoard()<CR>
+vmap gB    y:call DumpToClipBoard()<CR>
+"in virtual mode, gb is also ok
+vmap gb    y:call DumpToClipBoard()<CR>
+nmap gB    :r !xsel -b<CR>
 map <Leader>cname :call DumpNameToClipBoard()<CR>
 
 "easymotion settings
@@ -160,6 +167,9 @@ au! Filetype qf setlocal statusline="%t%{exists('w:quickfix_title')? ' '.w:quick
 
 let g:airline#extensions#tagbar#enabled = 1
 let g:airline#extensions#tagbar#flags = 'f'
+let g:airline_powerline_fonts=1
+
+
 
 "for ctrlp.vim
 let g:ctrlp_cmd = 'CtrlPBuffer'

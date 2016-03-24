@@ -56,7 +56,7 @@ $ - end of line
 / search
 ? search backwards
 
-g is a super powerful key:
+g is a super powerful key: (gem key, literally!)
 
 ga  - show hex of char under cursor  
 gd  - goto local declaration of word                               gD   --  global delcartion
@@ -82,29 +82,29 @@ g$ - screen-end
 g% - % backwards
 g^ - first non-blank in screen
 g& - repeat last subtittue
+g] - show tags under cursor
 
 
 RECLAIMable in g:
-gb - some netrw bookmark
+gb - some netrw bookmark            (copy to system cliboard)
 gc - none                           (Bound to Keep window with only quickfix)
 gh - enter select mode
-gl - none                           (Bound to FZF)
+ql - none                           (Bound to FZF)
 gq - format motion.(can use visual+= instead)
 gw - format motion.                 (Bound to :update)
 gx - netrw stuff                    (Bound to :close)
 gy - none                           (Bound to set pastetoggle)
-gz - none
-g] - show tags under cursor
+gz - none                           (Bound to toggle bg)
 
 gA                (Bound to tags_s)
-gB
+gB                (Bound to FzfBuffers)
 gC
 gG                (Bound to tags_f)
 gK
 gL
-gM
-gO
-gS
+gM                (Bound to tags_m)
+gO                (Bound to GotoTagLastName)
+gS                (Bound to MoveToDefintionOfMember)
 gV -- select-mode stuff.
 
 control keys:
@@ -208,7 +208,7 @@ T   : move window to a new tab
 
 
 Other Vim Tips:
--------------------
+===============
 
 In a huge list of cscope-s results on a function-name, to quickly find the function defintion, try
 
@@ -217,3 +217,14 @@ function_name\s*(\s*\w\+\s\+\w.*,
 i.e name space* ( space* word+ space* word+ .* ,
     The idea is only definition will have 2 words min between ( and , arg-type and arg-name, while invocations will have just argname. 
     The -> and . will separate words in invocations too, but hopefully they dont have space inbetween!
+
+
+:set hidden  # option enables the non-saving of files while switching
+echo &hidden # is a way to see the current setting.
+
+
+To know which plugin set the setting last
+-----------------------------------------
+
+:verbose set iskeyword?
+

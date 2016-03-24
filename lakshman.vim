@@ -37,6 +37,8 @@ nmap gl           <Esc>:FZF<CR>
 nmap gw           <Esc>:update<CR>
 nmap gx           <Esc>:close<CR>
 nmap gy           <Esc>:set paste!<CR>
+nmap gb           <Esc>:FzfBuffers<CR>
+call togglebg#map("gz")
 imap kj           <Esc>
 cmap kj           <Esc>
 nnoremap <Leader>pd   <Esc>:wincmd P<CR><C-D>:wincmd p<CR>
@@ -45,6 +47,7 @@ nmap <Leader>ln   <C-w>h<Esc>:q<CR><C-w>P<C-n>
 nmap <Leader>lp   <C-w>h<Esc>:q<CR><C-w>P<C-p>
 nmap <Leader>hn   :q<CR><C-w>P<C-n>
 nmap <Leader>hp   :q<CR><C-w>P<C-p>
+nmap <Leader>gfunc    <Esc>:call FindFunctionFromTags()<CR>
 nnoremap <Leader>gdb  <Esc>:Gdiff base<CR><C-w>lgg
 
 function! FoldTillTopBrace()
@@ -191,4 +194,41 @@ endfunction
 
 set laststatus=2
 
+
+function! FindFunctionFromTags()
+  let s:f_name=system('percol --tty=$TTY --match-method=regex ../gtp_tags_f | awk '' { print $1 }'' ')
+  if !v:shell_error
+     let s:new_var = substitute(s:f_name, '\n\+$', '', '')
+     echom "got " . s:new_var
+     call LoadCscopeToQuickFix(s:f_name,"s")
+  else
+     echom "Error:" . v:shell_error
+     echom "f_name:" . s:f_name
+  endif
+endfunction
+
+function! MoveToDefintionOfMember(word)
+  let l:save_word = a:word
+  execute "normal mZ"
+  "we are at member. Go past arrow or dot to the var-name of struct
+  execute "normal 2ge"
+  "go to local definition
+  execute "normal gd"
+  "go to type name. It could be a pointer or direct struct
+  execute "normal geb"
+  "split
+  execute ":vsplit"
+  "go to definition
+  execute ":cs find g ". expand("<cword>")
+  "high light word
+  execute "normal ?\\<" . l:save_word . "\\>?s\<CR>"
+  let @/="\\<" . l:save_word . "\\>"
+  execute "normal zz"
+  "go back
+  execute "wincmd l"
+  execute "normal `Z"
+  execute "normal zz"
+endfunction
+
+nmap gS <Esc>:call MoveToDefintionOfMember(expand("<cword>"))<CR>
 
