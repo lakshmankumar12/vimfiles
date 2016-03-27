@@ -41,6 +41,7 @@ Plugin 'scrooloose/nerdcommenter'
 Plugin 'junegunn/fzf.vim'
 Plugin 'vim-scripts/QFixToggle'
 Plugin 'altercation/vim-colors-solarized.git'
+Plugin 'regedarek/ZoomWin'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -126,10 +127,9 @@ endfunction
 
 map <Leader>clip :call DumpToClipBoard()<CR>
 vmap <C-c> y:call DumpToClipBoard()<CR>
-vmap gB    y:call DumpToClipBoard()<CR>
-"in virtual mode, gb is also ok
 vmap gb    y:call DumpToClipBoard()<CR>
-nmap gB    :r !xsel -b<CR>
+nmap gb    y:call DumpToClipBoard()<CR>
+nmap gb    :r !xsel -b<CR>
 map <Leader>cname :call DumpNameToClipBoard()<CR>
 
 "easymotion settings
@@ -138,8 +138,8 @@ let g:EasyMotion_do_mapping = 0 " Disable default mappings
 " Bi-directional find motion
 " Jump to anywhere you want with minimal keystrokes, with just one key binding.
 " `s{char}{label}`
-nmap s <Plug>(easymotion-s)
-nmap S <Plug>(easymotion-s2)
+nmap S <Plug>(easymotion-s)
+"nmap S <Plug>(easymotion-s2)
 
 " Turn on case insensitive feature
 let g:EasyMotion_smartcase = 1
@@ -170,8 +170,17 @@ au! Filetype qf setlocal statusline="%t%{exists('w:quickfix_title')? ' '.w:quick
 let g:airline#extensions#tagbar#enabled = 1
 let g:airline#extensions#tagbar#flags = 'f'
 let g:airline_powerline_fonts=1
-
-
+let g:airline#extensions#default#section_truncate_width = {
+      \ 'a': 20,
+      \ 'b': 150,
+      \ 'c': 20,
+      \ 'gutter': 150,
+      \ 'y': 150,
+      \ 'z': 20,
+      \ 'warning': 150,
+      \ 'error': 150,
+      \ }
+let g:airline_theme='molokai'
 
 "for ctrlp.vim
 let g:ctrlp_cmd = 'CtrlPBuffer'

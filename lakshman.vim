@@ -32,6 +32,8 @@ nmap <c-l>         <C-w>l
 nmap Q            <Esc>:tabclose<CR>
 " i dont use Z<anything> much
 nmap Z            <Esc>:call QFixToggle(0)<CR>
+" neither do i use S
+nmap s            <Esc>
 nmap gc           <Esc>:call KeepOnlyWindowWithQuickFix()<CR>
 nmap gl           <Esc>:FZF<CR>
 nmap gw           <Esc>:update<CR>
@@ -40,10 +42,14 @@ nmap gy           <Esc>:set paste!<CR>
 nmap gG           <Esc>:call PanosTags("../tags_f")<CR>
 nmap gA           <Esc>:call PanosTags("../tags_s")<CR>
 nmap gM           <Esc>:call PanosTags("../tags_m")<CR>
-nmap gb           <Esc>:FzfBuffers<CR>
+nmap gB           <Esc>:FzfBuffers<CR>
 call togglebg#map("gz")
 imap kj           <Esc>
 cmap kj           <Esc>
+nmap gp           <Esc>p`[
+nmap gP           <Esc>P`[
+"in visual-line mode, i need to select lines, and i keep pressing J
+vmap J            j
 nnoremap <Leader>pd   <Esc>:wincmd P<CR><C-D>:wincmd p<CR>
 nnoremap <Leader>pu   <Esc>:wincmd P<CR><C-U>:wincmd p<CR>
 nmap <Leader>ln   <C-w>h<Esc>:q<CR><C-w>P<C-n>
