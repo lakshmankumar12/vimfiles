@@ -69,7 +69,7 @@ gk - go upon screen line
 gm - half g0
 gn - next and visual the word                                      gN   -- backward gn
 go - got to nth byte in buffer
-gp - like p, but leave cursor after pasted text                    gP   -- like P/gp, but P'ed effect
+gp - like p, but leave cursor after pasted text                    gP   -- like P/gp, but P'ed effect  (RECLAIMED to keep-cursor at beg-position)
 gr - virtual replace (like screen estate useful on file with tabs) gR   -- virt-replace mode
 gs - sleep
 gt - next tab                                                      gT   -- prev tab
