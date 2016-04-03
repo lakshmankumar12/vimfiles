@@ -261,6 +261,26 @@ function! Test(last_name)
     execute ":cs f g " . a:last_name
 endfunction
 
+function! ShowMp3Function()
+  execute "%d"
+  execute "0r !find_tags_of_files.py *mp3"
+endfunction
+
+function! MakeMp3Function()
+  let s:cmd="!/home/lnara002/bin/prepare_tag_commands.py " . expand("%:p") . " > /tmp/cmds"
+  execute s:cmd
+  let s:cmd="!chmod +x /tmp/cmds"
+  execute s:cmd
+  let s:cmd="!/tmp/cmds"
+  execute s:cmd
+  execute "!ls *mp3 | while read i ; do id3v2 -s $i ; done"
+  execute "%d"
+  execute "0r !find_tags_of_files.py *mp3"
+endfunction
+
+command! Showmp3 call ShowMp3Function()
+command! Makemp3 call MakeMp3Function()
+
 function! OthersDesk()
   execute ":colorscheme default"
   execute ":set bg=dark"

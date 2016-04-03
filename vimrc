@@ -67,7 +67,7 @@ if !has('nvim')
   set t_Co=16
 endif
 set mouse=a
-set previewheight=20
+set previewheight=15
 set ruler
 set history=100
 set lbr
@@ -172,13 +172,13 @@ let g:airline#extensions#tagbar#flags = 'f'
 let g:airline_powerline_fonts=1
 let g:airline#extensions#default#section_truncate_width = {
       \ 'a': 20,
-      \ 'b': 150,
+      \ 'b': 100,
       \ 'c': 20,
-      \ 'gutter': 150,
-      \ 'y': 150,
+      \ 'gutter': 100,
+      \ 'y': 100,
       \ 'z': 20,
-      \ 'warning': 150,
-      \ 'error': 150,
+      \ 'warning': 100,
+      \ 'error': 100,
       \ }
 let g:airline_theme='molokai'
 
