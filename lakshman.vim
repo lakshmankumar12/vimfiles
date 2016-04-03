@@ -286,6 +286,16 @@ function! OthersDesk()
   execute ":set bg=dark"
 endfunction
 
+function! LoadErrorsFunction()
+  execute ":cf log.txt"
+  execute ":copen"
+  execute "wincmd j"
+  execute "normal G"
+  execute "normal /\\<error\\>/s\<CR>"
+endfunction
+
+command! LoadErrors call LoadErrorsFunction()
+
 function! MoveToDefintionOfMember(word)
   let l:save_word = a:word
   execute "normal mZ"
