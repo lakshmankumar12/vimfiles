@@ -148,7 +148,7 @@ function! LoadCscopeToQuickFix(currword, oper)
   execute "set csqf=" . a:oper . "-"
   execute "cs find " a:oper . " " . a:currword
   execute "copen"
-  execute "wincmd k"
+  execute "wincmd p"
   execute "normal `Z"
   execute "set csqf="
 endfunction
