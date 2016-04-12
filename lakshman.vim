@@ -16,9 +16,9 @@ nmap <Leader>adds        <Esc>:call Addspaces()<CR>
 nmap <Leader>nerd        <Esc>:NERDTreeToggle<CR>
 nmap <Leader>pas         <Esc>:set paste<CR>
 nmap <Leader>nopas       <Esc>:set nopaste<CR>
-nmap <Leader>only        <Esc>:call KeepOnlyWindowWithQuickFix()<CR>
+nmap <Leader>only        <Esc>:call KeepOnlyWindowWithLocationList()<CR>
 "remapping to accomodate typos
-nmap <Leader>conly        <Esc>:call KeepOnlyWindowWithQuickFix()<CR>
+nmap <Leader>conly        <Esc>:call KeepOnlyWindowWithLocationList()<CR>
 nmap <Leader>bgl          <Esc>:set bg=light<CR>
 nmap <Leader>bgd          <Esc>:set bg=dark<CR>
 nmap [u            <C-w>h<C-w>c
@@ -31,10 +31,11 @@ nmap <c-k>         <C-w>k
 nmap <c-l>         <C-w>l
 nmap Q            <Esc>:tabclose<CR>
 " i dont use Z<anything> much
-nmap Z            <Esc>:call QFixToggle(0)<CR>
+nmap Z            <Esc>:call CloseOneWindowInBottom()<CR>
+nmap zp           <Esc>:lopen<CR>
 " neither do i use S
 nmap s            <Esc>
-nmap gc           <Esc>:call KeepOnlyWindowWithQuickFix()<CR>
+nmap gc           <Esc>:call KeepOnlyWindowWithLocationList()<CR>
 nmap gl           <Esc>:FZF<CR>
 nmap gw           <Esc>:update<CR>
 nmap gx           <Esc>:close<CR>
@@ -45,6 +46,7 @@ imap kj           <Esc>
 cmap kj           <Esc>
 nmap gp           <Esc>p`[
 nmap gP           <Esc>P`[
+nmap zg           <Esc>:vert scs find g <C-R>=expand("<cword>")<CR><CR>	
 "in visual-line mode, i need to select lines, and i keep pressing J
 vmap J            j
 nnoremap <Leader>pd   <Esc>:wincmd P<CR><C-D>:wincmd p<CR>
@@ -146,8 +148,8 @@ endfunction
 function! LoadCscopeToQuickFix(currword, oper)
   execute "normal mZ"
   execute "set csqf=" . a:oper . "-"
-  execute "cs find " a:oper . " " . a:currword
-  execute "copen"
+  execute "lcs find " a:oper . " " . a:currword
+  execute "lopen"
   execute "wincmd p"
   execute "normal `Z"
   execute "set csqf="
@@ -177,10 +179,15 @@ function! ZoomToggle()
   endif
 endfunction
 
-function! KeepOnlyWindowWithQuickFix()
+function! KeepOnlyWindowWithLocationList()
   execute "only"
-  execute "copen"
-  execute "wincmd k"
+  execute "lopen"
+  execute "wincmd p"
+endfunction
+
+function! CloseOneWindowInBottom()
+  execute "wincmd j"
+  execute "close"
 endfunction
 
 nnoremap <Leader>zoom <Esc>:call ZoomToggle()<CR>

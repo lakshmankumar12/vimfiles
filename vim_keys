@@ -100,12 +100,45 @@ gA                (Bound to tags_s)
 gB                (Bound to FzfBuffers)
 gC
 gG                (Bound to tags_f)
+gH                (Bound to :lprev)
 gK
-gL
+gL                (Bound to :lnext)
 gM                (Bound to tags_m)
 gO                (Bound to GotoTagLastName)
 gS                (Bound to MoveToDefintionOfMember)
 gV -- select-mode stuff.
+
+z-keys
+------
+
+za - open a closed fold
+zb - bring line to bottom
+zc - close a fold
+zd - delete one fold on cursor
+ze - bring current column to end of screen
+zf - create a fold
+zg - open current work to good work (spell file)
+zi - Invert foldenable (?)
+zj - goto next fold down
+zk - goto end of previous fold
+zm - subtract one fold level
+zn - all folds open (fold none)
+zo - open fold under curor
+zp - NONE                       (Bound to :lopen)
+zr - add a foldeding level
+zs - bring current column to start of screen
+zt - ..?..
+zu - word-lists sth
+zv -  open enuf folds to see line
+z0 - 
+z~ - 
+z#/g*
+z$ - 
+z% - 
+z^ - 
+z& - 
+z] - 
+
 
 control keys:
 
