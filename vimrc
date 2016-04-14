@@ -103,13 +103,11 @@ nmap + <Esc>:lnext<CR>
 au FileType make setlocal noexpandtab
 
 "for the ShowFunc.vim plugin.
-let g:showfuncctagsbin = "/home/lnara002/software/ctags/ctags-5.8/postinstall/bin/ctags"
 let g:ShowFuncScanType = "current"
 map  <Leader>shfn  <Plug>ShowFunc
 map! <Leader>shfn  <Plug>ShowFunc
 
 "for the ctags.vim plugin.
-let g:ctags_path="/home/lnara002/software/ctags/ctags-5.8/postinstall/bin/ctags"
 let g:ctags_statusline=1
 let g:ctags_title=0
 let generate_tags=1
@@ -204,6 +202,11 @@ set completeopt-=preview
 
 
 " ***********
+
+"ctags for ShowFunc
+let g:showfuncctagsbin = "/home/lnara002/software/ctags/ctags-5.8/postinstall/bin/ctags"
+"ctags for ctags.vim
+let g:ctags_path="/home/lnara002/software/ctags/ctags-5.8/postinstall/bin/ctags"
 
 "for ag.vim
 let g:agprg="/home/lnara002/software/ag/the_silver_searcher-0.30.0/postinstall/bin/ag --column"

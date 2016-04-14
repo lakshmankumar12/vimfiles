@@ -40,9 +40,6 @@ nmap gl           <Esc>:FZF<CR>
 nmap gw           <Esc>:update<CR>
 nmap gx           <Esc>:close<CR>
 nmap gy           <Esc>:set paste!<CR>
-nmap gG           <Esc>:call PanosTags("../tags_f")<CR>
-nmap gA           <Esc>:call PanosTags("../tags_s")<CR>
-nmap gM           <Esc>:call PanosTags("../tags_m")<CR>
 nmap gB           <Esc>:FzfBuffers<CR>
 call togglebg#map("gz")
 imap kj           <Esc>
@@ -211,14 +208,6 @@ endfunction
 set laststatus=2
 
 
-"my cscope.out is at a dir one level up!..so
-if has("cscope") && filereadable("../cscope.out")
-  cs add .. ..
-endif
-if filereadable("../tags")
-  set tags+=../tags
-endif
-
 function! FindFunctionFromTags()
   let s:f_name=system('percol --tty=$TTY --match-method=regex ../gtp_tags_f | awk '' { print $1 }'' ')
   if !v:shell_error
@@ -230,6 +219,74 @@ function! FindFunctionFromTags()
      echom "f_name:" . s:f_name
   endif
 endfunction
+
+function! ShowMp3Function()
+  execute "%d"
+  execute "0r !find_tags_of_files.py *mp3"
+endfunction
+
+function! MakeMp3Function()
+  let s:cmd="!/home/lnara002/bin/prepare_tag_commands.py " . expand("%:p") . " > /tmp/cmds"
+  execute s:cmd
+  let s:cmd="!chmod +x /tmp/cmds"
+  execute s:cmd
+  let s:cmd="!/tmp/cmds"
+  execute s:cmd
+  execute "!ls *mp3 | while read i ; do id3v2 -s $i ; done"
+  execute "%d"
+  execute "0r !find_tags_of_files.py *mp3"
+endfunction
+
+command! Showmp3 call ShowMp3Function()
+command! Makemp3 call MakeMp3Function()
+
+function! MoveToDefintionOfMember(word)
+  let l:save_word = a:word
+  execute "normal mZ"
+  "we are at member. Go past arrow or dot to the var-name of struct
+  execute "normal 2ge"
+  "go to local definition
+  execute "normal gd"
+  "go to type name. It could be a pointer or direct struct
+  execute "normal geb"
+  "split
+  execute ":vsplit"
+  "go to definition
+  execute ":cs find g ". expand("<cword>")
+  "high light word
+  execute "normal ?\\<" . l:save_word . "\\>?s\<CR>"
+  let @/="\\<" . l:save_word . "\\>"
+  execute "normal zz"
+  "go back
+  execute "wincmd l"
+  execute "normal `Z"
+  execute "normal zz"
+endfunction
+
+nmap gS <Esc>:call MoveToDefintionOfMember(expand("<cword>"))<CR>
+
+" DONT TYPE ANYTHING HERE SO THAT CENTOS-BRANCH CAN
+" SAFELY ADD ITS OVERRIDES WITHOUT ISSUES
+
+
+
+
+
+" ***********
+nmap gG           <Esc>:call PanosTags("../tags_f")<CR>
+nmap gA           <Esc>:call PanosTags("../tags_s")<CR>
+nmap gM           <Esc>:call PanosTags("../tags_m")<CR>
+
+"my cscope.out is at a dir one level up!..so
+if has("cscope") && filereadable("../cscope.out")
+  cs add .. ..
+endif
+if filereadable("../tags")
+  set tags+=../tags
+endif
+
+nmap <Leader>fpanv  <Esc>:call PanosTags("../tags_v")<CR>
+nmap <Leader>fpand  <Esc>:call PanosTags("../tags_d")<CR>
 
 function! PanosTagsSink(line)
   let g:last_name = a:line
@@ -264,35 +321,6 @@ function! PanosTagsJustGo(file)
   endif
 endfunction
 
-function! Test(last_name)
-    execute ":cs f g " . a:last_name
-endfunction
-
-function! ShowMp3Function()
-  execute "%d"
-  execute "0r !find_tags_of_files.py *mp3"
-endfunction
-
-function! MakeMp3Function()
-  let s:cmd="!/home/lnara002/bin/prepare_tag_commands.py " . expand("%:p") . " > /tmp/cmds"
-  execute s:cmd
-  let s:cmd="!chmod +x /tmp/cmds"
-  execute s:cmd
-  let s:cmd="!/tmp/cmds"
-  execute s:cmd
-  execute "!ls *mp3 | while read i ; do id3v2 -s $i ; done"
-  execute "%d"
-  execute "0r !find_tags_of_files.py *mp3"
-endfunction
-
-command! Showmp3 call ShowMp3Function()
-command! Makemp3 call MakeMp3Function()
-
-function! OthersDesk()
-  execute ":colorscheme default"
-  execute ":set bg=dark"
-endfunction
-
 function! LoadErrorsFunction()
   execute ":cf log.txt"
   execute ":copen"
@@ -303,43 +331,7 @@ endfunction
 
 command! LoadErrors call LoadErrorsFunction()
 
-function! MoveToDefintionOfMember(word)
-  let l:save_word = a:word
-  execute "normal mZ"
-  "we are at member. Go past arrow or dot to the var-name of struct
-  execute "normal 2ge"
-  "go to local definition
-  execute "normal gd"
-  "go to type name. It could be a pointer or direct struct
-  execute "normal geb"
-  "split
-  execute ":vsplit"
-  "go to definition
-  execute ":cs find g ". expand("<cword>")
-  "high light word
-  execute "normal ?\\<" . l:save_word . "\\>?s\<CR>"
-  let @/="\\<" . l:save_word . "\\>"
-  execute "normal zz"
-  "go back
-  execute "wincmd l"
-  execute "normal `Z"
-  execute "normal zz"
-endfunction
-
 function! GotoTagLastName()
   execute "tag ".g:last_name
 endfunction
-
-nmap gS <Esc>:call MoveToDefintionOfMember(expand("<cword>"))<CR>
 nmap gO <Esc>:call GotoTagLastName()<CR>
-
-function! CheckSearch(word)
-  echom "hi"
-  execute "normal /\\<" . a:word . "\\>/s\<CR>"
-endfunction
-
-nmap \test <Esc>:call CheckSearch(expand("<cword>"))<CR>
-
-nmap <Leader>fpanv  <Esc>:call PanosTags("../tags_v")<CR>
-nmap <Leader>fpand  <Esc>:call PanosTags("../tags_d")<CR>
-
