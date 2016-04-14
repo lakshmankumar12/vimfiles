@@ -234,7 +234,7 @@ endfunction
 function! PanosTagsSink(line)
   let g:last_name = a:line
   call LoadCscopeToQuickFix(a:line,"s")
-  execute "cc"
+  execute "ll"
 endfunction
 
 function! PanosTags(file)
