@@ -42,6 +42,7 @@ Plugin 'junegunn/fzf.vim'
 Plugin 'vim-scripts/QFixToggle'
 Plugin 'altercation/vim-colors-solarized.git'
 Plugin 'regedarek/ZoomWin'
+Plugin 'yssl/QFEnter'                         " <Leader><CR> on quickfix/loc-list will open in a new vert split.
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -94,8 +95,10 @@ colorscheme solarized
 set diffopt+=vertical
 set csprg='/home/lnara002/software/cscope/cscope-15.8a/postinstall/bin/cscope'
 
-map + <Esc>:cn<CR>
-map - <Esc>:cp<CR>
+nmap gL <Esc>:cn<CR>
+nmap gH <Esc>:cp<CR>
+nmap - <Esc>:lprev<CR>
+nmap + <Esc>:lnext<CR>
 
 au FileType make setlocal noexpandtab
 
