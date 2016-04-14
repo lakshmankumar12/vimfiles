@@ -111,21 +111,21 @@ gV -- select-mode stuff.
 z-keys
 ------
 
-za - open a closed fold
+za - toggles  a fold (Similar: zc/zo/za)                                  zA  - za at all folding levels
 zb - bring line to bottom
-zc - close a fold
-zd - delete one fold on cursor
+zc - close a fold (in an existing fold(determined by mode))               zC  - zc at all folding levels
+zd - delete one fold on cursor (in manual-fold mode)
 ze - bring current column to end of screen
-zf - create a fold
-zg - open current work to good work (spell file)
-zi - Invert foldenable (?)
+zf - create a fold (in manual-fold mode)
+zg - open current work to good work (spell file) (BOUND to vcs fing g)
+zi - Invert foldenable
 zj - goto next fold down
 zk - goto end of previous fold
-zm - subtract one fold level
-zn - all folds open (fold none)
-zo - open fold under curor
+zm - adds one fold level thru whole buff(inverse of zr)                   zM - closes all folds in file
+zn - fold none (reset foldenable)                                         zN - set foldenable
+zo - open fold under curor (in an existing fold)/complement of zc         zO  - zo at all folding levels
 zp - NONE                       (Bound to :lopen)
-zr - add a foldeding level
+zr - reduces folding by opening one foldeding level over whole buf        zR  - open all folds
 zs - bring current column to start of screen
 zt - ..?..
 zu - word-lists sth
