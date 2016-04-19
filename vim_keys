@@ -89,24 +89,24 @@ RECLAIMable in g:
 gb - some netrw bookmark            (copy to system cliboard)
 gc - none                           (Bound to Keep window with only quickfix)
 gh - enter select mode
-ql - none                           (Bound to FZF)
+gl - none                           (Bound to FZF)
 gq - format motion.(can use visual+= instead)
 gw - format motion.                 (Bound to :update)
 gx - netrw stuff                    (Bound to :close)
 gy - none                           (Bound to set pastetoggle)
 gz - none                           (Bound to toggle bg)
 
-gA                (Bound to tags_s)
-gB                (Bound to FzfBuffers)
+gA                         (Bound to tags_s)
+gB                         (Bound to FzfBuffers)
 gC
-gG                (Bound to tags_f)
-gH                (Bound to :lprev)
+gG                         (Bound to tags_f)
+gH                         (Bound to :lprev)
 gK
-gL                (Bound to :lnext)
-gM                (Bound to tags_m)
-gO                (Bound to GotoTagLastName)
-gS                (Bound to MoveToDefintionOfMember)
-gV -- select-mode stuff.
+gL                         (Bound to :lnext)
+gM                         (Bound to tags_m)
+gO                         (Bound to GotoTagLastName)
+gS                         (Bound to MoveToDefintionOfMember)
+gV  -- select-mode stuff.  (Bound to ToggleMouse)
 
 z-keys
 ------
@@ -118,11 +118,13 @@ zd - delete one fold on cursor (in manual-fold mode)
 ze - bring current column to end of screen
 zf - create a fold (in manual-fold mode)
 zg - open current work to good work (spell file) (BOUND to vcs fing g)
+zh - move view one step right                                             zH  - scroll left by half-screen
 zi - Invert foldenable
 zj - goto next fold down
 zk - goto end of previous fold
-zm - adds one fold level thru whole buff(inverse of zr)                   zM - closes all folds in file
-zn - fold none (reset foldenable)                                         zN - set foldenable
+zl - move view one step step                                              zL  - scroll right by half-screen
+zm - adds one fold level thru whole buff(inverse of zr)                   zM  - closes all folds in file
+zn - fold none (reset foldenable)                                         zN  - set foldenable
 zo - open fold under curor (in an existing fold)/complement of zc         zO  - zo at all folding levels
 zp - NONE                       (Bound to :lopen)
 zr - reduces folding by opening one foldeding level over whole buf        zR  - open all folds

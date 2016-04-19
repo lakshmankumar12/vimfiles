@@ -19,8 +19,6 @@ nmap <Leader>nopas       <Esc>:set nopaste<CR>
 nmap <Leader>only        <Esc>:call KeepOnlyWindowWithLocationList()<CR>
 "remapping to accomodate typos
 nmap <Leader>conly        <Esc>:call KeepOnlyWindowWithLocationList()<CR>
-nmap <Leader>bgl          <Esc>:set bg=light<CR>
-nmap <Leader>bgd          <Esc>:set bg=dark<CR>
 nmap [u            <C-w>h<C-w>c
 nmap ]u            <C-w>l<C-w>c
 nmap [t            <C-w>k<C-w>c
@@ -29,8 +27,9 @@ nmap <c-h>         <C-w>h
 nmap <c-j>         <C-w>j
 nmap <c-k>         <C-w>k
 nmap <c-l>         <C-w>l
+" Who uses ex mode these days!
 nmap Q            <Esc>:tabclose<CR>
-" i dont use Z<anything> much
+" i dont use ZZ/ZQ much. Anything else on Z?!
 nmap Z            <Esc>:call CloseOneWindowInBottom()<CR>
 nmap zp           <Esc>:lopen<CR>
 " neither do i use S
@@ -239,6 +238,24 @@ endfunction
 
 command! Showmp3 call ShowMp3Function()
 command! Makemp3 call MakeMp3Function()
+
+" Taken from : http://github.com/nvie/vim-togglemouse
+fun! ToggleMouse()
+    if !exists("s:old_mouse")
+        let s:old_mouse = "a"
+    endif
+
+    if &mouse == ""
+        let &mouse = s:old_mouse
+        echo "Mouse is for Vim (" . &mouse . ")"
+    else
+        let s:old_mouse = &mouse
+        let &mouse=""
+        echo "Mouse is for terminal"
+    endif
+endfunction
+
+nmap gV   <Esc>:call ToggleMouse()<CR>
 
 function! MoveToDefintionOfMember(word)
   let l:save_word = a:word
