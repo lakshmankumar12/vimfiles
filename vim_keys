@@ -91,7 +91,13 @@ gc - none                           (Bound to Keep window with only quickfix)
 gh - enter select mode
 gl - none                           (Bound to FZF)
 gq - format motion.(can use visual+= instead)
-gw - format motion.                 (Bound to :update)
+gw - format motion.
+   gww                              (Bound to :update)
+   gwh
+   gwj
+   gwk
+   gwl
+  
 gx - netrw stuff                    (Bound to :close)
 gy - none                           (Bound to set pastetoggle)
 gz - none                           (Bound to toggle bg)

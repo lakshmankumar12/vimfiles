@@ -30,13 +30,26 @@ nmap <c-l>         <C-w>l
 " Who uses ex mode these days!
 nmap Q            <Esc>:tabclose<CR>
 " i dont use ZZ/ZQ much. Anything else on Z?!
-nmap Z            <Esc>:call CloseOneWindowInBottom()<CR>
+nmap Z            :<C-U>call CloseOneWindowInBottom(v:count1)<CR>
 nmap zp           <Esc>:lopen<CR>
 " neither do i use S
-nmap s            <Esc>
+nmap S            <Esc>
 nmap gc           <Esc>:call KeepOnlyWindowWithLocationList()<CR>
 nmap gl           <Esc>:FZF<CR>
-nmap gw           <Esc>:update<CR>
+nmap gww          <Esc>:update<CR>
+nmap gwh          <C-w>h
+nmap gwj          <C-w>j
+nmap gwk          <C-w>k
+nmap gwl          <C-w>l
+nmap gw=          <C-w>=
+nmap gwc          <C-w>c
+nmap gwv          <C-w>v
+nmap gws          <C-w>s
+nmap gwt          <Esc>:tabnew expand("%:p")<CR>
+nmap gwH          <C-w>h<C-w>c
+nmap gwJ          <C-w>j<C-w>c
+nmap gwK          <C-w>k<C-w>c
+nmap gwL          <C-w>l<C-w>c
 nmap gx           <Esc>:close<CR>
 nmap gy           <Esc>:set paste!<CR>
 nmap gB           <Esc>:FzfBuffers<CR>
@@ -184,9 +197,20 @@ function! KeepOnlyWindowWithLocationList()
   execute "wincmd p"
 endfunction
 
-function! CloseOneWindowInBottom()
-  execute "wincmd j"
-  execute "close"
+function! CloseOneWindowInBottom(count)
+  echom "Got count as " . a:count
+  let l:c = 1
+
+  while l:c <= a:count
+      execute "wincmd j"
+      execute "close"
+      let l:c += 1
+  endwhile
+endfunction
+
+function! CloseWindowInDirection(dir)
+ execute "wincmd " . a:dir
+ execute "close"
 endfunction
 
 nnoremap <Leader>zoom <Esc>:call ZoomToggle()<CR>
