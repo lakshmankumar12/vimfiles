@@ -34,7 +34,8 @@ nmap gw=          <C-w>=
 nmap gwc          <C-w>c
 nmap gwv          <C-w>v
 nmap gws          <C-w>s
-nmap gwt          <Esc>:tabnew expand("%:p")<CR>
+nmap gwo          <Plug>ZoomWin
+nmap gwt          <Esc>:tabnew %<CR>
 nmap gwH          <C-w>h<C-w>c
 nmap gwJ          <C-w>j<C-w>c
 nmap gwK          <C-w>k<C-w>c
