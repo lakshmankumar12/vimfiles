@@ -247,6 +247,14 @@ P   : goto preview(not quickfix)
 T   : move window to a new tab
 }   : tag under cursor in preview
 
+Search modifiers
+---------------
+
+\c<pattern> will ignore case
+<pattern>/e will place cursor at end of pattern
+         /s will place curros at start of pattern (needed when combining number below)
+         /<num>  will goto line-above (or chars if e/s is used)
+         /-num     --do--      -below ( --do-- )
 
 Other Vim Tips:
 ===============
