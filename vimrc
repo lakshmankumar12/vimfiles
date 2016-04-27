@@ -43,6 +43,8 @@ Plugin 'vim-scripts/QFixToggle'
 Plugin 'altercation/vim-colors-solarized.git'
 Plugin 'regedarek/ZoomWin'
 Plugin 'yssl/QFEnter'                         " <Leader><CR> on quickfix/loc-list will open in a new vert split.
+Plugin 'fatih/vim-go'
+
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
