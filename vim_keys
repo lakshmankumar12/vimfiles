@@ -277,3 +277,8 @@ To know which plugin set the setting last
 
 :verbose set iskeyword?
 
+Set vertical scrollbind in 2 splits
+-----------------------------------
+
+:windo setlocal scrollbind
+ctrl-W <size> |   " to fix the vertical size
