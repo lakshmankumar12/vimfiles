@@ -83,6 +83,8 @@ g% - % backwards
 g^ - first non-blank in screen
 g& - repeat last subtittue
 g] - show tags under cursor
+g; - goto position in change list
+g, - goto position in change list rev order
 
 
 RECLAIMable in g:
@@ -282,3 +284,12 @@ Set vertical scrollbind in 2 splits
 
 :windo setlocal scrollbind
 ctrl-W <size> |   " to fix the vertical size
+
+Diff
+----
+
+If diff gets wonky, do
+:diffupdate
+--or--
+:bufdo diffoff
+and diff again.
