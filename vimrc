@@ -44,6 +44,8 @@ Plugin 'altercation/vim-colors-solarized.git'
 Plugin 'regedarek/ZoomWin'
 Plugin 'yssl/QFEnter'                         " <Leader><CR> on quickfix/loc-list will open in a new vert split.
 Plugin 'fatih/vim-go'
+Plugin 'godlygeek/tabular'
+Plugin 'tpope/vim-surround'
 
 
 " All of your Plugins must be added before the following line
@@ -179,6 +181,7 @@ let g:airline#extensions#default#section_truncate_width = {
       \ 'b': 100,
       \ 'c': 20,
       \ 'gutter': 100,
+      \ 'x': 20,
       \ 'y': 100,
       \ 'z': 20,
       \ 'warning': 100,
