@@ -265,8 +265,8 @@ function! PanosTagsJustGo(file)
 endfunction
 
 function! LoadErrorsFunction()
-  execute ":cf log.txt"
-  execute ":copen"
+  execute ":lf log.txt"
+  execute ":lopen"
   execute "wincmd j"
   execute "normal G"
   execute "normal /\\<error\\>/s\<CR>"
