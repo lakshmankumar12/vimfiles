@@ -24,7 +24,7 @@ nmap zp           <Esc>:lopen<CR>
 " neither do i use S
 nmap S            <Esc>
 " Y is same yy. So, lets do something useful
-nmap Y            y$
+nmap Y            y$:call DumpToClipBoard()<CR>
 nmap gc           <Esc>:call KeepOnlyWindowWithLocationList()<CR>
 nmap gl           <Esc>:FZF<CR>
 nmap gww          <Esc>:update<CR>
@@ -42,7 +42,22 @@ nmap gwH          <C-w>h<C-w>c
 nmap gwJ          <C-w>j<C-w>c
 nmap gwK          <C-w>k<C-w>c
 nmap gwL          <C-w>l<C-w>c
-nmap gx           <Esc>:close<CR>
+
+"cscope'ish
+nmap gxs :cs find s <C-R>=expand("<cword>")<CR><CR>
+nmap gxg :cs find g <C-R>=expand("<cword>")<CR><CR>
+nmap gxc :cs find c <C-R>=expand("<cword>")<CR><CR>
+nmap gxt :cs find t <C-R>=expand("<cword>")<CR><CR>
+nmap gxe :cs find e <C-R>=expand("<cword>")<CR><CR>
+nmap gxf :cs find f <C-R>=expand("<cfile>")<CR><CR>
+nmap gxi :cs find i <C-R>=expand("<cfile>")<CR><CR>
+nmap gxd :cs find d <C-R>=expand("<cword>")<CR><CR>
+nmap gxx <C-t>
+nmap gxo <C-o>
+nmap gxS :vsplit<CR>:cs find s <C-R>=expand("<cword>")<CR><CR>
+nmap gxG :vsplit<CR>:cs find g <C-R>=expand("<cword>")<CR><CR>
+nmap gxC :vsplit<CR>:cs find c <C-R>=expand("<cword>")<CR><CR>
+
 nmap gy           <Esc>:set paste!<CR>
 nmap gB           <Esc>:FzfBuffers<CR>
 call togglebg#map("gz")
@@ -53,6 +68,7 @@ nmap gP           <Esc>P`[
 nmap zg           <Esc>:vert scs find g <C-R>=expand("<cword>")<CR><CR>	
 "in visual-line mode, i need to select lines, and i keep pressing J
 vmap J            j
+"scroll preview window from another window
 nnoremap <Leader>pd   <Esc>:wincmd P<CR><C-D>:wincmd p<CR>
 nnoremap <Leader>pu   <Esc>:wincmd P<CR><C-U>:wincmd p<CR>
 nmap <Leader>ln   <C-w>h<Esc>:q<CR><C-w>P<C-n>
@@ -60,7 +76,7 @@ nmap <Leader>lp   <C-w>h<Esc>:q<CR><C-w>P<C-p>
 nmap <Leader>hn   :q<CR><C-w>P<C-n>
 nmap <Leader>hp   :q<CR><C-w>P<C-p>
 nmap <Leader>gfunc    <Esc>:call FindFunctionFromTags()<CR>
-nnoremap <Leader>gdb  <Esc>:Gdiff base<CR><C-w>lgg
+nnoremap <Leader>gdb  <Esc>:Gdiff base<CR>gg<Esc>:wincmd l<CR>
 
 function! GetCommandOutputOnNewTab()
   let s:cmdName = input("Enter command:")

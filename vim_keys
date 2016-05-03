@@ -98,7 +98,7 @@ gw - format motion.
    gwk
    gwl
   
-gx - netrw stuff                    (Bound to :close)
+gx - netrw stuff                    (Bound to cscope operations)
 gy - none                           (Bound to set pastetoggle)
 gz - none                           (Bound to toggle bg)
 
