@@ -2,12 +2,13 @@
 nnoremap <silent> <Leader>gg :call g:DiffCurrFile()<CR>
 nnoremap <silent> <Leader>gj :call g:DiffNextLoc()<CR>
 nnoremap <silent> <Leader>gk :call g:DiffPrevLoc()<CR>
+nnoremap <silent> <Leader>go :call g:DiffOff()<CR>
 
 command! -nargs=* Glistmod call g:ListModified(<f-args>)
 
 function! g:ListModified(lhs, rhs)
     execute "only"
-    windo set nodiff
+    execute "windo diffoff"
     let old_makeprg=&makeprg
     let old_errorformat=&errorformat
     let g:lhs = a:lhs
@@ -18,37 +19,48 @@ function! g:ListModified(lhs, rhs)
     lmake
     let &makeprg=old_makeprg
     let &errorformat=old_errorformat
-    ll
-    call g:DiffCurrFile()
+    execute "ll"
+    silent call g:DiffCurrFile()
 endfunction
 
 function! g:DiffCurrFile()
-    wincmd l
     let l:n = winnr('$')
     if l:n > 1
       only
     endif
-    windo set nodiff
+    execute "silent windo diffoff"
+    execute "ll"
     execute "wincmd v"
     exec 'Gedit ' . g:lhs . ':' . expand("%")
     diffthis
     execute "wincmd l"
-    exec 'Gedit ' . g:rhs . ':' . expand("%")
+    if g:rhs != "--"
+      exec 'Gedit ' . g:rhs . ':' . expand("%")
+    endif
     diffthis
-    execute "gg"
+    execute "normal gg"
 endfunction
 
 function! g:DiffNextLoc()
     wincmd l
+    execute "windo diffoff"
     only
     lnext
-    call g:DiffCurrFile()
+    silent call g:DiffCurrFile()
 endfunction
 
 function! g:DiffPrevLoc()
     wincmd l
+    execute "windo diffoff"
     only
     lprev
-    call g:DiffCurrFile()
+    silent call g:DiffCurrFile()
+endfunction
+
+function! g:DiffOff()
+    execute "normal mZ"
+    windo set nodiff!
+    only
+    execute "normal `Z"
 endfunction
 

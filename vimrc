@@ -23,7 +23,6 @@ Plugin 'ntpeters/vim-better-whitespace'
 Plugin 'vim-scripts/ShowFunc.vim'
 Plugin 'sjl/clam.vim'                         "Clam shellcmd
 Plugin 'vim-scripts/OmniCppComplete'
-Plugin 'vim-scripts/vimtabs.vim'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'majutsushi/tagbar'                    "Enables the c-function names with g:airline#extensions#tagbar#enabled below.
