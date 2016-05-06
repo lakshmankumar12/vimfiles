@@ -45,7 +45,7 @@ Plugin 'yssl/QFEnter'                         " <Leader><CR> on quickfix/loc-lis
 Plugin 'fatih/vim-go'
 Plugin 'godlygeek/tabular'
 Plugin 'tpope/vim-surround'
-
+Plugin 'jeetsukumaran/vim-indentwise'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -186,7 +186,25 @@ let g:airline#extensions#default#section_truncate_width = {
       \ 'warning': 100,
       \ 'error': 100,
       \ }
-let g:airline_theme='molokai'
+let g:airline_theme='solarized'
+function! AirlineThemePatch(palette)
+  if g:airline_theme == 'solarized'
+    "greenish
+    let a:palette.normal.airline_a = [ '#ffffff', '#268bd2', 234, 82 ]
+    let a:palette.normal.airline_z = [ '#ffffff', '#268bd2', 234, 82 ]
+    "blue
+    let a:palette.visual.airline_a = [ '#ffffff', '#268bd2', 255, 33 ]
+    let a:palette.visual.airline_z = [ '#ffffff', '#268bd2', 255, 33 ]
+    "violetish
+    let a:palette.insert.airline_a = [ '#ffffff', '#268bd2', 237, 129 ]
+    let a:palette.insert.airline_z = [ '#ffffff', '#268bd2', 237, 129 ]
+    "reddish
+    let a:palette.replace.airline_a = [ '#ffffff', '#268bd2', 255, 197 ]
+    let a:palette.replace.airline_z = [ '#ffffff', '#268bd2', 255, 197 ]
+  endif
+endfunction
+let g:airline_theme_patch_func = 'AirlineThemePatch'
+
 
 "for ctrlp.vim
 let g:ctrlp_cmd = 'CtrlPBuffer'

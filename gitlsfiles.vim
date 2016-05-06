@@ -5,10 +5,11 @@ nnoremap <silent> <Leader>gk :call g:DiffPrevLoc()<CR>
 nnoremap <silent> <Leader>go :call g:DiffOff()<CR>
 
 command! -nargs=* Glistmod call g:ListModified(<f-args>)
+command! Gbase call g:ListModified("base","--")
+command! Gedited call g:ListModified("HEAD","--")
 
 function! g:ListModified(lhs, rhs)
-    execute "only"
-    execute "windo diffoff"
+    execute "tabnew %"
     let old_makeprg=&makeprg
     let old_errorformat=&errorformat
     let g:lhs = a:lhs
@@ -16,7 +17,7 @@ function! g:ListModified(lhs, rhs)
     let &makeprg = "git diff --name-only " . a:lhs . " " . a:rhs
     let &errorformat="%f"
     echom &makeprg
-    lmake
+    silent lmake
     let &makeprg=old_makeprg
     let &errorformat=old_errorformat
     execute "ll"
@@ -31,11 +32,11 @@ function! g:DiffCurrFile()
     execute "silent windo diffoff"
     execute "ll"
     execute "wincmd v"
-    exec 'Gedit ' . g:lhs . ':' . expand("%")
+    silent exec 'Gedit ' . g:lhs . ':' . expand("%")
     diffthis
     execute "wincmd l"
     if g:rhs != "--"
-      exec 'Gedit ' . g:rhs . ':' . expand("%")
+      silent exec 'Gedit ' . g:rhs . ':' . expand("%")
     endif
     diffthis
     execute "normal gg"
