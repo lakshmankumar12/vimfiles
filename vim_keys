@@ -99,6 +99,7 @@ gw - format motion.
    gwj
    gwk
    gwl
+   gwg                              (Bound to gitGuttter disable)
   
 gx - netrw stuff                    (Bound to cscope operations)
 gy - none                           (Bound to set pastetoggle)
@@ -264,6 +265,7 @@ Other Vim Tips:
 In a huge list of cscope-s results on a function-name, to quickly find the function defintion, try
 
 function_name\s*(\s*\w\+\s\+\w.*,
+\w\+\s*(\s*\w\+\s\+\w.*,
 
 i.e name space* ( space* word+ space* word+ .* ,
     The idea is only definition will have 2 words min between ( and , arg-type and arg-name, while invocations will have just argname. 
