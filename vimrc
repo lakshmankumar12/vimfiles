@@ -250,3 +250,11 @@ let g:ctags_path="/home/lnara002/software/ctags/ctags-5.8/postinstall/bin/ctags"
 
 "for ag.vim
 let g:agprg="/home/lnara002/software/ag/the_silver_searcher-0.30.0/postinstall/bin/ag --column"
+
+"syntastic
+let g:syntastic_c_checkers = ['sparse']
+" suppressing warnings we probably do not want to see
+let g:syntastic_c_sparse_args='-Wno-one-bit-signed-bitfield -Wno-non-pointer-null'
+let s:sparse_common_opts='-DCPU=PENTIUM -DTGT_CPU=5 -DTGT_PF=0 -DTGT_PF_DEFINED -DTGT_HW=7 -DTGT_HW_DEFINED -DTGT_BSP=1 -DTGT_BSP_DEFINED -Iwind/target/h -I. -Igen -DNO_ISSU_VALIDATE_ASSERTS -D"ARRAY_CHECK_RANGE(a,b,c)"=b -D"__attribute__(x)"=" "'
+au BufEnter */lte_gtp/*.c,*/lte_gtp/*.h let g:syntastic_c_sparse_post_args='-DCOMPILING_MOD_GTP -DMODULE_ID=MOD_GTP -DMOD_GTP=299 ' . s:sparse_common_opts
+au BufEnter */lte_cpm/*.c,*/lte_cpm/*.h let g:syntastic_c_sparse_post_args='-DCOMPILING_MOD_IMSI -DMODULE_ID=MOD_IMSI -DMOD_GTP=302 -DMOD_SIG=335 ' . s:sparse_common_opts
