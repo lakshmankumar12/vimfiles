@@ -11,7 +11,6 @@ call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
 
 Plugin 'vim-scripts/MultipleSearch'
-Plugin 'vim-scripts/DirDiff.vim'
 Plugin 'antiAgainst/cscope-macros.vim'
 Plugin 'tpope/vim-fugitive'
 Plugin 'jreybert/vimagit'
@@ -48,6 +47,7 @@ Plugin 'fatih/vim-go'
 Plugin 'godlygeek/tabular'
 Plugin 'tpope/vim-surround'
 Plugin 'jeetsukumaran/vim-indentwise'
+Plugin 'junegunn/vim-peekaboo'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -218,6 +218,21 @@ let g:fzf_command_prefix = 'Fzf'
 
 " no omnicomplete preview
 set completeopt-=preview
+
+" Reset the listchars
+set listchars=""
+" make tabs visible
+set listchars=tab:▸▸
+" show trailing spaces as dots
+set listchars+=trail:•
+" The character to show in the last column when wrap is off and the line
+" continues beyond the right of the screen
+set listchars+=extends:>
+" The character to show in the last column when wrap is off and the line
+" continues beyond the right of the screen
+set listchars+=precedes:<
+set list
+let g:better_whitespace_enabled = 0
 
 " DONT TYPE ANYTHING HERE SO THAT CENTOS-BRANCH CAN
 " SAFELY ADD ITS OVERRIDES WITHOUT ISSUES
