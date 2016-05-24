@@ -28,6 +28,8 @@ nmap Y            y$:call DumpToClipBoard()<CR>
 nmap gc           <Esc>:call KeepOnlyWindowWithLocationList()<CR>
 nmap gl           <Esc>:FZF<CR>
 nmap gww          <Esc>:update<CR>
+
+"window movements
 nmap gwh          <C-w>h
 nmap gwj          <C-w>j
 nmap gwk          <C-w>k
@@ -36,28 +38,27 @@ nmap gw=          <C-w>=
 nmap gwc          <C-w>c
 nmap gwv          <C-w>v
 nmap gws          <C-w>s
-nmap gwo          <Plug>ZoomWin
-nmap gwt          <Esc>:tabnew %<CR>
-nmap gwg          <Esc>:GitGutterToggle<CR>
+"these close other windows
 nmap gwH          <C-w>h<C-w>c
 nmap gwJ          <C-w>j<C-w>c
 nmap gwK          <C-w>k<C-w>c
 nmap gwL          <C-w>l<C-w>c
+nmap gwo          <Plug>ZoomWin
+nmap gwt          <Esc>:tabnew %<CR>
+nmap gwg          <Esc>:GitGutterToggle<CR>
 
 "cscope'ish
 nmap gxs :cs find s <C-R>=expand("<cword>")<CR><CR>
 nmap gxg :cs find g <C-R>=expand("<cword>")<CR><CR>
 nmap gxc :cs find c <C-R>=expand("<cword>")<CR><CR>
-nmap gxt :cs find t <C-R>=expand("<cword>")<CR><CR>
-nmap gxe :cs find e <C-R>=expand("<cword>")<CR><CR>
-nmap gxf :cs find f <C-R>=expand("<cfile>")<CR><CR>
-nmap gxi :cs find i <C-R>=expand("<cfile>")<CR><CR>
-nmap gxd :cs find d <C-R>=expand("<cword>")<CR><CR>
-nmap gxx <C-t>
-nmap gxo <C-o>
 nmap gxS :vsplit<CR>:cs find s <C-R>=expand("<cword>")<CR><CR>
 nmap gxG :vsplit<CR>:cs find g <C-R>=expand("<cword>")<CR><CR>
 nmap gxC :vsplit<CR>:cs find c <C-R>=expand("<cword>")<CR><CR>
+nmap gxx <C-t>
+nmap gxt <C-t>
+nmap gxo <C-o>
+nmap gxe :w! /tmp/gxeback<CR>:e!<CR>
+nmap gxf <Esc>:FzfHistory<CR>
 
 nmap gy           <Esc>:set paste!<CR>
 nmap gB           <Esc>:FzfBuffers<CR>
@@ -208,6 +209,9 @@ function! MoveToDefintionOfMember(word)
 endfunction
 
 nmap gS <Esc>:call MoveToDefintionOfMember(expand("<cword>"))<CR>
+
+imap <c-x><c-l> <plug>(fzf-complete-line)
+
 
 " DONT TYPE ANYTHING HERE SO THAT CENTOS-BRANCH CAN
 " SAFELY ADD ITS OVERRIDES WITHOUT ISSUES
