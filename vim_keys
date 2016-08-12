@@ -69,7 +69,7 @@ gk - go upon screen line
 gm - half g0
 gn - next and visual the word                                      gN   -- backward gn
 go - got to nth byte in buffer
-gp - like p, but leave cursor after pasted text                    gP   -- like P/gp, but P'ed effect  (RECLAIMED to keep-cursor at beg-position)
+gp - like p, but leave cursor after pasted text                    gP   -- like P/gp, but P'ed effect  (Reclaimed to paste from clipboard+)
 gr - virtual replace (like screen estate useful on file with tabs) gR   -- virt-replace mode
 gs - sleep
 gt - next tab                                                      gT   -- prev tab
@@ -250,6 +250,45 @@ P   : goto preview(not quickfix)
 T   : move window to a new tab
 }   : tag under cursor in preview
 
+Command-mode
+-------------
+
+:help c_ctrl-a
+
+C-a  :  all names to the left of pattern are inserted (Like auto tab-completion)
+C-b  :  goto beginning of line
+C-c  :  quit command line w/o executing
+C-d  :  List names that match the pattern in front of the cursor. (like ? in our cli prompt)
+C-e  :  goto end of line
+C-f  :  open the command-line window
+C-g  :  Nothing. RECLAIM
+C-h  :  backspace
+C-i  :  insert first match (tab-completion)
+C-j  :  Enter (execute command)
+C-k  :  digraph
+c-l  :  Insert longest common (tab-completion)
+C-m  :  Nothing. RECLAIM
+C-l
+C-m
+C-n
+C-o
+C-p
+C-q
+C-r
+C-s
+C-t
+C-u
+C-v
+C-w
+C-x
+C-y
+C-z
+C-]
+C-^
+C-_
+C-|
+
+
 Search modifiers
 ---------------
 
@@ -295,3 +334,10 @@ If diff gets wonky, do
 --or--
 :bufdo diffoff
 and diff again.
+
+Navigating based on indent (for config files)
+---------------------------------------------
+
+:set foldmethod=indent
+]= / [=  -- next/prev lines on same indentation level
+[-       -- prev .. go one level up
