@@ -47,7 +47,7 @@ Plugin 'fatih/vim-go'
 Plugin 'godlygeek/tabular'
 Plugin 'tpope/vim-surround'
 Plugin 'jeetsukumaran/vim-indentwise'
-Plugin 'junegunn/vim-peekaboo'
+"Plugin 'junegunn/vim-peekaboo'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required

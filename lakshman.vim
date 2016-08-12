@@ -59,6 +59,9 @@ nmap gxt <C-t>
 nmap gxo <C-o>
 nmap gxe :w! /tmp/gxeback<CR>:e!<CR>
 nmap gxf <Esc>:FzfHistory<CR>
+"Useful for magit like walking across hunks in a Gedit'ed commit display
+nmap gxn :call SwitchBetweenDiffFolds('N')<CR>
+nmap gxp :call SwitchBetweenDiffFolds('P')<CR>
 
 nmap gy           <Esc>:set paste!<CR>
 nmap gB           <Esc>:FzfBuffers<CR>
@@ -66,7 +69,7 @@ call togglebg#map("gz")
 imap kj           <Esc>
 cmap kj           <Esc>
 nmap gp           <Esc>p`[
-nmap gP           <Esc>P`[
+nmap gP           <Esc>"+P
 nmap zg           <Esc>:vert scs find g <C-R>=expand("<cword>")<CR><CR>	
 "in visual-line mode, i need to select lines, and i keep pressing J
 vmap J            j
@@ -211,6 +214,28 @@ endfunction
 nmap gS <Esc>:call MoveToDefintionOfMember(expand("<cword>"))<CR>
 
 imap <c-x><c-l> <plug>(fzf-complete-line)
+
+" Taken from vimagit
+function! SwitchBetweenDiffFolds(dir)
+  let back = ( a:dir == 'P' ) ? 'b' : ''
+  let line = search("^@@ ", back . 'wn')
+  if ( line != 0 )
+    if ( foldlevel(line('.')) == 1 )
+      try
+        foldclose
+      catch /^Vim\%((\a\+)\)\=:E490/
+      endtry
+    endif
+    call cursor(line, 0)
+    while ( foldclosed(line) != -1 )
+      try
+        foldopen
+      catch /^Vim\%((\a\+)\)\=:E490/
+        break
+      endtry
+    endwhile
+  endif
+endfunction
 
 
 " DONT TYPE ANYTHING HERE SO THAT CENTOS-BRANCH CAN
