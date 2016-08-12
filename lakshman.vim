@@ -250,14 +250,6 @@ nmap gG           <Esc>:call PanosTags("../tags_f")<CR>
 nmap gA           <Esc>:call PanosTags("../tags_s")<CR>
 nmap gM           <Esc>:call PanosTags("../tags_m")<CR>
 
-"my cscope.out is at a dir one level up!..so
-if has("cscope") && filereadable("../cscope.out")
-  cs add .. ..
-endif
-if filereadable("../tags")
-  set tags+=../tags
-endif
-
 nmap <Leader>fpanv  <Esc>:call PanosTags("../tags_v")<CR>
 nmap <Leader>fpand  <Esc>:call PanosTags("../tags_d")<CR>
 
