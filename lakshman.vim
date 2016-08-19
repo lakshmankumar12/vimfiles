@@ -246,11 +246,17 @@ endfunction
 
 
 " ***********
+
+" functions
 nmap gG           <Esc>:call PanosTags("../tags_f")<CR>
+" struct/typedef
 nmap gA           <Esc>:call PanosTags("../tags_s")<CR>
+" member
 nmap gM           <Esc>:call PanosTags("../tags_m")<CR>
 
+" global variables
 nmap <Leader>fpanv  <Esc>:call PanosTags("../tags_v")<CR>
+" defines/enums
 nmap <Leader>fpand  <Esc>:call PanosTags("../tags_d")<CR>
 
 function! PanosTagsSink(line)
