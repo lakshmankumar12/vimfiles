@@ -10,7 +10,6 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim'
 
-Plugin 'vim-scripts/MultipleSearch'
 Plugin 'antiAgainst/cscope-macros.vim'
 Plugin 'tpope/vim-fugitive'
 Plugin 'jreybert/vimagit'
@@ -48,6 +47,7 @@ Plugin 'godlygeek/tabular'
 Plugin 'tpope/vim-surround'
 Plugin 'jeetsukumaran/vim-indentwise'
 "Plugin 'junegunn/vim-peekaboo'
+Plugin 'vim-scripts/Mark--Karkat'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -160,11 +160,15 @@ map <Leader>k <Plug>(easymotion-k)
 nmap <Leader>s <Plug>(SneakStreak)
 nmap <Leader>S <Plug>(SneakStreakBackward)
 
-"For MultipleSearch.vim
-let g:MultipleSearchMaxColors = 8
-"   foreground and background
-let g:MultipleSearchColorSequence = "red,blue,green,magenta,cyan,gray,brown,yellow"
-let g:MultipleSearchTextColorSequence = "white,white,black,white,black,black,white,black"
+"Form markwords
+highlight MarkWord1 ctermbg=red ctermfg=white guibg=#8CCBEA guifg=Black
+highlight MarkWord2 ctermbg=blue ctermfg=white guibg=#8CCBEA guifg=Black
+highlight MarkWord3 ctermbg=green ctermfg=black guibg=#8CCBEA guifg=Black
+highlight MarkWord4 ctermbg=magenta ctermfg=white guibg=#8CCBEA guifg=Black
+highlight MarkWord5 ctermbg=cyan ctermfg=black guibg=#8CCBEA guifg=Black
+highlight MarkWord6 ctermbg=gray ctermfg=black guibg=#8CCBEA guifg=Black
+highlight MarkWord7 ctermbg=brown ctermfg=white guibg=#8CCBEA guifg=Black
+highlight MarkWord8 ctermbg=yellow ctermfg=black guibg=#8CCBEA guifg=Black
 
 " DirDiff mapping enabled
 let g:DirDiffEnableMappings=1
