@@ -5,17 +5,6 @@ nmap <Leader>css         <Esc>:call LoadCscopeToQuickFix(expand("<cword>"),"s")<
 nmap <Leader>csg         <Esc>:call LoadCscopeToQuickFix(expand("<cword>"),"g")<CR>
 nmap <Leader>csc         <Esc>:call LoadCscopeToQuickFix(expand("<cword>"),"c")<CR>
 nmap <Leader>adds        <Esc>:call Addspaces()<CR>
-nmap <Leader>only        <Esc>:call KeepOnlyWindowWithLocationList()<CR>
-"remapping to accomodate typos
-nmap <Leader>conly        <Esc>:call KeepOnlyWindowWithLocationList()<CR>
-nmap [u            <C-w>h<C-w>c
-nmap ]u            <C-w>l<C-w>c
-nmap [t            <C-w>k<C-w>c
-nmap [b            <C-w>j<C-w>c
-nmap <c-h>         <C-w>h
-nmap <c-j>         <C-w>j
-nmap <c-k>         <C-w>k
-nmap <c-l>         <C-w>l
 " Who uses ex mode these days!
 nmap Q            <Esc>:tabclose<CR>
 " i dont use ZZ/ZQ much. Anything else on Z?!
@@ -46,6 +35,7 @@ nmap gwL          <C-w>l<C-w>c
 nmap gwo          <Plug>ZoomWin
 nmap gwt          <Esc>:tabnew %<CR>
 nmap gwg          <Esc>:GitGutterToggle<CR>
+nmap gwr          <Esc>:set wrap!<CR>
 
 "cscope'ish
 nmap gxs :cs find s <C-R>=expand("<cword>")<CR><CR>
@@ -248,16 +238,17 @@ endfunction
 " ***********
 
 " functions
-nmap gG           <Esc>:call PanosTags("../tags_f")<CR>
+nmap gGG          <Esc>:call PanosTags("../tags_f")<CR>
 " struct/typedef
-nmap gA           <Esc>:call PanosTags("../tags_s")<CR>
+nmap gGS          <Esc>:call PanosTags("../tags_s")<CR>
+nmap gGT          <Esc>:call PanosTags("../tags_s")<CR>
 " member
-nmap gM           <Esc>:call PanosTags("../tags_m")<CR>
-
+nmap gGM          <Esc>:call PanosTags("../tags_m")<CR>
 " global variables
-nmap <Leader>fpanv  <Esc>:call PanosTags("../tags_v")<CR>
+nmap gGV          <Esc>:call PanosTags("../tags_v")<CR>
 " defines/enums
-nmap <Leader>fpand  <Esc>:call PanosTags("../tags_d")<CR>
+nmap gGD          <Esc>:call PanosTags("../tags_d")<CR>
+nmap gGE          <Esc>:call PanosTags("../tags_d")<CR>
 
 function! PanosTagsSink(line)
   let g:last_name = a:line
