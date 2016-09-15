@@ -5,17 +5,6 @@ nmap <Leader>css         <Esc>:call LoadCscopeToQuickFix(expand("<cword>"),"s")<
 nmap <Leader>csg         <Esc>:call LoadCscopeToQuickFix(expand("<cword>"),"g")<CR>
 nmap <Leader>csc         <Esc>:call LoadCscopeToQuickFix(expand("<cword>"),"c")<CR>
 nmap <Leader>adds        <Esc>:call Addspaces()<CR>
-nmap <Leader>only        <Esc>:call KeepOnlyWindowWithLocationList()<CR>
-"remapping to accomodate typos
-nmap <Leader>conly        <Esc>:call KeepOnlyWindowWithLocationList()<CR>
-nmap [u            <C-w>h<C-w>c
-nmap ]u            <C-w>l<C-w>c
-nmap [t            <C-w>k<C-w>c
-nmap [b            <C-w>j<C-w>c
-nmap <c-h>         <C-w>h
-nmap <c-j>         <C-w>j
-nmap <c-k>         <C-w>k
-nmap <c-l>         <C-w>l
 " Who uses ex mode these days!
 nmap Q            <Esc>:tabclose<CR>
 " i dont use ZZ/ZQ much. Anything else on Z?!
@@ -46,6 +35,7 @@ nmap gwL          <C-w>l<C-w>c
 nmap gwo          <Plug>ZoomWin
 nmap gwt          <Esc>:tabnew %<CR>
 nmap gwg          <Esc>:GitGutterToggle<CR>
+nmap gwr          <Esc>:set wrap!<CR>
 
 "cscope'ish
 nmap gxs :cs find s <C-R>=expand("<cword>")<CR><CR>
@@ -238,6 +228,57 @@ function! SwitchBetweenDiffFolds(dir)
 endfunction
 
 
+" functions
+nmap gGG          <Esc>:call PanosTags("../tags_f")<CR>
+" struct/typedef
+nmap gGS          <Esc>:call PanosTags("../tags_s")<CR>
+nmap gGT          <Esc>:call PanosTags("../tags_s")<CR>
+" member
+nmap gGM          <Esc>:call PanosTags("../tags_m")<CR>
+" global variables
+nmap gGV          <Esc>:call PanosTags("../tags_v")<CR>
+" defines/enums
+nmap gGD          <Esc>:call PanosTags("../tags_d")<CR>
+nmap gGE          <Esc>:call PanosTags("../tags_d")<CR>
+
+function! PanosTagsSink(line)
+  let g:last_name = a:line
+  call LoadCscopeToQuickFix(a:line,"s")
+  execute "ll"
+endfunction
+
+function! PanosTags(file)
+  call fzf#run({
+  \   'source': "sed '/^\\!/d;s/\t.*//' " . a:file . " | uniq",
+  \   'options' : '--exact',
+  \   'right' : '30%',
+  \   'sink':   function('PanosTagsSink')})
+endfunction
+
+function! PanosTagsSinkJustGo(line)
+  let g:last_name = a:line
+endfunction
+
+function! PanosTagsJustGo(file)
+  let g:last_name = ""
+  call fzf#run({
+  \   'source': "sed '/^\\!/d;s/\t.*//' " . a:file . " | uniq",
+  \   'options' : '--exact',
+  \   'right' : '30%',
+  \   'sink':   function('PanosTagsSinkJustGo')})
+  if !empty(g:last_name)
+    execute ":redraw"
+    echom "Working on " . g:last_name
+    "call confirm("Press enter to continue.. There was just one result")
+    execute ":cs f g " . g:last_name
+  endif
+endfunction
+
+function! GotoTagLastName()
+  execute "tag ".g:last_name
+endfunction
+nmap gO <Esc>:call GotoTagLastName()<CR>
+
 " DONT TYPE ANYTHING HERE SO THAT CENTOS-BRANCH CAN
 " SAFELY ADD ITS OVERRIDES WITHOUT ISSUES
 
@@ -246,3 +287,14 @@ endfunction
 
 
 " ***********
+
+function! LoadErrorsFunction()
+  execute ":lf log.txt"
+  execute ":lopen"
+  execute "wincmd j"
+  execute "normal G"
+  execute "normal /\\<error\\>/s\<CR>"
+endfunction
+
+command! LoadErrors call LoadErrorsFunction()
+

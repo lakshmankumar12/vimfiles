@@ -95,12 +95,18 @@ gl - none                           (Bound to FZF)
 gq - format motion.(can use visual+= instead)
 gw - format motion.
    gww                              (Bound to :update)
-   gwh
+   gwh                              ( gw h,j,k,l -> window movements)
    gwj
    gwk
    gwl
+   gwo                              (Bound to Zoomwin)
+   gwt                              (New tab)
    gwg                              (Bound to gitGuttter disable)
-  
+   gwr                              (set wrap toggle)
+   gwH                              ( gw H,J,K,L -> window close operations)
+   gwJ
+   gwK
+   gwL
 gx - netrw stuff                    (Bound to cscope operations)
 gy - none                           (Bound to set pastetoggle)
 gz - none                           (Bound to toggle bg)
@@ -108,11 +114,18 @@ gz - none                           (Bound to toggle bg)
 gA                         (Bound to tags_s)
 gB                         (Bound to FzfBuffers)
 gC
-gG                         (Bound to tags_f)
+gG                         (Bound to tags_*)
+  gGG                                tags_f
+  gGS                                tags_s
+  gGT                                tags_s (typedef or struct)
+  gGM                                tags_m
+  gGV                                tags_v
+  gGD                                tags_d
+  gGE                                tags_e (defines or enum)
 gH                         (Bound to :lprev)
 gK
 gL                         (Bound to :lnext)
-gM                         (Bound to tags_m)
+gM
 gO                         (Bound to GotoTagLastName)
 gS                         (Bound to MoveToDefintionOfMember)
 gV  -- select-mode stuff.  (Bound to ToggleMouse)
@@ -306,7 +319,7 @@ In a huge list of cscope-s results on a function-name, to quickly find the funct
 function_name\s*(\s*\w\+\s\+\w.*,
 \w\+\s*(\s*\w\+\s\+\w.*,
 
-i.e name space* ( space* word+ space* word+ .* ,
+i.e name space* ( space* word+ space+ word+ .* ,
     The idea is only definition will have 2 words min between ( and , arg-type and arg-name, while invocations will have just argname. 
     The -> and . will separate words in invocations too, but hopefully they dont have space inbetween!
 

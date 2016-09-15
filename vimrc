@@ -15,7 +15,7 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'jreybert/vimagit'
 Plugin 'scrooloose/nerdtree'
 Plugin 'Xuyuanp/nerdtree-git-plugin'
-Plugin 'justinmk/vim-sneak'
+Plugin 'justinmk/vim-sneak'                  " goto any location using s<char>
 Plugin 'edsono/vim-matchit'
 Plugin 'Lokaltog/vim-easymotion'
 Plugin 'vim-scripts/python_match.vim'
@@ -107,6 +107,7 @@ nmap - <Esc>:lprev<CR>
 nmap + <Esc>:lnext<CR>
 
 au FileType make setlocal noexpandtab
+au FileType go setlocal nolist
 
 "for the ShowFunc.vim plugin.
 let g:ShowFuncScanType = "current"
