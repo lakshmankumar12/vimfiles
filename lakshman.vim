@@ -228,15 +228,6 @@ function! SwitchBetweenDiffFolds(dir)
 endfunction
 
 
-" DONT TYPE ANYTHING HERE SO THAT CENTOS-BRANCH CAN
-" SAFELY ADD ITS OVERRIDES WITHOUT ISSUES
-
-
-
-
-
-" ***********
-
 " functions
 nmap gGG          <Esc>:call PanosTags("../tags_f")<CR>
 " struct/typedef
@@ -283,6 +274,20 @@ function! PanosTagsJustGo(file)
   endif
 endfunction
 
+function! GotoTagLastName()
+  execute "tag ".g:last_name
+endfunction
+nmap gO <Esc>:call GotoTagLastName()<CR>
+
+" DONT TYPE ANYTHING HERE SO THAT CENTOS-BRANCH CAN
+" SAFELY ADD ITS OVERRIDES WITHOUT ISSUES
+
+
+
+
+
+" ***********
+
 function! LoadErrorsFunction()
   execute ":lf log.txt"
   execute ":lopen"
@@ -293,7 +298,3 @@ endfunction
 
 command! LoadErrors call LoadErrorsFunction()
 
-function! GotoTagLastName()
-  execute "tag ".g:last_name
-endfunction
-nmap gO <Esc>:call GotoTagLastName()<CR>
