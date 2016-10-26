@@ -218,7 +218,7 @@ let g:ctrlp_cmd = 'CtrlPBuffer'
 let g:ctrlp_working_path_mode = 'a'
 let g:ctrlp_show_hidden = 1
 
-set rtp+=/home/lnara002/github/fzf
+set rtp+=/home/lnara002/.fzf
 let g:fzf_command_prefix = 'Fzf'
 
 " no omnicomplete preview
@@ -249,12 +249,12 @@ let g:better_whitespace_enabled = 0
 " ***********
 
 "ctags for ShowFunc
-let g:showfuncctagsbin = "/home/lnara002/software/ctags/ctags-5.8/postinstall/bin/ctags"
+let g:showfuncctagsbin = "/home/lnara002/bin/ctags"
 "ctags for ctags.vim
-let g:ctags_path="/home/lnara002/software/ctags/ctags-5.8/postinstall/bin/ctags"
+let g:ctags_path="/home/lnara002/bin/ctags"
 
 "for ag.vim
-let g:agprg="/home/lnara002/software/ag/the_silver_searcher-0.30.0/postinstall/bin/ag --column"
+let g:ag_prg="/home/lnara002/bin/ag --column"
 
 "syntastic
 let g:syntastic_c_checkers = ['sparse']
@@ -265,4 +265,4 @@ au BufEnter */lte_gtp/*.c,*/lte_gtp/*.h let g:syntastic_c_sparse_post_args='-DCO
 au BufEnter */lte_cpm/*.c,*/lte_cpm/*.h let g:syntastic_c_sparse_post_args='-DCOMPILING_MOD_IMSI -DMODULE_ID=MOD_IMSI -DMOD_GTP=302 -DMOD_SIG=335 ' . s:sparse_common_opts
 
 "fugitive git
-let g:fugitive_git_executable = '/home/lnara002/software/git/git/postinstall/bin/git'
+"let g:fugitive_git_executable = '/home/lnara002/software/git/git/postinstall/bin/git'
