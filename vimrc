@@ -48,6 +48,8 @@ Plugin 'tpope/vim-surround'
 Plugin 'jeetsukumaran/vim-indentwise'
 "Plugin 'junegunn/vim-peekaboo'
 Plugin 'vim-scripts/Mark--Karkat'
+Plugin 'tpope/vim-speeddating'
+Plugin 'jceb/vim-orgmode'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -163,12 +165,12 @@ nmap <Leader>S <Plug>(SneakStreakBackward)
 
 "Form markwords
 highlight MarkWord1 ctermbg=red ctermfg=white guibg=#8CCBEA guifg=Black
-highlight MarkWord2 ctermbg=blue ctermfg=white guibg=#8CCBEA guifg=Black
-highlight MarkWord3 ctermbg=green ctermfg=black guibg=#8CCBEA guifg=Black
-highlight MarkWord4 ctermbg=magenta ctermfg=white guibg=#8CCBEA guifg=Black
-highlight MarkWord5 ctermbg=cyan ctermfg=black guibg=#8CCBEA guifg=Black
-highlight MarkWord6 ctermbg=gray ctermfg=black guibg=#8CCBEA guifg=Black
-highlight MarkWord7 ctermbg=brown ctermfg=white guibg=#8CCBEA guifg=Black
+highlight MarkWord2 ctermbg=brown ctermfg=white guibg=#8CCBEA guifg=Black
+highlight MarkWord3 ctermbg=magenta ctermfg=white guibg=#8CCBEA guifg=Black
+highlight MarkWord4 ctermbg=blue ctermfg=white guibg=#8CCBEA guifg=Black
+highlight MarkWord5 ctermbg=green ctermfg=black guibg=#8CCBEA guifg=Black
+highlight MarkWord6 ctermbg=cyan ctermfg=black guibg=#8CCBEA guifg=Black
+highlight MarkWord7 ctermbg=gray ctermfg=black guibg=#8CCBEA guifg=Black
 highlight MarkWord8 ctermbg=yellow ctermfg=black guibg=#8CCBEA guifg=Black
 
 " DirDiff mapping enabled
