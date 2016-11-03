@@ -354,3 +354,21 @@ Navigating based on indent (for config files)
 :set foldmethod=indent
 ]= / [=  -- next/prev lines on same indentation level
 [-       -- prev .. go one level up
+
+Fold Management
+---------------
+
+zR/zM  -> open-all-folds/close-all-folds
+zo/zc  -> open/close jsut one fold
+zO     -> open all folds in cursor recursively
+
+Org mode
+--------
+
+end files in .org
+
+* Heading 1
+** Heading 2
+   - List item   (<leader>cl/cL)
+   - [ ] Check bo (<leader>cn/cN)  (toggle status <leader>cc)
+

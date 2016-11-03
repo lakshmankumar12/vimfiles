@@ -33,7 +33,7 @@ nmap gwJ          <C-w>j<C-w>c
 nmap gwK          <C-w>k<C-w>c
 nmap gwL          <C-w>l<C-w>c
 nmap gwo          <Plug>ZoomWin
-nmap gwt          <Esc>:tabnew %<CR>
+nmap gwt          <Esc>mZ:tabnew %<CR>`Z
 nmap gwg          <Esc>:GitGutterToggle<CR>
 nmap gwr          <Esc>:set wrap!<CR>
 
