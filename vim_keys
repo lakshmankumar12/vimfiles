@@ -327,6 +327,18 @@ i.e name space* ( space* word+ space+ word+ .* ,
 :set hidden  # option enables the non-saving of files while switching
 echo &hidden # is a way to see the current setting.
 
+Colors in vim:
+-------------
+
+Its either cterm or gui.
+cterm colors are either words or nubmers from 0 to 255. To know colors use the plugin :XtermColorTable
+gui colors are either words or RGB spec
+
+Soloarized sticks to the first 16 colors.
+
+ctermbg=red ctermfg=white
+guibg=#8CCBEA guifg=Black
+
 
 To know which plugin set the setting last
 -----------------------------------------
