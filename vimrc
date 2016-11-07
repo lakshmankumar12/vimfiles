@@ -10,17 +10,17 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim'
 
-Plugin 'antiAgainst/cscope-macros.vim'
-Plugin 'tpope/vim-fugitive'
-Plugin 'jreybert/vimagit'
-Plugin 'scrooloose/nerdtree'
-Plugin 'Xuyuanp/nerdtree-git-plugin'
+Plugin 'antiAgainst/cscope-macros.vim'       " Brings in the ctrl-\ <g|s|c> shortcuts
+Plugin 'tpope/vim-fugitive'                  " The awesome git plugin. Period.
+Plugin 'jreybert/vimagit'                    " :Magit command
+Plugin 'scrooloose/nerdtree'                 " Directory browser
+Plugin 'Xuyuanp/nerdtree-git-plugin'         " Show gittish info when nerd-tree is invoked
 Plugin 'justinmk/vim-sneak'                  " goto any location using s<char>
 Plugin 'edsono/vim-matchit'
-Plugin 'Lokaltog/vim-easymotion'
+Plugin 'Lokaltog/vim-easymotion'             " \hjkl
 Plugin 'vim-scripts/python_match.vim'
 Plugin 'ntpeters/vim-better-whitespace'
-Plugin 'vim-scripts/ShowFunc.vim'
+Plugin 'vim-scripts/ShowFunc.vim'            " Not-needed check
 Plugin 'sjl/clam.vim'                         "Clam shellcmd
 Plugin 'vim-scripts/OmniCppComplete'
 Plugin 'vim-airline/vim-airline'
@@ -38,18 +38,18 @@ Plugin 'scrooloose/nerdcommenter'
 "Plugin 'Valloric/YouCompleteMe'
 "Plugin 'ternjs/tern_for_vim'
 Plugin 'junegunn/fzf.vim'
-Plugin 'vim-scripts/QFixToggle'
-Plugin 'altercation/vim-colors-solarized.git'
+Plugin 'vim-scripts/QFixToggle'               " Not needed check
+Plugin 'altercation/vim-colors-solarized.git' " Solarized vim
 Plugin 'regedarek/ZoomWin'
 Plugin 'yssl/QFEnter'                         " <Leader><CR> on quickfix/loc-list will open in a new vert split.
-Plugin 'fatih/vim-go'
+Plugin 'fatih/vim-go'                         " One stop go plugin
 Plugin 'godlygeek/tabular'
 Plugin 'tpope/vim-surround'
 Plugin 'jeetsukumaran/vim-indentwise'
-"Plugin 'junegunn/vim-peekaboo'
-Plugin 'vim-scripts/Mark--Karkat'
-Plugin 'tpope/vim-speeddating'
-Plugin 'jceb/vim-orgmode'
+Plugin 'vim-scripts/Mark--Karkat'             " Multiple color search
+Plugin 'tpope/vim-speeddating'                " Pre-req for vim-orgmode
+Plugin 'jceb/vim-orgmode'                     " Org style
+Plugin 'guns/xterm-color-table.vim'           " :XtermColorTable -- help to know color numbers
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -168,10 +168,10 @@ highlight MarkWord1 ctermbg=red ctermfg=white guibg=#8CCBEA guifg=Black
 highlight MarkWord2 ctermbg=brown ctermfg=white guibg=#8CCBEA guifg=Black
 highlight MarkWord3 ctermbg=magenta ctermfg=white guibg=#8CCBEA guifg=Black
 highlight MarkWord4 ctermbg=blue ctermfg=white guibg=#8CCBEA guifg=Black
-highlight MarkWord5 ctermbg=green ctermfg=black guibg=#8CCBEA guifg=Black
-highlight MarkWord6 ctermbg=cyan ctermfg=black guibg=#8CCBEA guifg=Black
-highlight MarkWord7 ctermbg=gray ctermfg=black guibg=#8CCBEA guifg=Black
-highlight MarkWord8 ctermbg=yellow ctermfg=black guibg=#8CCBEA guifg=Black
+highlight MarkWord5 ctermbg=6 ctermfg=black guibg=#8CCBEA guifg=Black
+highlight MarkWord6 ctermbg=57 ctermfg=white guibg=#8CCBEA guifg=Black
+highlight MarkWord7 ctermbg=48 ctermfg=black guibg=#8CCBEA guifg=Black
+highlight MarkWord8 ctermbg=88 ctermfg=white guibg=#8CCBEA guifg=Black
 
 " DirDiff mapping enabled
 let g:DirDiffEnableMappings=1
