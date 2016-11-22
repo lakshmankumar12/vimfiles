@@ -18,9 +18,9 @@ Plugin 'Xuyuanp/nerdtree-git-plugin'         " Show gittish info when nerd-tree 
 Plugin 'justinmk/vim-sneak'                  " goto any location using s<char>
 Plugin 'edsono/vim-matchit'
 Plugin 'Lokaltog/vim-easymotion'             " \hjkl
-Plugin 'vim-scripts/python_match.vim'
-Plugin 'ntpeters/vim-better-whitespace'
-Plugin 'vim-scripts/ShowFunc.vim'            " Not-needed check
+Plugin 'vim-scripts/python_match.vim'        " % for if/elif/else, try/except/catch in py. Also use [% to go to start of block 
+"Plugin 'ntpeters/vim-better-whitespace'
+"Plugin 'vim-scripts/ShowFunc.vim'            " Not-needed check
 Plugin 'sjl/clam.vim'                         "Clam shellcmd
 Plugin 'vim-scripts/OmniCppComplete'
 Plugin 'vim-airline/vim-airline'
@@ -28,17 +28,17 @@ Plugin 'vim-airline/vim-airline-themes'
 Plugin 'majutsushi/tagbar'                    "Enables the c-function names with g:airline#extensions#tagbar#enabled below.
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'rking/ag.vim'
-Plugin 'tarmolov/TabLineNumbers.vim'
-Plugin 'Shougo/vimproc.vim'
-Plugin 'Shougo/vimshell.vim'
+Plugin 'tarmolov/TabLineNumbers.vim'          "prints numbers in each tab
+"Plugin 'Shougo/vimproc.vim'
+"Plugin 'Shougo/vimshell.vim'
 Plugin 'vim-scripts/AnsiEsc.vim'
-Plugin 'ofavre/vimcat.git'
+"Plugin 'ofavre/vimcat.git'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'scrooloose/nerdcommenter'
 "Plugin 'Valloric/YouCompleteMe'
 "Plugin 'ternjs/tern_for_vim'
 Plugin 'junegunn/fzf.vim'
-Plugin 'vim-scripts/QFixToggle'               " Not needed check
+"Plugin 'vim-scripts/QFixToggle'               " Not needed check
 Plugin 'altercation/vim-colors-solarized.git' " Solarized vim
 Plugin 'regedarek/ZoomWin'
 Plugin 'yssl/QFEnter'                         " <Leader><CR> on quickfix/loc-list will open in a new vert split.
@@ -101,7 +101,7 @@ let g:solarized_termtrans=1
 colorscheme solarized
 
 set diffopt+=vertical
-set csprg='/home/lnara002/software/cscope/cscope-15.8a/postinstall/bin/cscope'
+set csprg='/home/lnara002/bin/cscope'
 
 nmap gL <Esc>:cn<CR>
 nmap gH <Esc>:cp<CR>
