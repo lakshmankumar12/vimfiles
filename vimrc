@@ -21,31 +21,31 @@ Plugin 'Lokaltog/vim-easymotion'             " \hjkl
 Plugin 'vim-scripts/python_match.vim'        " % for if/elif/else, try/except/catch in py. Also use [% to go to start of block 
 "Plugin 'ntpeters/vim-better-whitespace'
 "Plugin 'vim-scripts/ShowFunc.vim'            " Not-needed check
-Plugin 'sjl/clam.vim'                         "Clam shellcmd
-Plugin 'vim-scripts/OmniCppComplete'
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
-Plugin 'majutsushi/tagbar'                    "Enables the c-function names with g:airline#extensions#tagbar#enabled below.
-Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'rking/ag.vim'
-Plugin 'tarmolov/TabLineNumbers.vim'          "prints numbers in each tab
+Plugin 'sjl/clam.vim'                         " Clam shellcmd
+Plugin 'vim-scripts/OmniCppComplete'          " c-based language auto-complete
+Plugin 'vim-airline/vim-airline'              " look and feel with powerline'ish fonts
+Plugin 'vim-airline/vim-airline-themes'       " More themese for airline
+Plugin 'majutsushi/tagbar'                    " Enables the c-function names with g:airline#extensions#tagbar#enabled below.
+Plugin 'ctrlpvim/ctrlp.vim'                   " Quickly open buffers
+Plugin 'rking/ag.vim'                         " Brings :Ag :LAg commands and silver-searcher
+Plugin 'tarmolov/TabLineNumbers.vim'          " prints numbers in each tab
 "Plugin 'Shougo/vimproc.vim'
 "Plugin 'Shougo/vimshell.vim'
-Plugin 'vim-scripts/AnsiEsc.vim'
+Plugin 'vim-scripts/AnsiEsc.vim'              " To view files having ansi-esc chars.
 "Plugin 'ofavre/vimcat.git'
-Plugin 'airblade/vim-gitgutter'
-Plugin 'scrooloose/nerdcommenter'
-Plugin 'Valloric/YouCompleteMe'
-Plugin 'ternjs/tern_for_vim'
-Plugin 'junegunn/fzf.vim'
-"Plugin 'vim-scripts/QFixToggle'               " Not needed check
+Plugin 'airblade/vim-gitgutter'               " Puts up a line(gutter) in the left column with git'ish information
+Plugin 'scrooloose/nerdcommenter'             " Comment/remove-comment blocks quickly
+"Plugin 'Valloric/YouCompleteMe'
+"Plugin 'ternjs/tern_for_vim'
+Plugin 'junegunn/fzf.vim'                     " :Fzf and other commands
+"Plugin 'vim-scripts/QFixToggle'              " Not needed check
 Plugin 'altercation/vim-colors-solarized.git' " Solarized vim
-Plugin 'regedarek/ZoomWin'
+Plugin 'regedarek/ZoomWin'                    " Close other windows and re-open them again
 Plugin 'yssl/QFEnter'                         " <Leader><CR> on quickfix/loc-list will open in a new vert split.
 Plugin 'fatih/vim-go'                         " One stop go plugin
-Plugin 'godlygeek/tabular'
-Plugin 'tpope/vim-surround'
-Plugin 'jeetsukumaran/vim-indentwise'
+Plugin 'godlygeek/tabular'                    " Auto-align lines.
+Plugin 'tpope/vim-surround'                   " add quotes(surroundings) to a word etc..
+Plugin 'jeetsukumaran/vim-indentwise'         " help navigating blocks based on indent.
 Plugin 'vim-scripts/Mark--Karkat'             " Multiple color search
 Plugin 'tpope/vim-speeddating'                " Pre-req for vim-orgmode
 Plugin 'jceb/vim-orgmode'                     " Org style
