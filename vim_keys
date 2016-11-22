@@ -109,7 +109,7 @@ gw - format motion.
    gwL
 gx - netrw stuff                    (Bound to cscope operations)
 gy - none                           (Bound to set pastetoggle)
-gz - none                           (Bound to toggle bg)
+gz - none                           (Bound to solarized toggle bg)
 
 gA                         (Bound to tags_s)
 gB                         (Bound to FzfBuffers)
@@ -383,4 +383,21 @@ end files in .org
 ** Heading 2
    - List item   (<leader>cl/cL)
    - [ ] Check bo (<leader>cn/cN)  (toggle status <leader>cc)
+
+Multiple Highlight
+------------------
+
+\m  to highlight current word
+\r  to get prompt and enter regex
+:MarkClear to reset everything
+\*  to go to the next occurence of last mark. If you do this on a marked word,
+    that becomes the last mark.
+\/  to any mark
+
+Spell check
+----------
+
+:set spell
+]s next misspelled word
+[s prev misspelled word
 
