@@ -363,6 +363,8 @@ and diff again.
 Navigating based on indent (for config files)
 ---------------------------------------------
 
+(Effected by plugin vim-indentwise)
+
 :set foldmethod=indent
 ]= / [=  -- next/prev lines on same indentation level
 [-       -- prev .. go one level up
