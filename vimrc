@@ -220,7 +220,7 @@ let g:ctrlp_cmd = 'CtrlPBuffer'
 let g:ctrlp_working_path_mode = 'a'
 let g:ctrlp_show_hidden = 1
 
-set rtp+=/home/lnara002/github/fzf
+set rtp+=/home/lnara002/.fzf
 let g:fzf_command_prefix = 'Fzf'
 
 " no omnicomplete preview
