@@ -129,6 +129,7 @@ gM
 gO                         (Bound to GotoTagLastName)
 gS                         (Bound to MoveToDefintionOfMember)
 gV  -- select-mode stuff.  (Bound to ToggleMouse)
+gW                         (Bound to RemoveTrailWhite)
 
 z-keys
 ------
@@ -308,7 +309,7 @@ Search modifiers
 \c<pattern> will ignore case
 <pattern>/e will place cursor at end of pattern
          /s will place curros at start of pattern (needed when combining number below)
-         /<num>  will goto line-above (or chars if e/s is used)
+         /<num>  will goto line-above (or chars if e/s is used). This is 0-based counting. 1 will be next char. 0 is redundant to mention
          /-num     --do--      -below ( --do-- )
 
 Other Vim Tips:
