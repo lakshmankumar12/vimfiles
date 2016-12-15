@@ -203,6 +203,12 @@ endfunction
 
 nmap gS <Esc>:call MoveToDefintionOfMember(expand("<cword>"))<CR>
 
+function RemoveTrailWhite()
+  execute ":%s/\\s\\+$//g"
+endfunction
+
+nmap gW <Esc>:call RemoveTrailWhite()<CR>
+
 imap <c-x><c-l> <plug>(fzf-complete-line)
 
 " Taken from vimagit
