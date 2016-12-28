@@ -209,6 +209,13 @@ endfunction
 
 nmap gW <Esc>:call RemoveTrailWhite()<CR>
 
+function FlushSearch()
+  execute "/asdfasdfsafsd"
+endfunction
+
+nmap gX <Esc>:call FlushSearch()<CR>
+
+
 imap <c-x><c-l> <plug>(fzf-complete-line)
 
 " Taken from vimagit

@@ -130,6 +130,7 @@ gO                         (Bound to GotoTagLastName)
 gS                         (Bound to MoveToDefintionOfMember)
 gV  -- select-mode stuff.  (Bound to ToggleMouse)
 gW                         (Bound to RemoveTrailWhite)
+gX                         (Flush Search)
 
 z-keys
 ------
@@ -404,3 +405,10 @@ Spell check
 ]s next misspelled word
 [s prev misspelled word
 
+Mark and save a subset to another file
+--------------------------------------
+
+mA
+mB
+then
+:'A,'B w! /tmp/a
