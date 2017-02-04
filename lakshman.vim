@@ -60,7 +60,7 @@ imap kj           <Esc>
 cmap kj           <Esc>
 nmap gp           <Esc>p`[
 nmap gP           <Esc>"+P
-nmap zg           <Esc>:vert scs find g <C-R>=expand("<cword>")<CR><CR>	
+nmap zg           <Esc>:vert scs find g <C-R>=expand("<cword>")<CR><CR>
 "in visual-line mode, i need to select lines, and i keep pressing J
 vmap J            j
 "scroll preview window from another window
@@ -85,7 +85,7 @@ function! GetCommandOutputOnNewTab()
   echo "Buffer number is " . bufnr('%')
   redir END
   silent execute "0r !cat /tmp/vimtempfile"
-  silent 
+  silent
 endfunction
 
 function! ShedM()
@@ -291,6 +291,15 @@ function! GotoTagLastName()
   execute "tag ".g:last_name
 endfunction
 nmap gO <Esc>:call GotoTagLastName()<CR>
+
+function! RedirGSearch()
+  redir @a
+  silent execute ":g//"
+  redir END
+  tabnew
+  put! a
+endfunction
+nmap gY <Esc>:call RedirGSearch()<CR>
 
 " DONT TYPE ANYTHING HERE SO THAT CENTOS-BRANCH CAN
 " SAFELY ADD ITS OVERRIDES WITHOUT ISSUES
