@@ -29,7 +29,7 @@ Plugin 'majutsushi/tagbar'                    " Enables the c-function names wit
 Plugin 'ctrlpvim/ctrlp.vim'                   " Quickly open buffers
 Plugin 'rking/ag.vim'                         " Brings :Ag :LAg commands and silver-searcher
 Plugin 'tarmolov/TabLineNumbers.vim'          " prints numbers in each tab
-"Plugin 'Shougo/vimproc.vim'
+Plugin 'Shougo/vimproc.vim'
 "Plugin 'Shougo/vimshell.vim'
 Plugin 'vim-scripts/AnsiEsc.vim'              " To view files having ansi-esc chars.
 "Plugin 'ofavre/vimcat.git'
@@ -50,6 +50,8 @@ Plugin 'vim-scripts/Mark--Karkat'             " Multiple color search
 Plugin 'tpope/vim-speeddating'                " Pre-req for vim-orgmode
 Plugin 'jceb/vim-orgmode'                     " Org style
 Plugin 'guns/xterm-color-table.vim'           " :XtermColorTable -- help to know color numbers
+Plugin 'Shougo/unite.vim'                     " :Unite
+Plugin 'Shougo/neomru.vim'                    " :for file_mru option in Unite
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -241,6 +243,12 @@ set listchars+=extends:>
 set listchars+=precedes:<
 set list
 let g:better_whitespace_enabled = 0
+
+" Unite
+autocmd FileType unite map <buffer> xkj <Plug>(unite_exit)
+autocmd FileType unite imap <buffer> kj <Esc>
+nnoremap gK <Esc>:Unite -start-insert -ignorecase file file_rec buffer file_mru<CR>
+nnoremap gM <Esc>:Unite -start-insert -ignorecase line<CR>
 
 " DONT TYPE ANYTHING HERE SO THAT CENTOS-BRANCH CAN
 " SAFELY ADD ITS OVERRIDES WITHOUT ISSUES
