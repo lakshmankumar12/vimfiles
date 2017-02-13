@@ -245,7 +245,7 @@ set list
 let g:better_whitespace_enabled = 0
 
 " Unite
-autocmd FileType unite map <buffer> xkj <Plug>(unite_exit)
+autocmd FileType unite map <buffer> <Leader>x <Plug>(unite_exit)
 autocmd FileType unite imap <buffer> kj <Esc>
 nnoremap gK <Esc>:Unite -start-insert -ignorecase file file_rec buffer file_mru<CR>
 nnoremap gM <Esc>:Unite -start-insert -ignorecase line<CR>
