@@ -127,9 +127,9 @@ gG                         (Bound to tags_*)
   gGD                                tags_d
   gGE                                tags_e (defines or enum)
 gH                         (Bound to :lprev)
-gK
+gK                         :Unite
 gL                         (Bound to :lnext)
-gM
+gM                         :Unite lines
 gO                         (Bound to GotoTagLastName)
 gS                         (Bound to MoveToDefintionOfMember)
 gV  -- select-mode stuff.  (Bound to ToggleMouse)
