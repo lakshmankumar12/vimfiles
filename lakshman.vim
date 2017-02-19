@@ -8,8 +8,8 @@ nmap <Leader>adds        <Esc>:call Addspaces()<CR>
 " Who uses ex mode these days!
 nmap Q            <Esc>:tabclose<CR>
 " i dont use ZZ/ZQ much. Anything else on Z?!
-nmap Z            :<C-U>call CloseWindowsInBottomAndOpenLocationList(v:count1)<CR>
-nmap zp           <Esc>:lopen<CR>
+nmap Z            <Esc>:lclose<CR>:lopen<CR>
+nmap zp           <Esc>:cclose<CR>:copen<CR>
 " neither do i use S
 nmap S            <Esc>
 " Y is same yy. So, lets do something useful
@@ -118,7 +118,7 @@ endfunction
 function! CloseWindowsInBottomAndOpenLocationList(count)
   let l:c = 1
   execute "wincmd b"
-  execute "close"
+  silent! execute "close"
 
   while l:c <= a:count
       execute "wincmd j"
