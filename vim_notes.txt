@@ -69,7 +69,7 @@ gf - open file under cursor                                        gF   --  file
 gg - begining of file
 gi - insert at previous insertation stop point                     gI   -- At column 1 (I will be first non-blank)
 gj - go down on screen line                                        gJ   -- like J, but no space
-gk - go upon screen line
+gk - go up on screen line
 gm - half g0
 gn - next and visual the word                                      gN   -- backward gn
 go - got to nth byte in buffer
@@ -94,7 +94,10 @@ g, - goto position in change list rev order
 RECLAIMable in g:
 gb - some netrw bookmark            (copy to system cliboard)
 gc - none                           (Bound to Keep window with only quickfix)
-gh - enter select mode
+gh - enter select mode              (Rebound to unitish operations)
+  gho                             buffer file file_rec file_mru
+  gh/                             line
+  ghy                             history/yank
 gl - none                           (Bound to FZF)
 gq - format motion.(can use visual+= instead)
 gw - format motion.
@@ -127,9 +130,9 @@ gG                         (Bound to tags_*)
   gGD                                tags_d
   gGE                                tags_e (defines or enum)
 gH                         (Bound to :lprev)
-gK                         :Unite
+gK
 gL                         (Bound to :lnext)
-gM                         :Unite lines
+gM
 gO                         (Bound to GotoTagLastName)
 gS                         (Bound to MoveToDefintionOfMember)
 gV  -- select-mode stuff.  (Bound to ToggleMouse)
@@ -317,6 +320,11 @@ Search modifiers
          /s will place curros at start of pattern (needed when combining number below)
          /<num>  will goto line-above (or chars if e/s is used). This is 0-based counting. 1 will be next char. 0 is redundant to mention
          /-num     --do--      -below ( --do-- )
+
+Quickly grep in a given file
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+:lvimgrep /^r// %
 
 Other Vim Tips:
 ===============

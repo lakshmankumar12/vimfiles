@@ -16,6 +16,7 @@ Plugin 'jreybert/vimagit'                    " :Magit command
 Plugin 'scrooloose/nerdtree'                 " Directory browser
 Plugin 'Xuyuanp/nerdtree-git-plugin'         " Show gittish info when nerd-tree is invoked
 Plugin 'justinmk/vim-sneak'                  " goto any location using s<char>
+Plugin 'jiangmiao/auto-pairs'                " for automatically adding braces
 Plugin 'edsono/vim-matchit'
 Plugin 'Lokaltog/vim-easymotion'             " \hjkl
 Plugin 'vim-scripts/python_match.vim'        " % for if/elif/else, try/except/catch in py. Also use [% to go to start of block 
@@ -52,6 +53,7 @@ Plugin 'jceb/vim-orgmode'                     " Org style
 Plugin 'guns/xterm-color-table.vim'           " :XtermColorTable -- help to know color numbers
 Plugin 'Shougo/unite.vim'                     " :Unite
 Plugin 'Shougo/neomru.vim'                    " :for file_mru option in Unite
+Plugin 'Shougo/neoyank.vim'                   " :Unite history/yank
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -245,10 +247,11 @@ set list
 let g:better_whitespace_enabled = 0
 
 " Unite
-autocmd FileType unite map <buffer> <Leader>x <Plug>(unite_exit)
+autocmd FileType unite imap <buffer> <Leader>x <Plug>(unite_exit)
 autocmd FileType unite imap <buffer> kj <Esc>
-nnoremap gK <Esc>:Unite -start-insert -ignorecase file file_rec buffer file_mru<CR>
-nnoremap gM <Esc>:Unite -start-insert -ignorecase line<CR>
+nnoremap gho <Esc>:Unite -start-insert -ignorecase buffer file file_rec file_mru<CR>
+nnoremap gh/ <Esc>:Unite -start-insert -ignorecase line<CR>
+nnoremap ghy <Esc>:Unite -start-insert -ignorecase history/yank<CR>
 
 " DONT TYPE ANYTHING HERE SO THAT CENTOS-BRANCH CAN
 " SAFELY ADD ITS OVERRIDES WITHOUT ISSUES
