@@ -110,17 +110,6 @@ nmap + <Esc>:lnext<CR>
 au FileType make setlocal noexpandtab
 au FileType go setlocal nolist
 
-"for the ShowFunc.vim plugin.
-let g:ShowFuncScanType = "current"
-map  <Leader>shfn  <Plug>ShowFunc
-map! <Leader>shfn  <Plug>ShowFunc
-
-"for the ctags.vim plugin.
-let g:ctags_statusline=1
-let g:ctags_title=0
-let generate_tags=1
-
-
 function! DumpToClipBoard()
   "call writefile(split(@","\n"), '/dev/clipboard')
   call system("xsel -i -b", getreg("\""))
@@ -157,7 +146,6 @@ let g:EasyMotion_smartcase = 1
 map <Leader>j <Plug>(easymotion-j)
 map <Leader>k <Plug>(easymotion-k)
 
-
 "vim-sneak mapping
 nmap <Leader>s <Plug>(SneakStreak)
 nmap <Leader>S <Plug>(SneakStreakBackward)
@@ -171,9 +159,6 @@ highlight MarkWord5 ctermbg=6 ctermfg=black guibg=#8CCBEA guifg=Black
 highlight MarkWord6 ctermbg=57 ctermfg=white guibg=#8CCBEA guifg=Black
 highlight MarkWord7 ctermbg=48 ctermfg=black guibg=#8CCBEA guifg=Black
 highlight MarkWord8 ctermbg=88 ctermfg=white guibg=#8CCBEA guifg=Black
-
-" DirDiff mapping enabled
-let g:DirDiffEnableMappings=1
 
 " NerdTree
 map <C-n> :NERDTreeToggle<CR>
@@ -213,11 +198,6 @@ function! AirlineThemePatch(palette)
 endfunction
 let g:airline_theme_patch_func = 'AirlineThemePatch'
 
-
-"for ctrlp.vim
-let g:ctrlp_cmd = 'CtrlPBuffer'
-let g:ctrlp_working_path_mode = 'a'
-let g:ctrlp_show_hidden = 1
 
 set rtp+=/home/lnara002/.fzf
 let g:fzf_command_prefix = 'Fzf'
