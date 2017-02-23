@@ -426,6 +426,11 @@ mB
 then
 :'A,'B w! /tmp/a
 
+Set a column limit to files
+---------------------------
+
+:set colorcolumn=80
+
 
 help expand
 ------------
