@@ -10,16 +10,16 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim'
 
-Plugin 'antiAgainst/cscope-macros.vim'       " Brings in the ctrl-\ <g|s|c> shortcuts
-Plugin 'tpope/vim-fugitive'                  " The awesome git plugin. Period.
-Plugin 'jreybert/vimagit'                    " :Magit command
-Plugin 'scrooloose/nerdtree'                 " Directory browser
-Plugin 'Xuyuanp/nerdtree-git-plugin'         " Show gittish info when nerd-tree is invoked
-Plugin 'justinmk/vim-sneak'                  " goto any location using s<char>
-Plugin 'jiangmiao/auto-pairs'                " for automatically adding braces
-Plugin 'edsono/vim-matchit'
-Plugin 'Lokaltog/vim-easymotion'             " \hjkl
-Plugin 'vim-scripts/python_match.vim'        " % for if/elif/else, try/except/catch in py. Also use [% to go to start of block 
+Plugin 'antiAgainst/cscope-macros.vim'        " Brings in the ctrl-\ <g|s|c> shortcuts
+Plugin 'tpope/vim-fugitive'                   " The awesome git plugin. Period.
+Plugin 'jreybert/vimagit'                     " :Magit command
+Plugin 'scrooloose/nerdtree'                  " Directory browser
+Plugin 'Xuyuanp/nerdtree-git-plugin'          " Show gittish info when nerd-tree is invoked
+Plugin 'justinmk/vim-sneak'                   " goto any location using s<char>
+Plugin 'jiangmiao/auto-pairs'                 " for automatically adding braces
+Plugin 'edsono/vim-matchit'                   " % given a new life
+Plugin 'Lokaltog/vim-easymotion'              " <Leader>hjkl
+Plugin 'vim-scripts/python_match.vim'         " % for if/elif/else, try/except/catch in py. Also use [% to go to start of block 
 Plugin 'sjl/clam.vim'                         " Clam shellcmd
 Plugin 'vim-scripts/OmniCppComplete'          " c-based language auto-complete
 Plugin 'vim-airline/vim-airline'              " look and feel with powerline'ish fonts
@@ -48,6 +48,10 @@ Plugin 'guns/xterm-color-table.vim'           " :XtermColorTable -- help to know
 Plugin 'Shougo/unite.vim'                     " :Unite
 Plugin 'Shougo/neomru.vim'                    " :for file_mru option in Unite
 Plugin 'Shougo/neoyank.vim'                   " :Unite history/yank
+Plugin 'kana/vim-textobj-user'                " pre-req for indent/line
+Plugin 'kana/vim-textobj-indent'              " indent text-object
+Plugin 'kana/vim-textobj-line'                " line text-object
+Plugin 'bps/vim-textobj-python'               " python function/class selector
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -78,6 +82,8 @@ set ruler
 set history=100
 set lbr
 set laststatus=2
+set nu
+set relativenumber
 
 map <Leader>mai i#include<stdio.h><CR><CR>int main(int argc,char *argv[],char *envp[])<CR>{<CR><CR>}<CR><Esc>kka<Tab>
 map <Leader>cmai i#include<iostream><CR><CR>using namespace std;<CR><CR>int main(int argc,char *argv[],char *envp[])<CR>{<CR><CR>return 0;<CR>}<CR><Esc>kka<Tab>
