@@ -311,6 +311,35 @@ C-^
 C-_
 C-|
 
+Vim text object selectors
+--------------------------
+
+Standard from vim:
+iw  aw
+i"  a"
+i'  a'
+i(  a(
+
+indent-plugin:
+ii
+iI
+
+line-plugin
+il
+
+python:
+if
+ic
+
+(also) [pf / ]pf - next/prev function
+(also) [pc / ]pc - next/prev class
+
+surround
+~~~~~~~~
+
+ds" ds' ds( ds[  ds{
+cs"'
+ys<motion><sur-char>
 
 Search modifiers
 ---------------

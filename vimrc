@@ -10,16 +10,16 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim'
 
-Plugin 'antiAgainst/cscope-macros.vim'       " Brings in the ctrl-\ <g|s|c> shortcuts
-Plugin 'tpope/vim-fugitive'                  " The awesome git plugin. Period.
-Plugin 'jreybert/vimagit'                    " :Magit command
-Plugin 'scrooloose/nerdtree'                 " Directory browser
-Plugin 'Xuyuanp/nerdtree-git-plugin'         " Show gittish info when nerd-tree is invoked
-Plugin 'justinmk/vim-sneak'                  " goto any location using s<char>
-Plugin 'jiangmiao/auto-pairs'                " for automatically adding braces
-Plugin 'edsono/vim-matchit'
-Plugin 'Lokaltog/vim-easymotion'             " \hjkl
-Plugin 'vim-scripts/python_match.vim'        " % for if/elif/else, try/except/catch in py. Also use [% to go to start of block 
+Plugin 'antiAgainst/cscope-macros.vim'        " Brings in the ctrl-\ <g|s|c> shortcuts
+Plugin 'tpope/vim-fugitive'                   " The awesome git plugin. Period.
+Plugin 'jreybert/vimagit'                     " :Magit command
+Plugin 'scrooloose/nerdtree'                  " Directory browser
+Plugin 'Xuyuanp/nerdtree-git-plugin'          " Show gittish info when nerd-tree is invoked
+Plugin 'justinmk/vim-sneak'                   " goto any location using s<char>
+Plugin 'jiangmiao/auto-pairs'                 " for automatically adding braces
+Plugin 'edsono/vim-matchit'                   " % given a new life
+Plugin 'Lokaltog/vim-easymotion'              " <Leader>hjkl
+Plugin 'vim-scripts/python_match.vim'         " % for if/elif/else, try/except/catch in py. Also use [% to go to start of block 
 Plugin 'sjl/clam.vim'                         " Clam shellcmd
 Plugin 'vim-scripts/OmniCppComplete'          " c-based language auto-complete
 Plugin 'vim-airline/vim-airline'              " look and feel with powerline'ish fonts
@@ -48,6 +48,10 @@ Plugin 'guns/xterm-color-table.vim'           " :XtermColorTable -- help to know
 Plugin 'Shougo/unite.vim'                     " :Unite
 Plugin 'Shougo/neomru.vim'                    " :for file_mru option in Unite
 Plugin 'Shougo/neoyank.vim'                   " :Unite history/yank
+Plugin 'kana/vim-textobj-user'                " pre-req for indent/line
+Plugin 'kana/vim-textobj-indent'              " indent text-object
+Plugin 'kana/vim-textobj-line'                " line text-object
+Plugin 'bps/vim-textobj-python'               " python function/class selector
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -78,6 +82,8 @@ set ruler
 set history=100
 set lbr
 set laststatus=2
+set nu
+set relativenumber
 
 map <Leader>mai i#include<stdio.h><CR><CR>int main(int argc,char *argv[],char *envp[])<CR>{<CR><CR>}<CR><Esc>kka<Tab>
 map <Leader>cmai i#include<iostream><CR><CR>using namespace std;<CR><CR>int main(int argc,char *argv[],char *envp[])<CR>{<CR><CR>return 0;<CR>}<CR><Esc>kka<Tab>
@@ -109,17 +115,6 @@ nmap + <Esc>:lnext<CR>
 
 au FileType make setlocal noexpandtab
 au FileType go setlocal nolist
-
-"for the ShowFunc.vim plugin.
-let g:ShowFuncScanType = "current"
-map  <Leader>shfn  <Plug>ShowFunc
-map! <Leader>shfn  <Plug>ShowFunc
-
-"for the ctags.vim plugin.
-let g:ctags_statusline=1
-let g:ctags_title=0
-let generate_tags=1
-
 
 function! DumpToClipBoard()
   "call writefile(split(@","\n"), '/dev/clipboard')
@@ -157,7 +152,6 @@ let g:EasyMotion_smartcase = 1
 map <Leader>j <Plug>(easymotion-j)
 map <Leader>k <Plug>(easymotion-k)
 
-
 "vim-sneak mapping
 nmap <Leader>s <Plug>(SneakStreak)
 nmap <Leader>S <Plug>(SneakStreakBackward)
@@ -171,9 +165,6 @@ highlight MarkWord5 ctermbg=6 ctermfg=black guibg=#8CCBEA guifg=Black
 highlight MarkWord6 ctermbg=57 ctermfg=white guibg=#8CCBEA guifg=Black
 highlight MarkWord7 ctermbg=48 ctermfg=black guibg=#8CCBEA guifg=Black
 highlight MarkWord8 ctermbg=88 ctermfg=white guibg=#8CCBEA guifg=Black
-
-" DirDiff mapping enabled
-let g:DirDiffEnableMappings=1
 
 " NerdTree
 map <C-n> :NERDTreeToggle<CR>
@@ -213,11 +204,6 @@ function! AirlineThemePatch(palette)
 endfunction
 let g:airline_theme_patch_func = 'AirlineThemePatch'
 
-
-"for ctrlp.vim
-let g:ctrlp_cmd = 'CtrlPBuffer'
-let g:ctrlp_working_path_mode = 'a'
-let g:ctrlp_show_hidden = 1
 
 set rtp+=/home/lnara002/.fzf
 let g:fzf_command_prefix = 'Fzf'
