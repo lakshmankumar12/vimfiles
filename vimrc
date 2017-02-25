@@ -116,6 +116,11 @@ nmap + <Esc>:lnext<CR>
 au FileType make setlocal noexpandtab
 au FileType go setlocal nolist
 
+function! DumpToTmuxClipBoard()
+  "call writefile(split(@","\n"), '/dev/clipboard')
+  call system("tmux loadb -", getreg("\""))
+endfunction
+
 function! DumpToClipBoard()
   "call writefile(split(@","\n"), '/dev/clipboard')
   call system("xsel -i -b", getreg("\""))
@@ -131,6 +136,7 @@ endfunction
 
 map <Leader>clip :call DumpToClipBoard()<CR>
 vmap <C-c> y:call DumpToClipBoard()<CR>
+vmap <C-b> y:call DumpToTmuxClipBoard()<CR>
 vmap gb    y:call DumpToClipBoard()<CR>
 nmap gb    y:call DumpToClipBoard()<CR>
 nmap gb    :r !xsel -b<CR>
