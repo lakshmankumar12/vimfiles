@@ -52,6 +52,8 @@ Plugin 'kana/vim-textobj-user'                " pre-req for indent/line
 Plugin 'kana/vim-textobj-indent'              " indent text-object
 Plugin 'kana/vim-textobj-line'                " line text-object
 Plugin 'bps/vim-textobj-python'               " python function/class selector
+Plugin 'thinca/vim-textobj-between'           " between a char if af
+Plugin 'vim-scripts/vis'                      " search/replace in visual-block
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -234,11 +236,11 @@ set list
 " Unite
 autocmd FileType unite imap <buffer> <Leader>x <Plug>(unite_exit)
 autocmd FileType unite imap <buffer> kj <Esc>
-nnoremap gho <Esc>:Unite -start-insert -ignorecase buffer file file_rec file_mru<CR>
-nnoremap gh/ <Esc>:Unite -start-insert -ignorecase line<CR>
-nnoremap ghr <Esc>:UniteResume<CR>
-nnoremap gh? <Esc>:Unite -start-insert -ignorecase -no-quit -keep-focus line<CR>
-nnoremap ghy <Esc>:Unite -start-insert -ignorecase history/yank<CR>
+nnoremap gho <Esc>:set nopaste<CR><Esc>:Unite -start-insert -ignorecase buffer file file_rec file_mru<CR>
+nnoremap gh/ <Esc>:set nopaste<CR><Esc>:Unite -start-insert -ignorecase line<CR>
+nnoremap ghr <Esc>:set nopaste<CR><Esc>:UniteResume<CR>
+nnoremap gh? <Esc>:set nopaste<CR><Esc>:Unite -start-insert -ignorecase -no-quit -keep-focus line<CR>
+nnoremap ghy <Esc>:set nopaste<CR><Esc>:Unite -start-insert -ignorecase history/yank<CR>
 
 " DONT TYPE ANYTHING HERE SO THAT CENTOS-BRANCH CAN
 " SAFELY ADD ITS OVERRIDES WITHOUT ISSUES
