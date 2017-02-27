@@ -61,6 +61,7 @@ imap kj           <Esc>
 cmap kj           <Esc>
 nmap gp           <Esc>p`[
 nmap gP           <Esc>"+P
+nmap gC           <Esc>:read !tmux saveb -<CR>
 nmap zg           <Esc>:vert scs find g <C-R>=expand("<cword>")<CR><CR>
 "in visual-line mode, i need to select lines, and i keep pressing J
 vmap J            j
@@ -204,13 +205,13 @@ endfunction
 
 nmap gS <Esc>:call MoveToDefintionOfMember(expand("<cword>"))<CR>
 
-function RemoveTrailWhite()
+function! RemoveTrailWhite()
   execute ":%s/\\s\\+$//g"
 endfunction
 
 nmap gW <Esc>:call RemoveTrailWhite()<CR>
 
-function FlushSearch()
+function! FlushSearch()
   execute "/asdfasdfsafsd"
 endfunction
 

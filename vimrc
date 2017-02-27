@@ -138,8 +138,9 @@ endfunction
 
 map <Leader>clip :call DumpToClipBoard()<CR>
 vmap <C-c> y:call DumpToClipBoard()<CR>
-vmap <C-b> y:call DumpToTmuxClipBoard()<CR>
 vmap gb    y:call DumpToClipBoard()<CR>
+vmap <C-b> y:call DumpToTmuxClipBoard()<CR>
+vmap gt    y:call DumpToTmuxClipBoard()<CR>
 nmap gb    y:call DumpToClipBoard()<CR>
 nmap gb    :r !xsel -b<CR>
 map <Leader>cname :call DumpNameToClipBoard()<CR>
