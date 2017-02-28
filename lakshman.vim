@@ -61,7 +61,8 @@ imap kj           <Esc>
 cmap kj           <Esc>
 nmap gp           <Esc>p`[
 nmap gP           <Esc>"+P
-nmap gC           <Esc>:read !tmux saveb -<CR>
+nmap gC           <Esc>:execute ":normal a" . system("tmux saveb -")<CR>
+nmap gY           <Esc>:read !tmux saveb -<CR>
 nmap zg           <Esc>:vert scs find g <C-R>=expand("<cword>")<CR><CR>
 "in visual-line mode, i need to select lines, and i keep pressing J
 vmap J            j
@@ -293,15 +294,6 @@ function! GotoTagLastName()
   execute "tag ".g:last_name
 endfunction
 nmap gO <Esc>:call GotoTagLastName()<CR>
-
-function! RedirGSearch()
-  redir @a
-  silent execute ":g//"
-  redir END
-  tabnew
-  put! a
-endfunction
-nmap gY <Esc>:call RedirGSearch()<CR>
 
 " DONT TYPE ANYTHING HERE SO THAT CENTOS-BRANCH CAN
 " SAFELY ADD ITS OVERRIDES WITHOUT ISSUES

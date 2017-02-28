@@ -139,7 +139,7 @@ gS                         (Bound to MoveToDefintionOfMember)
 gV  -- select-mode stuff.  (Bound to ToggleMouse)
 gW                         (Bound to RemoveTrailWhite)
 gX                         (Flush Search)
-gY                         (Bound to redirGSearch)
+gY                         (Tmux paste at new line)
 
 z-keys
 ------
