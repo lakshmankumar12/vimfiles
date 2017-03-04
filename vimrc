@@ -17,7 +17,7 @@ Plugin 'scrooloose/nerdtree'                  " Directory browser
 Plugin 'Xuyuanp/nerdtree-git-plugin'          " Show gittish info when nerd-tree is invoked
 Plugin 'justinmk/vim-sneak'                   " goto any location using s<char>
 Plugin 'jiangmiao/auto-pairs'                 " for automatically adding braces
-Plugin 'edsono/vim-matchit'                   " % given a new life
+Plugin 'tmhedberg/matchit'                    " % given a new life
 Plugin 'Lokaltog/vim-easymotion'              " <Leader>hjkl
 Plugin 'vim-scripts/python_match.vim'         " % for if/elif/else, try/except/catch in py. Also use [% to go to start of block 
 Plugin 'sjl/clam.vim'                         " Clam shellcmd

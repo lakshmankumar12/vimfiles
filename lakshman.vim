@@ -14,7 +14,7 @@ nmap zp           <Esc>:cclose<CR>:copen<CR>
 nmap S            <Esc>
 " Y is same yy. So, lets do something useful
 nmap Y            y$:call DumpToClipBoard()<CR>
-nmap gc           <Esc>:call KeepOnlyWindowWithLocationList()<CR>
+nmap gY           <Esc>:call KeepOnlyWindowWithLocationList()<CR>
 nmap gl           <Esc>:FZF<CR>
 nmap gww          <Esc>:update<CR>
 
@@ -62,7 +62,7 @@ cmap kj           <Esc>
 nmap gp           <Esc>p`[
 nmap gP           <Esc>"+P
 nmap gC           <Esc>:execute ":normal a" . system("tmux saveb -")<CR>
-nmap gY           <Esc>:read !tmux saveb -<CR>
+nmap gc           <Esc>:read !tmux saveb -<CR>
 nmap zg           <Esc>:vert scs find g <C-R>=expand("<cword>")<CR><CR>
 "in visual-line mode, i need to select lines, and i keep pressing J
 vmap J            j
