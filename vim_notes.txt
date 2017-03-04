@@ -93,7 +93,7 @@ g, - goto position in change list rev order
 
 RECLAIMable in g:
 gb - some netrw bookmark            (copy to system cliboard)
-gc - none                           (Bound to Keep window with only quickfix)
+gc - none                           (Tmux paste at new line) (gC is for paste wherever you are)
 gh - enter select mode              (Rebound to unitish operations)
   gho                             buffer file file_rec file_mru
   gh/                             line
@@ -139,7 +139,7 @@ gS                         (Bound to MoveToDefintionOfMember)
 gV  -- select-mode stuff.  (Bound to ToggleMouse)
 gW                         (Bound to RemoveTrailWhite)
 gX                         (Flush Search)
-gY                         (Tmux paste at new line)
+gY                         (Bound to Keep window with only quickfix)
 
 z-keys
 ------
@@ -496,6 +496,23 @@ Set a column limit to files
 ---------------------------
 
 :set colorcolumn=80
+
+Tabularize around a char
+------------------------
+
+:Tabularize /|
+
+
+Delete empty lines
+------------------
+
+#choose line that is empty or anti-choose line with atleat one char
+:g/^$/d
+:v/./d
+
+#choose line that is having only space or anti-choose line that has one-non-space char
+:g/^\s*$/d
+:v/\S/d
 
 
 help expand
