@@ -18,7 +18,7 @@ Plugin 'Xuyuanp/nerdtree-git-plugin'          " Show gittish info when nerd-tree
 Plugin 'justinmk/vim-sneak'                   " goto any location using s<char>
 Plugin 'jiangmiao/auto-pairs'                 " for automatically adding braces
 Plugin 'tmhedberg/matchit'                    " % given a new life
-Plugin 'Lokaltog/vim-easymotion'              " <Leader>hjkl
+Plugin 'easymotion/vim-easymotion'              " <Leader>hjkl
 Plugin 'vim-scripts/python_match.vim'         " % for if/elif/else, try/except/catch in py. Also use [% to go to start of block 
 Plugin 'sjl/clam.vim'                         " Clam shellcmd
 Plugin 'vim-scripts/OmniCppComplete'          " c-based language auto-complete
@@ -160,6 +160,22 @@ let g:EasyMotion_smartcase = 1
 " JK motions: Line motions
 map <Leader>j <Plug>(easymotion-j)
 map <Leader>k <Plug>(easymotion-k)
+nmap <Leader>w <Plug>(easymotion-bd-w)
+vmap <Leader>w <Plug>(easymotion-bd-w)
+nmap <Leader>W <Plug>(easymotion-bd-W)
+vmap <Leader>W <Plug>(easymotion-bd-W)
+nmap <Leader>e <Plug>(easymotion-bd-e)
+vmap <Leader>e <Plug>(easymotion-bd-e)
+nmap <Leader>E <Plug>(easymotion-bd-E)
+vmap <Leader>E <Plug>(easymotion-bd-E)
+
+"black-hole copying
+"we are in visual mode with block select and use s to black-hole paste
+vmap s "_c<C-R>"<Esc>
+nmap gA "_c
+"shrink visual block by one char on either side (assuming we are on left)
+vmap S oloh
+
 
 "vim-sneak mapping
 nmap <Leader>s <Plug>(SneakStreak)

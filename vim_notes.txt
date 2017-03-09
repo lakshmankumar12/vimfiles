@@ -102,6 +102,7 @@ gl - none                           (Bound to FZF)
 gq - format motion.(can use visual+= instead)
 gw - format motion.
    gww                              (Bound to :update)
+   gwc                              ( close window)
    gwh                              ( gw h,j,k,l -> window movements)
    gwj
    gwk
@@ -114,11 +115,12 @@ gw - format motion.
    gwJ
    gwK
    gwL
+   gwS                              (set spell toggle)
 gx - netrw stuff                    (Bound to cscope operations)
 gy - none                           (Bound to set pastetoggle)
 gz - none                           (Bound to solarized toggle bg)
 
-gA                         (Bound to tags_s)
+gA                         (Bound to black-hole c)
 gB                         (Bound to FzfBuffers)
 gC                         (Paste from tmux buffer)
 gG                         (Bound to tags_*)
@@ -342,6 +344,51 @@ C-]
 C-^
 C-_
 C-|
+
+All My Leader maps
+-------------------
+
+One char
+
+map <Leader>j <Plug>(easymotion-j)
+map <Leader>k <Plug>(easymotion-k)
+nmap <Leader>w <Plug>(easymotion-bd-w)
+vmap <Leader>w <Plug>(easymotion-bd-w)
+nmap <Leader>W <Plug>(easymotion-bd-W)
+vmap <Leader>W <Plug>(easymotion-bd-W)
+nmap <Leader>s <Plug>(SneakStreak)
+nmap <Leader>S <Plug>(SneakStreakBackward)
+
+Words
+~~~~~
+
+Really using:
+
+map <Leader>mai i#include<stdio.h><CR><CR>int main(int argc,char *argv[],char *envp[])<CR>{<CR><CR>}<CR><Esc>kka<Tab>
+map <Leader>cmai i#include<iostream><CR><CR>using namespace std;<CR><CR>int..n(int argc,char *argv[],char *envp[])<CR>{<CR><CR>return 0;<CR>}<CR><Esc>kka<Tab>
+map <Leader>pyth i#!/usr/bin/python<CR><CR>from __future__ import print_fun..<CR><CR>def main():<CR>pass<CR><C-D><CR>if __name__ == '__main__':<CR>main()<CR>~
+map <Leader>tail 100A <Esc>A;<Esc>h
+map <Leader>clip :call DumpToClipBoard()<CR>
+map <Leader>cname :call DumpNameToClipBoard()<CR>
+nmap <Leader>name        <Esc>:echo expand("%:p")<CR>
+nmap <Leader>mshed       <Esc>:call ShedM()<CR>
+nmap <Leader>css         <Esc>:call LoadCscopeToQuickFix(expand("<cword>"),"s")<CR>
+nmap <Leader>csg         <Esc>:call LoadCscopeToQuickFix(expand("<cword>"),"g")<CR>
+nmap <Leader>csc         <Esc>:call LoadCscopeToQuickFix(expand("<cword>"),"c")<CR>
+nnoremap <Leader>gdb  <Esc>:Gdiff base<CR>gg<Esc>:wincmd l<CR>
+
+Not that much:
+
+nmap <Leader>cmd         <Esc>:call GetCommandOutputOnNewTab()<CR>
+map <Leader>typ itypedef struct<CR>{<CR><CR>}  ;<Esc>hi
+nmap <Leader>adds        <Esc>:call Addspaces()<CR>
+nnoremap <Leader>pd   <Esc>:wincmd P<CR><C-D>:wincmd p<CR>
+nnoremap <Leader>pu   <Esc>:wincmd P<CR><C-U>:wincmd p<CR>
+nmap <Leader>ln   <C-w>h<Esc>:q<CR><C-w>P<C-n>
+nmap <Leader>lp   <C-w>h<Esc>:q<CR><C-w>P<C-p>
+nmap <Leader>hn   :q<CR><C-w>P<C-n>
+nmap <Leader>hp   :q<CR><C-w>P<C-p>
+nmap <Leader>gfunc    <Esc>:call FindFunctionFromTags()<CR>
 
 Vim text object selectors
 --------------------------
