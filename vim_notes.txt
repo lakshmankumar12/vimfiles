@@ -98,6 +98,8 @@ gh - enter select mode              (Rebound to unitish operations)
   gho                             buffer file file_rec file_mru
   gh/                             line
   ghy                             history/yank
+  ghd                             easy-clip d
+  ghD                             easy-clip dd
 gl - none                           (Bound to FZF)
 gq - format motion.(can use visual+= instead)
 gw - format motion.
@@ -120,7 +122,7 @@ gx - netrw stuff                    (Bound to cscope operations)
 gy - none                           (Bound to set pastetoggle)
 gz - none                           (Bound to solarized toggle bg)
 
-gA                         (Bound to black-hole c)
+gA                         (Free)
 gB                         (Bound to FzfBuffers)
 gC                         (Paste from tmux buffer)
 gG                         (Bound to tags_*)

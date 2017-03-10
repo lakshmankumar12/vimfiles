@@ -11,6 +11,7 @@ call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
 
 Plugin 'antiAgainst/cscope-macros.vim'        " Brings in the ctrl-\ <g|s|c> shortcuts
+Plugin 'tpope/vim-repeat'                     " pre-requisite for easyclip
 Plugin 'tpope/vim-fugitive'                   " The awesome git plugin. Period.
 Plugin 'jreybert/vimagit'                     " :Magit command
 Plugin 'scrooloose/nerdtree'                  " Directory browser
@@ -54,6 +55,7 @@ Plugin 'kana/vim-textobj-line'                " line text-object
 Plugin 'bps/vim-textobj-python'               " python function/class selector
 Plugin 'thinca/vim-textobj-between'           " between a char if af
 Plugin 'vim-scripts/vis'                      " search/replace in visual-block
+Plugin 'svermeulen/vim-easyclip'              " black-hole cut-paste
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -170,9 +172,11 @@ nmap <Leader>E <Plug>(easymotion-bd-E)
 vmap <Leader>E <Plug>(easymotion-bd-E)
 
 "black-hole copying
-"we are in visual mode with block select and use s to black-hole paste
-vmap s "_c<C-R>"<Esc>
-nmap gA "_c
+let g:EasyClipUseCutDefaults = 0
+nmap ghd <Plug>MoveMotionPlug
+nmap ghD <Plug>MoveMotionLinePlug
+nmap ghs <Plug>SubstituteOverMotionMap
+
 "shrink visual block by one char on either side (assuming we are on left)
 vmap S oloh
 
@@ -257,7 +261,7 @@ nnoremap gho <Esc>:set nopaste<CR><Esc>:Unite -start-insert -ignorecase buffer f
 nnoremap gh/ <Esc>:set nopaste<CR><Esc>:Unite -start-insert -ignorecase line<CR>
 nnoremap ghr <Esc>:set nopaste<CR><Esc>:UniteResume<CR>
 nnoremap gh? <Esc>:set nopaste<CR><Esc>:Unite -start-insert -ignorecase -no-quit -keep-focus line<CR>
-nnoremap ghy <Esc>:set nopaste<CR><Esc>:Unite -start-insert -ignorecase history/yank<CR>
+nnoremap ghy <Esc>:set nopaste<CR><Esc>:Unite -start-insert -ignorecase register history/yank<CR>
 
 " DONT TYPE ANYTHING HERE SO THAT CENTOS-BRANCH CAN
 " SAFELY ADD ITS OVERRIDES WITHOUT ISSUES
