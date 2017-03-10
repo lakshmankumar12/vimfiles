@@ -11,6 +11,7 @@ call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
 
 Plugin 'antiAgainst/cscope-macros.vim'        " Brings in the ctrl-\ <g|s|c> shortcuts
+Plugin 'tpope/vim-repeat'                     " pre-requisite for easyclip
 Plugin 'tpope/vim-fugitive'                   " The awesome git plugin. Period.
 Plugin 'jreybert/vimagit'                     " :Magit command
 Plugin 'scrooloose/nerdtree'                  " Directory browser
@@ -18,7 +19,7 @@ Plugin 'Xuyuanp/nerdtree-git-plugin'          " Show gittish info when nerd-tree
 Plugin 'justinmk/vim-sneak'                   " goto any location using s<char>
 Plugin 'jiangmiao/auto-pairs'                 " for automatically adding braces
 Plugin 'tmhedberg/matchit'                    " % given a new life
-Plugin 'Lokaltog/vim-easymotion'              " <Leader>hjkl
+Plugin 'easymotion/vim-easymotion'              " <Leader>hjkl
 Plugin 'vim-scripts/python_match.vim'         " % for if/elif/else, try/except/catch in py. Also use [% to go to start of block 
 Plugin 'sjl/clam.vim'                         " Clam shellcmd
 Plugin 'vim-scripts/OmniCppComplete'          " c-based language auto-complete
@@ -54,6 +55,7 @@ Plugin 'kana/vim-textobj-line'                " line text-object
 Plugin 'bps/vim-textobj-python'               " python function/class selector
 Plugin 'thinca/vim-textobj-between'           " between a char if af
 Plugin 'vim-scripts/vis'                      " search/replace in visual-block
+Plugin 'svermeulen/vim-easyclip'              " black-hole cut-paste
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -160,6 +162,24 @@ let g:EasyMotion_smartcase = 1
 " JK motions: Line motions
 map <Leader>j <Plug>(easymotion-j)
 map <Leader>k <Plug>(easymotion-k)
+nmap <Leader>w <Plug>(easymotion-bd-w)
+vmap <Leader>w <Plug>(easymotion-bd-w)
+nmap <Leader>W <Plug>(easymotion-bd-W)
+vmap <Leader>W <Plug>(easymotion-bd-W)
+nmap <Leader>e <Plug>(easymotion-bd-e)
+vmap <Leader>e <Plug>(easymotion-bd-e)
+nmap <Leader>E <Plug>(easymotion-bd-E)
+vmap <Leader>E <Plug>(easymotion-bd-E)
+
+"black-hole copying
+let g:EasyClipUseCutDefaults = 0
+nmap ghd <Plug>MoveMotionPlug
+nmap ghD <Plug>MoveMotionLinePlug
+nmap ghs <Plug>SubstituteOverMotionMap
+
+"shrink visual block by one char on either side (assuming we are on left)
+vmap S oloh
+
 
 "vim-sneak mapping
 nmap <Leader>s <Plug>(SneakStreak)
@@ -241,7 +261,7 @@ nnoremap gho <Esc>:set nopaste<CR><Esc>:Unite -start-insert -ignorecase buffer f
 nnoremap gh/ <Esc>:set nopaste<CR><Esc>:Unite -start-insert -ignorecase line<CR>
 nnoremap ghr <Esc>:set nopaste<CR><Esc>:UniteResume<CR>
 nnoremap gh? <Esc>:set nopaste<CR><Esc>:Unite -start-insert -ignorecase -no-quit -keep-focus line<CR>
-nnoremap ghy <Esc>:set nopaste<CR><Esc>:Unite -start-insert -ignorecase history/yank<CR>
+nnoremap ghy <Esc>:set nopaste<CR><Esc>:Unite -start-insert -ignorecase register history/yank<CR>
 
 " DONT TYPE ANYTHING HERE SO THAT CENTOS-BRANCH CAN
 " SAFELY ADD ITS OVERRIDES WITHOUT ISSUES
