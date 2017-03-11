@@ -379,6 +379,11 @@ nmap <Leader>csg         <Esc>:call LoadCscopeToQuickFix(expand("<cword>"),"g")<
 nmap <Leader>csc         <Esc>:call LoadCscopeToQuickFix(expand("<cword>"),"c")<CR>
 nnoremap <Leader>gdb  <Esc>:Gdiff base<CR>gg<Esc>:wincmd l<CR>
 
+Org mode
+<Leader>cl/CL   # list item
+<Leader>cn/CN   # check box
+<Leader>cc      # toggle check box
+
 Not that much:
 
 nmap <Leader>cmd         <Esc>:call GetCommandOutputOnNewTab()<CR>
