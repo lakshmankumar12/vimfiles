@@ -36,6 +36,7 @@ nmap gwL          <C-w>l<C-w>c
 nmap gwo          <Plug>ZoomWin
 nmap gwt          <Esc>mZ:tabnew %<CR>`Z
 nmap gwg          <Esc>:GitGutterToggle<CR>
+nmap gws          <Esc>:set spell!<CR>
 nmap gwn          <Esc>:set relativenumber!<CR>
 nmap gwr          <Esc>:set wrap!<CR>
 
@@ -64,7 +65,6 @@ nmap gp           <Esc>p`[
 nmap gP           <Esc>"+P
 nmap gC           <Esc>:execute ":normal a" . system("tmux saveb -")<CR>
 nmap gc           <Esc>:read !tmux saveb -<CR>
-nmap zg           <Esc>:vert scs find g <C-R>=expand("<cword>")<CR><CR>
 "in visual-line mode, i need to select lines, and i keep pressing J
 vmap J            j
 "scroll preview window from another window

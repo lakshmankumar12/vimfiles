@@ -154,7 +154,7 @@ zc - close a fold (in an existing fold(determined by mode))               zC  - 
 zd - delete one fold on cursor (in manual-fold mode)
 ze - bring current column to end of screen
 zf - create a fold (in manual-fold mode)
-zg - open current work to good work (spell file) (BOUND to vcs fing g)
+zg - open current work to good work (spell file) (RECLAIM)
 zh - move view one step right                                             zH  - scroll left by half-screen
 zi - Invert foldenable
 zj - goto next fold down
