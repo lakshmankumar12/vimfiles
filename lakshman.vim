@@ -36,7 +36,6 @@ nmap gwL          <C-w>l<C-w>c
 nmap gwo          <Plug>ZoomWin
 nmap gwt          <Esc>mZ:tabnew %<CR>`Z
 nmap gwg          <Esc>:GitGutterToggle<CR>
-nmap gws          <Esc>:set spell!<CR>
 nmap gwn          <Esc>:set relativenumber!<CR>
 nmap gwr          <Esc>:set wrap!<CR>
 

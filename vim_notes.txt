@@ -533,6 +533,7 @@ Multiple Highlight
 
 Spell check
 ----------
+(I have mapped gwS)
 
 :set spell
 ]s next misspelled word
