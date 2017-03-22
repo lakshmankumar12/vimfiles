@@ -2,7 +2,7 @@ This is a list of keys and the commands they do in vim.
 Vim's key-scape is pretty packed - Hardly any room to map to my personal commands.
 So, here is a listing of the keys to commands to identify the gaps, that I can reclaim for my own maps.
 
-q - recording                                    Q - ex mode. RECLAIM!                  (Bound to :tabclose)
+q - recording (also useful q:,q/)                Q - ex mode. RECLAIM!                  (Bound to :tabclose)
 w - word next                                    W - Blank-sep word forward
 e - word end                                     E - Blank-sep word end
 r - remove char                                  R - Remove multi chars
@@ -143,7 +143,7 @@ gS                         (Bound to MoveToDefintionOfMember)
 gV  -- select-mode stuff.  (Bound to ToggleMouse)
 gW                         (Bound to RemoveTrailWhite)
 gX                         (Flush Search)
-gY                         (Bound to Keep window with only quickfix)
+gY                         (Bound to Keep window with only location-list)
 
 z-keys
 ------
@@ -432,6 +432,8 @@ ds" ds' ds( ds[  ds{
 cs"'
 ys<motion><sur-char>
 
+select visually, press S and then the surround char ",'
+
 Search modifiers
 ---------------
 
@@ -444,7 +446,8 @@ Search modifiers
 Quickly grep in a given file
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-:lvimgrep /^r// %
+" Opens the lines with patter in location list
+:lvimgrep /pattern/ %
 
 Other Vim Tips:
 ===============

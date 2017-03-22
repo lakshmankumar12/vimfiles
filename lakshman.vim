@@ -36,7 +36,7 @@ nmap gwL          <C-w>l<C-w>c
 nmap gwo          <Plug>ZoomWin
 nmap gwt          <Esc>mZ:tabnew %<CR>`Z
 nmap gwg          <Esc>:GitGutterToggle<CR>
-nmap gwn          <Esc>:set relativenumber!<CR>
+nmap gwn          <Esc>:set relativenumber!<CR>:set nu!<CR>
 nmap gwr          <Esc>:set wrap!<CR>
 
 "cscope'ish
@@ -294,6 +294,15 @@ function! GotoTagLastName()
   execute "tag ".g:last_name
 endfunction
 nmap gO <Esc>:call GotoTagLastName()<CR>
+
+if !exists("*ReloadConfigs")
+  function! ReloadConfigs()
+    execute "source ~/.vimrc"
+    execute "source ~/.vim/plugin/lakshman.vim"
+  endfunction
+  command! Recfg call ReloadConfigs()
+endif
+
 
 " DONT TYPE ANYTHING HERE SO THAT CENTOS-BRANCH CAN
 " SAFELY ADD ITS OVERRIDES WITHOUT ISSUES

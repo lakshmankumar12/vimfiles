@@ -175,6 +175,7 @@ vmap <Leader>E <Plug>(easymotion-bd-E)
 "black-hole copying
 let g:EasyClipUseCutDefaults = 0
 nmap ghd <Plug>MoveMotionPlug
+vmap ghd ygvd
 nmap ghD <Plug>MoveMotionLinePlug
 nmap ghs <Plug>SubstituteOverMotionMap
 
