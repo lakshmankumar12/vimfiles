@@ -118,6 +118,7 @@ gw - format motion.
    gwK
    gwL
    gwS                              (set spell toggle)
+   gwd                              diffoff
 gx - netrw stuff                    (Bound to cscope operations)
 gy - none                           (Bound to set pastetoggle)
 gz - none                           (Bound to solarized toggle bg)

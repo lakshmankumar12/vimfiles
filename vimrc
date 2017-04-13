@@ -147,6 +147,10 @@ nmap gb    y:call DumpToClipBoard()<CR>
 nmap gb    :r !xsel -b<CR>
 map <Leader>cname :call DumpNameToClipBoard()<CR>
 
+"dont lose anything on a accidental ctrl-u/w
+inoremap <c-u> <c-g>u<c-u>
+inoremap <c-w> <c-g>u<c-w>
+
 "easymotion settings
 let g:EasyMotion_do_mapping = 0 " Disable default mappings
 
@@ -175,12 +179,14 @@ vmap <Leader>E <Plug>(easymotion-bd-E)
 "black-hole copying
 let g:EasyClipUseCutDefaults = 0
 nmap ghd <Plug>MoveMotionPlug
+"In visual mode, both d & D do the same.
 vmap ghd ygvd
+vmap ghD ygvd
 nmap ghD <Plug>MoveMotionLinePlug
 nmap ghs <Plug>SubstituteOverMotionMap
 
 "shrink visual block by one char on either side (assuming we are on left)
-vmap S oloh
+vmap <C-S> oloh
 
 
 "vim-sneak mapping
