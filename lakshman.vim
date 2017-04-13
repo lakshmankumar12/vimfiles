@@ -38,6 +38,7 @@ nmap gwt          <Esc>mZ:tabnew %<CR>`Z
 nmap gwg          <Esc>:GitGutterToggle<CR>
 nmap gwn          <Esc>:set relativenumber!<CR>:set nu!<CR>
 nmap gwr          <Esc>:set wrap!<CR>
+nmap gwd          <Esc>:diffoff<CR>
 
 "cscope'ish
 nmap gxs :cs find s <C-R>=expand("<cword>")<CR><CR>
