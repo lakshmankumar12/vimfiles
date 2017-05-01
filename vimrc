@@ -56,6 +56,7 @@ Plugin 'bps/vim-textobj-python'               " python function/class selector
 Plugin 'thinca/vim-textobj-between'           " between a char if af
 Plugin 'vim-scripts/vis'                      " search/replace in visual-block
 Plugin 'svermeulen/vim-easyclip'              " black-hole cut-paste
+Plugin 'juneedahamed/svnj.vim'                " svn plugin
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -210,6 +211,7 @@ highlight MarkWord8 ctermbg=88 ctermfg=white guibg=#8CCBEA guifg=Black
 
 " NerdTree
 map <C-n> :NERDTreeToggle<CR>
+map <C-N> :NERDTreeFind<CR>
 
 au! Filetype qf setlocal statusline="%t%{exists('w:quickfix_title')? ' '.w:quickfix_title : ''} win:%{WindowNumber()}%=%-15(%l,%c%V%) %P"
 
@@ -247,7 +249,7 @@ endfunction
 let g:airline_theme_patch_func = 'AirlineThemePatch'
 
 
-set rtp+=/home/lnara002/.fzf
+set rtp+=~/.fzf
 let g:fzf_command_prefix = 'Fzf'
 
 " no omnicomplete preview
