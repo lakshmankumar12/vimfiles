@@ -110,7 +110,7 @@ let g:solarized_termtrans=1
 colorscheme solarized
 
 set diffopt+=vertical
-set csprg='/home/lnara002/bin/cscope'
+set csprg='~/bin/cscope'
 
 nmap gL <Esc>:cn<CR>
 nmap gH <Esc>:cp<CR>
@@ -120,15 +120,20 @@ nmap + <Esc>:lnext<CR>
 au FileType make setlocal noexpandtab
 au FileType go setlocal nolist
 
+let s:uname = system("echo -n \"$(uname)\"")
+
 function! DumpToTmuxClipBoard()
   "call writefile(split(@","\n"), '/dev/clipboard')
   call system("tmux loadb -", getreg("\""))
 endfunction
 
 function! DumpToClipBoard()
-  "call writefile(split(@","\n"), '/dev/clipboard')
-  call system("xsel -i -b", getreg("\""))
-  call system("xsel -i -b", getreg("\""))
+  if !v:shell_error && s:uname == "Darwin"
+    call system("pbcopy -pboard general", getreg("\""))
+  else
+    call system("xsel -i -b", getreg("\""))
+    call system("xsel -i -b", getreg("\""))
+  endif
 endfunction
 
 function! DumpNameToClipBoard()
