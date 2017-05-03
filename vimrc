@@ -129,7 +129,7 @@ function! DumpToTmuxClipBoard()
 endfunction
 
 function! DumpToClipBoard()
-  if !v:shell_error && s:uname == "Darwin"
+  if s:uname == "Darwin"
     call system("pbcopy -pboard general", getreg("\""))
   else
     call system("xsel -i -b", getreg("\""))
