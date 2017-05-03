@@ -211,7 +211,7 @@ highlight MarkWord8 ctermbg=88 ctermfg=white guibg=#8CCBEA guifg=Black
 
 " NerdTree
 map <C-n> :NERDTreeToggle<CR>
-map <C-N> :NERDTreeFind<CR>
+map gwe :NERDTreeFind<CR>
 
 au! Filetype qf setlocal statusline="%t%{exists('w:quickfix_title')? ' '.w:quickfix_title : ''} win:%{WindowNumber()}%=%-15(%l,%c%V%) %P"
 

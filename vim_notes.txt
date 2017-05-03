@@ -105,10 +105,12 @@ gq - format motion.(can use visual+= instead)
 gw - format motion.
    gww                              (Bound to :update)
    gwc                              ( close window)
+   gwe                              (NerdTreeFind)
    gwh                              ( gw h,j,k,l -> window movements)
    gwj
    gwk
    gwl
+   gwn                              (Bound to number/relative number toggle)
    gwo                              (Bound to Zoomwin)
    gwt                              (New tab)
    gwg                              (Bound to gitGuttter disable)
