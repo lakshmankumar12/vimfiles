@@ -23,19 +23,19 @@ Plugin 'easymotion/vim-easymotion'              " <Leader>hjkl
 Plugin 'vim-scripts/python_match.vim'         " % for if/elif/else, try/except/catch in py. Also use [% to go to start of block 
 Plugin 'sjl/clam.vim'                         " Clam shellcmd
 Plugin 'vim-scripts/OmniCppComplete'          " c-based language auto-complete
-Plugin 'vim-airline/vim-airline'              " look and feel with powerline'ish fonts
+Plugin 'vim-airline/vim-airline'              " look and feel with powerline-ish fonts
 Plugin 'vim-airline/vim-airline-themes'       " More themese for airline
 Plugin 'majutsushi/tagbar'                    " Enables the c-function names with g:airline#extensions#tagbar#enabled below.
 Plugin 'rking/ag.vim'                         " Brings :Ag :LAg commands and silver-searcher
 Plugin 'tarmolov/TabLineNumbers.vim'          " prints numbers in each tab
 Plugin 'Shougo/vimproc.vim'                   " Needed for unite
 Plugin 'vim-scripts/AnsiEsc.vim'              " To view files having ansi-esc chars.
-Plugin 'airblade/vim-gitgutter'               " Puts up a line(gutter) in the left column with git'ish information
+Plugin 'airblade/vim-gitgutter'               " Puts up a line(gutter) in the left column with git-ish information
 Plugin 'scrooloose/nerdcommenter'             " Comment/remove-comment blocks quickly
 "Plugin 'Valloric/YouCompleteMe'
 "Plugin 'ternjs/tern_for_vim'
 Plugin 'junegunn/fzf.vim'                     " :Fzf and other commands
-Plugin 'altercation/vim-colors-solarized.git' " Solarized vim
+Plugin 'altercation/vim-colors-solarized'     " Solarized vim
 Plugin 'regedarek/ZoomWin'                    " Close other windows and re-open them again
 Plugin 'yssl/QFEnter'                         " <Leader><CR> on quickfix/loc-list will open in a new vert split.
 Plugin 'fatih/vim-go'                         " One stop go plugin

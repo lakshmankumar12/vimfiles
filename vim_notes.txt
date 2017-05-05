@@ -575,6 +575,19 @@ Delete empty lines
 :g/^\s*$/d
 :v/\S/d
 
+NerdTree
+--------
+
+NerdTreeToggle  (mapped to C-n. Just opens nerd-tree at cwd)
+NerdTreeFind    (opens Nerdtree at file location)
+
+Enter -> at a folder opens up the folder
+x     -> close current parent
+p     -> go to parent
+?     -> close in case you accidentally opened help with ?
+R     -> refresh
+
+
 
 help expand
 ------------
