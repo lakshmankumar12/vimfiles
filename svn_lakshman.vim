@@ -76,8 +76,9 @@ function! DoSvnLogRevision(revision)
           execute "bd! " . s:temp_name
   endif
   execute "tabnew " . s:temp_name
-  let s:cmdName = "svn log --verbose -r" . a:revision
+  let s:cmdName = "svn log --verbose -r" . a:revision . " " . g:currentRepoPrefix
   silent execute "0r !" . s:cmdName
+  silent execute "0r !echo " . s:cmdName
   set nomodified
   setlocal buftype=nofile
   setlocal bufhidden=hide

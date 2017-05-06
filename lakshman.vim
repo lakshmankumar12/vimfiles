@@ -300,6 +300,9 @@ if !exists("*ReloadConfigs")
   function! ReloadConfigs()
     execute "source ~/.vimrc"
     execute "source ~/.vim/plugin/lakshman.vim"
+    if filereadable("~/.vim/plugin/svn_lakshman.vim")
+       execute "source ~/.vim/plugin/svn_lakshman.vim"
+    endif
   endfunction
   command! Recfg call ReloadConfigs()
 endif

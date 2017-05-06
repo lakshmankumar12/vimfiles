@@ -56,7 +56,7 @@ Plugin 'bps/vim-textobj-python'               " python function/class selector
 Plugin 'thinca/vim-textobj-between'           " between a char if af
 Plugin 'vim-scripts/vis'                      " search/replace in visual-block
 Plugin 'svermeulen/vim-easyclip'              " black-hole cut-paste
-Plugin 'juneedahamed/svnj.vim'                " svn plugin
+"Plugin 'juneedahamed/svnj.vim'                " svn plugin
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -272,7 +272,8 @@ set list
 " Unite
 autocmd FileType unite imap <buffer> <Leader>x <Plug>(unite_exit)
 autocmd FileType unite imap <buffer> kj <Esc>
-nnoremap gho <Esc>:set nopaste<CR><Esc>:Unite -start-insert -ignorecase buffer file file_rec file_mru<CR>
+nnoremap gho <Esc>:set nopaste<CR><Esc>:Unite -start-insert -ignorecase buffer file file_mru<CR>
+nnoremap ghO <Esc>:set nopaste<CR><Esc>:Unite -start-insert -ignorecase buffer file file_rec file_mru<CR>
 nnoremap gh/ <Esc>:set nopaste<CR><Esc>:Unite -start-insert -ignorecase line<CR>
 nnoremap ghr <Esc>:set nopaste<CR><Esc>:UniteResume<CR>
 nnoremap gh? <Esc>:set nopaste<CR><Esc>:Unite -start-insert -ignorecase -no-quit -keep-focus line<CR>
