@@ -4,10 +4,6 @@ com! SVNAnno  call DoSvnAnnotate(expand("%:p"))
 com! SVNRev   call DoSvnLogRevision(expand("<cWORD>"))
 com! SVNRDiff call ShowSvnRevDiff(expand("<cWORD>"))
 
-function! ChompedSystem( ...  )
-  return substitute(call('system', a:000), '\n\+$', '', '')
-endfunction
-
 function! ShowSvnCurrDiff(filename)
   let g:currentLoggedSVNFile = a:filename
   let s:fileType = &ft

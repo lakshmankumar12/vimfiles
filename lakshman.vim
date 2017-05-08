@@ -77,6 +77,10 @@ nmap <Leader>hp   :q<CR><C-w>P<C-p>
 nmap <Leader>gfunc    <Esc>:call FindFunctionFromTags()<CR>
 nnoremap <Leader>gdb  <Esc>:Gdiff base<CR>gg<Esc>:wincmd l<CR>
 
+function! ChompedSystem( ...  )
+  return substitute(call('system', a:000), '\n\+$', '', '')
+endfunction
+
 function! GetCommandOutputOnNewTab()
   let s:cmdName = input("Enter command:")
   execute "tabnew"
@@ -259,8 +263,9 @@ nmap gGD          <Esc>:call PanosTags("../tags_d")<CR>
 nmap gGE          <Esc>:call PanosTags("../tags_d")<CR>
 
 function! PanosTagsSink(line)
-  let g:last_name = a:line
-  call LoadCscopeToQuickFix(a:line,"s")
+  let s:cmdName = "a=" . a:line . "; echo ${a##*::}"
+  let g:last_name = ChompedSystem(s:cmdName)
+  call LoadCscopeToQuickFix(g:last_name,"s")
   execute "ll"
 endfunction
 
@@ -270,25 +275,6 @@ function! PanosTags(file)
   \   'options' : '--exact',
   \   'right' : '30%',
   \   'sink':   function('PanosTagsSink')})
-endfunction
-
-function! PanosTagsSinkJustGo(line)
-  let g:last_name = a:line
-endfunction
-
-function! PanosTagsJustGo(file)
-  let g:last_name = ""
-  call fzf#run({
-  \   'source': "sed '/^\\!/d;s/\t.*//' " . a:file . " | uniq",
-  \   'options' : '--exact',
-  \   'right' : '30%',
-  \   'sink':   function('PanosTagsSinkJustGo')})
-  if !empty(g:last_name)
-    execute ":redraw"
-    echom "Working on " . g:last_name
-    "call confirm("Press enter to continue.. There was just one result")
-    execute ":cs f g " . g:last_name
-  endif
 endfunction
 
 function! GotoTagLastName()
