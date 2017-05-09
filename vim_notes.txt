@@ -436,6 +436,7 @@ cs"'
 ys<motion><sur-char>
 
 select visually, press S and then the surround char ",'
+note: if you press opening-brace, there will be a space added. if you use closing-brace, no space is added
 
 Search modifiers
 ---------------
@@ -465,7 +466,7 @@ i.e name space* ( space* word+ space+ word+ .* ,
     The -> and . will separate words in invocations too, but hopefully they dont have space inbetween!
 
 
-:set hidden  # option enables the non-saving of files while switching
+:set hidden  # option enables the non-saving of files while switching (unnecessary swap files)
 echo &hidden # is a way to see the current setting.
 
 Colors in vim:
@@ -545,6 +546,15 @@ Spell check
 ]s next misspelled word
 [s prev misspelled word
 
+Sort a file
+------------
+
+:%sort
+:'<,'>sort
+
+#only uniq
+:sort -u
+
 Mark and save a subset to another file
 --------------------------------------
 
@@ -592,8 +602,6 @@ R     -> refresh
 help expand
 ------------
 
-
-
 %    current file name
 #    alternate file name
 #n    alternate file name n
@@ -613,3 +621,6 @@ Modifiers:
 :t    tail (last path component only)
 :r    root (one extension removed)
 :e    extension only
+
+eg:
+expand("<cWORD>")
