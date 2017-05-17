@@ -27,7 +27,6 @@ Plugin 'vim-airline/vim-airline'              " look and feel with powerline-ish
 Plugin 'vim-airline/vim-airline-themes'       " More themese for airline
 Plugin 'majutsushi/tagbar'                    " Enables the c-function names with g:airline#extensions#tagbar#enabled below.
 Plugin 'rking/ag.vim'                         " Brings :Ag :LAg commands and silver-searcher
-Plugin 'tarmolov/TabLineNumbers.vim'          " prints numbers in each tab
 Plugin 'Shougo/vimproc.vim'                   " Needed for unite
 Plugin 'vim-scripts/AnsiEsc.vim'              " To view files having ansi-esc chars.
 Plugin 'airblade/vim-gitgutter'               " Puts up a line(gutter) in the left column with git-ish information
@@ -56,6 +55,7 @@ Plugin 'bps/vim-textobj-python'               " python function/class selector
 Plugin 'thinca/vim-textobj-between'           " between a char if af
 Plugin 'vim-scripts/vis'                      " search/replace in visual-block
 Plugin 'svermeulen/vim-easyclip'              " black-hole cut-paste
+Plugin 'ryanoasis/vim-devicons'               " super-duper fonts
 "Plugin 'juneedahamed/svnj.vim'                " svn plugin
 
 " All of your Plugins must be added before the following line
@@ -247,7 +247,8 @@ function! AirlineThemePatch(palette)
   endif
 endfunction
 let g:airline_theme_patch_func = 'AirlineThemePatch'
-
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#tab_nr_type = 1 " tab number
 
 set rtp+=~/.fzf
 let g:fzf_command_prefix = 'Fzf'

@@ -154,7 +154,7 @@ function! ShowMp3Function()
 endfunction
 
 function! MakeMp3Function()
-  let s:cmd="!/home/lnara002/bin/prepare_tag_commands.py '" . expand("%:p") . "' > /tmp/cmds"
+  let s:cmd="!~/bin/prepare_tag_commands.py '" . expand("%:p") . "' > /tmp/cmds"
   execute s:cmd
   let s:cmd="!chmod +x /tmp/cmds"
   execute s:cmd

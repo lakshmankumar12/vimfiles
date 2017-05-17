@@ -144,7 +144,7 @@ gO                         (Bound to GotoTagLastName)
 gP                         (clip-board paste)
 gS                         (Bound to MoveToDefintionOfMember)
 gV  -- select-mode stuff.  (Bound to ToggleMouse)
-gW                         (Bound to RemoveTrailWhite)
+gW                         (Bound to RemoveTrailWhite) # remove trail white space
 gX                         (Flush Search)
 gY                         (Bound to Keep window with only location-list)
 
