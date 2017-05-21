@@ -293,6 +293,16 @@ if !exists("*ReloadConfigs")
   command! Recfg call ReloadConfigs()
 endif
 
+function! LoadErrorsFunction()
+  execute "normal mZ"
+  execute ":lf /tmp/errors"
+  execute ":lopen"
+  execute "wincmd k"
+endfunction
+
+command! LoadErrors call LoadErrorsFunction()
+
+
 
 " DONT TYPE ANYTHING HERE SO THAT CENTOS-BRANCH CAN
 " SAFELY ADD ITS OVERRIDES WITHOUT ISSUES
@@ -302,14 +312,4 @@ endif
 
 
 " ***********
-
-function! LoadErrorsFunction()
-  execute ":lf log.txt"
-  execute ":lopen"
-  execute "wincmd j"
-  execute "normal G"
-  execute "normal /\\<error\\>/s\<CR>"
-endfunction
-
-command! LoadErrors call LoadErrorsFunction()
 

@@ -57,6 +57,7 @@ Plugin 'vim-scripts/vis'                      " search/replace in visual-block
 Plugin 'svermeulen/vim-easyclip'              " black-hole cut-paste
 Plugin 'ryanoasis/vim-devicons'               " super-duper fonts
 "Plugin 'juneedahamed/svnj.vim'                " svn plugin
+Plugin 'vim-scripts/iptables'                 " iptables filetype
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
