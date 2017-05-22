@@ -1,11 +1,11 @@
 "What i use:
-com! SVNDiff  call ShowSvnCurrDiff(expand("%:p"))
-com! SVNAnno  call DoSvnAnnotate(expand("%:p"))
-com! SVNRev   call DoSvnLogRevision(expand("<cWORD>"))
-com! SVNRDiff call ShowSvnRevDiff(expand("<cWORD>"))
+com! SVNDiff   call ShowSvnCurrDiff(expand("%:p"))
+com! SVNAnno   call DoSvnAnnotate(expand("%:p"))
+com! SVNRev    call DoSvnLogRevision(expand("<cWORD>"))
+com! SVNRDiff  call ShowSvnRevDiff(expand("<cWORD>"))
+com! SVNStatus call ShowSvnStatus()
 
 function! ShowSvnCurrDiff(filename)
-  let g:currentLoggedSVNFile = a:filename
   let s:fileType = &ft
   let s:filename_t = expand("%:t")
   let s:filename_h = expand("%:h")
@@ -17,8 +17,8 @@ function! ShowSvnCurrDiff(filename)
   execute "vnew " . s:temp_name
   let s:cmdName = "svn cat -rBASE " . a:filename
   silent execute "0r !" . s:cmdName
-  execute "set filetype=" . s:fileType
-  set nomodified
+  execute "setlocal filetype=" . s:fileType
+  setlocal nomodified
   setlocal buftype=nofile
   setlocal bufhidden=hide
   setlocal noswapfile
@@ -33,17 +33,47 @@ function! ShowSvnCurrDiff(filename)
   let g:currentRepoPrefix = ChompedSystem(s:cmdName)
 endfunction
 
+function! ShowSvnStatus()
+  let s:temp_name = "__svn_status"
+  if bufexists(s:temp_name)
+    execute "bd! " . s:temp_name
+  endif
+  execute "tabnew " . s:temp_name
+  let s:cmdName = "svn status"
+  if filereadable ("./.branch_name")
+    let s:branch = system("cat .branch_name")
+    execute "lcd " . s:branch
+  else
+    0r "!echo no .branch file"
+  endif
+  silent execute "0r !" . s:cmdName
+  setlocal nomodified
+  setlocal buftype=nofile
+  setlocal bufhidden=hide
+  setlocal noswapfile
+  execute ":Clam svn diff"
+  execute "normal gg"
+  execute "wincmd h"
+  execute "normal gg"
+  silent execute ":MarkClear"
+  silent execute ":Mark ^?"
+  silent execute ":Mark ^M"
+  silent execute "/^M"
+  silent execute "normal w"
+endfunction
+
+nnoremap gwb :call ShowSvnCurrDiff(expand("<cWORD>"))<CR>
+
 function! DoSvnAnnotate(filename)
-  let g:currentLoggedSVNFile = a:filename
   let s:filename_t = expand("%:t")
   let s:filename_h = expand("%:h")
   let s:temp_name = "__anno__" . s:filename_t
+  let s:lnum = line(".")
   execute "tabnew " . a:filename
   if bufexists(s:temp_name)
           execute "bd! " . s:temp_name
   endif
-  let s:lnum = line(".")
-  echo "Current line " s:lnum
+  echom "Current line " s:lnum
   setlocal scrollbind
   let s:size = winwidth(0) * 1/4
   execute "vsplit " . s:temp_name
@@ -81,6 +111,8 @@ function! DoSvnLogRevision(revision)
   setlocal noswapfile
   execute "normal gg"
 endfunction
+
+command! -nargs=1 SVNShowRev call DoSvnLogRevision(<f-args>)
 
 function! ShowSvnRevDiff(filename)
   " step-1: Get the left side revision number

@@ -103,24 +103,38 @@ gh - enter select mode              (Rebound to unitish operations)
 gl - none                           (Bound to FZF)
 gq - format motion.(can use visual+= instead)
 gw - format motion.
-   gww                              (Bound to :update)
+   gwa        Available
+   gwb        Available
    gwc                              ( close window)
+   gwd                              diffoff
    gwe                              (NerdTreeFind)
+   gwf        Available
+   gwg                              (Bound to gitGuttter disable)
    gwh                              ( gw h,j,k,l -> window movements)
-   gwj
-   gwk
-   gwl
+   gwi        Available
+   gwj                              ( gw h,j,k,l -> window movements)
+   gwk                              ( gw h,j,k,l -> window movements)
+   gwl                              ( gw h,j,k,l -> window movements)
+   gwm        Available
    gwn                              (Bound to number/relative number toggle)
    gwo                              (Bound to Zoomwin)
-   gwt                              (New tab)
-   gwg                              (Bound to gitGuttter disable)
+   gwp        Available
+   gwq        Available
    gwr                              (set wrap toggle)
+   gws                              (set to horizontal window split)     # remember and use this
+   gwt                              (New tab)                            # remember and use this
+   gwu        Available
+   gwv                              (set to vertical window split)       # remember and use this
+   gww                              (Bound to :update)
+   gwx        Available
+   gwy        Available
+   gwz        Available
+
    gwH                              ( gw H,J,K,L -> window close operations)
    gwJ
    gwK
    gwL
    gwS                              (set spell toggle)
-   gwd                              diffoff
 gx - netrw stuff                    (Bound to cscope operations)
 gy - none                           (Bound to set pastetoggle)
 gz - none                           (Bound to solarized toggle bg)
@@ -624,3 +638,14 @@ Modifiers:
 
 eg:
 expand("<cWORD>")
+
+
+vimscript
+---------
+
+#get output of a command into a varilable
+let varName = system("command with args in a single string")
+
+#echo messagnes and show them
+echom "message"
+messages

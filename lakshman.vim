@@ -283,10 +283,14 @@ endfunction
 nmap gO <Esc>:call GotoTagLastName()<CR>
 
 if !exists("*ReloadConfigs")
+  "The above safeguard is necessary as otherwise
+  "  the function can't reload itself while in
+  "  execution!
   function! ReloadConfigs()
     execute "source ~/.vimrc"
     execute "source ~/.vim/plugin/lakshman.vim"
     if filereadable("~/.vim/plugin/svn_lakshman.vim")
+       echom "Reading svn too"
        execute "source ~/.vim/plugin/svn_lakshman.vim"
     endif
   endfunction
