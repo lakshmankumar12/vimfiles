@@ -274,6 +274,7 @@ set list
 " Unite
 autocmd FileType unite imap <buffer> <Leader>x <Plug>(unite_exit)
 autocmd FileType unite imap <buffer> kj <Esc>
+nnoremap ghb <Esc>:set nopaste<CR><Esc>:Unite -ignorecase buffer<CR>
 nnoremap gho <Esc>:set nopaste<CR><Esc>:Unite -start-insert -ignorecase buffer file file_mru<CR>
 nnoremap ghO <Esc>:set nopaste<CR><Esc>:Unite -start-insert -ignorecase buffer file file_rec file_mru<CR>
 nnoremap gh/ <Esc>:set nopaste<CR><Esc>:Unite -start-insert -ignorecase line<CR>
