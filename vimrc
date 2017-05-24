@@ -129,6 +129,12 @@ function! DumpToTmuxClipBoard()
   call system("tmux loadb -", getreg("\""))
 endfunction
 
+function! DumpPwdToTmuxClipBoard()
+  "call writefile(split(@","\n"), '/dev/clipboard')
+  call system("tmux loadb -", getcwd())
+endfunction
+map gwp   <Esc>:call DumpPwdToTmuxClipBoard()<CR>
+
 function! DumpToClipBoard()
   if s:uname == "Darwin"
     call system("pbcopy -pboard general", getreg("\""))
@@ -220,15 +226,15 @@ let g:airline#extensions#tagbar#enabled = 1
 let g:airline#extensions#tagbar#flags = 'f'
 let g:airline_powerline_fonts=1
 let g:airline#extensions#default#section_truncate_width = {
-      \ 'a': 20,
+      \ 'a': 30,
       \ 'b': 100,
       \ 'c': 20,
       \ 'gutter': 100,
       \ 'x': 20,
       \ 'y': 100,
-      \ 'z': 20,
-      \ 'warning': 100,
-      \ 'error': 100,
+      \ 'z': 30,
+      \ 'warning': 120,
+      \ 'error': 120,
       \ }
 let g:airline_theme='solarized'
 function! AirlineThemePatch(palette)

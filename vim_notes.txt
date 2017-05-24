@@ -120,7 +120,7 @@ gw - format motion.
    gwm        Available
    gwn                              (Bound to number/relative number toggle)
    gwo                              (Bound to Zoomwin)
-   gwp        Available
+   gwp                              DumpPwdToTmuxClipBoard
    gwq        Available
    gwr                              (set wrap toggle)
    gws                              (set to horizontal window split)     # remember and use this

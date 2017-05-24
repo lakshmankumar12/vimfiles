@@ -24,6 +24,10 @@ nmap gwj          <C-w>j
 nmap gwk          <C-w>k
 nmap gwl          <C-w>l
 nmap gw=          <C-w>=
+nmap gw\|         <C-w>\|
+nmap gw_          <C-w>_
+nmap gw<          <C-w><
+nmap gw>          <C-w>>
 nmap gwc          <C-w>c
 nmap gwv          <C-w>v
 nmap gws          <C-w>s
