@@ -119,8 +119,9 @@ function! ShowSvnRevDiff(filename)
   " step-1: Get the left side revision number
   let s:cmdName = "echo " . a:filename . " | sed 's#^/[^/]*/[^/]*/##'"
   let s:svn_file_arg_latter = ChompedSystem(s:cmdName)
-  let s:svn_file_arg = g:currentRepoPrefix . s:svn_file_arg_latter
+  let s:svn_file_arg = g:currentRepoPrefix . "/" . s:svn_file_arg_latter
   let s:cmdName = "svn diff -c" . g:currentLoggedSVNRev . " " . s:svn_file_arg . " > /tmp/svn_plugin.patch"
+  echom "command is " . s:cmdName
   call system(s:cmdName)
   let s:cmdName = "head -n 3 /tmp/svn_plugin.patch | grep -E -o 'revision [[:digit:]]+' | cut -d' ' -f2"
   let s:left_rev = ChompedSystem(s:cmdName)
