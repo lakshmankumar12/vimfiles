@@ -613,6 +613,16 @@ p     -> go to parent
 ?     -> close in case you accidentally opened help with ?
 R     -> refresh
 
+My SVN plug
+-----------
+
+:SVNDiff     " with a file .. will diff the current changes
+:SVNAnno     " with a file .. will annotate the file
+:SVNRev      " in annotate window (or on a revision word) .. will get the rev on a window
+:SVNShowRev  " Anywhere .. asks a revision number and shows it..
+:SVNRDiff    " in a rev-window on a file .. shows the changes of that one file
+:SVNStatus   " Anywhere .. shows the svn status
+
 
 
 help expand
@@ -651,3 +661,5 @@ let varName = system("command with args in a single string")
 #echo messagnes and show them
 echom "message"
 messages
+
+
