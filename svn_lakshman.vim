@@ -4,6 +4,7 @@ com! SVNAnno   call DoSvnAnnotate(expand("%:p"))
 com! SVNRev    call DoSvnLogRevision(expand("<cWORD>"))
 com! SVNRDiff  call ShowSvnRevDiff(expand("<cWORD>"))
 com! SVNStatus call ShowSvnStatus()
+com! -nargs=* SVNLog  call ShowSvnLog(<f-args>)
 
 function! ShowSvnCurrDiff(filename)
   let s:fileType = &ft
@@ -168,3 +169,31 @@ function! ShowSvnRevDiff(filename)
   execute "normal zz"
 endfunction
 
+function! ShowSvnLog(...)
+  let s:temp_name = "__svn_log"
+  if bufexists(s:temp_name)
+    execute "bd! " . s:temp_name
+  endif
+  execute "tabnew " . s:temp_name
+  if filereadable ("./.branch_name")
+    let s:branch = system("cat .branch_name")
+    execute "lcd " . s:branch
+  else
+    0r "!echo no .branch file"
+  endif
+  setlocal nomodified
+  setlocal buftype=nofile
+  setlocal bufhidden=hide
+  setlocal noswapfile
+  let l:num = ( a:0 >= 1 ) ? a:1 : 10
+  echom "num is " . l:num
+  execute ":Clam svn log -l " . l:num
+  execute "wincmd l"
+  let l:cmd = "%s/^r\\(\\d\\)/ \\1/"
+  silent execute l:cmd
+  if !exists('g:currentRepoPrefix')
+    " Lets save our URL prepend for later use
+    let s:cmdName = "svn info . | grep URL: | cut -d' ' -f2 | sed 's#\\(.*branches/[^/]*/\\).*#\\1#' "
+    let g:currentRepoPrefix = ChompedSystem(s:cmdName)
+  endif
+endfunction
