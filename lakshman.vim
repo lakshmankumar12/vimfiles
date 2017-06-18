@@ -44,6 +44,13 @@ nmap gwn          <Esc>:set relativenumber!<CR>:set nu!<CR>
 nmap gwr          <Esc>:set wrap!<CR>
 nmap gwd          <Esc>:diffoff<CR>
 
+if has('nvim')
+  nmap gwT        <Esc>:tabnew \| terminal<CR>
+  nmap gwV        <Esc>:vsplit \| terminal<CR>
+  tnoremap kj     <C-\><C-n>
+  tnoremap <expr> <C-\><C-R> '<C-\><C-N>"'.nr2char(getchar()).'pi'
+endif
+
 "cscope'ish
 nmap gxs :cs find s <C-R>=expand("<cword>")<CR><CR>
 nmap gxg :cs find g <C-R>=expand("<cword>")<CR><CR>
@@ -65,6 +72,8 @@ nmap gB           <Esc>:FzfBuffers<CR>
 call togglebg#map("gz")
 imap kj           <Esc>
 cmap kj           <Esc>
+imap jk           <Esc>
+cmap jk           <Esc>
 nmap gp           <Esc>p`[
 nmap gP           <Esc>"+P
 nmap gC           <Esc>:execute ":normal a" . system("tmux saveb -")<CR>

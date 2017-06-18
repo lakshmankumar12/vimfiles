@@ -26,7 +26,11 @@ Plugin 'vim-scripts/OmniCppComplete'          " c-based language auto-complete
 Plugin 'vim-airline/vim-airline'              " look and feel with powerline-ish fonts
 Plugin 'vim-airline/vim-airline-themes'       " More themese for airline
 Plugin 'majutsushi/tagbar'                    " Enables the c-function names with g:airline#extensions#tagbar#enabled below.
-Plugin 'rking/ag.vim'                         " Brings :Ag :LAg commands and silver-searcher
+if has('nvim')
+  Plugin 'Numkil/ag.nvim'
+else
+  Plugin 'rking/ag.vim'                         " Brings :Ag :LAg commands and silver-searcher
+endif
 Plugin 'Shougo/vimproc.vim'                   " Needed for unite
 Plugin 'vim-scripts/AnsiEsc.vim'              " To view files having ansi-esc chars.
 Plugin 'airblade/vim-gitgutter'               " Puts up a line(gutter) in the left column with git-ish information
@@ -56,8 +60,8 @@ Plugin 'thinca/vim-textobj-between'           " between a char if af
 Plugin 'vim-scripts/vis'                      " search/replace in visual-block
 Plugin 'svermeulen/vim-easyclip'              " black-hole cut-paste
 Plugin 'ryanoasis/vim-devicons'               " super-duper fonts
-"Plugin 'juneedahamed/svnj.vim'                " svn plugin
 Plugin 'vim-scripts/iptables'                 " iptables filetype
+Plugin 'vim-scripts/listmaps.vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -287,6 +291,30 @@ nnoremap gh/ <Esc>:set nopaste<CR><Esc>:Unite -start-insert -ignorecase line<CR>
 nnoremap ghr <Esc>:set nopaste<CR><Esc>:UniteResume<CR>
 nnoremap gh? <Esc>:set nopaste<CR><Esc>:Unite -start-insert -ignorecase -no-quit -keep-focus line<CR>
 nnoremap ghy <Esc>:set nopaste<CR><Esc>:Unite -start-insert -ignorecase register history/yank<CR>
+
+if filereadable ("../cscope.out")
+  execute "cs add ../cscope.out .."
+endif
+if filereadable ("../others.out")
+  execute "cs add ../others.out .."
+endif
+if filereadable ("others.out")
+  execute "cs add others.out"
+endif
+
+if has('nvim')
+  execute "source ~/.vim/plugin/lakshman.vim"
+  execute "source ~/.vim/plugin/sn_git.vim"
+  execute "source ~/.vim/plugin/gitlsfiles.vim"
+  let g:terminal_scrollback_buffer_size = 1000000
+  set timeout               " wait for 1s for keymaps
+  let g:terminus_default_prompt = '$'
+  let g:python_host_prog = '~/bin/python2.7'
+  let g:python3_host_prog = '~/bin/python3'
+endif
+
+let g:ag_apply_lmappings = 0
+let g:ag_apply_qmappings = 0
 
 " DONT TYPE ANYTHING HERE SO THAT CENTOS-BRANCH CAN
 " SAFELY ADD ITS OVERRIDES WITHOUT ISSUES

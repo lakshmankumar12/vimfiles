@@ -96,7 +96,7 @@ gb - some netrw bookmark            (copy to system cliboard)
 gc - none                           (Tmux paste at new line) (gC is for paste wherever you are)
 gh - enter select mode              (Rebound to unitish operations)
   ghb                             buffer
-  gho                             buffer file file_rec
+  gho                             buffer file file_mru
   ghO                             buffer file file_rec file_mru
   gh/                             line
   ghy                             history/yank
@@ -547,12 +547,13 @@ end files in .org
 Multiple Highlight
 ------------------
 
-\m  to highlight current word
-\r  to get prompt and enter regex
-:MarkClear to reset everything
-\*  to go to the next occurence of last mark. If you do this on a marked word,
-    that becomes the last mark.
-\/  to any mark
+\m             to highlight current word
+\r             to get prompt and enter regex
+:MarkClear     to reset everything
+\*,\#          to go to the next occurence of last mark. If you do this on a marked word,
+               that becomes the last mark.
+\/,\?          to any mark
+               (Mnemonic: * and # are complements, / and ? are complements. * is for narrower/sharper search)
 
 Spell check
 ----------
