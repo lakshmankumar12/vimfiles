@@ -416,6 +416,13 @@ nmap <Leader>hn   :q<CR><C-w>P<C-n>
 nmap <Leader>hp   :q<CR><C-w>P<C-p>
 nmap <Leader>gfunc    <Esc>:call FindFunctionFromTags()<CR>
 
+Cscope
+------
+
+the direct invocation is        :     gx         ,and the cscope-char
+Quickfix invocation is          :     <Leader>cs ,and the cscope-char
+                                         (remember \css, \csg, \csc rarely will use reset)
+
 Vim text object selectors
 --------------------------
 
@@ -532,7 +539,11 @@ Fold Management
 
 zR/zM  -> open-all-folds/close-all-folds
 zo/zc  -> open/close jsut one fold
+zr/zm  -> open/close fold level by one
 zO     -> open all folds in cursor recursively
+
+zj/zk  -> up/down to prev/next fold
+[z/]z  -> start/end of current fold
 
 Org mode
 --------

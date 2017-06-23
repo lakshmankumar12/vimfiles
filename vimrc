@@ -61,7 +61,11 @@ Plugin 'vim-scripts/vis'                      " search/replace in visual-block
 Plugin 'svermeulen/vim-easyclip'              " black-hole cut-paste
 Plugin 'ryanoasis/vim-devicons'               " super-duper fonts
 Plugin 'vim-scripts/iptables'                 " iptables filetype
-Plugin 'vim-scripts/listmaps.vim'
+Plugin 'vim-scripts/listmaps.vim'             " Provides :Listmaps , very useful to see which plugin set a map
+if has('nvim')
+  Plugin 'wbthomason/buildit.nvim'            " :Buildit .. async making
+  Plugin 'jalvesaq/vimcmdline'                " Run lines individuall from a file
+endif
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -306,7 +310,7 @@ if has('nvim')
   execute "source ~/.vim/plugin/lakshman.vim"
   execute "source ~/.vim/plugin/sn_git.vim"
   execute "source ~/.vim/plugin/gitlsfiles.vim"
-  let g:terminal_scrollback_buffer_size = 1000000
+  set scrollback=100000
   set timeout               " wait for 1s for keymaps
   let g:terminus_default_prompt = '$'
   let g:python_host_prog = '~/bin/python2.7'
@@ -315,6 +319,13 @@ endif
 
 let g:ag_apply_lmappings = 0
 let g:ag_apply_qmappings = 0
+
+"cmdline.nvim
+let cmdline_app           = {}
+let cmdline_app["python"] = "python3"
+
+let g:xml_syntax_folding=1
+au FileType xml setlocal foldmethod=syntax
 
 " DONT TYPE ANYTHING HERE SO THAT CENTOS-BRANCH CAN
 " SAFELY ADD ITS OVERRIDES WITHOUT ISSUES
