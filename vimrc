@@ -49,7 +49,11 @@ Plugin 'vim-scripts/Mark--Karkat'             " Multiple color search
 Plugin 'tpope/vim-speeddating'                " Pre-req for vim-orgmode
 Plugin 'jceb/vim-orgmode'                     " Org style
 Plugin 'guns/xterm-color-table.vim'           " :XtermColorTable -- help to know color numbers
-Plugin 'Shougo/unite.vim'                     " :Unite
+if has('nvim')
+  Plugin 'Shougo/denite.nvim'                 " :Denite
+else
+  Plugin 'Shougo/unite.vim'                   " :Unite
+endif
 Plugin 'Shougo/neomru.vim'                    " :for file_mru option in Unite
 Plugin 'Shougo/neoyank.vim'                   " :Unite history/yank
 Plugin 'kana/vim-textobj-user'                " pre-req for indent/line
@@ -62,7 +66,9 @@ Plugin 'svermeulen/vim-easyclip'              " black-hole cut-paste
 Plugin 'ryanoasis/vim-devicons'               " super-duper fonts
 Plugin 'vim-scripts/iptables'                 " iptables filetype
 Plugin 'vim-scripts/listmaps.vim'             " Provides :Listmaps , very useful to see which plugin set a map
+Plugin 'Yggdroot/indentLine'                  " show lines for indenting
 if has('nvim')
+  Plugin 'Shougo/deoplete.nvim'               " Auto-completion
   Plugin 'wbthomason/buildit.nvim'            " :Buildit .. async making
   Plugin 'jalvesaq/vimcmdline'                " Run lines individuall from a file
 endif
@@ -288,13 +294,23 @@ set list
 " Unite
 autocmd FileType unite imap <buffer> <Leader>x <Plug>(unite_exit)
 autocmd FileType unite imap <buffer> kj <Esc>
-nnoremap ghb <Esc>:set nopaste<CR><Esc>:Unite -ignorecase buffer<CR>
-nnoremap gho <Esc>:set nopaste<CR><Esc>:Unite -start-insert -ignorecase buffer file file_mru<CR>
-nnoremap ghO <Esc>:set nopaste<CR><Esc>:Unite -start-insert -ignorecase buffer file file_rec file_mru<CR>
-nnoremap gh/ <Esc>:set nopaste<CR><Esc>:Unite -start-insert -ignorecase line<CR>
-nnoremap ghr <Esc>:set nopaste<CR><Esc>:UniteResume<CR>
-nnoremap gh? <Esc>:set nopaste<CR><Esc>:Unite -start-insert -ignorecase -no-quit -keep-focus line<CR>
-nnoremap ghy <Esc>:set nopaste<CR><Esc>:Unite -start-insert -ignorecase register history/yank<CR>
+if has('nvim')
+  nnoremap ghb <Esc>:set nopaste<CR><Esc>:Denite -ignorecase buffer<CR>
+  nnoremap gho <Esc>:set nopaste<CR><Esc>:Denite -ignorecase buffer file file_mru<CR>
+  nnoremap ghO <Esc>:set nopaste<CR><Esc>:Denite -ignorecase buffer file file_rec file_mru<CR>
+  nnoremap gh/ <Esc>:set nopaste<CR><Esc>:Denite -ignorecase line<CR>
+  nnoremap ghr <Esc>:set nopaste<CR><Esc>:DeniteResume<CR>
+  nnoremap gh? <Esc>:set nopaste<CR><Esc>:Denite -ignorecase -no-quit -keep-focus line<CR>
+  nnoremap ghy <Esc>:set nopaste<CR><Esc>:Denite -ignorecase register history/yank<CR>
+else
+  nnoremap ghb <Esc>:set nopaste<CR><Esc>:Unite -ignorecase buffer<CR>
+  nnoremap gho <Esc>:set nopaste<CR><Esc>:Unite -start-insert -ignorecase buffer file file_mru<CR>
+  nnoremap ghO <Esc>:set nopaste<CR><Esc>:Unite -start-insert -ignorecase buffer file file_rec file_mru<CR>
+  nnoremap gh/ <Esc>:set nopaste<CR><Esc>:Unite -start-insert -ignorecase line<CR>
+  nnoremap ghr <Esc>:set nopaste<CR><Esc>:UniteResume<CR>
+  nnoremap gh? <Esc>:set nopaste<CR><Esc>:Unite -start-insert -ignorecase -no-quit -keep-focus line<CR>
+  nnoremap ghy <Esc>:set nopaste<CR><Esc>:Unite -start-insert -ignorecase register history/yank<CR>
+endif
 
 if filereadable ("../cscope.out")
   execute "cs add ../cscope.out .."
@@ -313,8 +329,8 @@ if has('nvim')
   set scrollback=100000
   set timeout               " wait for 1s for keymaps
   let g:terminus_default_prompt = '$'
-  let g:python_host_prog = '~/bin/python2.7'
-  let g:python3_host_prog = '~/bin/python3'
+  let g:python_host_prog = '/home/lakshman_narayanan/bin/python2.7'
+  let g:python3_host_prog = '/home/lakshman_narayanan/bin/python3'
 endif
 
 let g:ag_apply_lmappings = 0
@@ -324,8 +340,14 @@ let g:ag_apply_qmappings = 0
 let cmdline_app           = {}
 let cmdline_app["python"] = "python3"
 
+"start deoplete
+let g:deoplete#enable_at_startup = 1
+
 let g:xml_syntax_folding=1
 au FileType xml setlocal foldmethod=syntax
+
+"indentLine
+let g:indentLine_char='┆'
 
 " DONT TYPE ANYTHING HERE SO THAT CENTOS-BRANCH CAN
 " SAFELY ADD ITS OVERRIDES WITHOUT ISSUES
