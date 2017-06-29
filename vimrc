@@ -69,6 +69,8 @@ Plugin 'vim-scripts/listmaps.vim'             " Provides :Listmaps , very useful
 Plugin 'Yggdroot/indentLine'                  " show lines for indenting
 if has('nvim')
   Plugin 'Shougo/deoplete.nvim'               " Auto-completion
+  Plugin 'zchee/deoplete-clang'               " c,c++ autocomplete
+  Plugin 'zchee/deoplete-jedi'                " python autocomplete
   Plugin 'wbthomason/buildit.nvim'            " :Buildit .. async making
   Plugin 'jalvesaq/vimcmdline'                " Run lines individuall from a file
 endif
@@ -89,7 +91,7 @@ filetype plugin indent on    " required
 " Put your non-Plugin stuff after this line
 "
 set tabstop=4
-set shiftwidth=2
+set shiftwidth=4
 set sidescroll=1
 set grepprg=fgrep\ -n
 if !has('nvim')
@@ -137,6 +139,7 @@ au FileType make setlocal noexpandtab
 au FileType go setlocal nolist
 
 let s:uname = system("echo -n \"$(uname)\"")
+let g:my_home = $HOME
 
 function! DumpToTmuxClipBoard()
   "call writefile(split(@","\n"), '/dev/clipboard')
@@ -280,9 +283,9 @@ set completeopt-=preview
 " Reset the listchars - This is a native vim setting
 set listchars=""
 " make tabs visible
-set listchars=tab:▸▸
+set listchars=tab:⇢…
 " show trailing spaces as dots
-set listchars+=trail:•
+set listchars+=trail:‧
 " The character to show in the last column when wrap is off and the line
 " continues beyond the right of the screen
 set listchars+=extends:>
@@ -323,14 +326,14 @@ if filereadable ("others.out")
 endif
 
 if has('nvim')
-  execute "source ~/.vim/plugin/lakshman.vim"
-  execute "source ~/.vim/plugin/sn_git.vim"
-  execute "source ~/.vim/plugin/gitlsfiles.vim"
+  execute "source " . g:my_home . "/.vim/plugin/lakshman.vim"
+  execute "source " . g:my_home . "/.vim/plugin/sn_git.vim"
+  execute "source " . g:my_home . "/.vim/plugin/gitlsfiles.vim"
   set scrollback=100000
   set timeout               " wait for 1s for keymaps
   let g:terminus_default_prompt = '$'
-  let g:python_host_prog = '/home/lakshman_narayanan/bin/python2.7'
-  let g:python3_host_prog = '/home/lakshman_narayanan/bin/python3'
+  let g:python_host_prog = g:my_home . '/bin/python2.7'
+  let g:python3_host_prog = g:my_home . '/bin/python3'
 endif
 
 let g:ag_apply_lmappings = 0
@@ -342,6 +345,9 @@ let cmdline_app["python"] = "python3"
 
 "start deoplete
 let g:deoplete#enable_at_startup = 1
+let g:deoplete#sources#clang#libclang_path=g:my_home . '/install/clang/local/lib.hide/libclang.so.3.6'
+let g:deoplete#sources#clang#clang_header=g:my_home . '/install/clang/local/include/clang'
+let g:deoplete#sources#jedi#python_path=g:my_home . '/bin/python3'
 
 let g:xml_syntax_folding=1
 au FileType xml setlocal foldmethod=syntax

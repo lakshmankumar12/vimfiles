@@ -128,7 +128,7 @@ gw - format motion.
    gwu        Available
    gwv                              (set to vertical window split)       # remember and use this
    gww                              (Bound to :update)
-   gwx        Available
+   gwx                              (set list toggle)
    gwy        Available
    gwz        Available
 
@@ -565,6 +565,13 @@ Multiple Highlight
                that becomes the last mark.
 \/,\?          to any mark
                (Mnemonic: * and # are complements, / and ? are complements. * is for narrower/sharper search)
+
+Denite/Unite movement
+---------------------
+
+ctrl-o to enter normal mode
+i to come back to insert
+
 
 Spell check
 ----------
