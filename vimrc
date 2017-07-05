@@ -19,10 +19,8 @@ Plugin 'Xuyuanp/nerdtree-git-plugin'          " Show gittish info when nerd-tree
 Plugin 'justinmk/vim-sneak'                   " goto any location using s<char>
 Plugin 'jiangmiao/auto-pairs'                 " for automatically adding braces
 Plugin 'tmhedberg/matchit'                    " % given a new life
-Plugin 'easymotion/vim-easymotion'              " <Leader>hjkl
+Plugin 'easymotion/vim-easymotion'            " <Leader>hjkl
 Plugin 'vim-scripts/python_match.vim'         " % for if/elif/else, try/except/catch in py. Also use [% to go to start of block 
-Plugin 'sjl/clam.vim'                         " Clam shellcmd
-Plugin 'vim-scripts/OmniCppComplete'          " c-based language auto-complete
 Plugin 'vim-airline/vim-airline'              " look and feel with powerline-ish fonts
 Plugin 'vim-airline/vim-airline-themes'       " More themese for airline
 Plugin 'majutsushi/tagbar'                    " Enables the c-function names with g:airline#extensions#tagbar#enabled below.
@@ -31,12 +29,9 @@ if has('nvim')
 else
   Plugin 'rking/ag.vim'                         " Brings :Ag :LAg commands and silver-searcher
 endif
-Plugin 'Shougo/vimproc.vim'                   " Needed for unite
 Plugin 'vim-scripts/AnsiEsc.vim'              " To view files having ansi-esc chars.
 Plugin 'airblade/vim-gitgutter'               " Puts up a line(gutter) in the left column with git-ish information
 Plugin 'scrooloose/nerdcommenter'             " Comment/remove-comment blocks quickly
-"Plugin 'Valloric/YouCompleteMe'
-"Plugin 'ternjs/tern_for_vim'
 Plugin 'junegunn/fzf.vim'                     " :Fzf and other commands
 Plugin 'altercation/vim-colors-solarized'     " Solarized vim
 Plugin 'regedarek/ZoomWin'                    " Close other windows and re-open them again
@@ -52,6 +47,7 @@ Plugin 'guns/xterm-color-table.vim'           " :XtermColorTable -- help to know
 if has('nvim')
   Plugin 'Shougo/denite.nvim'                 " :Denite
 else
+  Plugin 'Shougo/vimproc.vim'                 " Needed for unite
   Plugin 'Shougo/unite.vim'                   " :Unite
 endif
 Plugin 'Shougo/neomru.vim'                    " :for file_mru option in Unite
@@ -69,10 +65,14 @@ Plugin 'vim-scripts/listmaps.vim'             " Provides :Listmaps , very useful
 Plugin 'Yggdroot/indentLine'                  " show lines for indenting
 if has('nvim')
   Plugin 'Shougo/deoplete.nvim'               " Auto-completion
+  Plugin 'Shougo/echodoc.vim'                 " Show function in echo-line
   Plugin 'zchee/deoplete-clang'               " c,c++ autocomplete
   Plugin 'zchee/deoplete-jedi'                " python autocomplete
   Plugin 'wbthomason/buildit.nvim'            " :Buildit .. async making
   Plugin 'jalvesaq/vimcmdline'                " Run lines individuall from a file
+else
+  Plugin 'sjl/clam.vim'                       " Clam shellcmd
+  Plugin 'vim-scripts/OmniCppComplete'        " c-based language auto-complete
 endif
 
 " All of your Plugins must be added before the following line
@@ -106,6 +106,7 @@ set lbr
 set laststatus=2
 set nu
 set relativenumber
+set noshowmode
 
 map <Leader>mai i#include<stdio.h><CR><CR>int main(int argc,char *argv[],char *envp[])<CR>{<CR><CR>}<CR><Esc>kka<Tab>
 map <Leader>cmai i#include<iostream><CR><CR>using namespace std;<CR><CR>int main(int argc,char *argv[],char *envp[])<CR>{<CR><CR>return 0;<CR>}<CR><Esc>kka<Tab>
@@ -353,6 +354,7 @@ else
     let g:deoplete#sources#clang#clang_header=g:my_home . '/install/clang/local/include/clang'
 endif
 let g:deoplete#sources#jedi#python_path=g:my_home . '/bin/python3'
+let g:echodoc#enable_at_startup = 1
 
 let g:xml_syntax_folding=1
 au FileType xml setlocal foldmethod=syntax
