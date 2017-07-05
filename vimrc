@@ -345,8 +345,13 @@ let cmdline_app["python"] = "python3"
 
 "start deoplete
 let g:deoplete#enable_at_startup = 1
-let g:deoplete#sources#clang#libclang_path=g:my_home . '/install/clang/local/lib.hide/libclang.so.3.6'
-let g:deoplete#sources#clang#clang_header=g:my_home . '/install/clang/local/include/clang'
+if s:uname == "Darwin"
+    let g:deoplete#sources#clang#libclang_path='/usr/local/opt/llvm/lib/libclang.dylib'
+    let g:deoplete#sources#clang#clang_header='/usr/local/opt/llvm/include'
+else
+    let g:deoplete#sources#clang#libclang_path=g:my_home . '/install/clang/local/lib.hide/libclang.so.3.6'
+    let g:deoplete#sources#clang#clang_header=g:my_home . '/install/clang/local/include/clang'
+endif
 let g:deoplete#sources#jedi#python_path=g:my_home . '/bin/python3'
 
 let g:xml_syntax_folding=1
