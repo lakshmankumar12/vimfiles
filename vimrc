@@ -250,8 +250,8 @@ let g:airline#extensions#default#section_truncate_width = {
       \ 'x': 20,
       \ 'y': 100,
       \ 'z': 30,
-      \ 'warning': 120,
-      \ 'error': 120,
+      \ 'warning': 200,
+      \ 'error': 200,
       \ }
 let g:airline_theme='solarized'
 function! AirlineThemePatch(palette)
@@ -283,9 +283,9 @@ set completeopt-=preview
 " Reset the listchars - This is a native vim setting
 set listchars=""
 " make tabs visible
-set listchars=tab:⇢…
+set listchars=tab:⇢‧
 " show trailing spaces as dots
-set listchars+=trail:‧
+set listchars+=trail:…
 " The character to show in the last column when wrap is off and the line
 " continues beyond the right of the screen
 set listchars+=extends:>
