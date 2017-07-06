@@ -63,7 +63,7 @@ Plugin 'ryanoasis/vim-devicons'               " super-duper fonts
 Plugin 'vim-scripts/iptables'                 " iptables filetype
 Plugin 'vim-scripts/listmaps.vim'             " Provides :Listmaps , very useful to see which plugin set a map
 Plugin 'Yggdroot/indentLine'                  " show lines for indenting
-Plugin 'davidhalter/jedi-vim'                 " python goto definition
+Plugin 'lakshmankumar12/jedi-vim'             " python goto definition
 if has('nvim')
   Plugin 'Shougo/deoplete.nvim'               " Auto-completion
   Plugin 'Shougo/echodoc.vim'                 " Show function in echo-line
