@@ -231,11 +231,12 @@ endfunction
 
 nmap gW <Esc>:call RemoveTrailWhite()<CR>
 
-function! FlushSearch()
-  execute "/asdfasdfsafsd"
+function! SearchCommandsTerm()
+  execute "normal ? "
+  let @/ = " "
 endfunction
 
-nmap gX <Esc>:call FlushSearch()<CR>
+nmap gX <Esc>:call SearchCommandsTerm()<CR>
 
 
 imap <c-x><c-l> <plug>(fzf-complete-line)

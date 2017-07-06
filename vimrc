@@ -63,6 +63,7 @@ Plugin 'ryanoasis/vim-devicons'               " super-duper fonts
 Plugin 'vim-scripts/iptables'                 " iptables filetype
 Plugin 'vim-scripts/listmaps.vim'             " Provides :Listmaps , very useful to see which plugin set a map
 Plugin 'Yggdroot/indentLine'                  " show lines for indenting
+Plugin 'davidhalter/jedi-vim'                 " python goto definition
 if has('nvim')
   Plugin 'Shougo/deoplete.nvim'               " Auto-completion
   Plugin 'Shougo/echodoc.vim'                 " Show function in echo-line
@@ -70,6 +71,7 @@ if has('nvim')
   Plugin 'zchee/deoplete-jedi'                " python autocomplete
   Plugin 'wbthomason/buildit.nvim'            " :Buildit .. async making
   Plugin 'jalvesaq/vimcmdline'                " Run lines individuall from a file
+  Plugin 'lyuts/vim-rtags'                    " rtags client
 else
   Plugin 'sjl/clam.vim'                       " Clam shellcmd
   Plugin 'vim-scripts/OmniCppComplete'        " c-based language auto-complete
@@ -152,6 +154,12 @@ function! DumpPwdToTmuxClipBoard()
   call system("tmux loadb -", getcwd())
 endfunction
 map gwp   <Esc>:call DumpPwdToTmuxClipBoard()<CR>
+
+function! DumpFullPathToTmuxClipBoard()
+  "call writefile(split(@","\n"), '/dev/clipboard')
+  call system("tmux loadb -", expand("%:p"))
+endfunction
+map gwq   <Esc>:call DumpFullPathToTmuxClipBoard()<CR>
 
 function! DumpToClipBoard()
   if s:uname == "Darwin"
@@ -335,6 +343,7 @@ if has('nvim')
   let g:terminus_default_prompt = '$'
   let g:python_host_prog = g:my_home . '/bin/python2.7'
   let g:python3_host_prog = g:my_home . '/bin/python3'
+  set shell=$HOME/bin/zsh
 endif
 
 let g:ag_apply_lmappings = 0
@@ -355,6 +364,22 @@ else
 endif
 let g:deoplete#sources#jedi#python_path=g:my_home . '/bin/python3'
 let g:echodoc#enable_at_startup = 1
+
+"jedi-vim
+let g:jedi#auto_vim_configuration = 0
+let g:jedi#goto_assignments_command = ''  " dynamically done for ft=python.
+let g:jedi#goto_definitions_command = ''  " dynamically done for ft=python.
+let g:jedi#use_tabs_not_buffers = 0  " current default is 1.
+let g:jedi#rename_command = '<Leader>gR'
+let g:jedi#usages_command = '<Leader>gu'
+let g:jedi#completions_enabled = 0
+let g:jedi#smart_auto_mappings = 1
+
+" Unite/ref and pydoc are more useful.
+let g:jedi#documentation_command = '<Leader>_K'
+let g:jedi#auto_close_doc = 1
+
+let g:rtagsRcCmd="/home/lakshman_narayanan/install/rtags/rtags-2.10-install/bin/rc"
 
 let g:xml_syntax_folding=1
 au FileType xml setlocal foldmethod=syntax

@@ -45,7 +45,7 @@ $ - end of line
 ( - para begin
 ) - para end
 {} - block navigation
-[] - diff navigation
+[] - diff navigation     (leveraged by git-gutter in normal-mode too!)
 -  forward line  RECLAIM  (Bound to :cprev)
 +  backward line RECLAIM  (Bound to :cnext)
 = - indent
@@ -74,6 +74,7 @@ gm - half g0
 gn - next and visual the word                                      gN   -- backward gn
 go - got to nth byte in buffer
 gp - like p, but leave cursor after pasted text                    gP   -- like P/gp, but P'ed effect  (Reclaimed to paste from clipboard+)
+gq - Format visually chosen text.
 gr - virtual replace (like screen estate useful on file with tabs) gR   -- virt-replace mode
 gs - sleep
 gt - next tab                                                      gT   -- prev tab
@@ -103,7 +104,6 @@ gh - enter select mode              (Rebound to unitish operations)
   ghd                             easy-clip d
   ghD                             easy-clip dd
 gl - none                           (Bound to FZF)
-gq - format motion.(can use visual+= instead)
 gw - format motion.
    gwa        Available
    gwb                              Show SVN Curr Diff
@@ -121,7 +121,7 @@ gw - format motion.
    gwn                              (Bound to number/relative number toggle)
    gwo                              (Bound to Zoomwin)
    gwp                              DumpPwdToTmuxClipBoard
-   gwq        Available
+   gwq                              DumpFullPathToTmuxClipBoard
    gwr                              (set wrap toggle)
    gws                              (set to horizontal window split)     # remember and use this
    gwt                              (New tab)                            # remember and use this
@@ -380,6 +380,25 @@ vmap <Leader>W <Plug>(easymotion-bd-W)
 nmap <Leader>s <Plug>(SneakStreak)
 nmap <Leader>S <Plug>(SneakStreakBackward)
 
+Leader maps from plugins
+------------------------
+
+Org mode
+<Leader>cl/CL   # list item
+<Leader>cn/CN   # check box
+<Leader>cc      # toggle check box
+
+Highlight
+
+<Leader>r
+
+rtags
+
+<Leader>rj
+<Leader>rf
+<Leader>rV
+<Leader>rS
+
 Words
 ~~~~~
 
@@ -397,11 +416,6 @@ nmap <Leader>css         <Esc>:call LoadCscopeToQuickFix(expand("<cword>"),"s")<
 nmap <Leader>csg         <Esc>:call LoadCscopeToQuickFix(expand("<cword>"),"g")<CR>
 nmap <Leader>csc         <Esc>:call LoadCscopeToQuickFix(expand("<cword>"),"c")<CR>
 nnoremap <Leader>gdb  <Esc>:Gdiff base<CR>gg<Esc>:wincmd l<CR>
-
-Org mode
-<Leader>cl/CL   # list item
-<Leader>cn/CN   # check box
-<Leader>cc      # toggle check box
 
 Not that much:
 
