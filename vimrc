@@ -44,6 +44,8 @@ Plugin 'vim-scripts/Mark--Karkat'             " Multiple color search
 Plugin 'tpope/vim-speeddating'                " Pre-req for vim-orgmode
 Plugin 'jceb/vim-orgmode'                     " Org style
 Plugin 'guns/xterm-color-table.vim'           " :XtermColorTable -- help to know color numbers
+Plugin 'sk1418/QFGrep'                        " Filter entries in quickfix
+Plugin 'mtth/scratch.vim'                     " Open up a scratch buffer
 if has('nvim')
   Plugin 'Shougo/denite.nvim'                 " :Denite
 else
