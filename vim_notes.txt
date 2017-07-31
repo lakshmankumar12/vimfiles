@@ -125,11 +125,11 @@ gw - format motion.
    gwr                              (set wrap toggle)
    gws                              (set to horizontal window split)     # remember and use this
    gwt                              (New tab)                            # remember and use this
-   gwu        Available
+   gwu                              (DumpTagToTmuxClip)
    gwv                              (set to vertical window split)       # remember and use this
    gww                              (Bound to :update)
    gwx                              (set list toggle)
-   gwy        Available
+   gwy                              Duplicate buffer in new tab
    gwz        Available
 
    gwH                              ( gw H,J,K,L -> window close operations)
@@ -398,6 +398,13 @@ rtags
 <Leader>rf
 <Leader>rV
 <Leader>rS
+<Leader>rb  - jump back
+
+QFGrep:
+(In quickfix/location-lsit)
+<Leader>g  - grep and show matches
+<Leader>v  - grep and show non-matches
+<Leader>q  - reset
 
 Words
 ~~~~~

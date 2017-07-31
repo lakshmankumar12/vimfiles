@@ -110,6 +110,25 @@ function! GetCommandOutputOnNewTab()
   silent
 endfunction
 
+function! DuplicateCurrentBufferInANewScratchBufferInNewTab()
+  if bufexists("lk_scratch")
+        execute "bd! lk_scratch"
+  endif
+  let s:lnum = line(".")
+  execute ":%y"
+  let l:filetype = &l:filetype
+  execute "tabnew lk_scratch"
+  silent execute "normal p"
+  set nomodified
+  setlocal buftype=nofile
+  setlocal bufhidden=hide
+  setlocal noswapfile
+  let s:cmdName = "normal " . s:lnum . "G"
+  execute s:cmdName
+  let &l:filetype = l:filetype
+endfunction
+nmap gwy         <Esc>:call DuplicateCurrentBufferInANewScratchBufferInNewTab()<CR>
+
 function! ShedM()
   execute "%s///g"
 endfunction

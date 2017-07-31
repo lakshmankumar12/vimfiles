@@ -13,6 +13,7 @@ Plugin 'gmarik/Vundle.vim'
 Plugin 'antiAgainst/cscope-macros.vim'        " Brings in the ctrl-\ <g|s|c> shortcuts
 Plugin 'tpope/vim-repeat'                     " pre-requisite for easyclip
 Plugin 'tpope/vim-fugitive'                   " The awesome git plugin. Period.
+Plugin 'tpope/tpope-vim-abolish'              " substitute rightly. :Abolish, :Subvert, crm/crs
 Plugin 'jreybert/vimagit'                     " :Magit command
 Plugin 'scrooloose/nerdtree'                  " Directory browser
 Plugin 'Xuyuanp/nerdtree-git-plugin'          " Show gittish info when nerd-tree is invoked
@@ -24,6 +25,7 @@ Plugin 'vim-scripts/python_match.vim'         " % for if/elif/else, try/except/c
 Plugin 'vim-airline/vim-airline'              " look and feel with powerline-ish fonts
 Plugin 'vim-airline/vim-airline-themes'       " More themese for airline
 Plugin 'majutsushi/tagbar'                    " Enables the c-function names with g:airline#extensions#tagbar#enabled below.
+Plugin 'vim-scripts/taglist.vim'              " Get a list of tags in a specific file (TlistToggle)
 if has('nvim')
   Plugin 'Numkil/ag.nvim'
 else
@@ -163,6 +165,11 @@ function! DumpFullPathToTmuxClipBoard()
 endfunction
 map gwq   <Esc>:call DumpFullPathToTmuxClipBoard()<CR>
 
+function! DumpTagToTmuxClip()
+    call system("tmux loadb -", tagbar#currenttag('%s', 'No current tag'))
+endfunction
+map gwu   <Esc>:call DumpTagToTmuxClip()<CR>
+
 function! DumpToClipBoard()
   if s:uname == "Darwin"
     call system("pbcopy -pboard general", getreg("\""))
@@ -279,6 +286,9 @@ function! AirlineThemePatch(palette)
     "reddish
     let a:palette.replace.airline_a = [ '#ffffff', '#ff005f', 255, 197 ]
     let a:palette.replace.airline_z = [ '#ffffff', '#ff005f', 255, 197 ]
+    "pinkish
+    let a:palette.terminal.airline_a = [ '#ffffff', '#ff005f', 255, 207 ]
+    let a:palette.terminal.airline_z = [ '#ffffff', '#ff005f', 255, 207 ]
   endif
 endfunction
 let g:airline_theme_patch_func = 'AirlineThemePatch'
