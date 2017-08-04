@@ -155,7 +155,7 @@ gG                         (Bound to tags_*)
 gH                         (Bound to :lprev)
 gK
 gL                         (Bound to :lnext)
-gM
+gM                         (Bound to last-tab)
 gO                         (Bound to GotoTagLastName)
 gP                         (clip-board paste)
 gS                         (Bound to MoveToDefintionOfMember)
@@ -536,6 +536,9 @@ Set vertical scrollbind in 2 splits
 
 :windo setlocal scrollbind
 ctrl-W <size> |   " to fix the vertical size
+
+"To not jump to start of line on scrolling
+:set nosol
 
 Diff
 ----

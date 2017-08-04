@@ -21,6 +21,7 @@ Plugin 'justinmk/vim-sneak'                   " goto any location using s<char>
 Plugin 'jiangmiao/auto-pairs'                 " for automatically adding braces
 Plugin 'tmhedberg/matchit'                    " % given a new life
 Plugin 'easymotion/vim-easymotion'            " <Leader>hjkl
+Plugin 'vim-scripts/PatternComplete'          " ctrl-r+& to paste the matched word instead of pattern
 Plugin 'vim-scripts/python_match.vim'         " % for if/elif/else, try/except/catch in py. Also use [% to go to start of block 
 Plugin 'vim-airline/vim-airline'              " look and feel with powerline-ish fonts
 Plugin 'vim-airline/vim-airline-themes'       " More themese for airline
@@ -113,6 +114,7 @@ set laststatus=2
 set nu
 set relativenumber
 set noshowmode
+set nosol
 
 map <Leader>mai i#include<stdio.h><CR><CR>int main(int argc,char *argv[],char *envp[])<CR>{<CR><CR>}<CR><Esc>kka<Tab>
 map <Leader>cmai i#include<iostream><CR><CR>using namespace std;<CR><CR>int main(int argc,char *argv[],char *envp[])<CR>{<CR><CR>return 0;<CR>}<CR><Esc>kka<Tab>
@@ -326,6 +328,7 @@ if has('nvim')
   nnoremap ghr <Esc>:set nopaste<CR><Esc>:DeniteResume<CR>
   nnoremap gh? <Esc>:set nopaste<CR><Esc>:Denite -ignorecase -no-quit -keep-focus line<CR>
   nnoremap ghy <Esc>:set nopaste<CR><Esc>:Denite -ignorecase register history/yank<CR>
+  let g:zoomwin_localoptlist = ["ai","ar","bh","bin","bl","bomb","bt","cfu","ci","cin","cink","cino","cinw","cms","com","cpt","diff","efm","eol","ep","et","fenc","fex","ff","flp","fo","ft","gp","imi","ims","inde","inex","indk","inf","isk","kmp","lisp","mps","ml","ma","mod","nf","ofu","pi","qe","ro","sw","si","sts","spc","spf","spl","sua","swf","smc","syn","ts","tw","udf","wfh","wfw","wm"]
 else
   nnoremap ghb <Esc>:set nopaste<CR><Esc>:Unite -ignorecase buffer<CR>
   nnoremap gho <Esc>:set nopaste<CR><Esc>:Unite -start-insert -ignorecase buffer file file_mru<CR>
@@ -366,7 +369,7 @@ let cmdline_app           = {}
 let cmdline_app["python"] = "python3"
 
 "start deoplete
-let g:deoplete#enable_at_startup = 1
+let g:deoplete#enable_at_startup = 0
 if s:uname == "Darwin"
     let g:deoplete#sources#clang#libclang_path='/usr/local/opt/llvm/lib/libclang.dylib'
     let g:deoplete#sources#clang#clang_header='/usr/local/opt/llvm/include'
@@ -398,6 +401,11 @@ au FileType xml setlocal foldmethod=syntax
 
 "indentLine
 let g:indentLine_char='┆'
+
+"last-tab!
+let g:lasttab = 1
+nnoremap gM :exe "tabn ".g:lasttab<CR>
+au TabLeave * let g:lasttab = tabpagenr()
 
 " DONT TYPE ANYTHING HERE SO THAT CENTOS-BRANCH CAN
 " SAFELY ADD ITS OVERRIDES WITHOUT ISSUES
