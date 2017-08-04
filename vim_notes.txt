@@ -136,6 +136,8 @@ gw - format motion.
    gwJ
    gwK
    gwL
+   gwP                              ( plus/minus - vert resize +10 )
+   gwM                              ( plus/minus - vert resize -10 )
    gwS                              (set spell toggle)
 gx - netrw stuff                    (Bound to cscope operations)
 gy - none                           (Bound to set pastetoggle)
@@ -705,5 +707,17 @@ let varName = system("command with args in a single string")
 #echo messagnes and show them
 echom "message"
 messages
+
+#notes on variables
+:help internal-variables
+
+buffer-variable    b:     Local to the current buffer.
+window-variable    w:     Local to the current window.
+tabpage-variable   t:     Local to the current tab page.
+global-variable    g:     Global.
+local-variable     l:     Local to a function.
+script-variable    s:     Local to a :source'ed Vim script.
+function-argument  a:     Function argument (only inside a function).
+vim-variable       v:     Global, predefined by Vim.
 
 

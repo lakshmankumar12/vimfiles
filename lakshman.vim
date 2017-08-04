@@ -91,6 +91,12 @@ nmap <Leader>hp   :q<CR><C-w>P<C-p>
 nmap <Leader>gfunc    <Esc>:call FindFunctionFromTags()<CR>
 nnoremap <Leader>gdb  <Esc>:Gdiff base<CR>gg<Esc>:wincmd l<CR>
 
+nmap <silent> <Plug>WinVertSizeIncrease <Esc>:vert resize +10<CR>:call repeat#set("\<Plug>WinVertSizeIncrease", v:count)<CR>
+nmap gwP <Plug>WinVertSizeIncrease
+
+nmap <silent> <Plug>WinVertSizeDecrease <Esc>:vert resize -10<CR>:call repeat#set("\<Plug>WinVertSizeDecrease", v:count)<CR>
+nmap gwM <Plug>WinVertSizeDecrease
+
 function! ChompedSystem( ...  )
   return substitute(call('system', a:000), '\n\+$', '', '')
 endfunction

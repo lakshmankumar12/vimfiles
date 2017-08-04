@@ -81,6 +81,8 @@ else
   Plugin 'sjl/clam.vim'                       " Clam shellcmd
   Plugin 'vim-scripts/OmniCppComplete'        " c-based language auto-complete
 endif
+Plugin 'SirVer/ultisnips'                     " snippets engine
+Plugin 'honza/vim-snippets'                   " snippets repo
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
