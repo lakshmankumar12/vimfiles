@@ -104,6 +104,9 @@ gh - enter select mode              (Rebound to unitish operations)
   ghd                             easy-clip d
   ghD                             easy-clip dd
 gl - none                           (Bound to FZF)
+  gll                             FZF
+  glb                             buffers
+  gl/                             BufferLines
 gw - format motion.
    gwa        Available
    gwb                              Show SVN Curr Diff
@@ -669,6 +672,21 @@ My SVN plug
 :SVNStatus                " Anywhere .. shows the svn status
 :SVNLog                   " Anywhere .. shows the last 10 logs (or n as arg)"
 
+fugitive notes
+---------------
+
+* Do any fugitive command by first opening a source controlled file in vim
+* O -> open commit
+  P -> annotate parent
+
+jedi-vim
+---------
+
+#python jumpter
+
+<Leader> d   - goto definition
+<Leader> gu   - goto all usages
+^t (gxx)     - goback
 
 
 help expand

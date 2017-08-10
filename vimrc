@@ -21,6 +21,8 @@ Plugin 'justinmk/vim-sneak'                   " goto any location using s<char>
 Plugin 'jiangmiao/auto-pairs'                 " for automatically adding braces
 Plugin 'tmhedberg/matchit'                    " % given a new life
 Plugin 'easymotion/vim-easymotion'            " <Leader>hjkl
+Plugin 'vim-scripts/ingo-library'             " Prerequisite for PatternComplete
+Plugin 'vim-scripts/CompleteHelper'           " Prerequisite for PatternComplete
 Plugin 'vim-scripts/PatternComplete'          " ctrl-r+& to paste the matched word instead of pattern
 Plugin 'vim-scripts/python_match.vim'         " % for if/elif/else, try/except/catch in py. Also use [% to go to start of block 
 Plugin 'vim-airline/vim-airline'              " look and feel with powerline-ish fonts
@@ -408,6 +410,10 @@ let g:indentLine_char='┆'
 let g:lasttab = 1
 nnoremap gM :exe "tabn ".g:lasttab<CR>
 au TabLeave * let g:lasttab = tabpagenr()
+
+
+"ultisnip directories
+let g:UltiSnipsSnippetDirectories=["UltiSnips", "myultisnippets"]
 
 " DONT TYPE ANYTHING HERE SO THAT CENTOS-BRANCH CAN
 " SAFELY ADD ITS OVERRIDES WITHOUT ISSUES

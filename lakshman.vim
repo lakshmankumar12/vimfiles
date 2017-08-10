@@ -15,7 +15,9 @@ nmap S            <Esc>
 " Y is same yy. So, lets do something useful
 nmap Y            y$:call DumpToClipBoard()<CR>
 nmap gY           <Esc>:call KeepOnlyWindowWithLocationList()<CR>
-nmap gl           <Esc>:FZF<CR>
+nmap gll          <Esc>:FZF<CR>
+nmap glb          <Esc>:FzfBuffers<CR>
+nmap gl/          <Esc>:FzfBLines<CR>
 nmap gww          <Esc>:update<CR>
 
 "window movements
