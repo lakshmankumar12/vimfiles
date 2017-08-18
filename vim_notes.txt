@@ -399,11 +399,26 @@ Highlight
 
 rtags
 
-<Leader>rj
-<Leader>rf
-<Leader>rV
-<Leader>rS
-<Leader>rb  - jump back
+<Leader>rj   - go-to-definition in same window
+<Leader>rV   - go-to-definition in new vert split
+<Leader>rS   - go-to-definition in new hor split
+<Leader>rf   - open all references in location-win
+<Leader>rb   - jump back
+
+
+<Leader>ri   - Information on the word
+<Leader>rJ   - Jump to declaration.
+<Leader>rT   - new tab
+<Leader>rp   - covering function, class
+<Leader>rn   - Find symbol(s) references that match the provided pattern.
+<Leader>rs   - Find declaration/definition location for symbol(s) that match provided pattern.
+<Leader>rr   - Trigger current file reindexing by 'rdm'.
+<Leader>rw      Rename symbol under cursor.
+<Leader>rv      Find other implementations of a function, such as virtual functions.
+<Leader>rC      Find the superclasses of the class under the cursor.
+<Leader>rc      Find the subclasses of the class under the cursor.
+
+
 
 QFGrep:
 (In quickfix/location-lsit)
@@ -618,6 +633,18 @@ Sort a file
 
 #only uniq
 :sort -u
+
+Reverse lines
+-------------
+
+"full file
+:g/^/m0   " g is to take action on lines matching ensuing regex, ^ matches every line, m move, 0 -> after line-0
+
+"part of file
+:'<,'>g/^/mN  " rember to get N (line number before selection)
+
+"fully with line numbers
+:100,150g/^/m99
 
 Mark and save a subset to another file
 --------------------------------------
