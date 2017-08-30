@@ -43,6 +43,7 @@ Plugin 'regedarek/ZoomWin'                    " Close other windows and re-open 
 Plugin 'yssl/QFEnter'                         " <Leader><CR> on quickfix/loc-list will open in a new vert split.
 Plugin 'fatih/vim-go'                         " One stop go plugin
 Plugin 'godlygeek/tabular'                    " Auto-align lines.
+Plugin 'plasticboy/vim-markdown'              " Markdown syntax
 Plugin 'tpope/vim-surround'                   " add quotes(surroundings) to a word etc..
 Plugin 'jeetsukumaran/vim-indentwise'         " help navigating blocks based on indent.
 Plugin 'vim-scripts/Mark--Karkat'             " Multiple color search
@@ -398,7 +399,7 @@ let g:jedi#smart_auto_mappings = 1
 let g:jedi#documentation_command = '<Leader>_K'
 let g:jedi#auto_close_doc = 1
 
-let g:rtagsRcCmd="/home/lakshman_narayanan/install/rtags/rtags-2.10-install/bin/rc"
+let g:rtagsRcCmd=g:my_home . '/bin/rc'
 
 let g:xml_syntax_folding=1
 au FileType xml setlocal foldmethod=syntax
