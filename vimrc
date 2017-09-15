@@ -28,7 +28,6 @@ Plugin 'vim-scripts/python_match.vim'         " % for if/elif/else, try/except/c
 Plugin 'vim-airline/vim-airline'              " look and feel with powerline-ish fonts
 Plugin 'vim-airline/vim-airline-themes'       " More themese for airline
 Plugin 'majutsushi/tagbar'                    " Enables the c-function names with g:airline#extensions#tagbar#enabled below.
-Plugin 'vim-scripts/taglist.vim'              " Get a list of tags in a specific file (TlistToggle)
 if has('nvim')
   Plugin 'Numkil/ag.nvim'
 else
@@ -86,6 +85,7 @@ else
 endif
 Plugin 'SirVer/ultisnips'                     " snippets engine
 Plugin 'honza/vim-snippets'                   " snippets repo
+Plugin 'file://' . $HOME . '/github/vimfiles', {'rtp': 'tdef/'}         " my tdef file
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -195,7 +195,7 @@ endfunction
 
 map <Leader>clip :call DumpToClipBoard()<CR>
 vmap <C-c> y:call DumpToClipBoard()<CR>
-vmap gb    y:call DumpToClipBoard()<CR>
+vmap gc    y:call DumpToClipBoard()<CR>
 vmap <C-b> y:call DumpToTmuxClipBoard()<CR>
 vmap gt    y:call DumpToTmuxClipBoard()<CR>
 nmap gb    y:call DumpToClipBoard()<CR>
@@ -272,6 +272,7 @@ let g:airline#extensions#default#section_truncate_width = {
       \ 'b': 100,
       \ 'c': 20,
       \ 'gutter': 100,
+      \ 'f': 30,
       \ 'x': 20,
       \ 'y': 100,
       \ 'z': 30,

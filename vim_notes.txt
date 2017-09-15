@@ -105,6 +105,7 @@ gh - enter select mode              (Rebound to unitish operations)
   ghD                             easy-clip dd
 gl - none                           (Bound to FZF)
   gll                             FZF
+  gloo                            AryakaFileOpen
   glb                             buffers
   gl/                             BufferLines
 gw - format motion.
@@ -464,6 +465,16 @@ the direct invocation is        :     gx         ,and the cscope-char
 Quickfix invocation is          :     <Leader>cs ,and the cscope-char
                                          (remember \css, \csg, \csc rarely will use reset)
 
+
+Navigation in vim
+-----------------
+
+w - beginning of next word
+b - beginning of current/prev word
+e - end of current/next word
+ge - end of prev word
+
+
 Vim text object selectors
 --------------------------
 
@@ -507,15 +518,35 @@ Search modifiers
 
 \c<pattern> will ignore case
 <pattern>/e will place cursor at end of pattern
-         /s will place curros at start of pattern (needed when combining number below)
+         /s will place curros at start of pattern (needed when combining number below) .. use s5 to place cursor at 5th char.
          /<num>  will goto line-above (or chars if e/s is used). This is 0-based counting. 1 will be next char. 0 is redundant to mention
          /-num     --do--      -below ( --do-- )
+
+:help search-offset
+
+Paste just the matched pattern
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+in insert-mode
+c-x &
+
+in command-line
+c-r &
 
 Quickly grep in a given file
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 " Opens the lines with patter in location list
 :lvimgrep /pattern/ %
+
+non-gredy grep
+~~~~~~~~~~~~~
+
+Instead of .* use .\{-}.
+
+grep IP
+-------
+\d\{1,3\}\.\d\{1,3\}\.\d\{1,3\}\.\d\{1,3\}
 
 Other Vim Tips:
 ===============
@@ -705,6 +736,7 @@ fugitive notes
 * Do any fugitive command by first opening a source controlled file in vim
 * O -> open commit
   P -> annotate parent
+* If you have opened a commit or a file, do a y^g to yank the current commit into clipboard
 
 jedi-vim
 ---------

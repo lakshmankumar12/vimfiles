@@ -324,6 +324,19 @@ function! GotoTagLastName()
 endfunction
 nmap gO <Esc>:call GotoTagLastName()<CR>
 
+function! OpenArayakaFile(line)
+    execute ":edit " . a:line
+endfunction
+
+function! AryakaFileOpen()
+  call fzf#run({
+  \   'source': "list_files_aryaka.sh",
+  \   'options' : '--exact' ,
+  \   'down'  : '20%',
+  \   'sink':   function('OpenArayakaFile')})
+endfunction
+nmap gloo        <Esc>:call AryakaFileOpen()<CR>
+
 if !exists("*ReloadConfigs")
   "The above safeguard is necessary as otherwise
   "  the function can't reload itself while in
