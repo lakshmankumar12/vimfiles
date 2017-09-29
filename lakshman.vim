@@ -6,7 +6,7 @@ nmap <Leader>csg         <Esc>:call LoadCscopeToQuickFix(expand("<cword>"),"g")<
 nmap <Leader>csc         <Esc>:call LoadCscopeToQuickFix(expand("<cword>"),"c")<CR>
 nmap <Leader>adds        <Esc>:call Addspaces()<CR>
 " Who uses ex mode these days!
-nmap Q            <Esc>:tabclose<CR>
+nmap Q            <Esc>:tabclose<CR>:tabprev<CR>
 " i dont use ZZ/ZQ much. Anything else on Z?!
 nmap Z            <Esc>:lclose<CR>:lopen<CR>
 nmap zp           <Esc>:cclose<CR>:copen<CR>
@@ -46,6 +46,9 @@ nmap gwn          <Esc>:set relativenumber!<CR>:set nu!<CR>
 nmap gwr          <Esc>:set wrap!<CR>
 nmap gwx          <Esc>:set list!<CR>
 nmap gwd          <Esc>:diffoff<CR>
+nnoremap gwa          <C-b>
+nnoremap gwf          <C-f>
+nnoremap gwm          gT
 
 if has('nvim')
   nmap gwT        <Esc>:tabnew \| terminal<CR>

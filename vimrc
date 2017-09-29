@@ -249,14 +249,14 @@ nmap <Leader>s <Plug>(SneakStreak)
 nmap <Leader>S <Plug>(SneakStreakBackward)
 
 "Form markwords
-highlight MarkWord1 ctermbg=red ctermfg=white guibg=#8CCBEA guifg=Black
-highlight MarkWord2 ctermbg=brown ctermfg=white guibg=#8CCBEA guifg=Black
-highlight MarkWord3 ctermbg=magenta ctermfg=white guibg=#8CCBEA guifg=Black
-highlight MarkWord4 ctermbg=blue ctermfg=white guibg=#8CCBEA guifg=Black
-highlight MarkWord5 ctermbg=6 ctermfg=black guibg=#8CCBEA guifg=Black
-highlight MarkWord6 ctermbg=57 ctermfg=white guibg=#8CCBEA guifg=Black
-highlight MarkWord7 ctermbg=48 ctermfg=black guibg=#8CCBEA guifg=Black
-highlight MarkWord8 ctermbg=88 ctermfg=white guibg=#8CCBEA guifg=Black
+highlight MarkWord1 ctermbg=57 ctermfg=white guibg=#8CCBEA guifg=Black
+highlight MarkWord2 ctermbg=48 ctermfg=black guibg=#8CCBEA guifg=Black
+highlight MarkWord3 ctermbg=88 ctermfg=white guibg=#8CCBEA guifg=Black
+highlight MarkWord4 ctermbg=6 ctermfg=black guibg=#8CCBEA guifg=Black
+highlight MarkWord5 ctermbg=red ctermfg=white guibg=#8CCBEA guifg=Black
+highlight MarkWord6 ctermbg=brown ctermfg=white guibg=#8CCBEA guifg=Black
+highlight MarkWord7 ctermbg=magenta ctermfg=white guibg=#8CCBEA guifg=Black
+highlight MarkWord8 ctermbg=blue ctermfg=white guibg=#8CCBEA guifg=Black
 
 " NerdTree
 map <C-n> :NERDTreeToggle<CR>
@@ -406,7 +406,7 @@ let g:xml_syntax_folding=1
 au FileType xml setlocal foldmethod=syntax
 
 "indentLine
-let g:indentLine_char='┆'
+let g:indentLine_char='┊'
 
 "last-tab!
 let g:lasttab = 1
