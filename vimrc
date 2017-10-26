@@ -86,6 +86,7 @@ endif
 Plugin 'SirVer/ultisnips'                     " snippets engine
 Plugin 'honza/vim-snippets'                   " snippets repo
 Plugin 'file://' . $HOME . '/github/vimfiles', {'rtp': 'tdef/'}         " my tdef file
+Plugin 'file://' . $HOME . '/github/vimfiles', {'rtp': 'sudoku/', 'name': 'mysudoku'}       " my sudoku file
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
