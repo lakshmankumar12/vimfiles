@@ -258,6 +258,11 @@ highlight MarkWord6 ctermbg=brown ctermfg=white guibg=#8CCBEA guifg=Black
 highlight MarkWord7 ctermbg=magenta ctermfg=white guibg=#8CCBEA guifg=Black
 highlight MarkWord8 ctermbg=blue ctermfg=white guibg=#8CCBEA guifg=Black
 
+if has('nvim')
+    highlight TermCursor   ctermbg=130 ctermfg=white guibg=#8CCBEA guifg=Black
+    highlight TermCursorNC ctermbg=29  ctermfg=white guibg=#8CCBEA guifg=Black
+endif
+
 " NerdTree
 map <C-n> :NERDTreeToggle<CR>
 map gwe :NERDTreeFind<CR>
@@ -359,12 +364,17 @@ if has('nvim')
   execute "source " . g:my_home . "/.vim/plugin/lakshman.vim"
   execute "source " . g:my_home . "/.vim/plugin/sn_git.vim"
   execute "source " . g:my_home . "/.vim/plugin/gitlsfiles.vim"
+  execute "source " . g:my_home . "/.vim/plugin/svn_lakshman.vim"
   set scrollback=100000
   set timeout               " wait for 1s for keymaps
   let g:terminus_default_prompt = '$'
   let g:python_host_prog = g:my_home . '/bin/python2.7'
   let g:python3_host_prog = g:my_home . '/bin/python3'
   set shell=$HOME/bin/zsh
+  augroup MyTermMappings
+    autocmd!
+    autocmd TermOpen * nnoremap <buffer> q a
+  augroup END
 endif
 
 let g:ag_apply_lmappings = 0
