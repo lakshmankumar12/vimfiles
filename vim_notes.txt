@@ -777,6 +777,18 @@ eg:
 expand("<cWORD>")
 
 
+My git-ls files
+---------------
+
+:Gedited  -> Show all edited files
+
+This works by loading modified files (or interest files) using vim's make by temporarily tying git diff --name-only as make program.
+So, if u want the list of all files, just use :lopen.
+You can skip to any file of interest. Just 
+gwo
+:bufdo diffoff
+and <Leader>gg to diff the file
+
 vimscript
 ---------
 

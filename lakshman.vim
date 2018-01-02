@@ -20,6 +20,8 @@ nmap glb          <Esc>:FzfBuffers<CR>
 nmap gl/          <Esc>:FzfBLines<CR>
 nmap gww          <Esc>:update<CR>
 
+nmap gO           <ESC>:let @"=expand("%:h")<CR><ESC>:e <C-R>"/
+
 "window movements
 nmap gwh          <C-w>h
 nmap gwj          <C-w>j
@@ -55,6 +57,11 @@ if has('nvim')
   nmap gwV        <Esc>:vsplit \| terminal<CR>
   tnoremap kj     <C-\><C-n>
   tnoremap <expr> <C-\><C-R> '<C-\><C-N>"'.nr2char(getchar()).'pi'
+  tnoremap <expr> <M-[> '<C-\><C-N>"'.nr2char(getchar()).'pi'
+
+  " Terminal mode:
+  tnoremap <M-h> <c-\><c-n>gT
+  tnoremap <M-l> <c-\><c-n>gt
 endif
 
 "cscope'ish
@@ -325,7 +332,6 @@ endfunction
 function! GotoTagLastName()
   execute "tag ".g:last_name
 endfunction
-nmap gO <Esc>:call GotoTagLastName()<CR>
 
 function! OpenArayakaFile(line)
     execute ":edit " . a:line

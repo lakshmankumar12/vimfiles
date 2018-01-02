@@ -307,7 +307,7 @@ endfunction
 let g:airline_theme_patch_func = 'AirlineThemePatch'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#tab_nr_type = 1 " tab number
-
+let g:airline#extensions#tabline#fnametruncate = 10
 set rtp+=~/.fzf
 let g:fzf_command_prefix = 'Fzf'
 
