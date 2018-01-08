@@ -1,9 +1,12 @@
+# Normal key functions
+
 [set ignorecase before searching!]
 
 This is a list of keys and the commands they do in vim.
 Vim's key-scape is pretty packed - Hardly any room to map to my personal commands.
 So, here is a listing of the keys to commands to identify the gaps, that I can reclaim for my own maps.
 
+```
 q - recording (also useful q:,q/)                Q - ex mode. RECLAIM!                  (Bound to :tabclose)
 w - word next                                    W - Blank-sep word forward
 e - word end                                     E - Blank-sep word end
@@ -30,8 +33,9 @@ v - visual                                       V - line visual
 b - word-back                                    B - blank-sep word backwardn
 n - find-next                                    N - search back
 m - mark                                         M - Middle of page
+```
 
-
+```
 ` - goto mark with column precision
 ~ - toggle case
 1-9 - repeat count
@@ -61,9 +65,11 @@ $ - end of line
 \ Leader
 / search
 ? search backwards
+```
 
 g is a super powerful key: (gem key, literally!)
 
+```
 ga  - show hex of char under cursor
 gd  - goto local declaration of word                               gD   --  global delcartion
 ge - got to end of prev word                                       gE   --  prev Non-blank word
@@ -92,9 +98,12 @@ g& - repeat last subtittue
 g] - show tags under cursor
 g; - goto position in change list
 g, - goto position in change list rev order
+```
 
 
-RECLAIMable in g:
+## RECLAIMable in g:
+
+```
 gb - some netrw bookmark            (copy to system cliboard)
 gc - none                           (Tmux paste at new line) (gC is for paste wherever you are)
 gh - enter select mode              (Rebound to unitish operations)
@@ -171,10 +180,11 @@ gV  -- select-mode stuff.  (Bound to ToggleMouse)
 gW                         (Bound to RemoveTrailWhite) # remove trail white space
 gX                         (Flush Search)
 gY                         (Bound to Keep window with only location-list)
+```
 
-z-keys
-------
+## z-keys
 
+```
 za - toggles  a fold (Similar: zc/zo/za)                                  zA  - za at all folding levels
 zb - bring line to bottom
 zc - close a fold (in an existing fold(determined by mode))               zC  - zc at all folding levels
@@ -204,10 +214,11 @@ z% -
 z^ -
 z& -
 z] -
+```
 
+# control keys:
 
-control keys:
-
+```
 C-a : increment
 C-b : screen-back
 C-c : abort
@@ -234,9 +245,11 @@ C-w : windows
 C-x : decrement
 C-y : scroll-lines upwards
 C-z : suspend vim
+```
 
-Insert mode control keys
+## Insert mode control keys
 
+```
 c-a : repeat previous insertion
 c-b : none
 c-c : exit insert mode
@@ -263,11 +276,13 @@ c-w : del word
 c-x : control-x submode
 c-y : insert char from above-live
 c-z : suspend vim
+```
 
-Visual mode control keys
+## Visual mode control keys
 
-help v_ctrl-a
+* help v_ctrl-a
 
+```
 c-a : increment number
 c-b : To map to tmux copy
 c-c :
@@ -294,9 +309,11 @@ c-w :
 c-x : decrement keys
 c-y :
 c-z :
+```
 
-Window mgmt keys C-w, then
+## Window mgmt keys C-w, then
 
+```
 C-a : none
 C-b : go to bottom most window
 C-c : plain-c closes. Ctrl-c cancels
@@ -335,12 +352,13 @@ L   : right
 P   : goto preview(not quickfix)
 T   : move window to a new tab
 }   : tag under cursor in preview
+```
 
-Command-mode
--------------
+## Command-mode
 
-:help c_ctrl-a
+* :help c_ctrl-a
 
+```
 C-a  :  all names to the left of pattern are inserted (Like auto tab-completion)
 C-b  :  goto beginning of line
 C-c  :  quit command line w/o executing
@@ -373,12 +391,13 @@ C-]
 C-^
 C-_
 C-|
+```
 
-All My Leader maps
--------------------
+# All My Leader maps
 
 One char
 
+```
 map <Leader>j <Plug>(easymotion-j)
 map <Leader>k <Plug>(easymotion-k)
 nmap <Leader>w <Plug>(easymotion-bd-w)
@@ -387,21 +406,27 @@ nmap <Leader>W <Plug>(easymotion-bd-W)
 vmap <Leader>W <Plug>(easymotion-bd-W)
 nmap <Leader>s <Plug>(SneakStreak)
 nmap <Leader>S <Plug>(SneakStreakBackward)
+```
 
-Leader maps from plugins
-------------------------
+## Leader maps from plugins
 
-Org mode
+## Org mode
+
+```
 <Leader>cl/CL   # list item
 <Leader>cn/CN   # check box
 <Leader>cc      # toggle check box
+```
 
-Highlight
+## Highlight Different colors
 
+```
 <Leader>r
+```
 
-rtags
+## rtags
 
+```
 <Leader>rj   - go-to-definition in same window
 <Leader>rV   - go-to-definition in new vert split
 <Leader>rS   - go-to-definition in new hor split
@@ -420,20 +445,22 @@ rtags
 <Leader>rv      Find other implementations of a function, such as virtual functions.
 <Leader>rC      Find the superclasses of the class under the cursor.
 <Leader>rc      Find the subclasses of the class under the cursor.
+```
 
+## QFGrep:
 
-
-QFGrep:
+```
 (In quickfix/location-lsit)
 <Leader>g  - grep and show matches
 <Leader>v  - grep and show non-matches
 <Leader>q  - reset
+```
 
-Words
-~~~~~
+## Words
 
 Really using:
 
+```
 map <Leader>mai i#include<stdio.h><CR><CR>int main(int argc,char *argv[],char *envp[])<CR>{<CR><CR>}<CR><Esc>kka<Tab>
 map <Leader>cmai i#include<iostream><CR><CR>using namespace std;<CR><CR>int..n(int argc,char *argv[],char *envp[])<CR>{<CR><CR>return 0;<CR>}<CR><Esc>kka<Tab>
 map <Leader>pyth i#!/usr/bin/python<CR><CR>from __future__ import print_fun..<CR><CR>def main():<CR>pass<CR><C-D><CR>if __name__ == '__main__':<CR>main()<CR>~
@@ -446,9 +473,11 @@ nmap <Leader>css         <Esc>:call LoadCscopeToQuickFix(expand("<cword>"),"s")<
 nmap <Leader>csg         <Esc>:call LoadCscopeToQuickFix(expand("<cword>"),"g")<CR>
 nmap <Leader>csc         <Esc>:call LoadCscopeToQuickFix(expand("<cword>"),"c")<CR>
 nnoremap <Leader>gdb  <Esc>:Gdiff base<CR>gg<Esc>:wincmd l<CR>
+```
 
 Not that much:
 
+```
 nmap <Leader>cmd         <Esc>:call GetCommandOutputOnNewTab()<CR>
 map <Leader>typ itypedef struct<CR>{<CR><CR>}  ;<Esc>hi
 nmap <Leader>adds        <Esc>:call Addspaces()<CR>
@@ -459,17 +488,16 @@ nmap <Leader>lp   <C-w>h<Esc>:q<CR><C-w>P<C-p>
 nmap <Leader>hn   :q<CR><C-w>P<C-n>
 nmap <Leader>hp   :q<CR><C-w>P<C-p>
 nmap <Leader>gfunc    <Esc>:call FindFunctionFromTags()<CR>
+```
 
-Cscope
-------
+# Cscope
 
-the direct invocation is        :     gx         ,and the cscope-char
-Quickfix invocation is          :     <Leader>cs ,and the cscope-char
+the direct invocation is        :     `gx`         ,and the cscope-char
+Quickfix invocation is          :     `<Leader>cs` ,and the cscope-char
                                          (remember \css, \csg, \csc rarely will use reset)
 
 
-Navigation in vim
------------------
+# Navigation in vim
 
 w - beginning of next word
 b - beginning of current/prev word
@@ -477,86 +505,101 @@ e - end of current/next word
 ge - end of prev word
 
 
-Vim text object selectors
---------------------------
+# Vim text object selectors
 
 Standard from vim:
+```
 iw  aw
 i"  a"
 i'  a'
 i(  a(
 i{  a{
 i[  a[
+```
 
 indent-plugin:
+```
 ii
 iI
+```
 
 line-plugin
+```
 il
+```
 
 text-between
+```
 if      Hrmph.. conflicts with python
+```
 
 python:
+```
 if
 ic
 
 (also) [pf / ]pf - next/prev function
 (also) [pc / ]pc - next/prev class
+```
 
-surround
-~~~~~~~~
+# surround
 
+```
 ds" ds' ds( ds[  ds{
 cs"'
 ys<motion><sur-char>
+```
 
 select visually, press S and then the surround char ",'
 note: if you press opening-brace, there will be a space added. if you use closing-brace, no space is added
 
-Search modifiers
----------------
+# Search modifiers
 
+```
 \c<pattern> will ignore case
 <pattern>/e will place cursor at end of pattern
          /s will place curros at start of pattern (needed when combining number below) .. use s5 to place cursor at 5th char.
          /<num>  will goto line-above (or chars if e/s is used). This is 0-based counting. 1 will be next char. 0 is redundant to mention
          /-num     --do--      -below ( --do-- )
+```
 
 :help search-offset
 
-Paste just the matched pattern
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Paste just the matched pattern
 
+```
 in insert-mode
 c-x &
 
 in command-line
 c-r &
+```
 
-Quickly grep in a given file
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Quickly grep in a given file
 
+```
 " Opens the lines with patter in location list
 :lvimgrep /pattern/ %
+```
 
-non-gredy grep
-~~~~~~~~~~~~~
+## non-gredy grep
 
 Instead of .* use .\{-}.
 
-grep IP
--------
-\d\{1,3\}\.\d\{1,3\}\.\d\{1,3\}\.\d\{1,3\}
+## grep IP
 
-Other Vim Tips:
-===============
+```
+\d\{1,3\}\.\d\{1,3\}\.\d\{1,3\}\.\d\{1,3\}
+```
+
+# Other Vim Tips:
 
 In a huge list of cscope-s results on a function-name, to quickly find the function defintion, try
 
+```
 function_name\s*(\s*\w\+\s\+\w.*,
 \w\+\s*(\s*\w\+\s\+\w.*,
+```
 
 i.e name space* ( space* word+ space+ word+ .* ,
     The idea is only definition will have 2 words min between ( and , arg-type and arg-name, while invocations will have just argname.
@@ -566,35 +609,39 @@ i.e name space* ( space* word+ space+ word+ .* ,
 :set hidden  # option enables the non-saving of files while switching (unnecessary swap files)
 echo &hidden # is a way to see the current setting.
 
-Colors in vim:
--------------
+## Colors in vim:
 
-Its either cterm or gui.
-cterm colors are either words or nubmers from 0 to 255. To know colors use the plugin :XtermColorTable
-gui colors are either words or RGB spec
+* Its either cterm or gui.
+* cterm colors are either words or nubmers from 0 to 255. To know colors use the plugin :XtermColorTable
+* gui colors are either words or RGB spec
 
-Soloarized sticks to the first 16 colors.
+* Soloarized sticks to the first 16 colors.
 
+```
 ctermbg=red ctermfg=white
 guibg=#8CCBEA guifg=Black
+```
 
 
-To know which plugin set the setting last
------------------------------------------
+## To know which plugin set the setting last
 
+```
 :verbose set iskeyword?
+```
 
-Set vertical scrollbind in 2 splits
------------------------------------
+## Set vertical scrollbind in 2 splits
 
+```
 :windo setlocal scrollbind
 ctrl-W <size> |   " to fix the vertical size
+```
 
-"To not jump to start of line on scrolling
+To not jump to start of line on scrolling
+```
 :set nosol
+```
 
-Diff
-----
+## Diff
 
 If diff gets wonky, do
 :diffupdate
@@ -602,8 +649,7 @@ If diff gets wonky, do
 :bufdo diffoff
 and diff again.
 
-Navigating based on indent (for config files)
----------------------------------------------
+## Navigating based on indent (for config files)
 
 (Effected by plugin vim-indentwise)
 
@@ -611,9 +657,9 @@ Navigating based on indent (for config files)
 ]= / [=  -- next/prev lines on same indentation level
 [-       -- prev .. go one level up
 
-Fold Management
----------------
+## Fold Management
 
+```
 zR/zM  -> open-all-folds/close-all-folds
 zo/zc  -> open/close jsut one fold
 zr/zm  -> open/close fold level by one
@@ -621,20 +667,22 @@ zO     -> open all folds in cursor recursively
 
 zj/zk  -> up/down to prev/next fold
 [z/]z  -> start/end of current fold
+```
 
-Org mode
---------
+*# Org mode
 
 end files in .org
 
+```
 * Heading 1
 ** Heading 2
    - List item   (<leader>cl/cL)
    - [ ] Check bo (<leader>cn/cN)  (toggle status <leader>cc)
+```
 
-Multiple Highlight
-------------------
+## Multiple Highlight
 
+```
 \m             to highlight current word
 \r             to get prompt and enter regex
 :MarkClear     to reset everything
@@ -642,34 +690,39 @@ Multiple Highlight
                that becomes the last mark.
 \/,\?          to any mark
                (Mnemonic: * and # are complements, / and ? are complements. * is for narrower/sharper search)
+```
 
-Denite/Unite movement
----------------------
+## Denite/Unite movement
 
+```
 ctrl-o to enter normal mode
 i to come back to insert
+```
 
 
-Spell check
-----------
+## Spell check
+
+```
 (I have mapped gwS)
 
 :set spell
 ]s next misspelled word
 [s prev misspelled word
+```
 
-Sort a file
-------------
+## Sort a file
 
+```
 :%sort
 :'<,'>sort
 
 #only uniq
 :sort -u
+```
 
-Reverse lines
--------------
+## Reverse lines
 
+```
 "full file
 :g/^/m0   " g is to take action on lines matching ensuing regex, ^ matches every line, m move, 0 -> after line-0
 
@@ -678,29 +731,32 @@ Reverse lines
 
 "fully with line numbers
 :100,150g/^/m99
+```
 
-Mark and save a subset to another file
---------------------------------------
+## Mark and save a subset to another file
 
+```
 mA
 mB
 then
 :'A,'B w! /tmp/a
+```
 
-Set a column limit to files
----------------------------
+## Set a column limit to files
 
+```
 :set colorcolumn=80
+```
 
-Tabularize around a char
-------------------------
+## Tabularize around a char
 
+```
 :Tabularize /|
+```
 
+## Delete empty lines
 
-Delete empty lines
-------------------
-
+```
 #choose line that is empty or anti-choose line with atleat one char
 :g/^$/d
 :v/./d
@@ -708,22 +764,24 @@ Delete empty lines
 #choose line that is having only space or anti-choose line that has one-non-space char
 :g/^\s*$/d
 :v/\S/d
+```
 
-NerdTree
---------
+## NerdTree
 
 NerdTreeToggle  (mapped to C-n. Just opens nerd-tree at cwd)
 NerdTreeFind    (opens Nerdtree at file location)
 
+```
 Enter -> at a folder opens up the folder
 x     -> close current parent
 p     -> go to parent
 ?     -> close in case you accidentally opened help with ?
 R     -> refresh
+```
 
-My SVN plug
------------
+## My SVN plug
 
+```
 :SVNDiff          gwb     " with a file .. will diff the current changes
 :SVNAnno                  " with a file .. will annotate the file
 :SVNRev                   " in annotate window (or on a revision word) .. will get the rev on a window
@@ -731,28 +789,32 @@ My SVN plug
 :SVNRDiff                 " in a rev-window on a file .. shows the changes of that one file
 :SVNStatus                " Anywhere .. shows the svn status
 :SVNLog                   " Anywhere .. shows the last 10 logs (or n as arg)"
+```
 
-fugitive notes
----------------
+## fugitive notes
 
+```
 * Do any fugitive command by first opening a source controlled file in vim
 * O -> open commit
   P -> annotate parent
 * If you have opened a commit or a file, do a y^g to yank the current commit into clipboard
+```
 
-jedi-vim
----------
+## jedi-vim
 
+```
 #python jumpter
 
 <Leader> d   - goto definition
 <Leader> gu   - goto all usages
 ^t (gxx)     - goback
+```
 
 
-help expand
-------------
+## Expansion
 
+```
+:help expand
 %    current file name
 #    alternate file name
 #n    alternate file name n
@@ -775,11 +837,12 @@ Modifiers:
 
 eg:
 expand("<cWORD>")
+```
 
 
-My git-ls files
----------------
+## My git-ls files
 
+```
 :Gedited  -> Show all edited files
 
 This works by loading modified files (or interest files) using vim's make by temporarily tying git diff --name-only as make program.
@@ -788,10 +851,11 @@ You can skip to any file of interest. Just
 gwo
 :bufdo diffoff
 and <Leader>gg to diff the file
+```
 
-vimscript
----------
+# vimscript
 
+```
 #get output of a command into a varilable
 let varName = system("command with args in a single string")
 
@@ -801,21 +865,22 @@ messages
 
 #notes on variables
 :help internal-variables
+```
 
-buffer-variable    b:     Local to the current buffer.
-window-variable    w:     Local to the current window.
-tabpage-variable   t:     Local to the current tab page.
-global-variable    g:     Global.
-local-variable     l:     Local to a function.
-script-variable    s:     Local to a :source'ed Vim script.
-function-argument  a:     Function argument (only inside a function).
-vim-variable       v:     Global, predefined by Vim.
+* buffer-variable    b:     Local to the current buffer.
+* window-variable    w:     Local to the current window.
+* tabpage-variable   t:     Local to the current tab page.
+* global-variable    g:     Global.
+* local-variable     l:     Local to a function.
+* script-variable    s:     Local to a :source'ed Vim script.
+* function-argument  a:     Function argument (only inside a function).
+* vim-variable       v:     Global, predefined by Vim.
 
-Snippets
---------
+## Snippets
 
 Read about them here - http://vimcasts.org/episodes/meet-ultisnips/
 
+```
 <tab>  - expand trigger
 <C-j>  - advance to next tabstop
 <C-k>  - reverse to previous tabstop
@@ -823,9 +888,11 @@ Read about them here - http://vimcasts.org/episodes/meet-ultisnips/
 Useful snippets:
 markdown
 cbl<tab>   - for code blocks
+```
 
 
-Fix a borken syntax highlighting
---------------------------------
+## Fix a borken syntax highlighting
 
+```
 syntax sync fromstart
+```
