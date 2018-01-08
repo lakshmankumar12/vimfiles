@@ -811,4 +811,21 @@ script-variable    s:     Local to a :source'ed Vim script.
 function-argument  a:     Function argument (only inside a function).
 vim-variable       v:     Global, predefined by Vim.
 
+Snippets
+--------
 
+Read about them here - http://vimcasts.org/episodes/meet-ultisnips/
+
+<tab>  - expand trigger
+<C-j>  - advance to next tabstop
+<C-k>  - reverse to previous tabstop
+
+Useful snippets:
+markdown
+cbl<tab>   - for code blocks
+
+
+Fix a borken syntax highlighting
+--------------------------------
+
+syntax sync fromstart
