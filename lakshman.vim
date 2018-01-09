@@ -36,6 +36,7 @@ nmap gwc          <C-w>c
 nmap gwv          <C-w>v
 nmap gws          <C-w>s
 nmap gwS          <Esc>:set spell!<CR>
+nmap gwX          <Esc>:syntax sync fromstart<CR>
 "these close other windows
 nmap gwH          <C-w>h<C-w>c
 nmap gwJ          <C-w>j<C-w>c

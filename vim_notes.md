@@ -154,6 +154,7 @@ gw - format motion.
    gwP                              ( plus/minus - vert resize +10 )
    gwM                              ( plus/minus - vert resize -10 )
    gwS                              (set spell toggle)
+   gwX                              (syntax sync from start)
 gx - netrw stuff                    (Bound to cscope operations)
 gy - none                           (Bound to set pastetoggle)
 gz - none                           (Bound to solarized toggle bg)
@@ -519,8 +520,8 @@ i[  a[
 
 indent-plugin:
 ```
-ii
-iI
+ii -> select lines with same indentation as current-line including encompassed lines with more indentation
+iI -> select lines with EXACTLY same indendation as current-line.
 ```
 
 line-plugin
@@ -893,6 +894,7 @@ cbl<tab>   - for code blocks
 
 ## Fix a borken syntax highlighting
 
+I have mapped this to gwX
 ```
 syntax sync fromstart
 ```
