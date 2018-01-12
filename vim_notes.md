@@ -866,8 +866,8 @@ messages
 
 #notes on variables
 :help internal-variables
-```
 
+```
 * buffer-variable    b:     Local to the current buffer.
 * window-variable    w:     Local to the current window.
 * tabpage-variable   t:     Local to the current tab page.
@@ -876,10 +876,12 @@ messages
 * script-variable    s:     Local to a :source'ed Vim script.
 * function-argument  a:     Function argument (only inside a function).
 * vim-variable       v:     Global, predefined by Vim.
+```
 
 ## Snippets
 
 Read about them here - http://vimcasts.org/episodes/meet-ultisnips/
+Look for snippets in - https://github.com/honza/vim-snippets -> UltiSnips
 
 ```
 <tab>  - expand trigger
@@ -891,6 +893,23 @@ markdown
 cbl<tab>   - for code blocks
 ```
 
+# Syntax highlighting in vim
+
+To Read: http://vim.wikia.com/wiki/Creating_your_own_syntax_files
+https://jordanelver.co.uk/blog/2015/05/27/working-with-vim-colorschemes/
+
+High level objects
+* syntax-keyword -  categorizes a bunch of text matching some rule as a particular syntax-group
+```
+syntax match <SYN-KEY-NAME> <expression-to-match>
+```
+* Highlight Group - defines a color-pattern
+* Link a syntax-keyword to a highlighting groups
+```
+hightlight link <SYN-KEY-NAME> <HIGHLIGHTGROUP>
+```
+
+* Checkout existing hightlight groups with `:highlight`
 
 ## Fix a borken syntax highlighting
 
