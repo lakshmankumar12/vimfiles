@@ -749,6 +749,12 @@ then
 :set colorcolumn=80
 ```
 
+## Working on Columns
+
+column-replace:
+
+Select a column/block using ctrl-v, and then press: and then type `<space> B s/find/repl/g`, it will replace on the column.
+
 ## Tabularize around a char
 
 ```
@@ -876,7 +882,6 @@ messages
 * script-variable    s:     Local to a :source'ed Vim script.
 * function-argument  a:     Function argument (only inside a function).
 * vim-variable       v:     Global, predefined by Vim.
-```
 
 ## Snippets
 

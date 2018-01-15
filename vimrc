@@ -426,7 +426,7 @@ au TabLeave * let g:lasttab = tabpagenr()
 " vim-markdown plugin settings
 let g:vim_markdown_conceal = 0
 let g:vim_markdown_toc_autofit = 1
-
+autocmd FileType markdown syntax sync fromstart
 
 "ultisnip directories
 let g:UltiSnipsSnippetDirectories=["UltiSnips", "myultisnippets"]
