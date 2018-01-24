@@ -155,6 +155,7 @@ gw - format motion.
    gwM                              ( plus/minus - vert resize -10 )
    gwS                              (set spell toggle)
    gwX                              (syntax sync from start)
+   gwT                              (setlocal noexpandtab)
 gx - netrw stuff                    (Bound to cscope operations)
 gy - none                           (Bound to set pastetoggle)
 gz - none                           (Bound to solarized toggle bg)
@@ -217,7 +218,7 @@ z& -
 z] -
 ```
 
-# control keys:
+## control keys:
 
 ```
 C-a : increment
@@ -786,6 +787,12 @@ p     -> go to parent
 R     -> refresh
 ```
 
+## NERDCommenter
+
+```
+<leader>cc  -> comment
+```
+
 ## My SVN plug
 
 ```
@@ -892,11 +899,14 @@ Look for snippets in - https://github.com/honza/vim-snippets -> UltiSnips
 <tab>  - expand trigger
 <C-j>  - advance to next tabstop
 <C-k>  - reverse to previous tabstop
-
-Useful snippets:
-markdown
-cbl<tab>   - for code blocks
 ```
+
+### Useful snippets:
+
+* markdown
+    ```
+    cbl<tab>   - for code blocks
+    ```
 
 # Syntax highlighting in vim
 

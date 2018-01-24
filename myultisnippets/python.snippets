@@ -1,0 +1,12 @@
+snippet argp
+import argparse
+parser = argparse.ArgumentParser()
+#parser.add_argument("-v","--verbose", help="increase output verbosity", action="count")
+#parser.add_argument("-v","--verbose", help="increase output verbosity", type=int)
+#parser.add_argument("-v","--verbose", help="increase output verbosity", type=int, choices=[0,1,2])
+parser.add_argument("-$1","--$2", help="$3", type=$4, action="store_true")
+
+parsed_args = parser.parse_args()
+if parsed_args.$2:
+	pass
+endsnippet
