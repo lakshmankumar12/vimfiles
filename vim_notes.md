@@ -145,8 +145,9 @@ gw - format motion.
    gww                              (Bound to :update)
    gwx                              (set list toggle)
    gwy                              Duplicate buffer in new tab
-   gwz        Available
+   gwz                              (tabclose w/o prev tab)
 
+   gwB                              (setlocal noexpandtab)
    gwH                              ( gw H,J,K,L -> window close operations)
    gwJ
    gwK
@@ -155,7 +156,6 @@ gw - format motion.
    gwM                              ( plus/minus - vert resize -10 )
    gwS                              (set spell toggle)
    gwX                              (syntax sync from start)
-   gwT                              (setlocal noexpandtab)
 gx - netrw stuff                    (Bound to cscope operations)
 gy - none                           (Bound to set pastetoggle)
 gz - none                           (Bound to solarized toggle bg)

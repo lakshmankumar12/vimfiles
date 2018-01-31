@@ -79,6 +79,7 @@ if has('nvim')
   Plugin 'wbthomason/buildit.nvim'            " :Buildit .. async making
   Plugin 'jalvesaq/vimcmdline'                " Run lines individuall from a file
   Plugin 'lyuts/vim-rtags'                    " rtags client
+  Plugin 'brettanomyces/nvim-editcommand'     " <ctr-x><ctr-e> from the neovim-terminal
 else
   Plugin 'sjl/clam.vim'                       " Clam shellcmd
   Plugin 'vim-scripts/OmniCppComplete'        " c-based language auto-complete
@@ -110,7 +111,7 @@ if !has('nvim')
   set term=xterm-256color
   set t_Co=16
 endif
-set mouse=a
+set mouse=
 set previewheight=15
 set ruler
 set history=100
@@ -367,13 +368,17 @@ if has('nvim')
   execute "source " . g:my_home . "/.vim/plugin/svn_lakshman.vim"
   set scrollback=100000
   set timeout               " wait for 1s for keymaps
-  let g:terminus_default_prompt = '$'
   let g:python_host_prog = g:my_home . '/bin/python2.7'
   let g:python3_host_prog = g:my_home . '/bin/python3'
   set shell=$HOME/bin/zsh
+  " nvim-editcommand
+  let g:editcommand_prompt = '─'
+  tmap <M-o> <Plug>EditCommand
+
   augroup MyTermMappings
     autocmd!
     autocmd TermOpen * nnoremap <buffer> q a
+    autocmd TermOpen * nnoremap <buffer> gp a<C-P>
   augroup END
 endif
 
@@ -429,6 +434,7 @@ let g:vim_markdown_toc_autofit = 1
 autocmd FileType markdown syntax sync fromstart
 
 "ultisnip directories
+" myultisnippets just works because runtimepath include this vimrepo, via tdef!
 let g:UltiSnipsSnippetDirectories=["UltiSnips", "myultisnippets"]
 
 " DONT TYPE ANYTHING HERE SO THAT CENTOS-BRANCH CAN

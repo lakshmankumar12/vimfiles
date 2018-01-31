@@ -7,6 +7,7 @@ nmap <Leader>csc         <Esc>:call LoadCscopeToQuickFix(expand("<cword>"),"c")<
 nmap <Leader>adds        <Esc>:call Addspaces()<CR>
 " Who uses ex mode these days!
 nmap Q            <Esc>:tabclose<CR>:tabprev<CR>
+nmap gwz          <Esc>:tabclose<CR>
 " i dont use ZZ/ZQ much. Anything else on Z?!
 nmap Z            <Esc>:lclose<CR>:lopen<CR>
 nmap zp           <Esc>:cclose<CR>:copen<CR>
@@ -35,9 +36,9 @@ nmap gw>          <C-w>>
 nmap gwc          <C-w>c
 nmap gwv          <C-w>v
 nmap gws          <C-w>s
+nmap gwB          <Esc>:setlocal noexpandtab<CR>
 nmap gwS          <Esc>:set spell!<CR>
 nmap gwX          <Esc>:syntax sync fromstart<CR>
-nmap gwX          <Esc>:setlocal noexpandtab<CR>
 "these close other windows
 nmap gwH          <C-w>h<C-w>c
 nmap gwJ          <C-w>j<C-w>c
@@ -65,6 +66,10 @@ if has('nvim')
   tnoremap <M-h> <c-\><c-n>gT
   tnoremap <M-l> <c-\><c-n>gt
 endif
+nnoremap <M-h> gT
+nnoremap <M-l> gt
+inoremap <M-h> <Esc>gT
+inoremap <M-l> <Esc>gt
 
 "cscope'ish
 nmap gxs :cs find s <C-R>=expand("<cword>")<CR><CR>
