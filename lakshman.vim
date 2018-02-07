@@ -56,8 +56,10 @@ nnoremap gwf          <C-f>
 nnoremap gwm          gT
 
 if has('nvim')
-  nmap gwT        <Esc>:tabnew \| terminal<CR>
-  nmap gwV        <Esc>:vsplit \| terminal<CR>
+  nnoremap gwT        <Esc>:tabnew \| terminal<CR>
+  nnoremap <M-t>      <Esc>:tabnew \| terminal<CR>
+  nnoremap gwV        <Esc>:vsplit \| terminal<CR>
+
   tnoremap kj     <C-\><C-n>
   tnoremap <expr> <C-\><C-R> '<C-\><C-N>"'.nr2char(getchar()).'pi'
   tnoremap <expr> <M-[> '<C-\><C-N>"'.nr2char(getchar()).'pi'
@@ -65,6 +67,8 @@ if has('nvim')
   " Terminal mode:
   tnoremap <M-h> <c-\><c-n>gT
   tnoremap <M-l> <c-\><c-n>gt
+
+  inoremap <M-t>     <Esc>:tabnew \| terminal<CR>
 endif
 nnoremap <M-h> gT
 nnoremap <M-l> gt

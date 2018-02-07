@@ -155,6 +155,8 @@ gw - format motion.
    gwP                              ( plus/minus - vert resize +10 )
    gwM                              ( plus/minus - vert resize -10 )
    gwS                              (set spell toggle)
+   gwT                              (new terminal)
+   gwV                              (new vsplit terminal)
    gwX                              (syntax sync from start)
 gx - netrw stuff                    (Bound to cscope operations)
 gy - none                           (Bound to set pastetoggle)
@@ -355,6 +357,17 @@ P   : goto preview(not quickfix)
 T   : move window to a new tab
 }   : tag under cursor in preview
 ```
+
+## Alt-combinations
+
+
+```
+      |        Normal        |  Insert
+M-t   |      new tab term    |  <same-normal>
+M-h   |      go tab left     |  <same-normal>
+M-l   |      go tab right    |  <same-normal>
+```
+
 
 ## Command-mode
 
