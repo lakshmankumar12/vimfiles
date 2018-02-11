@@ -165,7 +165,16 @@ function! DumpPwdToTmuxClipBoard()
   "call writefile(split(@","\n"), '/dev/clipboard')
   call system("tmux loadb -", getcwd())
 endfunction
-map gwp   <Esc>:call DumpPwdToTmuxClipBoard()<CR>
+
+function! DumpFullPathToClipBoard()
+  if s:uname == "Darwin"
+    call system("pbcopy -pboard general", expand("%:p"))
+  else
+    call system("ssh lakshman.narayanan@$(cat /home/lakshman_narayanan/.mymacip) pbcopy", expand("%:p"))
+  endif
+endfunction
+
+map gwp   <Esc>:call DumpFullPathToClipBoard()<CR>
 
 function! DumpFullPathToTmuxClipBoard()
   "call writefile(split(@","\n"), '/dev/clipboard')
@@ -187,13 +196,6 @@ function! DumpToClipBoard()
   endif
 endfunction
 
-function! DumpNameToClipBoard()
-  "call writefile(split(@","\n"), '/dev/clipboard')
-  call system("xsel -i -b", expand("%:p"))
-  call system("xsel -i -b", expand("%:p"))
-  call system("xsel -i -a", expand("%:p"))
-endfunction
-
 map <Leader>clip :call DumpToClipBoard()<CR>
 vmap <C-c> y:call DumpToClipBoard()<CR>
 vmap gc    y:call DumpToClipBoard()<CR>
@@ -201,7 +203,6 @@ vmap <C-b> y:call DumpToTmuxClipBoard()<CR>
 vmap gt    y:call DumpToTmuxClipBoard()<CR>
 nmap gb    y:call DumpToClipBoard()<CR>
 nmap gb    :r !xsel -b<CR>
-map <Leader>cname :call DumpNameToClipBoard()<CR>
 
 "dont lose anything on a accidental ctrl-u/w
 inoremap <c-u> <c-g>u<c-u>

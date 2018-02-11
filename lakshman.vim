@@ -21,7 +21,7 @@ nmap glb          <Esc>:FzfBuffers<CR>
 nmap gl/          <Esc>:FzfBLines<CR>
 nmap gww          <Esc>:update<CR>
 
-nmap gO           <ESC>:let @"=expand("%:h")<CR><ESC>:e <C-R>"/
+nmap gO           <ESC>:let @"=expand("%:p")<CR><ESC>:e <C-R>"
 
 "window movements
 nmap gwh          <C-w>h

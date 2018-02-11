@@ -135,7 +135,7 @@ gw - format motion.
    gwm                              (Bound to gT)
    gwn                              (Bound to number/relative number toggle)
    gwo                              (Bound to Zoomwin)
-   gwp                              DumpPwdToTmuxClipBoard
+   gwp                              DumpFullPathToClipBoard
    gwq                              DumpFullPathToTmuxClipBoard
    gwr                              (set wrap toggle)
    gws                              (set to horizontal window split)     # remember and use this
@@ -481,7 +481,6 @@ map <Leader>cmai i#include<iostream><CR><CR>using namespace std;<CR><CR>int..n(i
 map <Leader>pyth i#!/usr/bin/python<CR><CR>from __future__ import print_fun..<CR><CR>def main():<CR>pass<CR><C-D><CR>if __name__ == '__main__':<CR>main()<CR>~
 map <Leader>tail 100A <Esc>A;<Esc>h
 map <Leader>clip :call DumpToClipBoard()<CR>
-map <Leader>cname :call DumpNameToClipBoard()<CR>
 nmap <Leader>name        <Esc>:echo expand("%:p")<CR>
 nmap <Leader>mshed       <Esc>:call ShedM()<CR>
 nmap <Leader>css         <Esc>:call LoadCscopeToQuickFix(expand("<cword>"),"s")<CR>
