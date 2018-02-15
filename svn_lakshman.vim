@@ -198,3 +198,18 @@ function! ShowSvnLog(...)
     let g:currentRepoPrefix = ChompedSystem(s:cmdName)
   endif
 endfunction
+
+" Gets a list of svn files - for now, what is edited
+function! ShowSVNFiles()
+    execute "tabnew %"
+    let old_makeprg=&makeprg
+    let old_errorformat=&errorformat
+    let &makeprg = "svndiffjustfiles"
+    let &errorformat="%f"
+    echom &makeprg
+    silent lmake
+    let &makeprg=old_makeprg
+    let &errorformat=old_errorformat
+    execute "ll"
+    silent call ShowSvnCurrDiff(expand("%:p"))
+endfunction

@@ -24,6 +24,9 @@ function! g:ListModified(lhs, rhs)
     silent call g:DiffCurrFile()
 endfunction
 
+" diffs the current file where cursor is
+"   it depends on global vars g:lhs, and g:rhs to know the left and right
+"   versions
 function! g:DiffCurrFile()
     let l:n = winnr('$')
     if l:n > 1
