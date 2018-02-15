@@ -7,7 +7,7 @@ nmap <Leader>csc         <Esc>:call LoadCscopeToQuickFix(expand("<cword>"),"c")<
 nmap <Leader>adds        <Esc>:call Addspaces()<CR>
 " Who uses ex mode these days!
 nmap Q            <Esc>:tabclose<CR>:tabprev<CR>
-nmap gwz          <Esc>:tabclose<CR>
+nmap gwx          <Esc>:tabclose<CR>
 " i dont use ZZ/ZQ much. Anything else on Z?!
 nmap Z            <Esc>:lclose<CR>:lopen<CR>
 nmap zp           <Esc>:cclose<CR>:copen<CR>
@@ -49,7 +49,7 @@ nmap gwt          <Esc>mZ:tabnew %<CR>`Z
 nmap gwg          <Esc>:GitGutterToggle<CR>
 nmap gwn          <Esc>:set relativenumber!<CR>:set nu!<CR>
 nmap gwr          <Esc>:set wrap!<CR>
-nmap gwx          <Esc>:set list!<CR>
+nmap gwz          <Esc>:set list!<CR>
 nmap gwd          <Esc>:diffoff<CR>
 nnoremap gwa          <C-b>
 nnoremap gwf          <C-f>

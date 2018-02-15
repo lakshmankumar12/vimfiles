@@ -143,9 +143,9 @@ gw - format motion.
    gwu                              (DumpTagToTmuxClip)
    gwv                              (set to vertical window split)       # remember and use this
    gww                              (Bound to :update)
-   gwx                              (set list toggle)
+   gwx                              (tabclose w/o prev tab)
    gwy                              Duplicate buffer in new tab
-   gwz                              (tabclose w/o prev tab)
+   gwz                              (set list toggle)
 
    gwB                              (setlocal noexpandtab)
    gwH                              ( gw H,J,K,L -> window close operations)
