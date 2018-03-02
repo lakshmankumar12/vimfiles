@@ -381,7 +381,19 @@ endfunction
 
 command! LoadErrors call LoadErrorsFunction()
 
+function! LoadListOfFilesFn(fileslist)
+    let old_makeprg=&makeprg
+    let old_errorformat=&errorformat
+    let &makeprg = "cat " . a:fileslist
+    let &errorformat="%f"
+    echom &makeprg
+    silent lmake
+    let &makeprg=old_makeprg
+    let &errorformat=old_errorformat
+    execute "ll"
+endfunction
 
+command! -nargs=1 LoadListOfFiles call LoadListOfFilesFn(<f-args>)
 
 " DONT TYPE ANYTHING HERE SO THAT CENTOS-BRANCH CAN
 " SAFELY ADD ITS OVERRIDES WITHOUT ISSUES

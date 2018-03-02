@@ -5,6 +5,7 @@ com! SVNRev    call DoSvnLogRevision(expand("<cWORD>"))
 com! SVNRDiff  call ShowSvnRevDiff(expand("<cWORD>"))
 com! SVNStatus call ShowSvnStatus()
 com! -nargs=* SVNLog  call ShowSvnLog(<f-args>)
+com! SVNedited call ShowSVNFiles()
 
 function! ShowSvnCurrDiff(filename)
   let s:fileType = &ft
@@ -210,6 +211,7 @@ function! ShowSVNFiles()
     silent lmake
     let &makeprg=old_makeprg
     let &errorformat=old_errorformat
+    execute "lopen"
     execute "ll"
     silent call ShowSvnCurrDiff(expand("%:p"))
 endfunction

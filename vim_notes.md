@@ -581,6 +581,8 @@ note: if you press opening-brace, there will be a space added. if you use closin
 
 # Paste just the matched pattern
 
+Search terms: search, register, paste
+
 ```
 in insert-mode
 c-x &
