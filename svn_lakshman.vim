@@ -25,6 +25,7 @@ function! ShowSvnCurrDiff(filename)
   setlocal bufhidden=hide
   setlocal noswapfile
   execute ":diffthis"
+  silent exec 'vertical resize '. string(&columns * 0.25)
   execute "wincmd l"
   execute ":diffthis"
   execute "normal 1G"

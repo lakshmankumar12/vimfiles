@@ -462,6 +462,13 @@ nmap <Leader>S <Plug>(SneakStreakBackward)
 <Leader>rc      Find the subclasses of the class under the cursor.
 ```
 
+## Enable auto-completion
+
+```
+call deoplete#enable()
+```
+
+
 ## QFGrep:
 
 ```

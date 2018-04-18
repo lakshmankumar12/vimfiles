@@ -69,6 +69,8 @@ if has('nvim')
   tnoremap <M-l> <c-\><c-n>gt
 
   inoremap <M-t>     <Esc>:tabnew \| terminal<CR>
+
+  autocmd BufWinEnter,WinEnter term://* startinsert
 endif
 nnoremap <M-h> gT
 nnoremap <M-l> gt

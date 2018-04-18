@@ -32,17 +32,20 @@ function! g:DiffCurrFile()
     if l:n > 1
       only
     endif
+    set nosplitright
     execute "silent windo diffoff"
     execute "ll"
     execute "wincmd v"
     silent exec 'Gedit ' . g:lhs . ':' . expand("%")
     diffthis
+    silent exec 'vertical resize '. string(&columns * 0.25)
     execute "wincmd l"
     if g:rhs != "--"
       silent exec 'Gedit ' . g:rhs . ':' . expand("%")
     endif
     diffthis
     execute "normal gg"
+    set splitright
 endfunction
 
 function! g:DiffNextLoc()
