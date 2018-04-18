@@ -56,7 +56,7 @@ nnoremap gwf          <C-f>
 nnoremap gwm          gT
 
 if has('nvim')
-  nnoremap gwT        <Esc>:tabnew \| terminal<CR>
+  nnoremap gwT        <Esc>:tabnew \| terminal<CR>a
   nnoremap <M-t>      <Esc>:tabnew \| terminal<CR>
   nnoremap gwV        <Esc>:vsplit \| terminal<CR>
 
