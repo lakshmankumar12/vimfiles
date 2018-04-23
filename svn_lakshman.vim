@@ -79,7 +79,9 @@ function! DoSvnAnnotate(filename)
   echom "Current line " s:lnum
   setlocal scrollbind
   let s:size = winwidth(0) * 1/4
+  set nosplitright
   execute "vsplit " . s:temp_name
+  set splitright
   execute "vert resize " . s:size
   let s:cmdName = "svn info " . a:filename . " | grep Path: | cut -d' ' -f2"
   let s:repoName = system(s:cmdName)
