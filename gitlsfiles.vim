@@ -3,6 +3,7 @@ nnoremap <silent> <Leader>gg :call g:DiffCurrFile()<CR>
 nnoremap <silent> <Leader>gj :call g:DiffNextLoc()<CR>
 nnoremap <silent> <Leader>gk :call g:DiffPrevLoc()<CR>
 nnoremap <silent> <Leader>go :call g:DiffOff()<CR>
+nnoremap <silent> <Leader>gd :call g:DiffCurrentWins()<CR>
 
 command! -nargs=* Glistmod call g:ListModified(<f-args>)
 command! Gbase call g:ListModified("base","--")
@@ -48,6 +49,25 @@ function! g:DiffCurrFile()
     set splitright
 endfunction
 
+function! g:DiffCurrentWins()
+    let l:n = winnr('$')
+    if l:n == 1
+        "altreast 2 windows required
+        return "Nothing"
+    endif
+    execute "normal mZ"
+    silent exec 'windo diffoff'
+    " utmost 4 windows for the script func to work. We will just come to
+    " top-left
+    silent exec 'wincmd h'
+    silent exec 'wincmd k'
+    silent exec 'diffthis'
+    silent exec 'wincmd l'
+    silent exec 'diffthis'
+    execute "normal `Z"
+endfunction
+
+
 function! g:DiffNextLoc()
     wincmd l
     execute "windo diffoff"
@@ -65,9 +85,10 @@ function! g:DiffPrevLoc()
 endfunction
 
 function! g:DiffOff()
+    let l:n = winnr()
     execute "normal mZ"
-    windo set nodiff!
-    only
+    silent exec 'windo diffoff'
+    execute l:n . "wincmd w"
     execute "normal `Z"
 endfunction
 

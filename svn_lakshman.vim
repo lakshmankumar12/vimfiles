@@ -16,7 +16,9 @@ function! ShowSvnCurrDiff(filename)
   if bufexists(s:temp_name)
           execute "bd! " . s:temp_name
   endif
+  set nosplitright
   execute "vnew " . s:temp_name
+  set splitright
   let s:cmdName = "svn cat -rBASE " . a:filename
   silent execute "0r !" . s:cmdName
   execute "setlocal filetype=" . s:fileType
@@ -157,7 +159,9 @@ function! ShowSvnRevDiff(filename)
   setlocal noswapfile
   execute ":diffthis"
 
+  set nosplitright
   execute "vnew " . s:lbuf_name
+  set splitright
   let s:cmdName = "svn cat -r" . s:left_rev . " " . s:svn_file_arg
   silent execute "%d"
   silent execute "0r !" . s:cmdName

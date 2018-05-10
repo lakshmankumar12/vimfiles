@@ -115,8 +115,8 @@ gh - enter select mode              (Rebound to unitish operations)
   ghd                             easy-clip d
   ghD                             easy-clip dd
 gl - none                           (Bound to FZF)
-  gll                             FZF
-  gloo                            AryakaFileOpen
+  gll                             FZF (files in the curr folder)
+  gloo                            AryakaFileOpen (git ls files)
   glb                             buffers
   gl/                             BufferLines
 gw - format motion.
@@ -159,7 +159,20 @@ gw - format motion.
    gwV                              (new vsplit terminal)
    gwX                              (syntax sync from start)
 gx - netrw stuff                    (Bound to cscope operations)
-gy - none                           (Bound to set pastetoggle)
+gy
+   gyy                              (Bound to set pastetoggle)
+   gyo                              Open preview
+   gyx                              Close preview
+   gyp                              Plus/Increase preview size
+   gym                              Minus/Decrease preview size
+   gyu                              Up Scroll Preview
+   gyd                              Down scroll preview
+
+   gya                              AddACurrentPosition
+   gyl                              LoadCurrPositions
+   gye                              EditCurrPositions
+
+
 gz - none                           (Bound to solarized toggle bg)
 
 gA                         (Free)
@@ -886,6 +899,13 @@ You can skip to any file of interest. Just
 gwo
 :bufdo diffoff
 and <Leader>gg to diff the file
+```
+
+General diff 2 files
+
+```
+<Leader>go  -- diff off
+<Leader>gd  -- diff 2 wins
 ```
 
 # vimscript

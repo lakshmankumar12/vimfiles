@@ -6,7 +6,7 @@ nmap <Leader>csg         <Esc>:call LoadCscopeToQuickFix(expand("<cword>"),"g")<
 nmap <Leader>csc         <Esc>:call LoadCscopeToQuickFix(expand("<cword>"),"c")<CR>
 nmap <Leader>adds        <Esc>:call Addspaces()<CR>
 " Who uses ex mode these days!
-nmap Q            <Esc>:tabclose<CR>:tabprev<CR>
+nmap Q            <Esc>:tabclose\|tabprev<CR><Esc>
 nmap gwx          <Esc>:tabclose<CR>
 " i dont use ZZ/ZQ much. Anything else on Z?!
 nmap Z            <Esc>:lclose<CR>:lopen<CR>
@@ -56,7 +56,7 @@ nnoremap gwf          <C-f>
 nnoremap gwm          gT
 
 if has('nvim')
-  nnoremap gwT        <Esc>:tabnew \| terminal<CR>a
+  nnoremap gwT        <Esc>:tabnew \| terminal<CR>
   nnoremap <M-t>      <Esc>:tabnew \| terminal<CR>
   nnoremap gwV        <Esc>:vsplit \| terminal<CR>
 
@@ -93,9 +93,9 @@ nmap gxf <Esc>:FzfHistory<CR>
 nmap gxn :call SwitchBetweenDiffFolds('N')<CR>
 nmap gxp :call SwitchBetweenDiffFolds('P')<CR>
 
-nmap gy           <Esc>:set paste!<CR>
+nmap gyy          <Esc>:set paste!<CR>
 nmap gB           <Esc>:FzfBuffers<CR>
-call togglebg#map("gz")
+nmap gz           <Esc>:ToggleBG<CR>
 imap kj           <Esc>
 cmap kj           <Esc>
 imap jk           <Esc>
@@ -396,6 +396,103 @@ function! LoadListOfFilesFn(fileslist)
 endfunction
 
 command! -nargs=1 LoadListOfFiles call LoadListOfFilesFn(<f-args>)
+
+function! IncreaseSizeOfPreviewFn()
+    let l:n = winnr()            "note down where we were
+    silent! wincmd P             "go to preview
+    if &previewwindow            "if we really get there...
+        exe "resize +2"
+        "go back where we came from
+        execute l:n . "wincmd w"
+    endif
+endfunction
+
+function! DecreaseSizeOfPreviewFn()
+    let l:n = winnr()            "note down where we were
+    silent! wincmd P             "go to preview
+    if &previewwindow            "if we really get there...
+        exe "resize -2"
+        "go back where we came from
+        execute l:n . "wincmd w"
+    endif
+endfunction
+
+function! ClosePreviewFn()
+    let l:n = winnr()            "note down where we were
+    silent! wincmd P             "go to preview
+    if &previewwindow            "if we really get there...
+        exe ":close"
+        let l:n = l:n - 1
+        "go back where we came from
+        execute l:n . "wincmd w"
+    endif
+endfunction
+
+function! ScrollUpInPreviewFn()
+    let l:n = winnr()            "note down where we were
+    silent! wincmd P             "go to preview
+    if &previewwindow            "if we really get there...
+        exe "normal! Lj"
+        "go back where we came from
+        execute l:n . "wincmd w"
+    endif
+endfunction
+
+function! ScrollDownInPreviewFn()
+    let l:n = winnr()            "note down where we were
+    silent! wincmd P             "go to preview
+    if &previewwindow            "if we really get there...
+        exe "normal! Hk"
+        "go back where we came from
+        execute l:n . "wincmd w"
+    endif
+endfunction
+
+nnoremap gyo <Esc>:exe "ptjump " . expand("<cword>")<Esc>
+nnoremap gyx <Esc>:call ClosePreviewFn()<Esc>
+
+nmap <silent> <Plug>IncreaseSizeOfPreview <Esc>:call IncreaseSizeOfPreviewFn()<CR>:call repeat#set("\<Plug>IncreaseSizeOfPreview", v:count)<CR>
+nmap gyp <Plug>IncreaseSizeOfPreview
+
+nmap <silent> <Plug>DecreaseSizeOfPreview <Esc>:call DecreaseSizeOfPreviewFn()<CR>:call repeat#set("\<Plug>DecreaseSizeOfPreview", v:count)<CR>
+nmap gym <Plug>DecreaseSizeOfPreview
+
+nmap <silent> <Plug>ScrollUpInPreview <Esc>:call ScrollUpInPreviewFn()<CR>:call repeat#set("\<Plug>ScrollUpInPreview", v:count)<CR>
+nmap gyu <Plug>ScrollUpInPreview
+
+nmap <silent> <Plug>ScrollDownInPreview <Esc>:call ScrollDownInPreviewFn()<CR>:call repeat#set("\<Plug>ScrollDownInPreview", v:count)<CR>
+nmap gyd <Plug>ScrollDownInPreview
+
+function! AddACurrentPosition()
+    let g:currLkPositionsFile = "/tmp/vimPos." . getpid()
+    let l:name = input('Enter name: ')
+    let l:currLine = line(".")
+    let l:cmd = "sed '" . l:currLine . "q;d' " . expand("%") . " | tr -d '\n' "
+    let l:line = system(l:cmd)
+    let l:final = expand("%") . ":" . l:currLine . ":" . l:name . "|" . l:line
+    let l:cmd = 'echo ' . shellescape(l:final) . ' >> ' . g:currLkPositionsFile
+    let l:line = system(l:cmd)
+    echom l:final
+endfunction
+
+function! LoadCurrPositions()
+    execute "normal mZ"
+    execute "lf " . g:currLkPositionsFile
+    execute "lclose"
+    execute "lopen"
+    execute "wincmd p"
+    execute "normal `Z"
+    execute "wincmd j"
+endfunction
+
+function! EditCurrPositions()
+    execute "edit " . g:currLkPositionsFile
+endfunction
+
+nnoremap gya <Esc>:call AddACurrentPosition()<CR>
+nnoremap gyl <Esc>:call LoadCurrPositions()<CR>
+nnoremap gye <Esc>:call EditCurrPositions()<CR>
+
 
 " DONT TYPE ANYTHING HERE SO THAT CENTOS-BRANCH CAN
 " SAFELY ADD ITS OVERRIDES WITHOUT ISSUES
