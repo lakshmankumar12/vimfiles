@@ -224,7 +224,6 @@ function! MakeMp3Function()
   execute s:cmd
   let s:cmd="!/tmp/cmds"
   execute s:cmd
-  execute "!ls *mp3 | while read i ; do id3v2 -s $i ; done"
   execute "%d"
   execute "0r !find_tags_of_files.py *mp3"
 endfunction
