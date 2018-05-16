@@ -396,6 +396,8 @@ endfunction
 
 command! -nargs=1 LoadListOfFiles call LoadListOfFilesFn(<f-args>)
 
+au BufNewFile,BufRead *.applescript set filetype=applescript
+
 function! IncreaseSizeOfPreviewFn()
     let l:n = winnr()            "note down where we were
     silent! wincmd P             "go to preview
@@ -491,7 +493,6 @@ endfunction
 nnoremap gya <Esc>:call AddACurrentPosition()<CR>
 nnoremap gyl <Esc>:call LoadCurrPositions()<CR>
 nnoremap gye <Esc>:call EditCurrPositions()<CR>
-
 
 " DONT TYPE ANYTHING HERE SO THAT CENTOS-BRANCH CAN
 " SAFELY ADD ITS OVERRIDES WITHOUT ISSUES

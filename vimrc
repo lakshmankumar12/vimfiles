@@ -68,6 +68,7 @@ Plugin 'vim-scripts/vis'                      " search/replace in visual-block
 Plugin 'svermeulen/vim-easyclip'              " black-hole cut-paste
 Plugin 'ryanoasis/vim-devicons'               " super-duper fonts
 Plugin 'vim-scripts/iptables'                 " iptables filetype
+Plugin 'vim-scripts/applescript.vim'          " applescript
 Plugin 'vim-scripts/listmaps.vim'             " Provides :Listmaps , very useful to see which plugin set a map
 Plugin 'Yggdroot/indentLine'                  " show lines for indenting
 Plugin 'lakshmankumar12/jedi-vim'             " python goto definition
