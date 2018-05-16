@@ -493,6 +493,7 @@ endfunction
 nnoremap gya <Esc>:call AddACurrentPosition()<CR>
 nnoremap gyl <Esc>:call LoadCurrPositions()<CR>
 nnoremap gye <Esc>:call EditCurrPositions()<CR>
+nnoremap gyt <Esc>:lclose\|Toc<CR>
 
 " DONT TYPE ANYTHING HERE SO THAT CENTOS-BRANCH CAN
 " SAFELY ADD ITS OVERRIDES WITHOUT ISSUES

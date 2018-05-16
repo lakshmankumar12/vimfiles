@@ -172,6 +172,8 @@ gy
    gyl                              LoadCurrPositions
    gye                              EditCurrPositions
 
+   gyt                              Open Toc
+
 
 gz - none                           (Bound to solarized toggle bg)
 
@@ -602,6 +604,8 @@ note: if you press opening-brace, there will be a space added. if you use closin
 # Paste just the matched pattern
 
 Search terms: search, register, paste
+
+Remember/Mnemonic: c-r as usual for command mode, c-x for insert, Its shift-7 always.
 
 ```
 in insert-mode
