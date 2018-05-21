@@ -87,7 +87,6 @@ else
 endif
 Plugin 'SirVer/ultisnips'                     " snippets engine
 Plugin 'honza/vim-snippets'                   " snippets repo
-Plugin 'vim-scripts/taglist.vim'              " get list of tags in current file on the side
 Plugin 'file://' . $HOME . '/github/vimfiles', {'rtp': 'tdef/'}         " my tdef file
 
 " All of your Plugins must be added before the following line

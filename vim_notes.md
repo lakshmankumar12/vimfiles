@@ -532,6 +532,9 @@ the direct invocation is        :     `gx`         ,and the cscope-char
 Quickfix invocation is          :     `<Leader>cs` ,and the cscope-char
                                          (remember \css, \csg, \csc rarely will use reset)
 
+## tags
+
+:Tagbar
 
 # Navigation in vim
 
