@@ -475,10 +475,11 @@ function! LoadCurrPositions()
 endfunction
 
 function! SnarfCurrLocationList()
+    let @z="UnsetZRegisterBeforeSearch"
     execute "wincmd j"
-    execute 'normal 03f|l"zy$'
+    execute 'normal 02f>ll"zy$'
     execute "wincmd k"
-    let @/=@z
+    let @/="\\V" . @z
     execute "normal n"
 endfunction
 
@@ -491,7 +492,7 @@ function! ReplaceACurrentPosition()
     let l:replLine = input('Enter line to replace:')
     let l:cmd = "sed -e '" . l:replLine . "d' -i " . g:currLkPositionsFile
     let l:discard = system(l:cmd)
-    let l:final = expand("%") . ":" . l:currLine . ":" . l:name . "|" . l:line
+    let l:final = expand("%") . ":" . l:currLine . ": <<" . l:name . ">> " . l:line
     let l:replLine = l:replLine - 1
     let l:cmd = 'sed -e "' . l:replLine . "a " . l:final . '" -i ' . g:currLkPositionsFile
     let l:line = system(l:cmd)
@@ -507,7 +508,7 @@ function! AddACurrentPosition()
     let l:currLine = line(".")
     let l:cmd = "sed '" . l:currLine . "q;d' " . expand("%") . " | tr -d '\n' "
     let l:line = system(l:cmd)
-    let l:final = expand("%") . ":" . l:currLine . ":" . l:name . "|" . l:line
+    let l:final = expand("%") . ":" . l:currLine . ": <<" . l:name . ">> " . l:line
     let l:cmd = 'echo ' . shellescape(l:final) . ' >> ' . g:currLkPositionsFile
     let l:line = system(l:cmd)
     call LoadCurrPositions()
