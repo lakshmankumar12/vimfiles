@@ -464,18 +464,6 @@ nmap gyu <Plug>ScrollUpInPreview
 nmap <silent> <Plug>ScrollDownInPreview <Esc>:call ScrollDownInPreviewFn()<CR>:call repeat#set("\<Plug>ScrollDownInPreview", v:count)<CR>
 nmap gyd <Plug>ScrollDownInPreview
 
-function! AddACurrentPosition()
-    let g:currLkPositionsFile = "/tmp/vimPos." . getpid()
-    let l:name = input('Enter name: ')
-    let l:currLine = line(".")
-    let l:cmd = "sed '" . l:currLine . "q;d' " . expand("%") . " | tr -d '\n' "
-    let l:line = system(l:cmd)
-    let l:final = expand("%") . ":" . l:currLine . ":" . l:name . "|" . l:line
-    let l:cmd = 'echo ' . shellescape(l:final) . ' >> ' . g:currLkPositionsFile
-    let l:line = system(l:cmd)
-    echom l:final
-endfunction
-
 function! LoadCurrPositions()
     execute "normal mZ"
     execute "lf " . g:currLkPositionsFile
@@ -486,6 +474,47 @@ function! LoadCurrPositions()
     execute "wincmd j"
 endfunction
 
+function! SnarfCurrLocationList()
+    execute "wincmd j"
+    execute 'normal 03f|l"zy$'
+    execute "wincmd k"
+    let @/=@z
+    execute "normal n"
+endfunction
+
+function! ReplaceACurrentPosition()
+    let g:currLkPositionsFile = "/tmp/vimPos." . getpid()
+    let l:name = input('Enter name: ')
+    let l:currLine = line(".")
+    let l:cmd = "sed '" . l:currLine . "q;d' " . expand("%") . " | tr -d '\n' "
+    let l:line = system(l:cmd)
+    let l:replLine = input('Enter line to replace:')
+    let l:cmd = "sed -e '" . l:replLine . "d' -i " . g:currLkPositionsFile
+    let l:discard = system(l:cmd)
+    let l:final = expand("%") . ":" . l:currLine . ":" . l:name . "|" . l:line
+    let l:replLine = l:replLine - 1
+    let l:cmd = 'sed -e "' . l:replLine . "a " . l:final . '" -i ' . g:currLkPositionsFile
+    let l:line = system(l:cmd)
+    call LoadCurrPositions()
+    let l:replLine = l:replLine + 1
+    execute "normal " . l:replLine . "G"
+endfunction
+
+
+function! AddACurrentPosition()
+    let g:currLkPositionsFile = "/tmp/vimPos." . getpid()
+    let l:name = input('Enter name: ')
+    let l:currLine = line(".")
+    let l:cmd = "sed '" . l:currLine . "q;d' " . expand("%") . " | tr -d '\n' "
+    let l:line = system(l:cmd)
+    let l:final = expand("%") . ":" . l:currLine . ":" . l:name . "|" . l:line
+    let l:cmd = 'echo ' . shellescape(l:final) . ' >> ' . g:currLkPositionsFile
+    let l:line = system(l:cmd)
+    call LoadCurrPositions()
+    execute "normal G"
+endfunction
+
+
 function! EditCurrPositions()
     execute "edit " . g:currLkPositionsFile
 endfunction
@@ -493,6 +522,8 @@ endfunction
 nnoremap gya <Esc>:call AddACurrentPosition()<CR>
 nnoremap gyl <Esc>:call LoadCurrPositions()<CR>
 nnoremap gye <Esc>:call EditCurrPositions()<CR>
+nnoremap gyr <Esc>:call ReplaceACurrentPosition()<CR>
+nnoremap gys <Esc>:call SnarfCurrLocationList()<CR>
 nnoremap gyt <Esc>:lclose\|Toc<CR>
 
 " DONT TYPE ANYTHING HERE SO THAT CENTOS-BRANCH CAN

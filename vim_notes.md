@@ -171,6 +171,8 @@ gy
    gya                              AddACurrentPosition
    gyl                              LoadCurrPositions
    gye                              EditCurrPositions
+   gyr                              ReplaceACurrentPosition
+   gys                              SnarfCurrLocationList
 
    gyt                              Open Toc
 
