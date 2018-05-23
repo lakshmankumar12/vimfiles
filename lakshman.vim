@@ -489,16 +489,23 @@ function! ReplaceACurrentPosition()
     let l:currLine = line(".")
     let l:cmd = "sed '" . l:currLine . "q;d' " . expand("%") . " | tr -d '\n' "
     let l:line = system(l:cmd)
+    let l:line = substitute(l:line, '"', '\\"', "g")
+    echom l:line
     let l:replLine = input('Enter line to replace:')
     let l:cmd = "sed -e '" . l:replLine . "d' -i " . g:currLkPositionsFile
     let l:discard = system(l:cmd)
     let l:final = expand("%") . ":" . l:currLine . ": <<" . l:name . ">> " . l:line
-    let l:replLine = l:replLine - 1
-    let l:cmd = 'sed -e "' . l:replLine . "a " . l:final . '" -i ' . g:currLkPositionsFile
+    if l:replLine == "1"
+        let l:cmd = 'sed -e "' . l:replLine . "i " . l:final . '" -i ' . g:currLkPositionsFile
+    else
+        let l:replLine = l:replLine - 1
+        let l:cmd = 'sed -e "' . l:replLine . "a " . l:final . '" -i ' . g:currLkPositionsFile
+    endif
     let l:line = system(l:cmd)
     call LoadCurrPositions()
     let l:replLine = l:replLine + 1
     execute "normal " . l:replLine . "G"
+    execute ":" . l:replLine . "ll"
 endfunction
 
 
@@ -513,6 +520,8 @@ function! AddACurrentPosition()
     let l:line = system(l:cmd)
     call LoadCurrPositions()
     execute "normal G"
+    let l:replLine = line(".")
+    execute ":" . l:replLine . "ll"
 endfunction
 
 
