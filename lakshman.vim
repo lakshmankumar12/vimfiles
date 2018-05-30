@@ -474,7 +474,7 @@ function! LoadCurrPositions()
     execute "wincmd j"
 endfunction
 
-function! SnarfCurrLocationList()
+function! SnarfCurrLocationListToSearch()
     let @z="UnsetZRegisterBeforeSearch"
     execute "wincmd j"
     execute 'normal 02f>ll"zy$'
@@ -524,6 +524,20 @@ function! AddACurrentPosition()
     execute ":" . l:replLine . "ll"
 endfunction
 
+function! ZapCurrentPosition()
+    execute "wincmd k"
+    execute "normal mZ"
+    execute "wincmd j"
+    let l:replLine = line(".")
+    let l:cmd = "sed -e '" . l:replLine . "d' -i " . g:currLkPositionsFile
+    let l:line = system(l:cmd)
+    execute "lf " . g:currLkPositionsFile
+    execute "normal " . l:replLine . "G"
+    execute "wincmd k"
+    execute "normal `Z"
+    execute "wincmd j"
+endfunction
+
 
 function! EditCurrPositions()
     execute "edit " . g:currLkPositionsFile
@@ -533,7 +547,7 @@ nnoremap gya <Esc>:call AddACurrentPosition()<CR>
 nnoremap gyl <Esc>:call LoadCurrPositions()<CR>
 nnoremap gye <Esc>:call EditCurrPositions()<CR>
 nnoremap gyr <Esc>:call ReplaceACurrentPosition()<CR>
-nnoremap gys <Esc>:call SnarfCurrLocationList()<CR>
+nnoremap gys <Esc>:call SnarfCurrLocationListToSearch()<CR>
 nnoremap gyt <Esc>:lclose\|Toc<CR>
 
 " DONT TYPE ANYTHING HERE SO THAT CENTOS-BRANCH CAN

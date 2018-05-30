@@ -59,7 +59,7 @@ $ - end of line
 ; repeat f/t
 ' goto mark to beg of line
 " to select register for yank/paste
-, RECLAIM  (same as ;)
+, RECLAIM  (same as ; but in opp direction)
 . repeast last action
 | goto column
 \ Leader
@@ -919,28 +919,14 @@ General diff 2 files
 
 # vimscript
 
-```
-#get output of a command into a varilable
-let varName = system("command with args in a single string")
+* See lang-notes
 
-#echo messagnes and show them
-echom "message"
-messages
+# Sparkling vim features to brag with others
 
-#notes on variables
-:help internal-variables
+* Selection can go back and forth -  if you didn't start at the right point.
+* Selection can select objects wherever you are (word, within brace/quote/any-char, line)
 
-```
-* buffer-variable    b:     Local to the current buffer.
-* window-variable    w:     Local to the current window.
-* tabpage-variable   t:     Local to the current tab page.
-* global-variable    g:     Global.
-* local-variable     l:     Local to a function.
-* script-variable    s:     Local to a :source'ed Vim script.
-* function-argument  a:     Function argument (only inside a function).
-* vim-variable       v:     Global, predefined by Vim.
-
-## Snippets
+# Snippets
 
 Read about them here - http://vimcasts.org/episodes/meet-ultisnips/
 Look for snippets in - https://github.com/honza/vim-snippets -> UltiSnips
@@ -957,6 +943,13 @@ Look for snippets in - https://github.com/honza/vim-snippets -> UltiSnips
     ```
     cbl<tab>   - for code blocks
     ```
+
+* python
+    * ifmain
+    * if
+    * for
+    * with
+    * class
 
 # Syntax highlighting in vim
 
