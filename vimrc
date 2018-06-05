@@ -62,6 +62,7 @@ Plugin 'Shougo/neoyank.vim'                   " :Unite history/yank
 Plugin 'kana/vim-textobj-user'                " pre-req for indent/line
 Plugin 'kana/vim-textobj-indent'              " indent text-object
 Plugin 'kana/vim-textobj-line'                " line text-object
+Plugin 'kana/vim-textobj-lastpat'             " last search text-object
 Plugin 'bps/vim-textobj-python'               " python function/class selector
 Plugin 'thinca/vim-textobj-between'           " between a char if af
 Plugin 'vim-scripts/vis'                      " search/replace in visual-block

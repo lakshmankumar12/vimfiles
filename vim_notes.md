@@ -89,6 +89,7 @@ gt - next tab                                                      gT   -- prev 
 gu - lower case text                                               gU   -- upper-case text
 gv - repeat previous virtual selection
 g0 - screen beg line
+g_ - last char. VERY USEFUL. Removes the annoying newline selection when doing $
 g~ - toggle case (of motion)
 g#/g* - like #/*, but no \<..\>
 g$ - screen-end
@@ -156,7 +157,7 @@ gw - format motion.
    gwM                              ( plus/minus - vert resize -10 )
    gwS                              (set spell toggle)
    gwT                              (new terminal)
-   gwV                              (new vsplit terminal)
+   gwV                              vsplit and come back to same window
    gwX                              (syntax sync from start)
 gx - netrw stuff                    (Bound to cscope operations)
 gy
@@ -173,6 +174,7 @@ gy
    gye                              EditCurrPositions
    gyr                              ReplaceACurrentPosition
    gys                              SnarfCurrLocationList
+   gyz                              ZapCurrentPosition
 
    gyt                              Open Toc
 
@@ -553,9 +555,10 @@ Standard from vim:
 iw  aw
 i"  a"
 i'  a'
-i(  a(
+i(  a(  ib/ab is a short-hand for parenthesis
 i{  a{
 i[  a[
+it  at   between tag.
 ```
 
 indent-plugin:

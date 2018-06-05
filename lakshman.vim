@@ -54,11 +54,11 @@ nmap gwd          <Esc>:diffoff<CR>
 nnoremap gwa          <C-b>
 nnoremap gwf          <C-f>
 nnoremap gwm          gT
+nnoremap gwV        <Esc>:vsplit<CR><C-w>h
 
 if has('nvim')
   nnoremap gwT        <Esc>:tabnew \| terminal<CR>
-  nnoremap <M-t>      <Esc>:tabnew \| terminal<CR>
-  nnoremap gwV        <Esc>:vsplit \| terminal<CR>
+  nnoremap <M-t>      <Esc>:vsplit \| terminal<CR>
 
   tnoremap kj     <C-\><C-n>
   tnoremap <expr> <C-\><C-R> '<C-\><C-N>"'.nr2char(getchar()).'pi'
@@ -484,17 +484,22 @@ function! SnarfCurrLocationListToSearch()
 endfunction
 
 function! ReplaceACurrentPosition()
+    "Execute this after you :ll on the position to change
+    "And be on the main-window
     let g:currLkPositionsFile = "/tmp/vimPos." . getpid()
-    let l:name = input('Enter name: ')
     let l:currLine = line(".")
     let l:cmd = "sed '" . l:currLine . "q;d' " . expand("%") . " | tr -d '\n' "
     let l:line = system(l:cmd)
     let l:line = substitute(l:line, '"', '\\"', "g")
-    echom l:line
-    let l:replLine = input('Enter line to replace:')
+    let l:origName = expand("%")
+    execute "wincmd j"
+    let l:replLine = line(".")
+    let l:cmd = "sed -n -e 's/.*<<\\(.*\\)>>.*$/\\1/' -e '" . l:replLine . "p' " . g:currLkPositionsFile
+    let l:name = system(l:cmd)
+    let l:name = substitute(l:name, '\n\+$', '', '')
     let l:cmd = "sed -e '" . l:replLine . "d' -i " . g:currLkPositionsFile
     let l:discard = system(l:cmd)
-    let l:final = expand("%") . ":" . l:currLine . ": <<" . l:name . ">> " . l:line
+    let l:final = l:origName . ":" . l:currLine . ": <<" . l:name . ">> " . l:line
     if l:replLine == "1"
         let l:cmd = 'sed -e "' . l:replLine . "i " . l:final . '" -i ' . g:currLkPositionsFile
     else
@@ -502,6 +507,7 @@ function! ReplaceACurrentPosition()
         let l:cmd = 'sed -e "' . l:replLine . "a " . l:final . '" -i ' . g:currLkPositionsFile
     endif
     let l:line = system(l:cmd)
+    execute "wincmd k"
     call LoadCurrPositions()
     let l:replLine = l:replLine + 1
     execute "normal " . l:replLine . "G"
@@ -525,6 +531,7 @@ function! AddACurrentPosition()
 endfunction
 
 function! ZapCurrentPosition()
+    " Call this from location list window!
     execute "wincmd k"
     execute "normal mZ"
     execute "wincmd j"
@@ -548,6 +555,7 @@ nnoremap gyl <Esc>:call LoadCurrPositions()<CR>
 nnoremap gye <Esc>:call EditCurrPositions()<CR>
 nnoremap gyr <Esc>:call ReplaceACurrentPosition()<CR>
 nnoremap gys <Esc>:call SnarfCurrLocationListToSearch()<CR>
+nnoremap gyz <Esc>:call ZapCurrentPosition()<CR>
 nnoremap gyt <Esc>:lclose\|Toc<CR>
 
 " DONT TYPE ANYTHING HERE SO THAT CENTOS-BRANCH CAN
