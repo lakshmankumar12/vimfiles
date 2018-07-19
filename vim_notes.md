@@ -579,11 +579,12 @@ if      Hrmph.. conflicts with python
 
 python:
 ```
-if
+im  (edited from if so that it works)
 ic
 
 (also) [pf / ]pf - next/prev function
 (also) [pc / ]pc - next/prev class
+(also) [-  /     - up an indent (from indentwise plugin)
 ```
 
 # surround
@@ -953,6 +954,7 @@ Look for snippets in - https://github.com/honza/vim-snippets -> UltiSnips
     * for
     * with
     * class
+    * argp
 
 # Syntax highlighting in vim
 

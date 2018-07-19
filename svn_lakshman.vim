@@ -5,7 +5,16 @@ com! SVNRev    call DoSvnLogRevision(expand("<cWORD>"))
 com! SVNRDiff  call ShowSvnRevDiff(expand("<cWORD>"))
 com! SVNStatus call ShowSvnStatus()
 com! -nargs=* SVNLog  call ShowSvnLog(<f-args>)
-com! SVNedited call ShowSVNFiles()
+com! SVNEdited call ShowSVNFiles()
+com! SVNAnnoParentRev call DoSvnAnnoRevision(g:currentLoggedFile, g:currentLoggedSVNRevParentForFile)
+com! SVNAnnoAskRev -nargs=1 call DoSvnAnnoRevision(g:currentLoggedFile, <f-args>)
+
+
+" ALL globals
+" g:currentRepoPrefix
+" g:currentLoggedSVNRev
+" g:currentLoggedFile
+" g:currentLoggedSVNRevParentForFile
 
 function! ShowSvnCurrDiff(filename)
   let s:fileType = &ft
@@ -86,8 +95,9 @@ function! DoSvnAnnotate(filename)
   set splitright
   execute "vert resize " . s:size
   let s:cmdName = "svn info " . a:filename . " | grep Path: | cut -d' ' -f2"
-  let s:repoName = system(s:cmdName)
-  let s:cmdName = "svn annotate " . s:repoName
+  let s:repoFileName = system(s:cmdName)
+  let g:currentLoggedFile = s:repoFileName
+  let s:cmdName = "svn annotate " . s:repoFileName
   silent execute "0r !" . s:cmdName
   set nomodified
   setlocal buftype=nofile
@@ -126,6 +136,7 @@ function! ShowSvnRevDiff(filename)
   let s:cmdName = "echo " . a:filename . " | sed 's#^/[^/]*/[^/]*/##'"
   let s:svn_file_arg_latter = ChompedSystem(s:cmdName)
   let s:svn_file_arg = g:currentRepoPrefix . "/" . s:svn_file_arg_latter
+  let g:currentLoggedFile = s:svn_file_arg
   let s:cmdName = "svn diff -c" . g:currentLoggedSVNRev . " " . s:svn_file_arg . " > /tmp/svn_plugin.patch"
   echom "command is " . s:cmdName
   call system(s:cmdName)
@@ -133,6 +144,7 @@ function! ShowSvnRevDiff(filename)
   let s:left_rev = ChompedSystem(s:cmdName)
   let s:cmdName = "svn info -r" . s:left_rev . " " . s:svn_file_arg . " | grep 'Last Changed Rev:' | cut -d' ' -f4"
   let s:left_rev = ChompedSystem(s:cmdName)
+  let g:currentLoggedSVNRevParentForFile = s:left_rev
 
   "prepare names for buffers
   let s:right_rev = g:currentLoggedSVNRev
@@ -178,6 +190,47 @@ function! ShowSvnRevDiff(filename)
   execute "normal zz"
 endfunction
 
+function! DoSvnAnnoRevision(filename, revision)
+  let s:temp_name = "_rev_" . a:revision . "_" . s:filename_t
+  if bufexists(s:temp_name)
+          execute "bd! " . s:temp_name
+  endif
+  let s:lnum = line(".")
+  execute "tabnew " . s:temp_name
+  let s:cmdName = "svn cat -r" . a:revision . " " . a:filename
+  silent execute "0r !" . s:cmdName
+  silent execute "0r !echo " . s:cmdName
+  set nomodified
+  setlocal buftype=nofile
+  setlocal bufhidden=hide
+  setlocal noswapfile
+
+  let s:temp_name = s:temp_name . "_anno"
+  if bufexists(s:temp_name)
+          execute "bd! " . s:temp_name
+  endif
+
+  setlocal scrollbind
+  let s:size = winwidth(0) * 1/4
+  set nosplitright
+  execute "vsplit " . s:temp_name
+  set splitright
+  execute "vert resize " . s:size
+
+  let s:cmdName = "svn annotate -r" . a:revision . " " . s:repoFileName
+  silent execute "0r !" . s:cmdName
+  silent execute "0r !echo" . s:cmdName
+  set nomodified
+  setlocal buftype=nofile
+  setlocal bufhidden=hide
+  setlocal noswapfile
+  setlocal scrollbind
+
+  let s:cmdName = "normal " . s:lnum . "G"
+  execute s:cmdName
+endfunction
+
+
 function! ShowSvnLog(...)
   let s:temp_name = "__svn_log"
   if bufexists(s:temp_name)
@@ -196,7 +249,7 @@ function! ShowSvnLog(...)
   setlocal noswapfile
   let l:num = ( a:0 >= 1 ) ? a:1 : 10
   echom "num is " . l:num
-  execute ":Clam svn log -l " . l:num
+  execute ":0r !svn log -l " . l:num
   execute "wincmd l"
   let l:cmd = "%s/^r\\(\\d\\)/ \\1/"
   silent execute l:cmd
@@ -221,4 +274,7 @@ function! ShowSVNFiles()
     execute "lopen"
     execute "ll"
     silent call ShowSvnCurrDiff(expand("%:p"))
+endfunction
+
+function! GetRevOfFile(rev)
 endfunction

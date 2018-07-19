@@ -89,6 +89,9 @@ endif
 Plugin 'SirVer/ultisnips'                     " snippets engine
 Plugin 'honza/vim-snippets'                   " snippets repo
 Plugin 'file://' . $HOME . '/github/vimfiles', {'rtp': 'tdef/'}         " my tdef file
+Plugin 'vim-scripts/align'                    "  pre-req for vim-dragvisuals
+Plugin 'vim-scripts/cecutil'                  "  pre-req for vim-dragvisuals
+Plugin 'atweiden/vim-dragvisuals'             "  drag visual block
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -436,10 +439,18 @@ au TabLeave * let g:lasttab = tabpagenr()
 let g:vim_markdown_conceal = 0
 let g:vim_markdown_toc_autofit = 1
 autocmd FileType markdown syntax sync fromstart
+autocmd FileType jira_op syntax sync fromstart
 
 "ultisnip directories
 " myultisnippets just works because runtimepath include this vimrepo, via tdef!
 let g:UltiSnipsSnippetDirectories=["UltiSnips", "myultisnippets"]
+
+" Drag-visual
+vmap  <expr>  <LEFT>   DVB_Drag('left')
+vmap  <expr>  <RIGHT>  DVB_Drag('right')
+vmap  <expr>  <DOWN>   DVB_Drag('down')
+vmap  <expr>  <UP>     DVB_Drag('up')
+vmap  <expr>  D        DVB_Duplicate()
 
 " DONT TYPE ANYTHING HERE SO THAT CENTOS-BRANCH CAN
 " SAFELY ADD ITS OVERRIDES WITHOUT ISSUES

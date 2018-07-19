@@ -122,6 +122,13 @@ nmap gwP <Plug>WinVertSizeIncrease
 nmap <silent> <Plug>WinVertSizeDecrease <Esc>:vert resize -10<CR>:call repeat#set("\<Plug>WinVertSizeDecrease", v:count)<CR>
 nmap gwM <Plug>WinVertSizeDecrease
 
+" ctrl-k to kill chars from current pos to eol in command mode only
+cnoremap <c-k> <c-\>e getcmdpos() == 1 ? '' : getcmdline()[:getcmdpos()-2]<CR>
+
+" visual mode add or remove chars in the chosen block
+vnoremap - oh
+vnoremap + ol
+
 function! ChompedSystem( ...  )
   return substitute(call('system', a:000), '\n\+$', '', '')
 endfunction
@@ -464,7 +471,26 @@ nmap gyu <Plug>ScrollUpInPreview
 nmap <silent> <Plug>ScrollDownInPreview <Esc>:call ScrollDownInPreviewFn()<CR>:call repeat#set("\<Plug>ScrollDownInPreview", v:count)<CR>
 nmap gyd <Plug>ScrollDownInPreview
 
+call textobj#user#plugin('datetime', {
+\   'c_lang': {
+\     'pattern': '\v[0-9a-zA-Z.\->_]+',
+\     'select': ['ac', 'ic'],
+\   },
+\   'c_lang_op': {
+\     'pattern': '\v[0-9a-zA-Z.\->_+*/()]+',
+\     'select': ['ao', 'io'],
+\   },
+\   'generalpaths': {
+\     'pattern': '\v[0-9a-zA-Z/_\-.<>(){}~]+',
+\     'select': ['ax', 'ix'],
+\   },
+\ })
+
+
 function! LoadCurrPositions()
+    if !exists("g:currLkPositionsFile")
+        let g:currLkPositionsFile = "/tmp/vimPos." . getpid()
+    endif
     execute "normal mZ"
     execute "lf " . g:currLkPositionsFile
     execute "lclose"
