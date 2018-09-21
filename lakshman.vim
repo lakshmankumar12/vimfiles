@@ -21,7 +21,7 @@ nmap glb          <Esc>:FzfBuffers<CR>
 nmap gl/          <Esc>:FzfBLines<CR>
 nmap gww          <Esc>:update<CR>
 
-nmap gO           <ESC>:let @"=expand("%:p")<CR><ESC>:e <C-R>"
+nmap gO           <ESC>:AddressBar<CR>
 
 "window movements
 nmap gwh          <C-w>h
@@ -473,7 +473,7 @@ nmap gyd <Plug>ScrollDownInPreview
 
 call textobj#user#plugin('datetime', {
 \   'c_lang': {
-\     'pattern': '\v[0-9a-zA-Z.\->_]+',
+\     'pattern': '\v[0-9a-zA-Z.\->_\[\]]+',
 \     'select': ['ac', 'ic'],
 \   },
 \   'c_lang_op': {
@@ -485,6 +485,23 @@ call textobj#user#plugin('datetime', {
 \     'select': ['ax', 'ix'],
 \   },
 \ })
+
+function! MakePlainAryakaFn(folder)
+    execute "normal mZ"
+    let old_makeprg=&makeprg
+    let &makeprg = 'sh -c "source /home/lakshman_narayanan/.bashrc.aryaka.centos.sh && go ' . a:folder . ' && mkplain"'
+    echom &makeprg
+    silent lmake
+    let &makeprg=old_makeprg
+    execute "lf /tmp/errors"
+    execute "lopen"
+    execute "ll"
+endfunction
+
+command! -nargs=1 MakePlainAryaka call MakePlainAryakaFn(<f-args>)
+nnoremap gMR <Esc>:MakePlainAryaka rse<CR>
+nnoremap gMA <Esc>:MakePlainAryaka am<CR>
+nnoremap gMX <Esc>:MakePlainAryaka 
 
 
 function! LoadCurrPositions()

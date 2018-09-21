@@ -30,6 +30,8 @@ function! ShowSvnCurrDiff(filename)
   set splitright
   let s:cmdName = "svn cat -rBASE " . a:filename
   silent execute "0r !" . s:cmdName
+  "delete the last line
+  silent execute "$,$d"
   execute "setlocal filetype=" . s:fileType
   setlocal nomodified
   setlocal buftype=nofile
@@ -40,7 +42,6 @@ function! ShowSvnCurrDiff(filename)
   execute "wincmd l"
   execute ":diffthis"
   execute "normal 1G"
-  execute "normal zR"
   execute "normal ]c"
   " Lets save our URL prepend for later use
   let s:cmdName = "svn info " . a:filename . " | grep URL: | cut -d' ' -f2 | sed 's#\\(.*branches/[^/]*/\\).*#\\1#' "
@@ -113,6 +114,10 @@ endfunction
 
 
 function! DoSvnLogRevision(revision)
+  if !exists('g:currentRepoPrefix')
+      let s:cmdName = "svn info " . expand("%:p") . " | grep URL: | cut -d' ' -f2 | sed 's#\\(.*branches/[^/]*/\\).*#\\1#' "
+      let g:currentRepoPrefix = ChompedSystem(s:cmdName)
+  endif
   let g:currentLoggedSVNRev = a:revision
   let s:temp_name = "_rev_" . a:revision
   if bufexists(s:temp_name)

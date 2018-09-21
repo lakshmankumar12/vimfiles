@@ -78,7 +78,7 @@ gg - begining of file
 gi - insert at previous insertation stop point                     gI   -- At column 1 (I will be first non-blank)
 gj - go down on screen line                                        gJ   -- like J, but no space
 gk - go up on screen line
-gm - half g0
+gm - half g0                                                       gM   -- call MakePlainArayaka
 gn - next and visual the word                                      gN   -- backward gn
 go - got to nth byte in buffer
 gp - like p, but leave cursor after pasted text                    gP   -- like P/gp, but P'ed effect  (Reclaimed to paste from clipboard+)
@@ -195,8 +195,11 @@ gG                         (Bound to tags_*)
 gH                         (Bound to :lprev)
 gK
 gL                         (Bound to :lnext)
-gM                         (Bound to last-tab)
-gO                         (Bound to GotoTagLastName)
+gMM                        (Bound to last-tab)
+gMR                        make-arayka rse
+gMA                        make-arayka acemon
+gMX                        make-arayka ask
+gO                         :Addressbar
 gP                         (clip-board paste)
 gS                         (Bound to MoveToDefintionOfMember)
 gV  -- select-mode stuff.  (Bound to ToggleMouse)
@@ -974,9 +977,13 @@ hightlight link <SYN-KEY-NAME> <HIGHLIGHTGROUP>
 
 * Checkout existing hightlight groups with `:highlight`
 
-## Fix a borken syntax highlighting
+## Fix a broken syntax highlighting
 
 I have mapped this to gwX
 ```
 syntax sync fromstart
 ```
+
+# Add a digraph to vim
+
+

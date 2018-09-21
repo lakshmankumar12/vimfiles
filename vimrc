@@ -92,6 +92,7 @@ Plugin 'file://' . $HOME . '/github/vimfiles', {'rtp': 'tdef/'}         " my tde
 Plugin 'vim-scripts/align'                    "  pre-req for vim-dragvisuals
 Plugin 'vim-scripts/cecutil'                  "  pre-req for vim-dragvisuals
 Plugin 'atweiden/vim-dragvisuals'             "  drag visual block
+Plugin 'tmilloff/vim-address-bar'             "  one line buffer for filename
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -336,6 +337,9 @@ set listchars+=extends:►
 set listchars+=precedes:◄
 set list
 
+set fillchars=vert:│,fold:-
+hi VertSplit ctermbg=NONE guibg=NONE
+
 " Unite
 autocmd FileType unite imap <buffer> <Leader>x <Plug>(unite_exit)
 autocmd FileType unite imap <buffer> kj <Esc>
@@ -432,7 +436,7 @@ let g:indentLine_char='┊'
 
 "last-tab!
 let g:lasttab = 1
-nnoremap gM :exe "tabn ".g:lasttab<CR>
+nnoremap gMM :exe "tabn ".g:lasttab<CR>
 au TabLeave * let g:lasttab = tabpagenr()
 
 " vim-markdown plugin settings
