@@ -94,6 +94,7 @@ nmap gxn :call SwitchBetweenDiffFolds('N')<CR>
 nmap gxp :call SwitchBetweenDiffFolds('P')<CR>
 
 nmap gyy          <Esc>:set paste!<CR>
+nmap gMT          <Esc>:setlocal noexpandtab!<CR>
 nmap gB           <Esc>:FzfBuffers<CR>
 nmap gz           <Esc>:ToggleBG<CR>
 imap kj           <Esc>
@@ -514,7 +515,6 @@ function! LoadCurrPositions()
     execute "lopen"
     execute "wincmd p"
     execute "normal `Z"
-    execute "wincmd j"
 endfunction
 
 function! SnarfCurrLocationListToSearch()
@@ -546,13 +546,16 @@ function! ReplaceACurrentPosition()
     if l:replLine == "1"
         let l:cmd = 'sed -e "' . l:replLine . "i " . l:final . '" -i ' . g:currLkPositionsFile
     else
+        " actually .i. on all lines will work except for last line.
+        " But dont know how to check for last line in vim. So using i only for
+        " 1st line and using a on all other lines by going behind one line
         let l:replLine = l:replLine - 1
         let l:cmd = 'sed -e "' . l:replLine . "a " . l:final . '" -i ' . g:currLkPositionsFile
+        let l:replLine = l:replLine + 1
     endif
     let l:line = system(l:cmd)
     execute "wincmd k"
     call LoadCurrPositions()
-    let l:replLine = l:replLine + 1
     execute "normal " . l:replLine . "G"
     execute ":" . l:replLine . "ll"
 endfunction

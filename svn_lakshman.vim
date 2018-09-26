@@ -190,7 +190,6 @@ function! ShowSvnRevDiff(filename)
 
   execute "wincmd l"
   execute "normal 1G"
-  execute "normal zR"
   execute "normal ]c"
   execute "normal zz"
 endfunction

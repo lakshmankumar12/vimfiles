@@ -195,9 +195,10 @@ gG                         (Bound to tags_*)
 gH                         (Bound to :lprev)
 gK
 gL                         (Bound to :lnext)
+gMA                        make-arayka acemon
 gMM                        (Bound to last-tab)
 gMR                        make-arayka rse
-gMA                        make-arayka acemon
+gMT                        :setlocal expandtab
 gMX                        make-arayka ask
 gO                         :Addressbar
 gP                         (clip-board paste)
