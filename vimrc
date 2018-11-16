@@ -177,7 +177,7 @@ function! DumpFullPathToClipBoard()
   if s:uname == "Darwin"
     call system("pbcopy -pboard general", expand("%:p"))
   else
-    call system("ssh lakshman.narayanan@$(cat /home/lakshman_narayanan/.mymacip) pbcopy", expand("%:p"))
+    call system("ssh -p $(cat /home/lakshman_narayanan/.mymacport) lakshman.narayanan@$(cat /home/lakshman_narayanan/.mymacip) pbcopy", expand("%:p"))
   endif
 endfunction
 
@@ -200,6 +200,7 @@ function! DumpToClipBoard()
   else
     call system("xsel -i -b", getreg("\""))
     call system("xsel -i -b", getreg("\""))
+    call system("ssh -p $(cat /home/lakshman_narayanan/.mymacport) lakshman.narayanan@$(cat /home/lakshman_narayanan/.mymacip) pbcopy", getreg("\""))
   endif
 endfunction
 

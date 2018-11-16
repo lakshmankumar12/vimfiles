@@ -79,6 +79,32 @@ endfunction
 
 nnoremap gwb :call ShowSvnCurrDiff(expand("<cWORD>"))<CR>
 
+function! DoSvnDumpRevision(filename, version)
+  let s:cmdName = "svn info " . a:filename . " | grep Path: | cut -d' ' -f2"
+  let s:repoFileName = system(s:cmdName)
+  let g:currentLoggedFile = s:repoFileName
+
+  let s:temp_name = "__rev__" . a:version . "_" . s:repoFileName
+  echom "Tempname is " . s:temp_name
+  if bufexists(s:temp_name)
+          execute "bd! " . s:temp_name
+  endif
+  execute "tabnew " . s:temp_name
+  let s:cmdName = "svn cat -r " . a:version . "  " . s:repoFileName
+  silent execute "0r !" . s:cmdName
+  set nomodified
+  setlocal buftype=nofile
+  setlocal bufhidden=hide
+  setlocal noswapfile
+  setlocal scrollbind
+  let s:cmdName = "normal " . s:lnum . "G"
+  execute s:cmdName
+  " Lets save our URL prepend for later use
+  let s:cmdName = "svn info " . a:filename . " | grep URL: | cut -d' ' -f2 | sed 's#\\(.*branches/[^/]*/\\).*#\\1#' "
+  let g:currentRepoPrefix = ChompedSystem(s:cmdName)
+endfunction
+
+
 function! DoSvnAnnotate(filename)
   let s:filename_t = expand("%:t")
   let s:filename_h = expand("%:h")
@@ -221,7 +247,7 @@ function! DoSvnAnnoRevision(filename, revision)
   set splitright
   execute "vert resize " . s:size
 
-  let s:cmdName = "svn annotate -r" . a:revision . " " . s:repoFileName
+  let s:cmdName = "svn annotate -v -r" . a:revision . " " . s:repoFileName
   silent execute "0r !" . s:cmdName
   silent execute "0r !echo" . s:cmdName
   set nomodified

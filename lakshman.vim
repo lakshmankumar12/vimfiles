@@ -494,7 +494,7 @@ function! MakePlainAryakaFn(folder)
     echom &makeprg
     silent lmake
     let &makeprg=old_makeprg
-    execute "lf /tmp/errors"
+    execute "lf /home/lakshman_narayanan/tmp/errors"
     execute "lopen"
     execute "ll"
 endfunction
@@ -517,7 +517,7 @@ function! LoadCurrPositions()
     execute "normal `Z"
 endfunction
 
-function! SnarfCurrLocationListToSearch()
+function! GotoCurrentLocationListItem()
     let @z="UnsetZRegisterBeforeSearch"
     execute "wincmd j"
     execute 'normal 02f>ll"zy$'
@@ -536,6 +536,8 @@ function! ReplaceACurrentPosition()
     let l:line = substitute(l:line, '"', '\\"', "g")
     let l:origName = expand("%")
     execute "wincmd j"
+    let @z="UnsetZRegisterBeforeSearch"
+    execute 'normal 02f>ll"zy$'
     let l:replLine = line(".")
     let l:cmd = "sed -n -e 's/.*<<\\(.*\\)>>.*$/\\1/' -e '" . l:replLine . "p' " . g:currLkPositionsFile
     let l:name = system(l:cmd)
@@ -600,9 +602,29 @@ nnoremap gya <Esc>:call AddACurrentPosition()<CR>
 nnoremap gyl <Esc>:call LoadCurrPositions()<CR>
 nnoremap gye <Esc>:call EditCurrPositions()<CR>
 nnoremap gyr <Esc>:call ReplaceACurrentPosition()<CR>
-nnoremap gys <Esc>:call SnarfCurrLocationListToSearch()<CR>
+nnoremap gys <Esc>:call GotoCurrentLocationListItem()<CR>
 nnoremap gyz <Esc>:call ZapCurrentPosition()<CR>
 nnoremap gyt <Esc>:lclose\|Toc<CR>
+
+function! GitGrepFn(grepArg,...)
+    execute "normal mZ"
+    let a:pathSpecArg = get(a:,1,"")
+    let l:cmd = 'lgrep! --no-pager grep -nH ' . a:grepArg
+    if !empty(a:pathSpecArg)
+        let l:cmd = l:cmd . " -- '*" . a:pathSpecArg . "*'"
+    endif
+    let old_grepprg=&grepprg
+    let &grepprg = "git"
+    let old_grepprg=&grepprg
+    silent! execute l:cmd
+    let &grepprg=old_grepprg
+    if len(getloclist(winnr()))
+        execute "lopen"
+        execute "ll"
+    endif
+endfunction
+command! -nargs=+ Ggp call GitGrepFn(<f-args>)
+
 
 " DONT TYPE ANYTHING HERE SO THAT CENTOS-BRANCH CAN
 " SAFELY ADD ITS OVERRIDES WITHOUT ISSUES

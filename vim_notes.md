@@ -173,7 +173,7 @@ gy
    gyl                              LoadCurrPositions
    gye                              EditCurrPositions
    gyr                              ReplaceACurrentPosition
-   gys                              SnarfCurrLocationList
+   gys                              GotoCurrentLocationListItem
    gyz                              ZapCurrentPosition
 
    gyt                              Open Toc
