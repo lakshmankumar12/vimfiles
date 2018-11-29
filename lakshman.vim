@@ -33,7 +33,8 @@ nmap gw\|         <C-w>\|
 nmap gw_          <C-w>_
 nmap gw<          <C-w><
 nmap gw>          <C-w>>
-nmap gwc          <C-w>c
+nmap gwc          <Esc>:lclose<CR><C-w>c
+nmap gwO          <Esc>:lclose<CR>
 nmap gwv          <C-w>v
 nmap gws          <C-w>s
 nmap gwB          <Esc>:setlocal noexpandtab<CR>
@@ -55,6 +56,13 @@ nnoremap gwa          <C-b>
 nnoremap gwf          <C-f>
 nnoremap gwm          gT
 nnoremap gwV        <Esc>:vsplit<CR><C-w>h
+nnoremap <Leader>1  <Esc>: 1wincmd w<CR>
+nnoremap <Leader>2  <Esc>: 2wincmd w<CR>
+nnoremap <Leader>3  <Esc>: 3wincmd w<CR>
+nnoremap <Leader>4  <Esc>: 4wincmd w<CR>
+nnoremap <Leader>5  <Esc>: 5wincmd w<CR>
+nnoremap <Leader>6  <Esc>: 6wincmd w<CR>
+nnoremap <Leader>7  <Esc>: 7wincmd w<CR>
 
 if has('nvim')
   nnoremap gwT        <Esc>:tabnew \| terminal<CR>
@@ -517,6 +525,18 @@ function! LoadCurrPositions()
     execute "normal `Z"
 endfunction
 
+function! LoadCurrPositionsAndGoto(...)
+    let a:position = get(a:,1,"")
+    call LoadCurrPositions()
+    if empty(a:position)
+        let l:position = 1
+    else
+        let l:position = a:position
+    endif
+    let l:cmd = l:position . "ll"
+    silent execute l:cmd
+endfunction
+
 function! GotoCurrentLocationListItem()
     let @z="UnsetZRegisterBeforeSearch"
     execute "wincmd j"
@@ -605,14 +625,28 @@ nnoremap gyr <Esc>:call ReplaceACurrentPosition()<CR>
 nnoremap gys <Esc>:call GotoCurrentLocationListItem()<CR>
 nnoremap gyz <Esc>:call ZapCurrentPosition()<CR>
 nnoremap gyt <Esc>:lclose\|Toc<CR>
+nnoremap gyg :<C-U>call LoadCurrPositionsAndGoto(v:count)<CR>
 
-function! GitGrepFn(grepArg,...)
+function! GitGrepFn(stayInLoc,encloseword,ignoreCase,grepArg,...)
     execute "normal mZ"
     let a:pathSpecArg = get(a:,1,"")
-    let l:cmd = 'lgrep! --no-pager grep -nH ' . a:grepArg
+    let l:cmd = "lgrep! --no-pager grep -nH "
+    if a:ignoreCase
+        let l:cmd = l:cmd . "-i "
+    endif
+    let l:cmd = l:cmd . "'"
+    if a:encloseword
+        let l:cmd = l:cmd . '\b'
+    endif
+    let l:cmd = l:cmd . a:grepArg
+    if a:encloseword
+        let l:cmd = l:cmd . '\b'
+    endif
+    let l:cmd = l:cmd . "'"
     if !empty(a:pathSpecArg)
         let l:cmd = l:cmd . " -- '*" . a:pathSpecArg . "*'"
     endif
+    echom "cmd is:" . l:cmd
     let old_grepprg=&grepprg
     let &grepprg = "git"
     let old_grepprg=&grepprg
@@ -620,10 +654,25 @@ function! GitGrepFn(grepArg,...)
     let &grepprg=old_grepprg
     if len(getloclist(winnr()))
         execute "lopen"
-        execute "ll"
+        if !a:stayInLoc
+            execute "ll"
+        endif
     endif
 endfunction
-command! -nargs=+ Ggp call GitGrepFn(<f-args>)
+" Ggp -- base command
+"   s -- stay in location-list window, dont go to item.
+"   w -- enclose word
+"   i -- ignore case
+command! -nargs=+ Ggp call GitGrepFn(0,0,0,<f-args>)
+command! -nargs=+ Ggps call GitGrepFn(1,0,0,<f-args>)
+command! -nargs=+ Ggpw call GitGrepFn(0,1,0,<f-args>)
+command! -nargs=+ Ggpi call GitGrepFn(0,0,1,<f-args>)
+
+command! -nargs=+ Ggpsw call GitGrepFn(1,1,0,<f-args>)
+command! -nargs=+ Ggpsi call GitGrepFn(1,0,1,<f-args>)
+command! -nargs=+ Ggpwi call GitGrepFn(0,1,1,<f-args>)
+
+command! -nargs=+ Ggpswi call GitGrepFn(1,1,1,<f-args>)
 
 
 " DONT TYPE ANYTHING HERE SO THAT CENTOS-BRANCH CAN

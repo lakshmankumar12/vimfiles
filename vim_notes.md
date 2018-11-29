@@ -171,6 +171,7 @@ gy
 
    gya                              AddACurrentPosition
    gyl                              LoadCurrPositions
+   gyg                              LoadAndGotoLocations
    gye                              EditCurrPositions
    gyr                              ReplaceACurrentPosition
    gys                              GotoCurrentLocationListItem

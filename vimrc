@@ -295,6 +295,10 @@ let g:airline#extensions#default#section_truncate_width = {
       \ 'error': 200,
       \ }
 let g:airline_theme='solarized'
+let g:airline_section_c =
+      \"%{bufnr('%')}:%{winnr()}: ".
+      \"%<%f%m %#__accent_red#".
+      \"%{airline#util#wrap(airline#parts#readonly(),0)}%#__restore__#"
 function! AirlineThemePatch(palette)
   if g:airline_theme == 'solarized'
     "greenish
