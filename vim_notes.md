@@ -129,7 +129,9 @@ gw - format motion.
    gwf                              ( Bound to control-f <page-down> )
    gwg                              (Bound to gitGuttter disable)
    gwh                              ( gw h,j,k,l -> window movements)
-   gwi        Available
+   gwi
+        gwii                        Open up a grep commandline
+        gwir                               --do--              fill with rse
    gwj                              ( gw h,j,k,l -> window movements)
    gwk                              ( gw h,j,k,l -> window movements)
    gwl                              ( gw h,j,k,l -> window movements)
@@ -145,7 +147,7 @@ gw - format motion.
    gwv                              (set to vertical window split)       # remember and use this
    gww                              (Bound to :update)
    gwx                              (tabclose w/o prev tab)
-   gwy                              Duplicate buffer in new tab
+   gwy                              Duplicate buffer in new scratch tab
    gwz                              (set list toggle)
 
    gwB                              (setlocal noexpandtab)

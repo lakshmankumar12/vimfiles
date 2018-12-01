@@ -674,6 +674,9 @@ command! -nargs=+ Ggpwi call GitGrepFn(0,1,1,<f-args>)
 
 command! -nargs=+ Ggpswi call GitGrepFn(1,1,1,<f-args>)
 
+nnoremap gwii <Esc>:<C-U>Ggp
+nnoremap gwir <Esc>:<C-U>Ggp /rse/<Left><Left><Left><Left><Left><Left>
+
 
 " DONT TYPE ANYTHING HERE SO THAT CENTOS-BRANCH CAN
 " SAFELY ADD ITS OVERRIDES WITHOUT ISSUES
