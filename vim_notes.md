@@ -136,7 +136,7 @@ gw - format motion.
    gwk                              ( gw h,j,k,l -> window movements)
    gwl                              ( gw h,j,k,l -> window movements)
    gwm                              (Bound to gT)
-   gwn                              (Bound to number/relative number toggle)
+   gwn                              goto window n
    gwo                              (Bound to Zoomwin)
    gwp                              DumpFullPathToClipBoard
    gwq                              DumpFullPathToTmuxClipBoard
@@ -157,6 +157,7 @@ gw - format motion.
    gwL
    gwP                              ( plus/minus - vert resize +10 )
    gwM                              ( plus/minus - vert resize -10 )
+   gwN                              Bound to number/rel-number toggle
    gwS                              (set spell toggle)
    gwT                              (new terminal)
    gwV                              vsplit and come back to same window
@@ -447,6 +448,8 @@ nmap <Leader>W <Plug>(easymotion-bd-W)
 vmap <Leader>W <Plug>(easymotion-bd-W)
 nmap <Leader>s <Plug>(SneakStreak)
 nmap <Leader>S <Plug>(SneakStreakBackward)
+
+nmap <Leader>1 .. 9  goto window N (gwN)
 ```
 
 ## Leader maps from plugins

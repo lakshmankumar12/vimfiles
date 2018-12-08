@@ -296,7 +296,7 @@ let g:airline#extensions#default#section_truncate_width = {
       \ }
 let g:airline_theme='solarized'
 let g:airline_section_c =
-      \"%{bufnr('%')}:%{winnr()}: ".
+      \"%{winnr()}: ".
       \"%<%f%m %#__accent_red#".
       \"%{airline#util#wrap(airline#parts#readonly(),0)}%#__restore__#"
 function! AirlineThemePatch(palette)

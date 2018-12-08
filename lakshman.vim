@@ -35,7 +35,7 @@ nmap gw<          <C-w><
 nmap gw>          <C-w>>
 nmap gwc          <Esc>:lclose<CR><C-w>c
 nmap gwO          <Esc>:lclose<CR>
-nmap gwv          <C-w>v
+nmap gwv          <Esc>:lclose<CR><C-w>v
 nmap gws          <C-w>s
 nmap gwB          <Esc>:setlocal noexpandtab<CR>
 nmap gwS          <Esc>:set spell!<CR>
@@ -48,14 +48,14 @@ nmap gwL          <C-w>l<C-w>c
 nmap gwo          <Plug>ZoomWin
 nmap gwt          <Esc>mZ:tabnew %<CR>`Z
 nmap gwg          <Esc>:GitGutterToggle<CR>
-nmap gwn          <Esc>:set relativenumber!<CR>:set nu!<CR>
+nmap gwN          <Esc>:set relativenumber!<CR>:set nu!<CR>
 nmap gwr          <Esc>:set wrap!<CR>
 nmap gwz          <Esc>:set list!<CR>
 nmap gwd          <Esc>:diffoff<CR>
 nnoremap gwa          <C-b>
 nnoremap gwf          <C-f>
 nnoremap gwm          gT
-nnoremap gwV        <Esc>:vsplit<CR><C-w>h
+nnoremap gwV        <Esc>:lclose<CR>:vsplit<CR><C-w>h
 nnoremap <Leader>1  <Esc>: 1wincmd w<CR>
 nnoremap <Leader>2  <Esc>: 2wincmd w<CR>
 nnoremap <Leader>3  <Esc>: 3wincmd w<CR>
@@ -63,6 +63,13 @@ nnoremap <Leader>4  <Esc>: 4wincmd w<CR>
 nnoremap <Leader>5  <Esc>: 5wincmd w<CR>
 nnoremap <Leader>6  <Esc>: 6wincmd w<CR>
 nnoremap <Leader>7  <Esc>: 7wincmd w<CR>
+
+function! MyWinCmdWrapper(winnr)
+    let l:cmd = a:winnr . "wincmd w"
+    silent execute l:cmd
+endfunction
+
+nnoremap gwn  :<C-U>call MyWinCmdWrapper(v:count)<CR>
 
 if has('nvim')
   nnoremap gwT        <Esc>:tabnew \| terminal<CR>
@@ -513,21 +520,24 @@ nnoremap gMA <Esc>:MakePlainAryaka am<CR>
 nnoremap gMX <Esc>:MakePlainAryaka 
 
 
-function! LoadCurrPositions()
+function! LoadCurrPositions(...)
+    let a:dontOpen = get(a:,1,"")
     if !exists("g:currLkPositionsFile")
         let g:currLkPositionsFile = "/tmp/vimPos." . getpid()
     endif
     execute "normal mZ"
     execute "lf " . g:currLkPositionsFile
-    execute "lclose"
-    execute "lopen"
-    execute "wincmd p"
+    if empty(a:dontOpen)
+        execute "lclose"
+        execute "lopen"
+        execute "wincmd p"
+    endif
     execute "normal `Z"
 endfunction
 
 function! LoadCurrPositionsAndGoto(...)
     let a:position = get(a:,1,"")
-    call LoadCurrPositions()
+    call LoadCurrPositions("dont")
     if empty(a:position)
         let l:position = 1
     else
@@ -675,6 +685,7 @@ command! -nargs=+ Ggpwi call GitGrepFn(0,1,1,<f-args>)
 command! -nargs=+ Ggpswi call GitGrepFn(1,1,1,<f-args>)
 
 nnoremap gwii <Esc>:<C-U>Ggp
+nnoremap gwic <Esc>:<C-U>Ggp expand("<cword>")
 nnoremap gwir <Esc>:<C-U>Ggp /rse/<Left><Left><Left><Left><Left><Left>
 
 
