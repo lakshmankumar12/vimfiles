@@ -6,8 +6,8 @@ com! SVNRDiff  call ShowSvnRevDiff(expand("<cWORD>"))
 com! SVNStatus call ShowSvnStatus()
 com! -nargs=* SVNLog  call ShowSvnLog(<f-args>)
 com! SVNEdited call ShowSVNFiles()
-com! SVNAnnoParentRev call DoSvnAnnoRevision(g:currentLoggedFile, g:currentLoggedSVNRevParentForFile)
-com! SVNAnnoAskRev -nargs=1 call DoSvnAnnoRevision(g:currentLoggedFile, <f-args>)
+com! SVNAnnoParentRev call DoSvnAnnoRevision(g:currentLoggedSVNRevParentForFile)
+com! -nargs=1 SVNAnnoShowRev call DoSvnAnnoRevision(<f-args>)
 
 
 " ALL globals
@@ -56,7 +56,7 @@ function! ShowSvnStatus()
   execute "tabnew " . s:temp_name
   let s:cmdName = "svn status"
   if filereadable ("./.branch_name")
-    let s:branch = system("cat .branch_name")
+    let s:branch = ChompedSystem("cat .branch_name")
     execute "lcd " . s:branch
   else
     0r "!echo no .branch file"
@@ -81,7 +81,7 @@ nnoremap gwb :call ShowSvnCurrDiff(expand("<cWORD>"))<CR>
 
 function! DoSvnDumpRevision(filename, version)
   let s:cmdName = "svn info " . a:filename . " | grep Path: | cut -d' ' -f2"
-  let s:repoFileName = system(s:cmdName)
+  let s:repoFileName = ChompedSystem(s:cmdName)
   let g:currentLoggedFile = s:repoFileName
 
   let s:temp_name = "__rev__" . a:version . "_" . s:repoFileName
@@ -122,7 +122,7 @@ function! DoSvnAnnotate(filename)
   set splitright
   execute "vert resize " . s:size
   let s:cmdName = "svn info " . a:filename . " | grep Path: | cut -d' ' -f2"
-  let s:repoFileName = system(s:cmdName)
+  let s:repoFileName = ChompedSystem(s:cmdName)
   let g:currentLoggedFile = s:repoFileName
   let s:cmdName = "svn annotate " . s:repoFileName
   silent execute "0r !" . s:cmdName
@@ -170,7 +170,7 @@ function! ShowSvnRevDiff(filename)
   let g:currentLoggedFile = s:svn_file_arg
   let s:cmdName = "svn diff -c" . g:currentLoggedSVNRev . " " . s:svn_file_arg . " > /tmp/svn_plugin.patch"
   echom "command is " . s:cmdName
-  call system(s:cmdName)
+  call ChompedSystem(s:cmdName)
   let s:cmdName = "head -n 3 /tmp/svn_plugin.patch | grep -E -o 'revision [[:digit:]]+' | cut -d' ' -f2"
   let s:left_rev = ChompedSystem(s:cmdName)
   let s:cmdName = "svn info -r" . s:left_rev . " " . s:svn_file_arg . " | grep 'Last Changed Rev:' | cut -d' ' -f4"
@@ -180,8 +180,8 @@ function! ShowSvnRevDiff(filename)
   "prepare names for buffers
   let s:right_rev = g:currentLoggedSVNRev
   let s:cmdName = "basename " . a:filename
-  let s:small_name = system(s:cmdName)
-  let s:file_name_t = system(s:cmdName)
+  let s:small_name = ChompedSystem(s:cmdName)
+  let s:file_name_t = ChompedSystem(s:cmdName)
   let s:lbuf_name = "__" . s:left_rev . "_" . s:small_name
   let s:rbuf_name = "__" . s:right_rev . "_" . s:small_name
 
@@ -220,44 +220,47 @@ function! ShowSvnRevDiff(filename)
   execute "normal zz"
 endfunction
 
-function! DoSvnAnnoRevision(filename, revision)
-  let s:temp_name = "_rev_" . a:revision . "_" . s:filename_t
+function! DoSvnAnnoRevision(revision)
+  let s:cmdName = "svn info " . expand("%:p") . " | grep Path: | cut -d' ' -f2"
+  let l:filename = ChompedSystem(s:cmdName)
+  let s:temp_name = "_rev_" . a:revision . "_" . fnamemodify(l:filename, ':t')
   if bufexists(s:temp_name)
-          execute "bd! " . s:temp_name
+    execute "bd! " . s:temp_name
   endif
-  let s:lnum = line(".")
+  echom "bufname is set to " . s:temp_name
+  let s:temp_anno_name = s:temp_name . "_anno"
+  echom "annoname is set to " . s:temp_anno_name
   execute "tabnew " . s:temp_name
-  let s:cmdName = "svn cat -r" . a:revision . " " . a:filename
+  let s:cmdName = "svn cat -r" . a:revision . " " . l:filename
+  silent execute "0r !" . s:cmdName
+  silent execute "0r !echo " . s:cmdName
+  echom "cmd is " . s:cmdName
+  set nomodified
+  setlocal buftype=nofile
+  setlocal bufhidden=hide
+  setlocal noswapfile
+
+  if bufexists(s:temp_anno_name)
+          execute "bd! " . s:temp_anno_name
+  endif
+
+  setlocal scrollbind
+  let s:size = winwidth(0) * 1/4
+  set nosplitright
+  execute "vsplit " . s:temp_anno_name
+  set splitright
+  execute "vert resize " . s:size
+
+  let s:cmdName = "svn annotate -v -r" . a:revision . " " . l:filename
   silent execute "0r !" . s:cmdName
   silent execute "0r !echo " . s:cmdName
   set nomodified
   setlocal buftype=nofile
   setlocal bufhidden=hide
   setlocal noswapfile
-
-  let s:temp_name = s:temp_name . "_anno"
-  if bufexists(s:temp_name)
-          execute "bd! " . s:temp_name
-  endif
-
-  setlocal scrollbind
-  let s:size = winwidth(0) * 1/4
-  set nosplitright
-  execute "vsplit " . s:temp_name
-  set splitright
-  execute "vert resize " . s:size
-
-  let s:cmdName = "svn annotate -v -r" . a:revision . " " . s:repoFileName
-  silent execute "0r !" . s:cmdName
-  silent execute "0r !echo" . s:cmdName
-  set nomodified
-  setlocal buftype=nofile
-  setlocal bufhidden=hide
-  setlocal noswapfile
   setlocal scrollbind
 
-  let s:cmdName = "normal " . s:lnum . "G"
-  execute s:cmdName
+  silent execute "wincmd l"
 endfunction
 
 
@@ -268,7 +271,7 @@ function! ShowSvnLog(...)
   endif
   execute "tabnew " . s:temp_name
   if filereadable ("./.branch_name")
-    let s:branch = system("cat .branch_name")
+    let s:branch = ChompedSystem("cat .branch_name")
     execute "lcd " . s:branch
   else
     0r "!echo no .branch file"
