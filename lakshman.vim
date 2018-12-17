@@ -33,9 +33,7 @@ nmap gw\|         <C-w>\|
 nmap gw_          <C-w>_
 nmap gw<          <C-w><
 nmap gw>          <C-w>>
-nmap gwc          <Esc>:lclose<CR><C-w>c
 nmap gwO          <Esc>:lclose<CR>
-nmap gwv          <Esc>:lclose<CR><C-w>v
 nmap gws          <C-w>s
 nmap gwB          <Esc>:setlocal noexpandtab<CR>
 nmap gwS          <Esc>:set spell!<CR>
@@ -70,6 +68,19 @@ function! MyWinCmdWrapper(winnr)
 endfunction
 
 nnoremap gwn  :<C-U>call MyWinCmdWrapper(v:count)<CR>
+
+function! MyWinCloseWrapper()
+    if &buftype == 'quickfix'
+        execute "close"
+        return
+    endif
+    execute "normal mZ"
+    execute "lclose"
+    execute "close"
+endfunction
+nnoremap gwc          <Esc>:call MyWinCloseWrapper()<CR>
+
+nnoremap gwv          <Esc>:lclose<CR><C-w>v<C-w>p:lopen<CR><C-w>p<C-w>l
 
 if has('nvim')
   nnoremap gwT        <Esc>:tabnew \| terminal<CR>
