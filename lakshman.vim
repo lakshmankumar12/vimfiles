@@ -8,8 +8,6 @@ nmap <Leader>adds        <Esc>:call Addspaces()<CR>
 " Who uses ex mode these days!
 nmap Q            <Esc>:tabclose\|tabprev<CR><Esc>
 nmap gwx          <Esc>:tabclose<CR>
-" i dont use ZZ/ZQ much. Anything else on Z?!
-nmap Z            <Esc>:lclose<CR>:lopen<CR>
 nmap zp           <Esc>:cclose<CR>:copen<CR>
 " neither do i use S
 nmap S            <Esc>
@@ -53,7 +51,6 @@ nmap gwd          <Esc>:diffoff<CR>
 nnoremap gwa          <C-b>
 nnoremap gwf          <C-f>
 nnoremap gwm          gT
-nnoremap gwV        <Esc>:lclose<CR>:vsplit<CR><C-w>h
 nnoremap <Leader>1  <Esc>: 1wincmd w<CR>
 nnoremap <Leader>2  <Esc>: 2wincmd w<CR>
 nnoremap <Leader>3  <Esc>: 3wincmd w<CR>
@@ -81,6 +78,19 @@ endfunction
 nnoremap gwc          <Esc>:call MyWinCloseWrapper()<CR>
 
 nnoremap gwv          <Esc>:lclose<CR><C-w>v<C-w>p:lopen<CR><C-w>p<C-w>l
+nnoremap gwV          <Esc>:lclose<CR><C-w>v<C-w>p:lopen<CR><C-w>p
+
+function! MyFixLocFixWrapper()
+    if &buftype == 'quickfix'
+        execute "ll"
+    endif
+    execute "lclose"
+    execute "lopen"
+    execute "ll"
+endfunction
+
+" i dont use ZZ/ZQ much. Anything else on Z?!
+nmap Z            <Esc>:call MyFixLocFixWrapper()<CR>
 
 if has('nvim')
   nnoremap gwT        <Esc>:tabnew \| terminal<CR>

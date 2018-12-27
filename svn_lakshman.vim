@@ -8,6 +8,8 @@ com! -nargs=* SVNLog  call ShowSvnLog(<f-args>)
 com! SVNEdited call ShowSVNFiles()
 com! SVNAnnoParentRev call DoSvnAnnoRevision(g:currentLoggedSVNRevParentForFile)
 com! -nargs=1 SVNAnnoShowRev call DoSvnAnnoRevision(<f-args>)
+com! -nargs=1 SVNShowRev call DoSvnLogRevision(<f-args>)
+com! -nargs=1 SVNShowRevOfFile call DoSvnDumpRevision(expand("%:p"),<f-args>)
 
 
 " ALL globals
@@ -80,28 +82,32 @@ endfunction
 nnoremap gwb :call ShowSvnCurrDiff(expand("<cWORD>"))<CR>
 
 function! DoSvnDumpRevision(filename, version)
+  let s:lnum = line(".")
   let s:cmdName = "svn info " . a:filename . " | grep Path: | cut -d' ' -f2"
   let s:repoFileName = ChompedSystem(s:cmdName)
   let g:currentLoggedFile = s:repoFileName
+  " Lets save our URL prepend for later use
+  let s:cmdName = "svn info " . a:filename . " | grep URL: | cut -d' ' -f2 | sed 's#\\(.*branches/[^/]*/\\).*#\\1#' "
+  let g:currentRepoPrefix = ChompedSystem(s:cmdName)
 
-  let s:temp_name = "__rev__" . a:version . "_" . s:repoFileName
+  let s:cmdName = "basename " . s:repoFileName
+  let s:small_name = ChompedSystem(s:cmdName)
+  let s:temp_name = "__rev__" . a:version . "_" . s:small_name
   echom "Tempname is " . s:temp_name
   if bufexists(s:temp_name)
           execute "bd! " . s:temp_name
   endif
   execute "tabnew " . s:temp_name
+  silent execute "%d"
   let s:cmdName = "svn cat -r " . a:version . "  " . s:repoFileName
   silent execute "0r !" . s:cmdName
+  silent execute "r !echo " . s:cmdName
   set nomodified
   setlocal buftype=nofile
   setlocal bufhidden=hide
   setlocal noswapfile
-  setlocal scrollbind
   let s:cmdName = "normal " . s:lnum . "G"
   execute s:cmdName
-  " Lets save our URL prepend for later use
-  let s:cmdName = "svn info " . a:filename . " | grep URL: | cut -d' ' -f2 | sed 's#\\(.*branches/[^/]*/\\).*#\\1#' "
-  let g:currentRepoPrefix = ChompedSystem(s:cmdName)
 endfunction
 
 
@@ -160,7 +166,6 @@ function! DoSvnLogRevision(revision)
   execute "normal gg"
 endfunction
 
-command! -nargs=1 SVNShowRev call DoSvnLogRevision(<f-args>)
 
 function! ShowSvnRevDiff(filename)
   " step-1: Get the left side revision number
