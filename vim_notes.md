@@ -26,7 +26,7 @@ h - left                                         H - top of window
 j - down                                         J - join lines
 k - up                                           K - man page
 l - right                                        L - end of window
-z - fold                                         Z - RECLAIM!                       (bound to :qfixtoggle)
+z - fold                                         Z - RECLAIM!                       (bound to goto window n)
 x - del                                          X - backspace
 c - change                                       C - change till end of line
 v - visual                                       V - line visual
@@ -136,7 +136,7 @@ gw - format motion.
    gwk                              ( gw h,j,k,l -> window movements)
    gwl                              ( gw h,j,k,l -> window movements)
    gwm                              (Bound to gT)
-   gwn                              goto window n
+   gwn                              Bound to number/rel-number toggle
    gwo                              (Bound to Zoomwin)
    gwp                              DumpFullPathToClipBoard
    gwq                              DumpFullPathToTmuxClipBoard
@@ -157,7 +157,7 @@ gw - format motion.
    gwL
    gwP                              ( plus/minus - vert resize +10 )
    gwM                              ( plus/minus - vert resize -10 )
-   gwN                              Bound to number/rel-number toggle
+   gwN                              Bound to :qfixtoggle (MyFixLocFixWrapper)
    gwS                              (set spell toggle)
    gwT                              (new terminal)
    gwV                              vsplit and come back to same window

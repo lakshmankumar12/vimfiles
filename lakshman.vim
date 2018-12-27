@@ -44,7 +44,7 @@ nmap gwL          <C-w>l<C-w>c
 nmap gwo          <Plug>ZoomWin
 nmap gwt          <Esc>mZ:tabnew %<CR>`Z
 nmap gwg          <Esc>:GitGutterToggle<CR>
-nmap gwN          <Esc>:set relativenumber!<CR>:set nu!<CR>
+nmap gwn          <Esc>:set relativenumber!<CR>:set nu!<CR>
 nmap gwr          <Esc>:set wrap!<CR>
 nmap gwz          <Esc>:set list!<CR>
 nmap gwd          <Esc>:diffoff<CR>
@@ -64,7 +64,7 @@ function! MyWinCmdWrapper(winnr)
     silent execute l:cmd
 endfunction
 
-nnoremap gwn  :<C-U>call MyWinCmdWrapper(v:count)<CR>
+nnoremap Z  :<C-U>call MyWinCmdWrapper(v:count)<CR>
 
 function! MyWinCloseWrapper()
     if &buftype == 'quickfix'
@@ -90,7 +90,7 @@ function! MyFixLocFixWrapper()
 endfunction
 
 " i dont use ZZ/ZQ much. Anything else on Z?!
-nmap Z            <Esc>:call MyFixLocFixWrapper()<CR>
+nnoremap gwN      <Esc>:call MyFixLocFixWrapper()<CR>
 
 if has('nvim')
   nnoremap gwT        <Esc>:tabnew \| terminal<CR>
