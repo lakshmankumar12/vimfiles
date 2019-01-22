@@ -152,11 +152,12 @@ gw - format motion.
 
    gwB                              (setlocal noexpandtab)
    gwH                              ( gw H,J,K,L -> window close operations)
-   gwJ
-   gwK
-   gwL
+   gwJ                              --do--
+   gwK                              --do--
+   gwL                              --do--
    gwP                              ( plus/minus - vert resize +10 )
    gwM                              ( plus/minus - vert resize -10 )
+   gwO                              :lclose
    gwN                              Bound to :qfixtoggle (MyFixLocFixWrapper)
    gwS                              (set spell toggle)
    gwT                              (new terminal)
@@ -440,6 +441,10 @@ C-|
 One char
 
 ```
+nmap <Leader>b :BuffergatorOpen
+nmap <Leader>B :BuffergatorClose
+nmap <Leader>t :BuffergatorTabsOpen
+nmap <Leader>T :BuffergatorTabsClose
 map <Leader>j <Plug>(easymotion-j)
 map <Leader>k <Plug>(easymotion-k)
 nmap <Leader>w <Plug>(easymotion-bd-w)
@@ -450,6 +455,11 @@ nmap <Leader>s <Plug>(SneakStreak)
 nmap <Leader>S <Plug>(SneakStreakBackward)
 
 nmap <Leader>1 .. 9  goto window N (gwN)
+```
+Multi-char
+
+```
+nmap <Leader>jrget JiraGet
 ```
 
 ## Leader maps from plugins

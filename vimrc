@@ -93,6 +93,7 @@ Plugin 'vim-scripts/align'                    "  pre-req for vim-dragvisuals
 Plugin 'vim-scripts/cecutil'                  "  pre-req for vim-dragvisuals
 Plugin 'atweiden/vim-dragvisuals'             "  drag visual block
 Plugin 'tmilloff/vim-address-bar'             "  one line buffer for filename
+Plugin 'jeetsukumaran/vim-buffergator'        " open up a buffer window
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -200,7 +201,7 @@ function! DumpToClipBoard()
   else
     call system("xsel -i -b", getreg("\""))
     call system("xsel -i -b", getreg("\""))
-    call system("ssh -p $(cat /home/lakshman_narayanan/.mymacport) lakshman.narayanan@$(cat /home/lakshman_narayanan/.mymacip) pbcopy", getreg("\""))
+    call system("ssh -p $(cat /home/lakshman_narayanan/.mymacport) $(cat $HOME/.mymacusername)@$(cat /home/lakshman_narayanan/.mymacip) pbcopy", getreg("\""))
   endif
 endfunction
 

@@ -144,6 +144,13 @@ function! DoSvnAnnotate(filename)
   let g:currentRepoPrefix = ChompedSystem(s:cmdName)
 endfunction
 
+function! DoSVNRevWindowOpenRevDiff()
+    let l:currentfile=expand("<cWORD>")
+    execute "normal j"
+    execute "normal 8|"
+    silent call ShowSvnRevDiff(l:currentfile)
+endfunction
+
 
 function! DoSvnLogRevision(revision)
   if !exists('g:currentRepoPrefix')
@@ -163,7 +170,9 @@ function! DoSvnLogRevision(revision)
   setlocal buftype=nofile
   setlocal bufhidden=hide
   setlocal noswapfile
-  execute "normal gg"
+  nnoremap <buffer> gwb :call DoSVNRevWindowOpenRevDiff()<CR>
+  execute "normal 5G"
+  execute "normal 8|"
 endfunction
 
 
@@ -285,7 +294,7 @@ function! ShowSvnLog(...)
   setlocal buftype=nofile
   setlocal bufhidden=hide
   setlocal noswapfile
-  let l:num = ( a:0 >= 1 ) ? a:1 : 10
+  let l:num = ( a:0 >= 1 ) ? a:1 : 100
   echom "num is " . l:num
   execute ":0r !svn log -l " . l:num
   execute "wincmd l"

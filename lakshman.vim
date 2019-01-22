@@ -77,7 +77,8 @@ function! MyWinCloseWrapper()
 endfunction
 nnoremap gwc          <Esc>:call MyWinCloseWrapper()<CR>
 
-nnoremap gwv          <Esc>:lclose<CR><C-w>v<C-w>p:lopen<CR><C-w>p<C-w>l
+nnoremap gwv          <Esc>:lclose<CR><C-w>v
+nnoremap gwvn         <Esc>:lclose<CR><C-w>v<C-w>p:lopen<CR><C-w>p<C-w>l
 nnoremap gwV          <Esc>:lclose<CR><C-w>v<C-w>p:lopen<CR><C-w>p
 
 function! MyFixLocFixWrapper()
@@ -532,7 +533,9 @@ function! MakePlainAryakaFn(folder)
     let &makeprg=old_makeprg
     execute "lf /home/lakshman_narayanan/tmp/errors"
     execute "lopen"
-    execute "ll"
+    execute "wincmd p"
+    execute "normal `Z"
+    "execute "ll"
 endfunction
 
 command! -nargs=1 MakePlainAryaka call MakePlainAryakaFn(<f-args>)
@@ -708,6 +711,33 @@ command! -nargs=+ Ggpswi call GitGrepFn(1,1,1,<f-args>)
 nnoremap gwii <Esc>:<C-U>Ggp
 nnoremap gwic <Esc>:<C-U>Ggp expand("<cword>")
 nnoremap gwir <Esc>:<C-U>Ggp /rse/<Left><Left><Left><Left><Left><Left>
+
+function! JiraRefresh()
+    "get jiraid from line1
+    let l:jiraid=getline(1)
+    let l:outfile=expand("%")
+    let l:cmd="download_jira.py -o " . l:outfile . " " . l:jiraid
+    echom l:cmd
+    let l:discard = system(l:cmd)
+    execute "e"
+endfunction
+
+function! OpenJira(jira_id)
+    if bufexists("jira_scratch")
+        execute "bd! jira_scratch"
+    endif
+    execute "tabnew jira_scratch"
+    let l:cmd="download_jira.py " . a:jira_id
+    echom l:cmd
+    silent execute "0r !" . l:cmd
+    set nomodified
+    setlocal buftype=nofile
+    setlocal bufhidden=hide
+    setlocal noswapfile
+    let &l:filetype = "jira_op"
+    execute "normal gg"
+endfunction
+nnoremap <Leader>jrget  <Esc>:<C-U>call OpenJira(expand("<cWORD>"))<CR>
 
 
 " DONT TYPE ANYTHING HERE SO THAT CENTOS-BRANCH CAN
