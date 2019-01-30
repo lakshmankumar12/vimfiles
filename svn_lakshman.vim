@@ -130,7 +130,7 @@ function! DoSvnAnnotate(filename)
   let s:cmdName = "svn info " . a:filename . " | grep Path: | cut -d' ' -f2"
   let s:repoFileName = ChompedSystem(s:cmdName)
   let g:currentLoggedFile = s:repoFileName
-  let s:cmdName = "svn annotate " . s:repoFileName
+  let s:cmdName = "svn annotate -v " . s:repoFileName
   silent execute "0r !" . s:cmdName
   set nomodified
   setlocal buftype=nofile

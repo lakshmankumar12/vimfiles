@@ -135,7 +135,7 @@ gw - format motion.
    gwj                              ( gw h,j,k,l -> window movements)
    gwk                              ( gw h,j,k,l -> window movements)
    gwl                              ( gw h,j,k,l -> window movements)
-   gwm                              (Bound to gT)
+   gwm                              ( Bound to windcmd-p )
    gwn                              Bound to number/rel-number toggle
    gwo                              (Bound to Zoomwin)
    gwp                              DumpFullPathToClipBoard
@@ -459,7 +459,10 @@ nmap <Leader>1 .. 9  goto window N (gwN)
 Multi-char
 
 ```
-nmap <Leader>jrget JiraGet
+nmap <Leader>jrget OpenJira        "Get jira under curson in a scratch
+nmap <Leader>jrask AskAndOpenJira  "Ask and open jira in scratch
+nmap <Leader>jrop  AskAndOpenJiraOpFile  "Prepare jira-o and open.
+nmap <Leader>jrref  RefreshJiraList  "Update the jira-list
 ```
 
 ## Leader maps from plugins

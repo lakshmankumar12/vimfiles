@@ -50,7 +50,7 @@ nmap gwz          <Esc>:set list!<CR>
 nmap gwd          <Esc>:diffoff<CR>
 nnoremap gwa          <C-b>
 nnoremap gwf          <C-f>
-nnoremap gwm          gT
+nnoremap gwm          <C-w>p
 nnoremap <Leader>1  <Esc>: 1wincmd w<CR>
 nnoremap <Leader>2  <Esc>: 2wincmd w<CR>
 nnoremap <Leader>3  <Esc>: 3wincmd w<CR>
@@ -721,6 +721,7 @@ function! JiraRefresh()
     let l:discard = system(l:cmd)
     execute "e"
 endfunction
+nnoremap <Leader>jrup <Esc>:<C-U>call JiraRefresh()<CR>/\V\^********   Changelog<CR>
 
 function! OpenJira(jira_id)
     if bufexists("jira_scratch")
@@ -738,6 +739,33 @@ function! OpenJira(jira_id)
     execute "normal gg"
 endfunction
 nnoremap <Leader>jrget  <Esc>:<C-U>call OpenJira(expand("<cWORD>"))<CR>
+
+function! AskAndOpenJira()
+  let l:jira_id = input("Enter Jira-ID:", "ASN-")
+  call OpenJira(l:jira_id)
+endfunction
+nnoremap <Leader>jrask <Esc>:<C-U>call AskAndOpenJira()<CR>
+
+function! AskAndOpenJiraOpFile()
+  let l:jira_id = input("Enter Jira-ID:", "ASN-")
+  let l:cmd="download_jira.py -o jira_op " . a:jira_id
+  execute "e jira_op"
+  execute "normal gg"
+endfunction
+nnoremap <Leader>jrop <Esc>:<C-U>call AskAndOpenJira()<CR>
+
+function! RefreshJiraList()
+    let l:cmd="list_issues.py > jira.new"
+    let l:discard = system(l:cmd)
+    silent execute "only"
+    silent execute "e A_jira_list"
+    silent execute "normal gg"
+    silent execute "split jira.new"
+    let l:cmd="python3 /home/lakshman_narayanan/gitlab/aryaka-scripts/jira/compare_jira_lists.py A_jira_list jira.new"
+    silent execute "0r !" . l:cmd
+    silent execute "w"
+endfunction
+nnoremap <Leader>jrref <Esc>:<C-U>call RefreshJiraList()<CR>
 
 
 " DONT TYPE ANYTHING HERE SO THAT CENTOS-BRANCH CAN
