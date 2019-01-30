@@ -462,7 +462,7 @@ Multi-char
 nmap <Leader>jrget OpenJira        "Get jira under curson in a scratch
 nmap <Leader>jrask AskAndOpenJira  "Ask and open jira in scratch
 nmap <Leader>jrop  AskAndOpenJiraOpFile  "Prepare jira-o and open.
-nmap <Leader>jrref  RefreshJiraList  "Update the jira-list
+nmap <Leader>jrll  RefreshJiraList  "Update the jira-list
 ```
 
 ## Leader maps from plugins

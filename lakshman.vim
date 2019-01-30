@@ -732,7 +732,6 @@ function! OpenJira(jira_id)
     echom l:cmd
     silent execute "0r !" . l:cmd
     set nomodified
-    setlocal buftype=nofile
     setlocal bufhidden=hide
     setlocal noswapfile
     let &l:filetype = "jira_op"
@@ -765,7 +764,7 @@ function! RefreshJiraList()
     silent execute "0r !" . l:cmd
     silent execute "w"
 endfunction
-nnoremap <Leader>jrref <Esc>:<C-U>call RefreshJiraList()<CR>
+nnoremap <Leader>jrll <Esc>:<C-U>call RefreshJiraList()<CR>
 
 
 " DONT TYPE ANYTHING HERE SO THAT CENTOS-BRANCH CAN
