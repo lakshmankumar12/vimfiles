@@ -728,6 +728,7 @@ function! OpenJira(jira_id)
         execute "bd! jira_scratch"
     endif
     execute "tabnew jira_scratch"
+    execute "%d"
     let l:cmd="download_jira.py " . a:jira_id
     echom l:cmd
     silent execute "0r !" . l:cmd
@@ -735,7 +736,7 @@ function! OpenJira(jira_id)
     setlocal bufhidden=hide
     setlocal noswapfile
     let &l:filetype = "jira_op"
-    execute "normal gg"
+    execute "/\V\^********   Changelog"
 endfunction
 nnoremap <Leader>jrget  <Esc>:<C-U>call OpenJira(expand("<cWORD>"))<CR>
 
