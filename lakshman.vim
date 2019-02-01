@@ -720,8 +720,9 @@ function! JiraRefresh()
     echom l:cmd
     let l:discard = system(l:cmd)
     execute "e"
+    normal /\V\^********   Changelog/
 endfunction
-nnoremap <Leader>jrup <Esc>:<C-U>call JiraRefresh()<CR>/\V\^********   Changelog<CR>
+nnoremap zJup <Esc>:<C-U>call JiraRefresh()<CR>
 
 function! OpenJira(jira_id)
     if bufexists("jira_scratch")
@@ -736,15 +737,15 @@ function! OpenJira(jira_id)
     setlocal bufhidden=hide
     setlocal noswapfile
     let &l:filetype = "jira_op"
-    execute "/\V\^********   Changelog"
+    normal /\V\^********   Changelog/
 endfunction
-nnoremap <Leader>jrget  <Esc>:<C-U>call OpenJira(expand("<cWORD>"))<CR>
+nnoremap zJget  <Esc>:<C-U>call OpenJira(expand("<cWORD>"))<CR>
 
 function! AskAndOpenJira()
   let l:jira_id = input("Enter Jira-ID:", "ASN-")
   call OpenJira(l:jira_id)
 endfunction
-nnoremap <Leader>jrask <Esc>:<C-U>call AskAndOpenJira()<CR>
+nnoremap zJask <Esc>:<C-U>call AskAndOpenJira()<CR>
 
 function! AskAndOpenJiraOpFile()
   let l:jira_id = input("Enter Jira-ID:", "ASN-")
@@ -752,7 +753,7 @@ function! AskAndOpenJiraOpFile()
   execute "e jira_op"
   execute "normal gg"
 endfunction
-nnoremap <Leader>jrop <Esc>:<C-U>call AskAndOpenJira()<CR>
+nnoremap zJop <Esc>:<C-U>call AskAndOpenJira()<CR>
 
 function! RefreshJiraList()
     let l:cmd="list_issues.py > jira.new"
@@ -765,7 +766,7 @@ function! RefreshJiraList()
     silent execute "0r !" . l:cmd
     silent execute "w"
 endfunction
-nnoremap <Leader>jrll <Esc>:<C-U>call RefreshJiraList()<CR>
+nnoremap zJll <Esc>:<C-U>call RefreshJiraList()<CR>
 
 
 " DONT TYPE ANYTHING HERE SO THAT CENTOS-BRANCH CAN

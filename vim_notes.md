@@ -226,13 +226,13 @@ zf - create a fold (in manual-fold mode)
 zg - open current work to good work (spell file) (RECLAIM)
 zh - move view one step right                                             zH  - scroll left by half-screen
 zi - Invert foldenable
-zj - goto next fold down
+zj - goto next fold down                                                  zJ  - all my jira maps (see below)
 zk - goto end of previous fold
 zl - move view one step step                                              zL  - scroll right by half-screen
 zm - adds one fold level thru whole buff(inverse of zr)                   zM  - closes all folds in file
 zn - fold none (reset foldenable)                                         zN  - set foldenable
 zo - open fold under curor (in an existing fold)/complement of zc         zO  - zo at all folding levels
-zp - NONE                       (Bound to :lopen)
+zp - NONE                       (Bound to :copen)
 zr - reduces folding by opening one foldeding level over whole buf        zR  - open all folds
 zs - bring current column to start of screen
 zt - ..?..
@@ -458,12 +458,17 @@ nmap <Leader>1 .. 9  goto window N (gwN)
 ```
 Multi-char
 
+## Jira maps
+
+
 ```
-nmap <Leader>jrget OpenJira        "Get jira under curson in a scratch
-nmap <Leader>jrask AskAndOpenJira  "Ask and open jira in scratch
-nmap <Leader>jrop  AskAndOpenJiraOpFile  "Prepare jira-o and open.
-nmap <Leader>jrll  RefreshJiraList  "Update the jira-list
+nmap zJup  JiraRefresh          " You are in jira-op buffer. Download jira-op again and refresh.
+nmap zJget OpenJira             " Get jira under curson in a scratch
+nmap zJask AskAndOpenJira       " Ask and open jira in scratch
+nmap zJop  AskAndOpenJiraOpFile " You are in Folder. Download jira-o and open.
+nmap zJll  RefreshJiraList      " Update the jira-list
 ```
+
 
 ## Leader maps from plugins
 
