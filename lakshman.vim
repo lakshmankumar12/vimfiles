@@ -96,6 +96,8 @@ nnoremap gwN      <Esc>:call MyFixLocFixWrapper()<CR>
 if has('nvim')
   nnoremap gwT        <Esc>:tabnew \| terminal<CR>
   nnoremap <M-t>      <Esc>:vsplit \| terminal<CR>
+  nnoremap <M-s>      <Esc>:split  \| terminal<CR>
+  nnoremap <M-r>      <Esc>:terminal<CR>
 
   tnoremap kj     <C-\><C-n>
   tnoremap <expr> <C-\><C-R> '<C-\><C-N>"'.nr2char(getchar()).'pi'
@@ -105,7 +107,8 @@ if has('nvim')
   tnoremap <M-h> <c-\><c-n>gT
   tnoremap <M-l> <c-\><c-n>gt
 
-  inoremap <M-t>     <Esc>:tabnew \| terminal<CR>
+  inoremap <M-t>     <Esc>:vsplit \| terminal<CR>
+  inoremap <M-s>     <Esc>:split  \| terminal<CR>
 
   autocmd BufWinEnter,WinEnter term://* startinsert
 endif
@@ -712,17 +715,20 @@ nnoremap gwii <Esc>:<C-U>Ggp
 nnoremap gwic <Esc>:<C-U>Ggp expand("<cword>")
 nnoremap gwir <Esc>:<C-U>Ggp /rse/<Left><Left><Left><Left><Left><Left>
 
+nnoremap zFjj <Esc>:vsplit ~/tmp/jira_comment<CR>
+nnoremap zFcc <Esc>:vsplit ~/tmp/commit_comment<CR>
+nnoremap zFrr <Esc>:vsplit ~/tmp/review_description<CR>
+
 function! JiraRefresh()
     "get jiraid from line1
     let l:jiraid=getline(1)
-    let l:outfile=expand("%")
-    let l:cmd="download_jira.py -o " . l:outfile . " " . l:jiraid
+    let l:cmd="download_jira.py -o jira-op " . l:jiraid
     echom l:cmd
     let l:discard = system(l:cmd)
-    execute "e"
+    execute "e jira-op"
     normal /\V\^********   Changelog/
 endfunction
-nnoremap zJup <Esc>:<C-U>call JiraRefresh()<CR>
+nnoremap zJff <Esc>:<C-U>call JiraRefresh()<CR>
 
 function! OpenJira(jira_id)
     if bufexists("jira_scratch")
@@ -739,21 +745,23 @@ function! OpenJira(jira_id)
     let &l:filetype = "jira_op"
     normal /\V\^********   Changelog/
 endfunction
-nnoremap zJget  <Esc>:<C-U>call OpenJira(expand("<cWORD>"))<CR>
+nnoremap zJss  <Esc>:<C-U>call OpenJira(expand("<cWORD>"))<CR>
 
 function! AskAndOpenJira()
   let l:jira_id = input("Enter Jira-ID:", "ASN-")
   call OpenJira(l:jira_id)
 endfunction
-nnoremap zJask <Esc>:<C-U>call AskAndOpenJira()<CR>
+nnoremap zJas <Esc>:<C-U>call AskAndOpenJira()<CR>
 
 function! AskAndOpenJiraOpFile()
   let l:jira_id = input("Enter Jira-ID:", "ASN-")
-  let l:cmd="download_jira.py -o jira_op " . a:jira_id
-  execute "e jira_op"
+  let l:cmd="download_jira.py -o jira-op " . l:jira_id
+  echom l:cmd
+  let l:discard = system(l:cmd)
+  execute "e jira-op"
   execute "normal gg"
 endfunction
-nnoremap zJop <Esc>:<C-U>call AskAndOpenJira()<CR>
+nnoremap zJaf <Esc>:<C-U>call AskAndOpenJiraOpFile()<CR>
 
 function! RefreshJiraList()
     let l:cmd="list_issues.py > jira.new"

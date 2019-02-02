@@ -222,7 +222,7 @@ zb - bring line to bottom
 zc - close a fold (in an existing fold(determined by mode))               zC  - zc at all folding levels
 zd - delete one fold on cursor (in manual-fold mode)
 ze - bring current column to end of screen
-zf - create a fold (in manual-fold mode)
+zf - create a fold (in manual-fold mode)                                  zF  - open my fav files
 zg - open current work to good work (spell file) (RECLAIM)
 zh - move view one step right                                             zH  - scroll left by half-screen
 zi - Invert foldenable
@@ -390,10 +390,12 @@ T   : move window to a new tab
 
 
 ```
-      |        Normal        |  Insert
-M-t   |      new tab term    |  <same-normal>
-M-h   |      go tab left     |  <same-normal>
-M-l   |      go tab right    |  <same-normal>
+      |        Normal            |  Insert
+M-r   |      repl with term      |  --
+M-s   |      new split term      |  <same-normal>
+M-t   |      new vsplit term     |  <same-normal>
+M-h   |      go tab left         |  <same-normal>
+M-l   |      go tab right        |  <same-normal>
 ```
 
 
@@ -462,12 +464,21 @@ Multi-char
 
 
 ```
-nmap zJup  JiraRefresh          " You are in jira-op buffer. Download jira-op again and refresh.
-nmap zJget OpenJira             " Get jira under curson in a scratch
-nmap zJask AskAndOpenJira       " Ask and open jira in scratch
-nmap zJop  AskAndOpenJiraOpFile " You are in Folder. Download jira-o and open.
+nmap zJff  JiraRefresh          " You are in jira-op file. Download jira-op and refresh file
+nmap zJss  OpenJira             " Get jira under curson in a scratch
+nmap zJas  AskAndOpenJira       " Ask and open jira in scratch
+nmap zJaf  AskAndOpenJiraOpFile " You are in Folder. Ask jira-num, download jira-o and open.
 nmap zJll  RefreshJiraList      " Update the jira-list
 ```
+
+## Fav file maps
+
+```
+nmap zFjj  open ~/tmp/jira_comment
+nmap zFcc  open ~/tmp/commit_comment
+nmap zFrr  open ~/tmp/review_description
+```
+
 
 
 ## Leader maps from plugins
