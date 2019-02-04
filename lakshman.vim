@@ -719,23 +719,26 @@ nnoremap zFjj <Esc>:vsplit ~/tmp/jira_comment<CR>
 nnoremap zFcc <Esc>:vsplit ~/tmp/commit_comment<CR>
 nnoremap zFrr <Esc>:vsplit ~/tmp/review_description<CR>
 
-function! JiraRefresh()
-    "get jiraid from line1
-    let l:jiraid=getline(1)
-    let l:cmd="download_jira.py -o jira-op " . l:jiraid
+"Replaces current window with newly downloaded jira-op
+function! JiraGetInFile(jiraid)
+    let l:cmd="download_jira.py -o jira-op " . a:jiraid
     echom l:cmd
     let l:discard = system(l:cmd)
     execute "e jira-op"
     normal /\V\^********   Changelog/
 endfunction
-nnoremap zJff <Esc>:<C-U>call JiraRefresh()<CR>
+nnoremap zJff <Esc>:<C-U>call JiraGetInFile(expand("<cWORD>"))<CR>
 
-function! OpenJira(jira_id)
-    if bufexists("jira_scratch")
-        execute "bd! jira_scratch"
+function! JiraGetInBuffer(jira_id)
+    if expand("%") ==? "jira_scratch"
+        execute "%d"
+    else
+        if bufexists("jira_scratch")
+            execute "bd! jira_scratch"
+        endif
+        execute "tabnew jira_scratch"
+        execute "%d"
     endif
-    execute "tabnew jira_scratch"
-    execute "%d"
     let l:cmd="download_jira.py " . a:jira_id
     echom l:cmd
     silent execute "0r !" . l:cmd
@@ -745,23 +748,31 @@ function! OpenJira(jira_id)
     let &l:filetype = "jira_op"
     normal /\V\^********   Changelog/
 endfunction
-nnoremap zJss  <Esc>:<C-U>call OpenJira(expand("<cWORD>"))<CR>
+nnoremap zJss  <Esc>:<C-U>call JiraGetInBuffer(expand("<cWORD>"))<CR>
 
-function! AskAndOpenJira()
+function! AskAndOpenJiraInFile()
   let l:jira_id = input("Enter Jira-ID:", "ASN-")
-  call OpenJira(l:jira_id)
+  call JiraGetInFile(l:jira_id)
 endfunction
-nnoremap zJas <Esc>:<C-U>call AskAndOpenJira()<CR>
+nnoremap zJaf <Esc>:<C-U>call AskAndOpenJiraInFile()<CR>
 
-function! AskAndOpenJiraOpFile()
+function! AskAndOpenJiraInBuffer()
   let l:jira_id = input("Enter Jira-ID:", "ASN-")
-  let l:cmd="download_jira.py -o jira-op " . l:jira_id
-  echom l:cmd
-  let l:discard = system(l:cmd)
-  execute "e jira-op"
-  execute "normal gg"
+  call JiraGetInBuffer(l:jira_id)
 endfunction
-nnoremap zJaf <Esc>:<C-U>call AskAndOpenJiraOpFile()<CR>
+nnoremap zJaf <Esc>:<C-U>call AskAndOpenJiraInBuffer()<CR>
+
+function! JiraRefreshCurrentFile()
+    let l:jiraid=getline(1)
+    call JiraGetInFile(l:jiraid)
+endfunction
+nnoremap zJrf <Esc>:<C-U>call JiraRefreshCurrentFile()<CR>
+
+function! JiraRefreshCurrentBuffer()
+    let l:jiraid=getline(1)
+    call JiraGetInBuffer(l:jiraid)
+endfunction
+nnoremap zJrs <Esc>:<C-U>call JiraRefreshCurrentBuffer()<CR>
 
 function! RefreshJiraList()
     let l:cmd="list_issues.py > jira.new"

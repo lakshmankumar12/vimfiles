@@ -464,11 +464,13 @@ Multi-char
 
 
 ```
-nmap zJff  JiraRefresh          " You are in jira-op file. Download jira-op and refresh file
-nmap zJss  OpenJira             " Get jira under curson in a scratch
-nmap zJas  AskAndOpenJira       " Ask and open jira in scratch
-nmap zJaf  AskAndOpenJiraOpFile " You are in Folder. Ask jira-num, download jira-o and open.
-nmap zJll  RefreshJiraList      " Update the jira-list
+nmap zJff  JiraGetInFile            " Get jira-id on curser into jira-op file (jira-op will repl current buffer)
+nmap zJss  JiraGetInBuffer          " Get jira-id on curser into jira_scratch buffer
+nmap zJrf  JiraRefreshCurrentFile   " You are in jira-op file. Download jira-op and refresh file
+nmap zJrs  JiraRefreshCurrentBuffer " You are in jira_scratch. Download jira-op and refresh buffer
+nmap zJaf  AskAndOpenJiraInFile     " Ask and open jira in jira-op
+nmap zJas  AskAndOpenJiraInBuffer   " Ask and open jira in buffer
+nmap zJll  RefreshJiraList          " Update the jira-list
 ```
 
 ## Fav file maps
