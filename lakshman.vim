@@ -760,7 +760,7 @@ function! AskAndOpenJiraInBuffer()
   let l:jira_id = input("Enter Jira-ID:", "ASN-")
   call JiraGetInBuffer(l:jira_id)
 endfunction
-nnoremap zJaf <Esc>:<C-U>call AskAndOpenJiraInBuffer()<CR>
+nnoremap zJas <Esc>:<C-U>call AskAndOpenJiraInBuffer()<CR>
 
 function! JiraRefreshCurrentFile()
     let l:jiraid=getline(1)
@@ -775,7 +775,7 @@ endfunction
 nnoremap zJrs <Esc>:<C-U>call JiraRefreshCurrentBuffer()<CR>
 
 function! RefreshJiraList()
-    let l:cmd="list_issues.py > jira.new"
+    let l:cmd="list_issues.py -s > jira.new"
     let l:discard = system(l:cmd)
     silent execute "only"
     silent execute "e A_jira_list"
