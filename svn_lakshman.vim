@@ -319,8 +319,6 @@ function! ShowSVNFiles()
     let &makeprg=old_makeprg
     let &errorformat=old_errorformat
     execute "lopen"
-    "execute "ll"
-    "silent call ShowSvnCurrDiff(expand("%:p"))
     silent call ShowSvnCurrDiff(expand("<cWORD>"))
 endfunction
 
