@@ -174,6 +174,11 @@ function! ChompedSystem( ...  )
   return substitute(call('system', a:000), '\n\+$', '', '')
 endfunction
 
+" Take from: https://stackoverflow.com/a/4479072/2587153
+function! Strip(input_string)
+    return substitute(a:input_string, '^\s*\(.\{-}\)\s*$', '\1', '')
+endfunction
+
 function! GetCommandOutputOnNewTab()
   let s:cmdName = input("Enter command:")
   execute "tabnew"
@@ -786,6 +791,29 @@ function! RefreshJiraList()
     silent execute "w"
 endfunction
 nnoremap zJll <Esc>:<C-U>call RefreshJiraList()<CR>
+
+function! DownloadAttachmentInBuffer()
+    let l:jiraid=getline(1)
+    let l:attachinfo=getline('.')
+    let l:attachinfoparts=split(l:attachinfo, ":")
+    let l:filename=l:attachinfoparts[1]
+    let l:filename=Strip(l:filename)
+    let l:attachid=l:attachinfoparts[2]
+    let l:attachid=Strip(l:attachid)
+    if bufexists(l:filename)
+        echom "Sorry.. " . l:filename " buffer exists. Close that and re-issue"
+        return
+    endif
+    execute "tabnew " . l:filename
+    silent execute "%d"
+    let l:cmd="/home/lakshman_narayanan/gitlab/aryaka-scripts/jira/download_jira.py -A " . l:attachid . " " . l:jiraid
+    silent execute "0r !" . l:cmd
+    silent execute "0r !echo " . l:cmd
+    set nomodified
+    setlocal bufhidden=hide
+    setlocal noswapfile
+endfunction
+nnoremap zJds <Esc>:<C-U>call DownloadAttachmentInBuffer()<CR>
 
 
 " DONT TYPE ANYTHING HERE SO THAT CENTOS-BRANCH CAN
