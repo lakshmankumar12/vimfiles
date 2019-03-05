@@ -9,6 +9,8 @@ syntax match JiraLine /---------------------------------------------------------
 syntax match JiraByComment /^by: .* date:.*/
 syntax match JiraPersonReference /\v\[\~\S+\]/
 syntax match JiraAnotherBug /ASN-\d\+/
+syntax match JiraAnotherBug /ESC-\d\+/
+syntax match JiraAnotherBug /REQ-\d\+/
 syntax region JiraCode start=/{noformat}/ end=/{noformat}/
 syntax region JiraCode start=/{code.*}/ end=/{code}/
 syntax region JiraCode start=/{{/ end=/}}/

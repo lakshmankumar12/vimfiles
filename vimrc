@@ -94,6 +94,7 @@ Plugin 'vim-scripts/cecutil'                  "  pre-req for vim-dragvisuals
 Plugin 'atweiden/vim-dragvisuals'             "  drag visual block
 Plugin 'tmilloff/vim-address-bar'             "  one line buffer for filename
 Plugin 'jeetsukumaran/vim-buffergator'        " open up a buffer window
+Plugin 'dzeban/vim-log-syntax'                " syslog syntax highlight
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required

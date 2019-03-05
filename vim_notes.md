@@ -477,6 +477,7 @@ nmap zJll  RefreshJiraList          " Update the jira-list
 
 ```
 nmap zFjj  open ~/tmp/jira_comment
+nmap zJcc  open ~/tmp/jira_comment
 nmap zFcc  open ~/tmp/commit_comment
 nmap zFrr  open ~/tmp/review_description
 ```

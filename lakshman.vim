@@ -543,7 +543,7 @@ function! MakePlainAryakaFn(folder)
     execute "lopen"
     execute "wincmd p"
     execute "normal `Z"
-    "execute "ll"
+    execute "ll"
 endfunction
 
 command! -nargs=1 MakePlainAryaka call MakePlainAryakaFn(<f-args>)
@@ -721,6 +721,7 @@ nnoremap gwic <Esc>:<C-U>Ggp expand("<cword>")
 nnoremap gwir <Esc>:<C-U>Ggp /rse/<Left><Left><Left><Left><Left><Left>
 
 nnoremap zFjj <Esc>:vsplit ~/tmp/jira_comment<CR>
+nnoremap zJcc <Esc>:vsplit ~/tmp/jira_comment<CR>
 nnoremap zFcc <Esc>:vsplit ~/tmp/commit_comment<CR>
 nnoremap zFrr <Esc>:vsplit ~/tmp/review_description<CR>
 

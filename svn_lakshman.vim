@@ -305,6 +305,7 @@ function! ShowSvnLog(...)
     let s:cmdName = "svn info . | grep URL: | cut -d' ' -f2 | sed 's#\\(.*branches/[^/]*/\\).*#\\1#' "
     let g:currentRepoPrefix = ChompedSystem(s:cmdName)
   endif
+  execute "normal gg"
 endfunction
 
 " Gets a list of svn files - for now, what is edited
