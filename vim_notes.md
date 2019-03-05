@@ -972,6 +972,10 @@ General diff 2 files
 * Selection can go back and forth -  if you didn't start at the right point.
 * Selection can select objects wherever you are (word, within brace/quote/any-char, line)
 
+## minor things, but cute
+
+* Search to land at a point of interest (eg: s,e and count) - so that you can execute dot right there.
+
 # Snippets
 
 Read about them here - http://vimcasts.org/episodes/meet-ultisnips/
