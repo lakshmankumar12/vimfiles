@@ -471,6 +471,7 @@ nmap zJrs  JiraRefreshCurrentBuffer " You are in jira_scratch. Download jira-op 
 nmap zJaf  AskAndOpenJiraInFile     " Ask and open jira in jira-op
 nmap zJas  AskAndOpenJiraInBuffer   " Ask and open jira in buffer
 nmap zJll  RefreshJiraList          " Update the jira-list
+nnoremap zJds <Esc>:<C-U>call DownloadAttachmentInBuffer()<CR>
 ```
 
 ## Fav file maps
@@ -902,6 +903,11 @@ R     -> refresh
   P -> annotate parent
 * If you have opened a commit or a file, do a y^g to yank the current commit into clipboard
 ```
+* Open a particular version of a file
+```
+:Gedit treeish:%
+```
+
 
 ## jedi-vim
 

@@ -127,7 +127,7 @@ function! DoSvnAnnotate(filename)
   execute "vsplit " . s:temp_name
   set splitright
   execute "vert resize " . s:size
-  let s:cmdName = "svn info " . a:filename . " | grep Path: | cut -d' ' -f2"
+  let s:cmdName = "svn info " . a:filename . " | grep '^Path:' | cut -d' ' -f2"
   let s:repoFileName = ChompedSystem(s:cmdName)
   let g:currentLoggedFile = s:repoFileName
   let s:cmdName = "svn annotate -v " . s:repoFileName
