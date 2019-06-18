@@ -117,6 +117,9 @@ nnoremap <M-l> gt
 inoremap <M-h> <Esc>gT
 inoremap <M-l> <Esc>gt
 
+"in insert mode, quickly come to next line w/o auto-formatting
+inoremap <silent> <c-b> <esc>:set paste<cr>o<esc>:set nopaste<cr>a
+
 "cscope'ish
 nmap gxs :cs find s <C-R>=expand("<cword>")<CR><CR>
 nmap gxg :cs find g <C-R>=expand("<cword>")<CR><CR>
