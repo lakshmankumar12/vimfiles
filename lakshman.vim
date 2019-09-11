@@ -398,17 +398,17 @@ endfunction
 
 
 " functions
-nmap gGG          <Esc>:call PanosTags("../tags_f")<CR>
+nmap gGG          <Esc>:call PanosTags("tags_f")<CR>
 " struct/typedef
-nmap gGS          <Esc>:call PanosTags("../tags_s")<CR>
-nmap gGT          <Esc>:call PanosTags("../tags_s")<CR>
+nmap gGS          <Esc>:call PanosTags("tags_s")<CR>
+nmap gGT          <Esc>:call PanosTags("tags_s")<CR>
 " member
-nmap gGM          <Esc>:call PanosTags("../tags_m")<CR>
+nmap gGM          <Esc>:call PanosTags("tags_m")<CR>
 " global variables
-nmap gGV          <Esc>:call PanosTags("../tags_v")<CR>
+nmap gGV          <Esc>:call PanosTags("tags_v")<CR>
 " defines/enums
-nmap gGD          <Esc>:call PanosTags("../tags_d")<CR>
-nmap gGE          <Esc>:call PanosTags("../tags_d")<CR>
+nmap gGD          <Esc>:call PanosTags("tags_d")<CR>
+nmap gGE          <Esc>:call PanosTags("tags_d")<CR>
 
 function! PanosTagsSink(line)
   let s:cmdName = "a=" . a:line . "; echo ${a##*::}"
