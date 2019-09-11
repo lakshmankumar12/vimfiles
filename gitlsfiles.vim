@@ -9,6 +9,19 @@ command! -nargs=* Glistmod call g:ListModified(<f-args>)
 command! Gbase call g:ListModified("base","--")
 command! Gedited call g:ListModified("HEAD","--")
 
+function! g:LoadFilesListCmd()
+    let old_makeprg=&makeprg
+    let old_errorformat=&errorformat
+    let l:command = input("Enter Command:", "cat ~/tmp/files.lst")
+    let &makeprg = l:command
+    let &errorformat="%f"
+    echom &makeprg
+    silent lmake
+    let &makeprg=old_makeprg
+    let &errorformat=old_errorformat
+    execute "ll"
+endfunction
+
 function! g:ListModified(lhs, rhs)
     execute "tabnew %"
     let old_makeprg=&makeprg

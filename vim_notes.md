@@ -890,7 +890,7 @@ R     -> refresh
 :SVNAnno                  " with a file .. will annotate the file
 :SVNRev                   " in annotate window (or on a revision word) .. will get the rev on a window
 :SVNShowRev               " Anywhere .. asks a revision number and shows it..
-:SVNRDiff                 " in a rev-window on a file .. shows the changes of that one file
+:SVNRDiff         gwb     " in a rev-window on a file .. shows the changes of that one file
 :SVNStatus                " Anywhere .. shows the svn status
 :SVNLog                   " Anywhere .. shows the last 10 logs (or n as arg)"
 ```

@@ -95,6 +95,7 @@ Plugin 'atweiden/vim-dragvisuals'             "  drag visual block
 Plugin 'tmilloff/vim-address-bar'             "  one line buffer for filename
 Plugin 'jeetsukumaran/vim-buffergator'        " open up a buffer window
 Plugin 'dzeban/vim-log-syntax'                " syslog syntax highlight
+Plugin 'lakshmankumar12/protectterm'          " Protect vim from closing when there are open terminals
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -455,6 +456,9 @@ autocmd FileType jira_op syntax sync fromstart
 "ultisnip directories
 " myultisnippets just works because runtimepath include this vimrepo, via tdef!
 let g:UltiSnipsSnippetDirectories=["UltiSnips", "myultisnippets"]
+
+" gdb file-type
+au BufNewFile,BufRead *.gdb         setf gdb
 
 " Drag-visual
 vmap  <expr>  <LEFT>   DVB_Drag('left')

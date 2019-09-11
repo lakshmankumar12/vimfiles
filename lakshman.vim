@@ -77,9 +77,37 @@ function! MyWinCloseWrapper()
 endfunction
 nnoremap gwc          <Esc>:call MyWinCloseWrapper()<CR>
 
-nnoremap gwv          <Esc>:lclose<CR><C-w>v
-nnoremap gwvn         <Esc>:lclose<CR><C-w>v<C-w>p:lopen<CR><C-w>p<C-w>l
-nnoremap gwV          <Esc>:lclose<CR><C-w>v<C-w>p:lopen<CR><C-w>p
+function! MyVsplitRightAndFocusThere()
+    let l:my_id = win_getid()
+    let l:loc_id = get(getloclist(0, {'winid':0}), 'winid', 0)
+    if l:loc_id
+        execute "lclose"
+    endif
+    execute "vsplit"
+    let l:new_win_id = win_getid()
+    if l:loc_id
+        call win_gotoid(l:my_id)
+        execute "lopen"
+        call win_gotoid(l:new_win_id)
+    endif
+endfunction
+nnoremap gwv          <Esc>:call MyVsplitRightAndFocusThere()<CR>
+
+function! MyVsplitRightAndFocusBack()
+    let l:my_id = win_getid()
+    let l:loc_id = get(getloclist(0, {'winid':0}), 'winid', 0)
+    if l:loc_id
+        execute "lclose"
+    endif
+    execute "vsplit"
+    let l:new_win_id = win_getid()
+    call win_gotoid(l:my_id)
+    if l:loc_id
+        execute "lopen"
+        call win_gotoid(l:my_id)
+    endif
+endfunction
+nnoremap gwV          <Esc>:call MyVsplitRightAndFocusBack()<CR>
 
 function! MyFixLocFixWrapper()
     if &buftype == 'quickfix'
@@ -405,6 +433,7 @@ function! OpenArayakaFile(line)
     execute ":edit " . a:line
 endfunction
 
+"list_files_aryaka.sh is in quick_utility_scripts repo
 function! AryakaFileOpen()
   call fzf#run({
   \   'source': "list_files_aryaka.sh",
@@ -722,6 +751,41 @@ command! -nargs=+ Ggpswi call GitGrepFn(1,1,1,<f-args>)
 nnoremap gwii <Esc>:<C-U>Ggp
 nnoremap gwic <Esc>:<C-U>Ggp expand("<cword>")
 nnoremap gwir <Esc>:<C-U>Ggp /rse/<Left><Left><Left><Left><Left><Left>
+
+" use the vimgrepperutil.sh in quick-utils repo.
+"   grep <pattern> <pattern-to-filter-files> <file-with-filenames>
+function! FileGrepper(stayInLoc,encloseword,ignoreCase,grepArg,pathSpecArg,fileArg)
+    execute "normal mZ"
+    let l:cmd = a:pathSpecArg . " " . a:fileArg . " "
+    if a:ignoreCase
+        let l:cmd = l:cmd . "-i "
+    endif
+    let l:grepPat = "'"
+    if a:encloseword
+        let l:grepPat = l:grepPat . '\b'
+    endif
+    let l:grepPat = l:grepPat . a:grepArg
+    if a:encloseword
+        let l:grepPat = l:grepPat . '\b'
+    endif
+    let l:grepPat = l:grepPat . "'"
+    let l:cmd = "lgrep! " . l:grepPat . " " . l:cmd
+    echom "cmd is:" . l:cmd
+    let old_grepprg=&grepprg
+    let &grepprg = "vimgrepperutil.sh"
+    let old_grepprg=&grepprg
+    silent! execute l:cmd
+    let &grepprg=old_grepprg
+    if len(getloclist(winnr()))
+        execute "lopen"
+        if !a:stayInLoc
+            execute "ll"
+        endif
+    endif
+endfunction
+
+command! -nargs=+ Ggf call FileGrepper(0,0,0,<f-args>)
+nnoremap gwif <Esc>:<C-U>Ggf
 
 nnoremap zFjj <Esc>:vsplit ~/tmp/jira_comment<CR>
 nnoremap zJcc <Esc>:vsplit ~/tmp/jira_comment<CR>

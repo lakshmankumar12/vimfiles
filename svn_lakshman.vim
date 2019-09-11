@@ -83,7 +83,7 @@ nnoremap gwb :call ShowSvnCurrDiff(expand("<cWORD>"))<CR>
 
 function! DoSvnDumpRevision(filename, version)
   let s:lnum = line(".")
-  let s:cmdName = "svn info " . a:filename . " | grep Path: | cut -d' ' -f2"
+  let s:cmdName = "svn info " . a:filename . " | grep '^Path:' | cut -d' ' -f2"
   let s:repoFileName = ChompedSystem(s:cmdName)
   let g:currentLoggedFile = s:repoFileName
   " Lets save our URL prepend for later use
@@ -235,7 +235,7 @@ function! ShowSvnRevDiff(filename)
 endfunction
 
 function! DoSvnAnnoRevision(revision)
-  let s:cmdName = "svn info " . expand("%:p") . " | grep Path: | cut -d' ' -f2"
+  let s:cmdName = "svn info " . expand("%:p") . " | grep '^Path:' | cut -d' ' -f2"
   let l:filename = ChompedSystem(s:cmdName)
   let s:temp_name = "_rev_" . a:revision . "_" . fnamemodify(l:filename, ':t')
   if bufexists(s:temp_name)
