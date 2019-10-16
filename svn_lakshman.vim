@@ -4,6 +4,7 @@ com! SVNAnno   call DoSvnAnnotate(expand("%:p"))
 com! SVNRev    call DoSvnLogRevision(expand("<cWORD>"))
 com! SVNRDiff  call ShowSvnRevDiff(expand("<cWORD>"))
 com! SVNStatus call ShowSvnStatus()
+com! SVNReset  call SvnResetGlobalInfo()
 com! -nargs=* SVNLog  call ShowSvnLog(<f-args>)
 com! SVNEdited call ShowSVNFiles()
 com! SVNAnnoParentRev call DoSvnAnnoRevision(g:currentLoggedSVNRevParentForFile)
@@ -17,6 +18,25 @@ com! -nargs=1 SVNShowRevOfFile call DoSvnDumpRevision(expand("%:p"),<f-args>)
 " g:currentLoggedSVNRev
 " g:currentLoggedFile
 " g:currentLoggedSVNRevParentForFile
+
+function! SvnCheckAndSetRepoPrefix()
+  if !exists('g:currentRepoPrefix')
+      if filereadable ("./.branch_name")
+        let l:branch = ChompedSystem("cat .branch_name")
+      else
+        echom "There is no .branch file. pwd is " . getcwd()
+        return
+      endif
+      let s:cmdName = "svn info " . l:branch . " | grep '^URL:' | cut -d' ' -f2 | sed 's#\\(.*branches/[^/]*/\\).*#\\1#' "
+      let g:currentRepoPrefix = ChompedSystem(s:cmdName)
+      echom "g:currentRepoPrefix is set to " . g:currentRepoPrefix
+  endif
+endfunction
+
+function! SvnResetGlobalInfo()
+  unlet g:currentRepoPrefix
+  call SvnCheckAndSetRepoPrefix()
+endfunction
 
 function! ShowSvnCurrDiff(filename)
   let s:fileType = &ft
@@ -45,9 +65,6 @@ function! ShowSvnCurrDiff(filename)
   execute ":diffthis"
   execute "normal 1G"
   execute "normal ]c"
-  " Lets save our URL prepend for later use
-  let s:cmdName = "svn info " . a:filename . " | grep URL: | cut -d' ' -f2 | sed 's#\\(.*branches/[^/]*/\\).*#\\1#' "
-  let g:currentRepoPrefix = ChompedSystem(s:cmdName)
 endfunction
 
 function! ShowSvnStatus()
@@ -86,9 +103,6 @@ function! DoSvnDumpRevision(filename, version)
   let s:cmdName = "svn info " . a:filename . " | grep '^Path:' | cut -d' ' -f2"
   let s:repoFileName = ChompedSystem(s:cmdName)
   let g:currentLoggedFile = s:repoFileName
-  " Lets save our URL prepend for later use
-  let s:cmdName = "svn info " . a:filename . " | grep URL: | cut -d' ' -f2 | sed 's#\\(.*branches/[^/]*/\\).*#\\1#' "
-  let g:currentRepoPrefix = ChompedSystem(s:cmdName)
 
   let s:cmdName = "basename " . s:repoFileName
   let s:small_name = ChompedSystem(s:cmdName)
@@ -139,9 +153,6 @@ function! DoSvnAnnotate(filename)
   setlocal scrollbind
   let s:cmdName = "normal " . s:lnum . "G"
   execute s:cmdName
-  " Lets save our URL prepend for later use
-  let s:cmdName = "svn info " . a:filename . " | grep URL: | cut -d' ' -f2 | sed 's#\\(.*branches/[^/]*/\\).*#\\1#' "
-  let g:currentRepoPrefix = ChompedSystem(s:cmdName)
 endfunction
 
 function! DoSVNRevWindowOpenRevDiff()
@@ -153,10 +164,7 @@ endfunction
 
 
 function! DoSvnLogRevision(revision)
-  if !exists('g:currentRepoPrefix')
-      let s:cmdName = "svn info " . expand("%:p") . " | grep URL: | cut -d' ' -f2 | sed 's#\\(.*branches/[^/]*/\\).*#\\1#' "
-      let g:currentRepoPrefix = ChompedSystem(s:cmdName)
-  endif
+  call SvnCheckAndSetRepoPrefix()
   let g:currentLoggedSVNRev = a:revision
   let s:temp_name = "_rev_" . a:revision
   if bufexists(s:temp_name)
@@ -177,6 +185,7 @@ endfunction
 
 
 function! ShowSvnRevDiff(filename)
+  call SvnCheckAndSetRepoPrefix()
   " step-1: Get the left side revision number
   let s:cmdName = "echo " . a:filename . " | sed 's#^/[^/]*/[^/]*/##'"
   let s:svn_file_arg_latter = ChompedSystem(s:cmdName)
@@ -284,9 +293,11 @@ function! ShowSvnLog(...)
     execute "bd! " . s:temp_name
   endif
   execute "tabnew " . s:temp_name
+  let l:revertdir=0
   if filereadable ("./.branch_name")
     let s:branch = ChompedSystem("cat .branch_name")
     execute "lcd " . s:branch
+    let l:revertdir=1
   else
     0r "!echo no .branch file"
   endif
@@ -300,12 +311,10 @@ function! ShowSvnLog(...)
   execute "wincmd l"
   let l:cmd = "%s/^r\\(\\d\\)/ \\1/"
   silent execute l:cmd
-  if !exists('g:currentRepoPrefix')
-    " Lets save our URL prepend for later use
-    let s:cmdName = "svn info . | grep URL: | cut -d' ' -f2 | sed 's#\\(.*branches/[^/]*/\\).*#\\1#' "
-    let g:currentRepoPrefix = ChompedSystem(s:cmdName)
-  endif
   execute "normal gg"
+  if l:revertdir == 1
+      execute "lcd .."
+  endif
 endfunction
 
 " Gets a list of svn files - for now, what is edited

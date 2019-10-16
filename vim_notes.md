@@ -203,7 +203,8 @@ gL                         (Bound to :lnext)
 gMA                        make-arayka acemon
 gMM                        (Bound to last-tab)
 gMR                        make-arayka rse
-gMT                        :setlocal expandtab
+gMT                        make-arayka tcp
+gMP                        make-arayka pss
 gMX                        make-arayka ask
 gO                         :Addressbar
 gP                         (clip-board paste)

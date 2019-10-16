@@ -112,6 +112,8 @@ nnoremap gwV          <Esc>:call MyVsplitRightAndFocusBack()<CR>
 function! MyFixLocFixWrapper()
     if &buftype == 'quickfix'
         execute "ll"
+    else
+        execute "normal mZ"
     endif
     execute "lclose"
     execute "lopen"
@@ -165,7 +167,6 @@ nmap gxn :call SwitchBetweenDiffFolds('N')<CR>
 nmap gxp :call SwitchBetweenDiffFolds('P')<CR>
 
 nmap gyy          <Esc>:set paste!<CR>
-nmap gMT          <Esc>:setlocal noexpandtab!<CR>
 nmap gB           <Esc>:FzfBuffers<CR>
 nmap gz           <Esc>:ToggleBG<CR>
 imap kj           <Esc>
@@ -564,10 +565,11 @@ call textobj#user#plugin('datetime', {
 \   },
 \ })
 
-function! MakePlainAryakaFn(folder)
+function! MakePlainAryakaFn(which, folder)
     execute "normal mZ"
+    execute "lclose"
     let old_makeprg=&makeprg
-    let &makeprg = 'sh -c "source /home/lakshman_narayanan/.bashrc.aryaka.centos.sh && go ' . a:folder . ' && mkplain"'
+    let &makeprg = 'sh -c "source /home/lakshman_narayanan/.bashrc.aryaka.centos.sh && go ' . a:folder . ' && ' . a:which . '"'
     echom &makeprg
     silent lmake
     let &makeprg=old_makeprg
@@ -578,10 +580,12 @@ function! MakePlainAryakaFn(folder)
     execute "ll"
 endfunction
 
-command! -nargs=1 MakePlainAryaka call MakePlainAryakaFn(<f-args>)
-nnoremap gMR <Esc>:MakePlainAryaka rse<CR>
-nnoremap gMA <Esc>:MakePlainAryaka am<CR>
-nnoremap gMX <Esc>:MakePlainAryaka 
+command! -nargs=* MakePlainAryaka call MakePlainAryakaFn(<f-args>)
+nnoremap gMR <Esc>:MakePlainAryaka mkplain rse<CR>
+nnoremap gMA <Esc>:MakePlainAryaka mkplain am<CR>
+nnoremap gMT <Esc>:MakePlainAryaka mkplainpop tcp<CR>
+nnoremap gMP <Esc>:MakePlainAryaka mkplainpop pss<CR>
+nnoremap gMX <Esc>:MakePlainAryaka mkplain
 
 
 function! LoadCurrPositions(...)
@@ -787,10 +791,10 @@ endfunction
 command! -nargs=+ Ggf call FileGrepper(0,0,0,<f-args>)
 nnoremap gwif <Esc>:<C-U>Ggf
 
-nnoremap zFjj <Esc>:vsplit ~/tmp/jira_comment<CR>
-nnoremap zJcc <Esc>:vsplit ~/tmp/jira_comment<CR>
-nnoremap zFcc <Esc>:vsplit ~/tmp/commit_comment<CR>
-nnoremap zFrr <Esc>:vsplit ~/tmp/review_description<CR>
+nnoremap zFjj <Esc>:tabnew ~/tmp/jira_comment<CR>
+nnoremap zJcc <Esc>:tabnew ~/tmp/jira_comment<CR>
+nnoremap zFcc <Esc>:tabnew ~/tmp/commit_comment<CR>
+nnoremap zFrr <Esc>:tabnew ~/tmp/review_description<CR>
 
 "Replaces current window with newly downloaded jira-op
 function! JiraGetInFile(jiraid)
