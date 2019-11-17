@@ -459,14 +459,23 @@ if !exists("*ReloadConfigs")
   command! Recfg call ReloadConfigs()
 endif
 
-function! LoadErrorsFunction()
+let g:errorSearchTerm="error:"
+
+function! LoadErrorsFunction(file)
+  execute ":lclose"
   execute "normal mZ"
-  execute ":lf /tmp/errors"
+  execute ":lf " . a:file
   execute ":lopen"
   execute "wincmd k"
+  execute "normal `Z"
+  execute "wincmd j"
+  execute "normal gg"
+  execute "/" . g:errorSearchTerm
 endfunction
 
-command! LoadErrors call LoadErrorsFunction()
+command! -nargs=1 LE call LoadErrorsFunction(<f-args>)
+command! LET call LoadErrorsFunction("~/tmp/errors")
+command! LER call LoadErrorsFunction(g:asnRootPrefix . "lakshman_make_op")
 
 function! LoadListOfFilesFn(fileslist)
     let old_makeprg=&makeprg

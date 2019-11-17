@@ -11,10 +11,12 @@ com! SVNAnnoParentRev call DoSvnAnnoRevision(g:currentLoggedSVNRevParentForFile)
 com! -nargs=1 SVNAnnoShowRev call DoSvnAnnoRevision(<f-args>)
 com! -nargs=1 SVNShowRev call DoSvnLogRevision(<f-args>)
 com! -nargs=1 SVNShowRevOfFile call DoSvnDumpRevision(expand("%:p"),<f-args>)
+com! -nargs=1 SVNShowRevOfFileAndDiff call DoSvnDumpRevisionAndDiff(expand("%:p"),<f-args>)
 
 
 " ALL globals
 " g:currentRepoPrefix
+" g:asnRootPrefix
 " g:currentLoggedSVNRev
 " g:currentLoggedFile
 " g:currentLoggedSVNRevParentForFile
@@ -29,12 +31,14 @@ function! SvnCheckAndSetRepoPrefix()
       endif
       let s:cmdName = "svn info " . l:branch . " | grep '^URL:' | cut -d' ' -f2 | sed 's#\\(.*branches/[^/]*/\\).*#\\1#' "
       let g:currentRepoPrefix = ChompedSystem(s:cmdName)
+      let g:asnRootPrefix = getcwd() . "/" . l:branch . "/"
       echom "g:currentRepoPrefix is set to " . g:currentRepoPrefix
   endif
 endfunction
 
 function! SvnResetGlobalInfo()
-  unlet g:currentRepoPrefix
+  silent! unlet g:currentRepoPrefix
+  silent! unlet g:asnRootPrefix
   call SvnCheckAndSetRepoPrefix()
 endfunction
 
@@ -122,6 +126,14 @@ function! DoSvnDumpRevision(filename, version)
   setlocal noswapfile
   let s:cmdName = "normal " . s:lnum . "G"
   execute s:cmdName
+endfunction
+
+function! DoSvnDumpRevisionAndDiff(filename, version)
+    execute "normal mZ"
+    call DoSvnDumpRevision(a:filename, a:version)
+    execute "vsplit"
+    execute "normal `Z"
+    call g:DiffCurrentWins()
 endfunction
 
 
