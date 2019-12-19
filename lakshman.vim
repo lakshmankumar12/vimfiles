@@ -707,7 +707,7 @@ nnoremap gyg :<C-U>call LoadCurrPositionsAndGoto(v:count)<CR>
 
 function! GitGrepFn(stayInLoc,encloseword,ignoreCase,grepArg,...)
     execute "normal mZ"
-    let a:pathSpecArg = get(a:,1,"")
+    let l:pathSpecArg = get(a:,1,"")
     let l:cmd = "lgrep! --no-pager grep -nH "
     if a:ignoreCase
         let l:cmd = l:cmd . "-i "
@@ -721,8 +721,8 @@ function! GitGrepFn(stayInLoc,encloseword,ignoreCase,grepArg,...)
         let l:cmd = l:cmd . '\b'
     endif
     let l:cmd = l:cmd . "'"
-    if !empty(a:pathSpecArg)
-        let l:cmd = l:cmd . " -- '*" . a:pathSpecArg . "*'"
+    if !empty(l:pathSpecArg)
+        let l:cmd = l:cmd . " -- '*" . l:pathSpecArg . "*'"
     endif
     echom "cmd is:" . l:cmd
     let old_grepprg=&grepprg

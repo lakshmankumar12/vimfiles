@@ -8,7 +8,7 @@ call vundle#begin()
 "call vundle#begin('~/some/path/here')
 
 " let Vundle manage Vundle, required
-Plugin 'gmarik/Vundle.vim'
+Plugin 'VundleVim/Vundle.vim'
 
 Plugin 'antiAgainst/cscope-macros.vim'        " Brings in the ctrl-\ <g|s|c> shortcuts
 Plugin 'tpope/vim-repeat'                     " pre-requisite for easyclip
@@ -28,11 +28,6 @@ Plugin 'vim-scripts/python_match.vim'         " % for if/elif/else, try/except/c
 Plugin 'vim-airline/vim-airline'              " look and feel with powerline-ish fonts
 Plugin 'vim-airline/vim-airline-themes'       " More themese for airline
 Plugin 'majutsushi/tagbar'                    " Enables the c-function names with g:airline#extensions#tagbar#enabled below.
-if has('nvim')
-  Plugin 'Numkil/ag.nvim'
-else
-  Plugin 'rking/ag.vim'                         " Brings :Ag :LAg commands and silver-searcher
-endif
 Plugin 'vim-scripts/AnsiEsc.vim'              " To view files having ansi-esc chars.
 Plugin 'airblade/vim-gitgutter'               " Puts up a line(gutter) in the left column with git-ish information
 Plugin 'scrooloose/nerdcommenter'             " Comment/remove-comment blocks quickly
@@ -317,8 +312,10 @@ function! AirlineThemePatch(palette)
     let a:palette.replace.airline_a = [ '#ffffff', '#ff005f', 255, 197 ]
     let a:palette.replace.airline_z = [ '#ffffff', '#ff005f', 255, 197 ]
     "pinkish
-    let a:palette.terminal.airline_a = [ '#ffffff', '#ff005f', 255, 207 ]
-    let a:palette.terminal.airline_z = [ '#ffffff', '#ff005f', 255, 207 ]
+    if has_key(a:palette, 'terminal')
+        let a:palette.terminal.airline_a = [ '#ffffff', '#ff005f', 255, 207 ]
+        let a:palette.terminal.airline_z = [ '#ffffff', '#ff005f', 255, 207 ]
+    endif
   endif
 endfunction
 let g:airline_theme_patch_func = 'AirlineThemePatch'
@@ -449,6 +446,7 @@ au TabLeave * let g:lasttab = tabpagenr()
 
 " vim-markdown plugin settings
 let g:vim_markdown_conceal = 0
+let g:vim_markdown_conceal_code_blocks = 0
 let g:vim_markdown_toc_autofit = 1
 autocmd FileType markdown syntax sync fromstart
 autocmd FileType jira_op syntax sync fromstart
