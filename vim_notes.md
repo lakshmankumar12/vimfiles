@@ -697,6 +697,7 @@ function_name\s*(\s*\w\+\s\+\w.*,
 i.e name space* ( space* word+ space+ word+ .* ,
     The idea is only definition will have 2 words min between ( and , arg-type and arg-name, while invocations will have just argname.
     The -> and . will separate words in invocations too, but hopefully they dont have space inbetween!
+    Caveat: WONT catch argument-less or 1-arg function-definition.
 
 
 :set hidden  # option enables the non-saving of files while switching (unnecessary swap files)
