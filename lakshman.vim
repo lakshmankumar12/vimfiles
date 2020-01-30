@@ -473,9 +473,16 @@ function! LoadErrorsFunction(file)
   execute "/" . g:errorSearchTerm
 endfunction
 
+function! LoadErrorsInAsnRoot()
+    if !exists('g:currentRepoPrefix')
+        SVNReset
+    endif
+    call LoadErrorsFunction(g:asnRootPrefix . "lakshman_make_op")
+endfunction
+
 command! -nargs=1 LE call LoadErrorsFunction(<f-args>)
 command! LET call LoadErrorsFunction("~/tmp/errors")
-command! LER call LoadErrorsFunction(g:asnRootPrefix . "lakshman_make_op")
+command! LER call LoadErrorsInAsnRoot()
 
 function! LoadListOfFilesFn(fileslist)
     let old_makeprg=&makeprg

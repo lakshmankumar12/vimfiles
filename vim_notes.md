@@ -586,10 +586,24 @@ Quickfix invocation is          :     `<Leader>cs` ,and the cscope-char
 
 # Navigation in vim
 
+Search: jump indent up square enclosing block
+
 w - beginning of next word
 b - beginning of current/prev word
 e - end of current/next word
 ge - end of prev word
+
+[c ]c - prev/next hunk
+[{    - prev point where { appears at col-1. i. beginning of the { block (function in c)
+
+[- ]- - prev/next line with lesser indent
+[+ ]+ - prev/next line with higher indent
+[= ]= - prev/next line with same indent by separated by lines with diff indent.
+
+[z   - start of prev fold (This is useful in xml to go to enclosing block)
+
+
+
 
 
 # Vim text object selectors
@@ -653,6 +667,12 @@ note: if you press opening-brace, there will be a space added. if you use closin
 ```
 
 :help search-offset
+
+## non-greedy search in vim
+
+```
+.\{-}
+```
 
 # Paste just the matched pattern
 
