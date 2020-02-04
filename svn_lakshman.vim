@@ -1,15 +1,39 @@
 "What i use:
+"
+" Checked what's edited in current file                      | SVNDiff
+" Check what's edited across all files                       | SVNEdited
+"
+" Annotate the current file                                  | SVNAnno
+" Annotate current file of a given revision                  | SVNAnnoShowRev
+"
+" Open a Revision under cursor (if you are                   | SVNRev
+"                  in an annotated window)                   |
+" Open a Revision from command line                          | SVNShowRev
+"
+" In revision window diff a file with its previous version   | Type gwb
+" If you have just opened up a file from a commit and want   |
+" SVNAnnoParentRev
+"         to annoate the left-rev
+"
+" Svn status (in case its a bit lengthy and you want on win) | SVNStatus
+" Reset SVN info                                             | SVNReset
+"
+" SVN Log with <n> commits                                   | SVNLog {optinal-n}
 com! SVNDiff   call ShowSvnCurrDiff(expand("%:p"))
+com! SVNEdited call ShowSVNFiles()
+
 com! SVNAnno   call DoSvnAnnotate(expand("%:p"))
+com! -nargs=1 SVNAnnoShowRev call DoSvnAnnoRevision(<f-args>, ChompedSystem("svn info " . expand("%:p") . "| awk '/^URL/ {print $2}'"))
+
 com! SVNRev    call DoSvnLogRevision(expand("<cWORD>"))
-com! SVNRDiff  call ShowSvnRevDiff(expand("<cWORD>"))
+com! -nargs=1 SVNShowRev call DoSvnLogRevision(<f-args>)
+com! SVNAnnoParentRev call DoSvnAnnoRevision(g:currentLoggedSVNRevParentForFile, g:currentLoggedFile)
+
 com! SVNStatus call ShowSvnStatus()
 com! SVNReset  call SvnResetGlobalInfo()
+
 com! -nargs=* SVNLog  call ShowSvnLog(<f-args>)
-com! SVNEdited call ShowSVNFiles()
-com! SVNAnnoParentRev call DoSvnAnnoRevision(g:currentLoggedSVNRevParentForFile)
-com! -nargs=1 SVNAnnoShowRev call DoSvnAnnoRevision(<f-args>)
-com! -nargs=1 SVNShowRev call DoSvnLogRevision(<f-args>)
+
 com! -nargs=1 SVNShowRevOfFile call DoSvnDumpRevision(expand("%:p"),<f-args>)
 com! -nargs=1 SVNShowRevOfFileAndDiff call DoSvnDumpRevisionAndDiff(expand("%:p"),<f-args>)
 
@@ -78,26 +102,19 @@ function! ShowSvnStatus()
   endif
   execute "tabnew " . s:temp_name
   let s:cmdName = "svn status"
-  if filereadable ("./.branch_name")
-    let s:branch = ChompedSystem("cat .branch_name")
-    execute "lcd " . s:branch
-  else
+  if !filereadable ("./.branch_name")
     0r "!echo no .branch file"
+    return
   endif
+  let s:branch = ChompedSystem("cat .branch_name")
+  execute "lcd " . s:branch
   silent execute "0r !" . s:cmdName
+  execute "lcd .."
   setlocal nomodified
   setlocal buftype=nofile
   setlocal bufhidden=hide
   setlocal noswapfile
-  execute ":Clam svn diff"
   execute "normal gg"
-  execute "wincmd h"
-  execute "normal gg"
-  silent execute ":MarkClear"
-  silent execute ":Mark ^?"
-  silent execute ":Mark ^M"
-  silent execute "/^M"
-  silent execute "normal w"
 endfunction
 
 nnoremap gwb :call ShowSvnCurrDiff(expand("<cWORD>"))<CR>
@@ -183,7 +200,7 @@ function! DoSvnLogRevision(revision)
           execute "bd! " . s:temp_name
   endif
   execute "tabnew " . s:temp_name
-  let s:cmdName = "svn log --verbose -r" . a:revision . " " . g:currentRepoPrefix
+  let s:cmdName = "svn log --verbose -r" . a:revision . " " . substitute(g:currentRepoPrefix, "branches/.*", "", "")
   silent execute "0r !" . s:cmdName
   silent execute "0r !echo " . s:cmdName
   set nomodified
@@ -199,16 +216,14 @@ endfunction
 function! ShowSvnRevDiff(filename)
   call SvnCheckAndSetRepoPrefix()
   " step-1: Get the left side revision number
-  let s:cmdName = "echo " . a:filename . " | sed 's#^/[^/]*/[^/]*/##'"
-  let s:svn_file_arg_latter = ChompedSystem(s:cmdName)
-  let s:svn_file_arg = g:currentRepoPrefix . "/" . s:svn_file_arg_latter
-  let g:currentLoggedFile = s:svn_file_arg
-  let s:cmdName = "svn diff -c" . g:currentLoggedSVNRev . " " . s:svn_file_arg . " > /tmp/svn_plugin.patch"
+  "  Incoming file will be of the form /branches/BRANCH_NAME/path/to/file
+  let g:currentLoggedFile = substitute(g:currentRepoPrefix, "/branches/.*", "", "") . a:filename
+  let s:cmdName = "svn diff -c" . g:currentLoggedSVNRev . " " . g:currentLoggedFile . " > /tmp/svn_plugin.patch"
   echom "command is " . s:cmdName
   call ChompedSystem(s:cmdName)
   let s:cmdName = "head -n 3 /tmp/svn_plugin.patch | grep -E -o 'revision [[:digit:]]+' | cut -d' ' -f2"
   let s:left_rev = ChompedSystem(s:cmdName)
-  let s:cmdName = "svn info -r" . s:left_rev . " " . s:svn_file_arg . " | grep 'Last Changed Rev:' | cut -d' ' -f4"
+  let s:cmdName = "svn info -r" . s:left_rev . " " . g:currentLoggedFile . " | grep 'Last Changed Rev:' | cut -d' ' -f4"
   let s:left_rev = ChompedSystem(s:cmdName)
   let g:currentLoggedSVNRevParentForFile = s:left_rev
 
@@ -228,7 +243,7 @@ function! ShowSvnRevDiff(filename)
           execute "bd! " . s:rbuf_name
   endif
   execute "tabnew " . s:rbuf_name
-  let s:cmdName = "svn cat -r" . s:right_rev . " " . s:svn_file_arg
+  let s:cmdName = "svn cat -r" . s:right_rev . " " . g:currentLoggedFile
   silent execute "%d"
   silent execute "0r !" . s:cmdName
   set nomodified
@@ -240,7 +255,7 @@ function! ShowSvnRevDiff(filename)
   set nosplitright
   execute "vnew " . s:lbuf_name
   set splitright
-  let s:cmdName = "svn cat -r" . s:left_rev . " " . s:svn_file_arg
+  let s:cmdName = "svn cat -r" . s:left_rev . " " . g:currentLoggedFile
   silent execute "%d"
   silent execute "0r !" . s:cmdName
   set nomodified
@@ -255,10 +270,12 @@ function! ShowSvnRevDiff(filename)
   execute "normal zz"
 endfunction
 
-function! DoSvnAnnoRevision(revision)
-  let s:cmdName = "svn info " . expand("%:p") . " | grep '^Path:' | cut -d' ' -f2"
-  let l:filename = ChompedSystem(s:cmdName)
-  let s:temp_name = "_rev_" . a:revision . "_" . fnamemodify(l:filename, ':t')
+function! DoSvnAnnoRevision(revision, repo_file)
+  " eg: revision:  29012
+  "     repo_file: http://url_of_repo/branches/path/to/file
+  let s:cmdName = "basename " . a:repo_file
+  let l:smallname = ChompedSystem(s:cmdName)
+  let s:temp_name = "_rev_" . a:revision . "_" . l:smallname
   if bufexists(s:temp_name)
     execute "bd! " . s:temp_name
   endif
@@ -266,7 +283,7 @@ function! DoSvnAnnoRevision(revision)
   let s:temp_anno_name = s:temp_name . "_anno"
   echom "annoname is set to " . s:temp_anno_name
   execute "tabnew " . s:temp_name
-  let s:cmdName = "svn cat -r" . a:revision . " " . l:filename
+  let s:cmdName = "svn cat -r" . a:revision . " " . a:repo_file
   silent execute "0r !" . s:cmdName
   silent execute "0r !echo " . s:cmdName
   echom "cmd is " . s:cmdName
@@ -286,7 +303,7 @@ function! DoSvnAnnoRevision(revision)
   set splitright
   execute "vert resize " . s:size
 
-  let s:cmdName = "svn annotate -v -r" . a:revision . " " . l:filename
+  let s:cmdName = "svn annotate -v -r" . a:revision . " " . a:repo_file
   silent execute "0r !" . s:cmdName
   silent execute "0r !echo " . s:cmdName
   set nomodified
