@@ -4,16 +4,16 @@
 " Check what's edited across all files                       | SVNEdited
 "
 " Annotate the current file                                  | SVNAnno
-" Annotate current file of a given revision                  | SVNAnnoShowRev
+" Annotate current file of a given revision                  | SVNAnnoShowRev <rev>
 "
 " Open a Revision under cursor (if you are                   | SVNRev
 "                  in an annotated window)                   |
-" Open a Revision from command line                          | SVNShowRev
+" Open a Revision from command line                          | SVNShowRev <rev>
 "
 " In revision window diff a file with its previous version   | Type gwb
-" If you have just opened up a file from a commit and want   |
-" SVNAnnoParentRev
+" If you have just opened up a file from a commit and want   | SVNAnnoParentRev
 "         to annoate the left-rev
+" (Rare) Annotate current file on a different revision       | SVNAnnoShowRev <rev>
 "
 " Svn status (in case its a bit lengthy and you want on win) | SVNStatus
 " Reset SVN info                                             | SVNReset
