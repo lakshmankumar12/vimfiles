@@ -807,6 +807,15 @@ endfunction
 command! -nargs=+ Ggf call FileGrepper(0,0,0,<f-args>)
 nnoremap gwif <Esc>:<C-U>Ggf
 
+function! StripColorCodes()
+    execute "%s/\\\\033.\\{-}m//g"
+endfunction
+
+function! CompileTestCaseFile()
+    let l:cmd="!" . $HOME . "/github/TestCaseExpander/TestCaseExpander.py -w " . expand("%:p") . " -o  " . expand("%:p:r") .  ".out.tdef"
+    execute l:cmd
+endfunction
+
 nnoremap zFjj <Esc>:tabnew ~/tmp/jira_comment<CR>
 nnoremap zJcc <Esc>:tabnew ~/tmp/jira_comment<CR>
 nnoremap zFcc <Esc>:tabnew ~/tmp/commit_comment<CR>
