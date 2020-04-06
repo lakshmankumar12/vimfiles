@@ -647,14 +647,32 @@ ic
 
 # surround
 
+http://www.futurile.net/2016/03/19/vim-surround-plugin-tutorial/
+
+Availabe targets
+note: if you press opening-brace, there will be a space added. if you use closing-brace, no space is added
 ```
-ds" ds' ds( ds[  ds{
-cs"'
-ys<motion><sur-char>
+() {} [] <>
+b-alternate for (
+B-for )
+r for }
+a for ]
+quotes - ` " '
 ```
 
+```
+#delete by a surround target
+ds" ds' ds( ds[  ds{
+#change a surround target
+cs"'
+#add a surround char
+ys<motion><sur-char>
+or
 select visually, press S and then the surround char ",'
-note: if you press opening-brace, there will be a space added. if you use closing-brace, no space is added
+```
+
+My customized:
+* for quick markdown code-block surround, line-visual select by V, and then type `So`
 
 # Search modifiers
 
@@ -990,6 +1008,11 @@ General diff 2 files
 <Leader>go  -- diff off
 <Leader>gd  -- diff 2 wins
 ```
+
+## vimrc not loading properly
+
+* First time might not give proper clues.
+* Doing a :Recfg might have more clues on what goes wrong. You will get better error messages
 
 # vimscript
 
