@@ -123,6 +123,7 @@ set lbr
 set laststatus=2
 set nu
 set relativenumber
+autocmd BufReadPost quickfix setlocal norelativenumber
 set noshowmode
 set nosol
 set splitright

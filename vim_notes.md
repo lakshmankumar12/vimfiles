@@ -697,6 +697,8 @@ My customized:
 Search terms: search, register, paste
 
 Remember/Mnemonic: c-r as usual for command mode, c-x for insert, Its shift-7 always.
+    * More mnenomic - 7 (sani/saniyan - i always forget this!)
+    * Also you have to master marksman to type the c-x/shift-7 fast for it to work.
 
 ```
 in insert-mode

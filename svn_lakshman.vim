@@ -2,9 +2,9 @@
 "
 " Checked what's edited in current file                      | SVNDiff
 " Check what's edited across all files                       | SVNEdited
+" Check a file with a specific revision                      | SVNDiffWith <rev>
 "
 " Annotate the current file                                  | SVNAnno
-" Annotate current file of a given revision                  | SVNAnnoShowRev <rev>
 "
 " Open a Revision under cursor (if you are                   | SVNRev
 "                  in an annotated window)                   |
@@ -21,6 +21,7 @@
 " SVN Log with <n> commits                                   | SVNLog {optinal-n}
 com! SVNDiff   call ShowSvnCurrDiff(expand("%:p"))
 com! SVNEdited call ShowSVNFiles()
+com! -nargs=1 SVNDiffWith   call ShowSvnCurrDiffWith(<f-args>, expand("%:p"))
 
 com! SVNAnno   call DoSvnAnnotate(expand("%:p"))
 com! -nargs=1 SVNAnnoShowRev call DoSvnAnnoRevision(<f-args>, ChompedSystem("svn info " . expand("%:p") . "| awk '/^URL/ {print $2}'"))
@@ -66,11 +67,11 @@ function! SvnResetGlobalInfo()
   call SvnCheckAndSetRepoPrefix()
 endfunction
 
-function! ShowSvnCurrDiff(filename)
+function! ShowSvnCurrDiffWith(revision, filename)
   let s:fileType = &ft
   let s:filename_t = expand("%:t")
   let s:filename_h = expand("%:h")
-  let s:temp_name = "__" . s:filename_t
+  let s:temp_name = "__" . a:revision . "_" . s:filename_t
   execute "tabnew " . a:filename
   if bufexists(s:temp_name)
           execute "bd! " . s:temp_name
@@ -78,7 +79,7 @@ function! ShowSvnCurrDiff(filename)
   set nosplitright
   execute "vnew " . s:temp_name
   set splitright
-  let s:cmdName = "svn cat -rBASE " . a:filename
+  let s:cmdName = "svn cat -r" . a:revision . " " . a:filename
   silent execute "0r !" . s:cmdName
   "delete the last line
   silent execute "$,$d"
@@ -93,6 +94,10 @@ function! ShowSvnCurrDiff(filename)
   execute ":diffthis"
   execute "normal 1G"
   execute "normal ]c"
+endfunction
+
+function! ShowSvnCurrDiff(filename)
+    call ShowSvnCurrDiffWith("BASE", a:filename)
 endfunction
 
 function! ShowSvnStatus()

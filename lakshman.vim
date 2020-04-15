@@ -718,8 +718,8 @@ nnoremap gye <Esc>:call EditCurrPositions()<CR>
 nnoremap gyr <Esc>:call ReplaceACurrentPosition()<CR>
 nnoremap gys <Esc>:call GotoCurrentLocationListItem()<CR>
 nnoremap gyz <Esc>:call ZapCurrentPosition()<CR>
-nnoremap gyt <Esc>:lclose\|Toc<CR>
 nnoremap gyg :<C-U>call LoadCurrPositionsAndGoto(v:count)<CR>
+nnoremap gyt <Esc>:lclose\|Toc<CR>
 
 function! GitGrepFn(stayInLoc,encloseword,ignoreCase,grepArg,...)
     execute "normal mZ"
@@ -806,6 +806,15 @@ endfunction
 
 command! -nargs=+ Ggf call FileGrepper(0,0,0,<f-args>)
 nnoremap gwif <Esc>:<C-U>Ggf
+
+" awesome answer from https://stackoverflow.com/a/7236867/2587153
+function! SearchOnVimBuffers(stayInLoc,encloseword,ignoreCase,grepArg)
+    let l:tempfile = ChompedSystem('mktemp /tmp/srchVimBuffers.XXXXXXX')
+    let l:pathNameList=map(filter(range(0,bufnr('$')), 'buflisted(v:val)'), 'fnamemodify(bufname(v:val), ":p")')
+    call writefile(l:pathNameList, l:tempfile)
+    call FileGrepper(a:stayInLoc,a:encloseword,a:ignoreCase,a:grepArg,'.',l:tempfile)
+    call system('rm ' . l:tempfile)
+endfunction
 
 function! StripColorCodes()
     execute "%s/\\\\033.\\{-}m//g"
