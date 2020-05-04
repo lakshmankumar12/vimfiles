@@ -4,6 +4,7 @@
 from __future__ import print_function
 import os
 import sys
+import tempfile
 
 from neovim import attach
 
@@ -16,3 +17,15 @@ def get_nvim():
     nvim = attach("socket", path=addr)
     return nvim
 
+
+def get_vim_pid(nvim):
+    _, path = tempfile.mkstemp()
+    pid=0
+    try:
+        command = 'silent execute "!echo " . getpid() . "> {}"'.format(path)
+        nvim.command(command)
+        with open(path, 'r') as fd:
+            pid = int(fd.read().strip())
+    finally:
+        os.remove(path)
+    return pid

@@ -466,11 +466,11 @@ function! LoadErrorsFunction(file)
   execute "normal mZ"
   execute ":lf " . a:file
   execute ":lopen"
-  execute "wincmd k"
-  execute "normal `Z"
   execute "wincmd j"
   execute "normal gg"
   execute "/" . g:errorSearchTerm
+  execute "wincmd k"
+  execute "normal ll"
 endfunction
 
 function! LoadErrorsInAsnRoot()
