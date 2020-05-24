@@ -88,7 +88,8 @@ Plugin 'vim-scripts/align'                    "  pre-req for vim-dragvisuals
 Plugin 'vim-scripts/cecutil'                  "  pre-req for vim-dragvisuals
 Plugin 'atweiden/vim-dragvisuals'             "  drag visual block
 Plugin 'tmilloff/vim-address-bar'             "  one line buffer for filename
-Plugin 'jeetsukumaran/vim-buffergator'        " open up a buffer window
+Plugin 'inkarkat/vim-ingo-library'            "  dependancy for vim-SearchHighlighting
+Plugin 'inkarkat/vim-SearchHighlighting'      "  auto-highlight current word
 Plugin 'dzeban/vim-log-syntax'                " syslog syntax highlight
 Plugin 'lakshmankumar12/protectterm'          " Protect vim from closing when there are open terminals
 
