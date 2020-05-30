@@ -19,6 +19,12 @@
 " Reset SVN info                                             | SVNReset
 "
 " SVN Log with <n> commits                                   | SVNLog {optinal-n}
+" SVN Log with <n> commits of one user                       | SVNLog {optinal-n} {user-to-filter}
+"    note: n is not number of comits in this case from user  |
+"          but simply the number of commits svn will list    |
+"          from which to grep                                |
+" SVN Log my n commits                                       | SVNLogMe <n>
+" SVN Log current file                                       | SVNLogFile <n>
 com! SVNDiff   call ShowSvnCurrDiff(expand("%:p"))
 com! SVNEdited call ShowSVNFiles()
 com! -nargs=1 SVNDiffWith   call ShowSvnCurrDiffWith(<f-args>, expand("%:p"))
@@ -34,6 +40,8 @@ com! SVNStatus call ShowSvnStatus()
 com! SVNReset  call SvnResetGlobalInfo()
 
 com! -nargs=* SVNLog  call ShowSvnLog(<f-args>)
+com! -nargs=1 SVNLogMe  call ShowSvnLog(<f-args>, "lakshman_narayanan")
+com! -nargs=1 SVNLogFile  call ShowSvnLog(<f-args>, "", expand("%:p"))
 
 com! -nargs=1 SVNShowRevOfFile call DoSvnDumpRevision(expand("%:p"),<f-args>)
 com! -nargs=1 SVNShowRevOfFileAndDiff call DoSvnDumpRevisionAndDiff(expand("%:p"),<f-args>)
@@ -340,8 +348,20 @@ function! ShowSvnLog(...)
   setlocal bufhidden=hide
   setlocal noswapfile
   let l:num = ( a:0 >= 1 ) ? a:1 : 100
+  let l:user = ( a:0 >= 2 ) ? a:2 : ""
+  let l:file = ( a:0 >= 3 ) ? a:3 : ""
   echom "num is " . l:num
-  execute ":0r !svn log -l " . l:num
+  echom "user is " . l:user
+  let l:cmd = ":0r !svn log -l " . l:num
+  if len(l:file) > 0
+      let l:cmdName = "svn info " . l:file . " | grep '^Path:' | cut -d' ' -f2"
+      let l:repoFileName = ChompedSystem(l:cmdName)
+      let l:cmd = l:cmd . " " . l:repoFileName
+  endif
+  if len(l:user) > 0
+      let l:cmd = l:cmd . " | sed -n '/" . l:user . "/,/-----$/ p'"
+  endif
+  execute l:cmd
   execute "wincmd l"
   let l:cmd = "%s/^r\\(\\d\\)/ \\1/"
   silent execute l:cmd
