@@ -460,9 +460,13 @@ let g:UltiSnipsSnippetDirectories=["UltiSnips", "myultisnippets"]
 " gdb file-type
 au BufNewFile,BufRead *.gdb         setf gdb
 
+" Reference: http://www.futurile.net/2016/03/19/vim-surround-plugin-tutorial/
 " new surround target
+"    :echo char2nr('o') which returns 111
 let g:surround_111 = "```\r```"
 let g:surround_{char2nr('o')} = "```\r```"
+let g:surround_107 = "`\r`"
+let g:surround_{char2nr('k')} = "`\r`"
 
 " Drag-visual
 vmap  <expr>  <LEFT>   DVB_Drag('left')
