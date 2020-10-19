@@ -692,6 +692,12 @@ My customized:
 .\{-}
 ```
 
+## Remove color codes in a tmux capture file
+
+```
+:%s/\\033.\{-}m//g
+```
+
 # Paste just the matched pattern
 
 Search terms: search, register, paste
@@ -726,6 +732,8 @@ Instead of .* use .\{-}.
 ```
 
 # Other Vim Tips:
+
+Search: search function
 
 In a huge list of cscope-s results on a function-name, to quickly find the function defintion, try
 

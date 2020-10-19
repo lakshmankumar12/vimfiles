@@ -379,6 +379,13 @@ if filereadable ("others.out")
   execute "cs add others.out"
 endif
 
+let g:shelltoset=g:my_home . "/bin/zsh"
+"Hose overrides
+let g:hostname=system("hostname -s")
+if stridx(g:hostname,"mforge3") != -1
+    let g:shelltoset="/home/lakshman_narayanan/gitlab/aryaka-scripts/m3_overrides/zsh"
+endif
+
 if has('nvim')
   execute "source " . g:my_home . "/.vim/plugin/lakshman.vim"
   execute "source " . g:my_home . "/.vim/plugin/sn_git.vim"
@@ -388,7 +395,7 @@ if has('nvim')
   set timeout               " wait for 1s for keymaps
   let g:python_host_prog = g:my_home . '/bin/python2.7'
   let g:python3_host_prog = g:my_home . '/bin/python3'
-  set shell=$HOME/bin/zsh
+  let &shell = g:shelltoset
   " nvim-editcommand
   let g:editcommand_prompt = '─'
   tmap <M-o> <Plug>EditCommand

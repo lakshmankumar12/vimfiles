@@ -27,7 +27,8 @@
 " SVN Log current file                                       | SVNLogFile <n>
 com! SVNDiff   call ShowSvnCurrDiff(expand("%:p"))
 com! SVNEdited call ShowSVNFiles()
-com! -nargs=1 SVNDiffWith   call ShowSvnCurrDiffWith(<f-args>, expand("%:p"))
+com! -nargs=1 SVNDiffWith         call ShowSvnCurrDiffWith("", <f-args>, expand("%:p"))
+com! -nargs=+ SVNDiffWithBranch   call ShowSvnCurrDiffWith(<f-args>, expand("%:p"))
 
 com! SVNAnno   call DoSvnAnnotate(expand("%:p"))
 com! -nargs=1 SVNAnnoShowRev call DoSvnAnnoRevision(<f-args>, ChompedSystem("svn info " . expand("%:p") . "| awk '/^URL/ {print $2}'"))
@@ -75,7 +76,10 @@ function! SvnResetGlobalInfo()
   call SvnCheckAndSetRepoPrefix()
 endfunction
 
-function! ShowSvnCurrDiffWith(revision, filename)
+function! ShowSvnCurrDiffWith(...)
+  let a:branch = ( a:0 >= 1 ) ? a:1 : ""
+  let a:revision = ( a:0 >= 2 ) ? a:2 : "BASE"
+  let a:filename = ( a:0 >= 3 ) ? a:3 : "Makefile"
   let s:fileType = &ft
   let s:filename_t = expand("%:t")
   let s:filename_h = expand("%:h")
@@ -87,7 +91,16 @@ function! ShowSvnCurrDiffWith(revision, filename)
   set nosplitright
   execute "vnew " . s:temp_name
   set splitright
-  let s:cmdName = "svn cat -r" . a:revision . " " . a:filename
+  let l:filearg = a:filename
+  if len(a:branch) > 0
+      let l:cmdName = "svn info " . l:filearg . " | grep '^Path:' | cut -d' ' -f2 | cut -d/ -f2-"
+      let l:repoFileName = ChompedSystem(l:cmdName)
+      let l:cmdName = "svn info " . l:filearg . " | grep '^Repository Root:' | cut -d' ' -f3"
+      let l:repoRoot = ChompedSystem(l:cmdName)
+      let l:filearg = l:repoRoot . "/branches/" . a:branch . "/" . l:repoFileName
+  end
+  let s:cmdName = "svn cat -r" . a:revision . " " . l:filearg
+  echom "Executing cmd: " . s:cmdName
   silent execute "0r !" . s:cmdName
   "delete the last line
   silent execute "$,$d"
@@ -105,7 +118,7 @@ function! ShowSvnCurrDiffWith(revision, filename)
 endfunction
 
 function! ShowSvnCurrDiff(filename)
-    call ShowSvnCurrDiffWith("BASE", a:filename)
+    call ShowSvnCurrDiffWith("", "BASE", a:filename)
 endfunction
 
 function! ShowSvnStatus()
