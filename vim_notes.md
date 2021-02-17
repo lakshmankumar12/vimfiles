@@ -733,6 +733,8 @@ Instead of .* use .\{-}.
 
 # Other Vim Tips:
 
+## Search function in cscope result
+
 Search: search function
 
 In a huge list of cscope-s results on a function-name, to quickly find the function defintion, try
@@ -750,6 +752,12 @@ i.e name space* ( space* word+ space+ word+ .* ,
 
 :set hidden  # option enables the non-saving of files while switching (unnecessary swap files)
 echo &hidden # is a way to see the current setting.
+
+## markdown File handling
+
+Search: md
+
+* See table of content - gyt
 
 ## Colors in vim:
 
@@ -1023,6 +1031,17 @@ General diff 2 files
 
 * First time might not give proper clues.
 * Doing a :Recfg might have more clues on what goes wrong. You will get better error messages
+
+## clear messages
+
+messages clear
+
+## show endofline
+
+```
+set listchars+=eol:↲
+set listchars-=eol:↲
+```
 
 # vimscript
 

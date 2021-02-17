@@ -921,6 +921,23 @@ function! DownloadAttachmentInBuffer()
 endfunction
 nnoremap zJds <Esc>:<C-U>call DownloadAttachmentInBuffer()<CR>
 
+function! SaveCurrFormatOptions()
+    if (!exists ("g:formatoptoinsaved") || g:formatoptoinsaved == 0)
+        let g:saveformatoptions=&formatoptions
+        set formatoptions-=cro
+        let g:formatoptoinsaved=1
+    end
+endfunction
+
+
+function! RestoreCurrFormatOptions()
+    if (exists ("g:formatoptoinsaved") && g:formatoptoinsaved == 1)
+        let g:saveformatoptions=&formatoptions
+        let &formatoptions=g:saveformatoptions
+        let g:formatoptoinsaved=0
+    end
+endfunction
+
 
 " DONT TYPE ANYTHING HERE SO THAT CENTOS-BRANCH CAN
 " SAFELY ADD ITS OVERRIDES WITHOUT ISSUES
