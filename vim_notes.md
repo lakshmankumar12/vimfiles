@@ -842,6 +842,13 @@ end files in .org
                (Mnemonic: * and # are complements, / and ? are complements. * is for narrower/sharper search)
 ```
 
+## Search Hightlight
+
+```
+:SearchAutoHighlighting wword
+:NoSearchAutoHighlighting
+```
+
 ## Denite/Unite movement
 
 ```
@@ -872,15 +879,23 @@ i to come back to insert
 
 ## Reverse lines
 
+Search : reverse, tac
+
 ```
 "full file
-:g/^/m0   " g is to take action on lines matching ensuing regex, ^ matches every line, m move, 0 -> after line-0
+:g/^/m0     " how it works:
+            "  g   : is to take action on lines matching ensuing regex
+            "  /^/ : matches every line
+            "  m0  : move after line-0. This does the magic of reversing.
 
 "part of file
-:'<,'>g/^/mN  " rember to get N (line number before selection)
+:'<,'>g/^/mN  " remember to get N (line number before selection)
 
 "fully with line numbers
 :100,150g/^/m99
+
+Or Just use tac
+:'<,'>!tac
 ```
 
 ## Mark and save a subset to another file
@@ -1108,5 +1123,18 @@ syntax sync fromstart
 ```
 
 # Add a digraph to vim
+
+## popular diagraphs
+
+```
+:digraph    " list all digraphs"
+»     >>
+«     <<
+↑     -!
+↓     -v
+←     -<
+→     ->
+```
+
 
 

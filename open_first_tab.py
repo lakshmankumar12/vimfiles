@@ -16,7 +16,7 @@ def parse_args():
     parser.add_argument("-t","--gototab", help="goto nth tab", type=int, default=-1)
     parser.add_argument("-c","--command", help="execute any command in colon mode")
     parser.add_argument("-N","--ncommand", help="execute any command in normal mode")
-    parser.add_argument("-g","--grabPosFile", help="execute any command in normal mode", type=int)
+    parser.add_argument("-g","--grabPosFile", help="grab a /tmp/vimPos.XXX file. Use .../quick-utility-scripts/check_vim_pos.sh to list all", type=int)
     cmd_options = parser.parse_args()
 
     return cmd_options
