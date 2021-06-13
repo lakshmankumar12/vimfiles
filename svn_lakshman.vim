@@ -1,6 +1,7 @@
 "What i use:
 "
 " Checked what's edited in current file                      | SVNDiff
+" Just load edited files in location-list                    | SVNLSM
 " Check what's edited across all files                       | SVNEdited
 " Check a file with a specific revision                      | SVNDiffWith <rev>
 "
@@ -26,7 +27,8 @@
 " SVN Log my n commits                                       | SVNLogMe <n>
 " SVN Log current file                                       | SVNLogFile <n>
 com! SVNDiff   call ShowSvnCurrDiff(expand("%:p"))
-com! SVNEdited call ShowSVNFiles()
+com! SVNLSM    call ShowSVNFiles()
+com! SVNEdited call ShowSVNEdited()
 com! -nargs=1 SVNDiffWith         call ShowSvnCurrDiffWith("", <f-args>, expand("%:p"))
 com! -nargs=+ SVNDiffWithBranch   call ShowSvnCurrDiffWith(<f-args>, expand("%:p"))
 
@@ -396,6 +398,10 @@ function! ShowSVNFiles()
     let &makeprg=old_makeprg
     let &errorformat=old_errorformat
     execute "lopen"
+endfunction
+
+function! ShowSVNEdited()
+    call ShowSVNFiles()
     silent call ShowSvnCurrDiff(expand("<cWORD>"))
 endfunction
 

@@ -41,13 +41,17 @@ elif options.next:
     nvim.command('tabnext')
 elif options.gototab != -1:
     nvim.command('{}tabnext'.format(options.gototab))
-elif options.command:
-    nvim.command(options.command)
-elif options.ncommand:
-    nvim.command('normal ' + options.ncommand)
 elif options.grabPosFile:
     grabPosFile(nvim, options)
 else:
-    #just create a first tab
-    nvim.command('0tabnew')
-    nvim.command('tabfirst')
+    if options.command or options.ncommand:
+        pass
+    else:
+        #just create a first tab
+        nvim.command('0tabnew')
+        nvim.command('tabfirst')
+
+if options.command:
+    nvim.command(options.command)
+elif options.ncommand:
+    nvim.command('normal ' + options.ncommand)

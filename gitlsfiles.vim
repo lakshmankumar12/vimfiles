@@ -4,6 +4,7 @@ nnoremap <silent> <Leader>gj :call g:DiffNextLoc()<CR>
 nnoremap <silent> <Leader>gk :call g:DiffPrevLoc()<CR>
 nnoremap <silent> <Leader>go :call g:DiffOff()<CR>
 nnoremap <silent> <Leader>gd :call g:DiffCurrentWins()<CR>
+nnoremap <silent> <Leader>gl :call g:DiffOffWhenListMod()<CR>
 
 command! -nargs=* Glistmod call g:ListModified(<f-args>)
 command! Gbase call g:ListModified("base","--")
@@ -105,3 +106,14 @@ function! g:DiffOff()
     execute "normal `Z"
 endfunction
 
+function! g:DiffOffWhenListMod()
+    let l:n = winnr()
+    execute "normal mZ"
+    silent exec 'windo diffoff'
+    silent exec 'wincmd h'
+    silent exec 'close'
+    silent exec 'lclose'
+    silent exec 'lopen'
+    silent exec 'wincmd k'
+    execute "normal `Z"
+endfunction
