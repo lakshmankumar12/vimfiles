@@ -35,6 +35,8 @@ nmap gwO          <Esc>:lclose<CR>
 nmap gws          <C-w>s
 nmap gwB          <Esc>:setlocal noexpandtab<CR>
 nmap gwS          <Esc>:set spell!<CR>
+nmap gwR          <Esc><Esc><Esc>:e!<CR>
+imap gwR          <Esc><Esc><Esc>:e!<CR>
 nmap gwX          <Esc>:syntax sync fromstart<CR>
 "these close other windows
 nmap gwH          <C-w>h<C-w>c
@@ -65,6 +67,16 @@ function! MyWinCmdWrapper(winnr)
 endfunction
 
 nnoremap Z  :<C-U>call MyWinCmdWrapper(v:count)<CR>
+
+function! ExecuteOnWin(winnr, command)
+    let l:currentWinNr = winnr()
+    execute a:winnr . 'wincmd w'
+    try
+        execute a:command
+    finally
+    silent execute l:currentWinNr . 'wincmd w'
+    endtry
+endfunction
 
 function! MyWinCloseWrapper()
     if &buftype == 'quickfix'

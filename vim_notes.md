@@ -842,7 +842,9 @@ end files in .org
                (Mnemonic: * and # are complements, / and ? are complements. * is for narrower/sharper search)
 ```
 
-## Search Hightlight
+## Search Highlight
+
+search: high
 
 ```
 :SearchAutoHighlighting wword
