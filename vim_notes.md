@@ -915,6 +915,16 @@ then
 :set colorcolumn=80
 ```
 
+## Merge a line having a pattern to its previous line
+
+```vim
+:g/pattern/.-1,.j
+
+" That's basically g/pattern/a,bCOMMAND
+" Here a and b are respectively .-1 and . (current minus one to current)
+```
+
+
 ## Working on Columns
 
 column-replace:
