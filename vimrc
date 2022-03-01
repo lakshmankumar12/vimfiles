@@ -92,6 +92,7 @@ Plugin 'inkarkat/vim-ingo-library'            "  dependancy for vim-SearchHighli
 Plugin 'inkarkat/vim-SearchHighlighting'      "  auto-highlight current word
 Plugin 'dzeban/vim-log-syntax'                " syslog syntax highlight
 Plugin 'lakshmankumar12/protectterm'          " Protect vim from closing when there are open terminals
+Plugin 'rust-lang/rust.vim'                   " Rust plugin
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
