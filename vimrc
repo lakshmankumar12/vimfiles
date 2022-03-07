@@ -75,7 +75,7 @@ if has('nvim')
   Plugin 'zchee/deoplete-jedi'                " python autocomplete
   Plugin 'wbthomason/buildit.nvim'            " :Buildit .. async making
   Plugin 'jalvesaq/vimcmdline'                " Run lines individuall from a file
-  Plugin 'lyuts/vim-rtags'                    " rtags client
+  "Plugin 'lyuts/vim-rtags'                    " rtags client
   Plugin 'brettanomyces/nvim-editcommand'     " <ctr-x><ctr-e> from the neovim-terminal
 else
   Plugin 'sjl/clam.vim'                       " Clam shellcmd
@@ -178,7 +178,7 @@ function! DumpFullPathToClipBoard()
   if s:uname == "Darwin"
     call system("pbcopy -pboard general", expand("%:p"))
   else
-    call system("ssh -p $(cat /home/lakshman_narayanan/.mymacport) lakshman.narayanan@$(cat /home/lakshman_narayanan/.mymacip) pbcopy", expand("%:p"))
+    call system("to_host_clip.sh", expand("%:p"))
   endif
 endfunction
 
@@ -199,9 +199,9 @@ function! DumpToClipBoard()
   if s:uname == "Darwin"
     call system("pbcopy -pboard general", getreg("\""))
   else
-    call system("xsel -i -b", getreg("\""))
-    call system("xsel -i -b", getreg("\""))
-    call system("ssh -p $(cat /home/lakshman_narayanan/.mymacport) $(cat $HOME/.mymacusername)@$(cat /home/lakshman_narayanan/.mymacip) pbcopy", getreg("\""))
+    call system("to_host_clip.sh", getreg("\""))
+    "call system("xsel -i -b", getreg("\""))
+    "call system("ssh -p $(cat /home/lakshman_narayanan/.mymacport) $(cat $HOME/.mymacusername)@$(cat /home/lakshman_narayanan/.mymacip) pbcopy", getreg("\""))
   endif
 endfunction
 
@@ -334,7 +334,7 @@ set completeopt-=preview
 " Reset the listchars - This is a native vim setting
 set listchars=""
 " make tabs visible
-set listchars=tab:⇢‧
+set listchars=tab:↔•        "⇢‧
 " show trailing spaces as dots
 set listchars+=trail:…
 " The character to show in the last column when wrap is off and the line
@@ -343,7 +343,7 @@ set listchars+=extends:►
 " The character to show in the last column when wrap is off and the line
 " continues beyond the right of the screen
 set listchars+=precedes:◄
-"set listchars+=eol:↲
+"set listchars+=eol:←  "  ↲
 set list
 
 set fillchars=vert:│,fold:-
@@ -448,7 +448,7 @@ let g:xml_syntax_folding=1
 au FileType xml setlocal foldmethod=syntax
 
 "indentLine
-let g:indentLine_char='┊'
+let g:indentLine_char='┃'   " '┊'
 
 "last-tab!
 let g:lasttab = 1
