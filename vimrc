@@ -81,8 +81,8 @@ else
   Plugin 'sjl/clam.vim'                       " Clam shellcmd
   Plugin 'vim-scripts/OmniCppComplete'        " c-based language auto-complete
 endif
-"Plugin 'SirVer/ultisnips'                     " snippets engine
-"Plugin 'honza/vim-snippets'                   " snippets repo
+Plugin 'SirVer/ultisnips'                     " snippets engine
+Plugin 'honza/vim-snippets'                   " snippets repo
 Plugin 'file://' . $HOME . '/github/vimfiles', {'rtp': 'tdef/'}         " my tdef file
 Plugin 'vim-scripts/align'                    "  pre-req for vim-dragvisuals
 Plugin 'vim-scripts/cecutil'                  "  pre-req for vim-dragvisuals
@@ -396,7 +396,7 @@ if has('nvim')
   set scrollback=100000
   set timeout               " wait for 1s for keymaps
   let g:python_host_prog = g:my_home . '/bin/python2.7'
-  let g:python3_host_prog = g:my_home . '/bin/python3'
+  let g:python3_host_prog = g:my_home . '/bin/python'
   let &shell = g:shelltoset
   " nvim-editcommand
   let g:editcommand_prompt = '─'
