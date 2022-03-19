@@ -755,7 +755,6 @@ function! GitGrepFn(stayInLoc,encloseword,ignoreCase,grepArg,...)
     echom "cmd is:" . l:cmd
     let old_grepprg=&grepprg
     let &grepprg = "git"
-    let old_grepprg=&grepprg
     silent! execute l:cmd
     let &grepprg=old_grepprg
     if len(getloclist(winnr()))

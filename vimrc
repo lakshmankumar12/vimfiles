@@ -199,7 +199,7 @@ function! DumpToClipBoard()
   if s:uname == "Darwin"
     call system("pbcopy -pboard general", getreg("\""))
   else
-    call system("to_host_clip.sh", getreg("\""))
+    call system("bash -ci to_host_clip", getreg("\""))
     "call system("xsel -i -b", getreg("\""))
     "call system("ssh -p $(cat /home/lakshman_narayanan/.mymacport) $(cat $HOME/.mymacusername)@$(cat /home/lakshman_narayanan/.mymacip) pbcopy", getreg("\""))
   endif
