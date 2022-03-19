@@ -151,7 +151,7 @@ let g:solarized_termtrans=1
 colorscheme solarized
 
 set diffopt+=vertical
-set csprg='~/bin/cscope'
+set csprg=~/bin/cscope
 
 nmap gL <Esc>:cn<CR>
 nmap gH <Esc>:cp<CR>
