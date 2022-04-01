@@ -465,6 +465,9 @@ autocmd FileType jira_op syntax sync fromstart
 "ultisnip directories
 " myultisnippets just works because runtimepath include this vimrepo, via tdef!
 let g:UltiSnipsSnippetDirectories=["UltiSnips", "myultisnippets"]
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 
 " gdb file-type
 au BufNewFile,BufRead *.gdb         setf gdb
