@@ -173,6 +173,8 @@ gy
    gyu                              Up Scroll Preview
    gyd                              Down scroll preview
 
+   gyc                              paste in virtual-box env (from cliptest.txt)
+
    gya                              AddACurrentPosition
    gyl                              LoadCurrPositions
    gyg                              LoadAndGotoLocations

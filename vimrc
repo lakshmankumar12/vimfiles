@@ -211,7 +211,6 @@ vmap gc    y:call DumpToClipBoard()<CR>
 vmap <C-b> y:call DumpToTmuxClipBoard()<CR>
 vmap gt    y:call DumpToTmuxClipBoard()<CR>
 nmap gb    y:call DumpToClipBoard()<CR>
-nmap gb    :r !xsel -b<CR>
 
 "dont lose anything on a accidental ctrl-u/w
 inoremap <c-u> <c-g>u<c-u>
