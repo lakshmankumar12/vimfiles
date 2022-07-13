@@ -939,7 +939,7 @@ Select a column/block using ctrl-v, and then press: and then type `<space> B s/f
 :Tabularize /|
 ```
 
-## Delete empty lines
+## delete empty lines
 
 ```
 #choose line that is empty or anti-choose line with atleat one char
