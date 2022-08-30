@@ -1070,7 +1070,17 @@ messages clear
 ```
 set listchars+=eol:↲
 set listchars-=eol:↲
+
+"Switch off list chars
+set nolist
 ```
+
+For indent-lines, use this:
+```
+IndentLinesToggle
+
+```
+
 
 # vimscript
 
