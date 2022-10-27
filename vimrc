@@ -429,7 +429,7 @@ let g:echodoc#enable_at_startup = 1
 
 "jedi-vim
 let g:jedi#auto_vim_configuration = 0
-let g:jedi#goto_assignments_command = ''  " dynamically done for ft=python.
+let g:jedi#goto_assignments_command = ''  " dynamically done for ft=python. it is <Leader>g
 let g:jedi#goto_definitions_command = ''  " dynamically done for ft=python.
 let g:jedi#use_tabs_not_buffers = 0  " current default is 1.
 let g:jedi#rename_command = '<Leader>gR'

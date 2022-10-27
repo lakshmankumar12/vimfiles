@@ -586,6 +586,29 @@ Quickfix invocation is          :     `<Leader>cs` ,and the cscope-char
 
 :Tagbar
 
+# golang
+
+```vim
+GoDecls           " find all declarations in this file
+GoDeclsDir
+GoDoc             " doc of the function
+GoInfo            " info on identifier under cursor -- useful. Gives type
+GoDef             " goto definition
+
+GoSameIds         " highlight current identifier
+GoSameIdsClear    " clear it off
+
+GoReferrers       " like cscope-r
+GoImplements
+GoCallers
+GoCallees
+GoCallStack
+
+GoDescribe        " gives all methods of a type -- amazing
+
+```
+
+
 # Navigation in vim
 
 Search: jump indent up square enclosing block
