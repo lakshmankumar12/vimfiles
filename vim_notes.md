@@ -143,7 +143,7 @@ gw - format motion.
    gwr                              (set wrap toggle)
    gws                              (set to horizontal window split)     # remember and use this
    gwt                              (New tab)                            # remember and use this
-   gwu                              (DumpTagToTmuxClip)
+   gwu                              (DumpCurrentFileToTmuxClip)
    gwv                              (set to vertical window split)       # remember and use this
    gww                              (Bound to :update)
    gwx                              (tabclose w/o prev tab)
@@ -1021,9 +1021,9 @@ R     -> refresh
 
 ## jedi-vim
 
-```
-#python jumpter
+search navigation python
 
+```
 <Leader> d   - goto definition
 <Leader> gu   - goto all usages
 ^t (gxx)     - goback

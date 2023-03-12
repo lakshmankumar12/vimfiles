@@ -193,7 +193,11 @@ map gwq   <Esc>:call DumpFullPathToTmuxClipBoard()<CR>
 function! DumpTagToTmuxClip()
     call system("tmux loadb -", tagbar#currenttag('%s', 'No current tag'))
 endfunction
-map gwu   <Esc>:call DumpTagToTmuxClip()<CR>
+
+function! DumpCurrentFileToTmuxClip()
+  call system("tmux loadb -", expand("%"))
+endfunction
+map gwu   <Esc>:call DumpCurrentFileToTmuxClip()<CR>
 
 function! DumpToClipBoard()
   if s:uname == "Darwin"
