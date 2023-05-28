@@ -464,7 +464,9 @@ let g:vim_markdown_conceal = 0
 let g:vim_markdown_conceal_code_blocks = 0
 let g:vim_markdown_toc_autofit = 1
 autocmd FileType markdown syntax sync fromstart
+autocmd FileType markdown set formatoptions-=q
 autocmd FileType jira_op syntax sync fromstart
+" https://github.com/preservim/vim-markdown/issues/232
 
 "ultisnip directories
 " myultisnippets just works because runtimepath include this vimrepo, via tdef!
