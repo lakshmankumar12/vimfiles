@@ -1017,6 +1017,15 @@ R     -> refresh
 ```
 :Gedit treeish:%
 ```
+* View logs of a single file
+```
+:Git log %
+# That will open all commits of that file in a temp-buffer.
+# You can press enter on any commit to open the commit
+# And press O on a  line beginning with "^diff", to open the diff of the file
+
+```
+
 
 
 ## jedi-vim
@@ -1181,6 +1190,7 @@ syntax sync fromstart
 ↓     -v
 ←     -<
 →     ->
+∞     00
 ```
 
 
