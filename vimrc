@@ -94,6 +94,7 @@ Plugin 'dzeban/vim-log-syntax'                " syslog syntax highlight
 Plugin 'lakshmankumar12/protectterm'          " Protect vim from closing when there are open terminals
 Plugin 'rust-lang/rust.vim'                   " Rust plugin
 Plugin 'nathanalderson/yang.vim'              " Yang plugin
+Plugin 'mfukar/robotframework-vim'            " Robot plugin
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -485,6 +486,11 @@ let g:surround_111 = "```\r```"
 let g:surround_{char2nr('o')} = "```\r```"
 let g:surround_107 = "`\r`"
 let g:surround_{char2nr('k')} = "`\r`"
+
+"Markdown fixing for lists
+let g:vim_markdown_auto_insert_bullets=0
+let g:vim_markdown_new_list_item_indent=0
+au FileType markdown setlocal formatlistpat=^\\s*\\d\\+[.\)]\\s\\+\\\|^\\s*[*+~-]\\s\\+\\\|^\\(\\\|[*#]\\)\\[^[^\\]]\\+\\]:\\s | setlocal comments=n:> | setlocal formatoptions+=cn
 
 " Drag-visual
 vmap  <expr>  <LEFT>   DVB_Drag('left')
