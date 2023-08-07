@@ -736,9 +736,10 @@ nnoremap gyz <Esc>:call ZapCurrentPosition()<CR>
 nnoremap gyg :<C-U>call LoadCurrPositionsAndGoto(v:count)<CR>
 nnoremap gyt <Esc>:lclose\|Toc<CR>
 
-function! GitGrepFn(stayInLoc,encloseword,ignoreCase,grepArg,...)
+function! GitGrepFn(stayInLoc,encloseword,ignoreCase,...)
     execute "normal mZ"
-    let l:pathSpecArg = get(a:,1,"")
+    let l:grepArg = get(a:,1,"")
+    let l:pathSpecArg = get(a:,2,"")
     let l:cmd = "lgrep! --no-pager grep -nH "
     if a:ignoreCase
         let l:cmd = l:cmd . "-i "
@@ -747,7 +748,11 @@ function! GitGrepFn(stayInLoc,encloseword,ignoreCase,grepArg,...)
     if a:encloseword
         let l:cmd = l:cmd . '\b'
     endif
-    let l:cmd = l:cmd . a:grepArg
+    if !empty(l:grepArg) && l:grepArg != "."
+        let l:cmd = l:cmd . l:grepArg
+    else
+        let l:cmd = l:cmd . getreg("g")
+    endif
     if a:encloseword
         let l:cmd = l:cmd . '\b'
     endif
@@ -771,16 +776,16 @@ endfunction
 "   s -- stay in location-list window, dont go to item.
 "   w -- enclose word
 "   i -- ignore case
-command! -nargs=+ Ggp call GitGrepFn(0,0,0,<f-args>)
-command! -nargs=+ Ggps call GitGrepFn(1,0,0,<f-args>)
-command! -nargs=+ Ggpw call GitGrepFn(0,1,0,<f-args>)
-command! -nargs=+ Ggpi call GitGrepFn(0,0,1,<f-args>)
+command! -nargs=* Ggp call GitGrepFn(0,0,0,<f-args>)
+command! -nargs=* Ggps call GitGrepFn(1,0,0,<f-args>)
+command! -nargs=* Ggpw call GitGrepFn(0,1,0,<f-args>)
+command! -nargs=* Ggpi call GitGrepFn(0,0,1,<f-args>)
 
-command! -nargs=+ Ggpsw call GitGrepFn(1,1,0,<f-args>)
-command! -nargs=+ Ggpsi call GitGrepFn(1,0,1,<f-args>)
-command! -nargs=+ Ggpwi call GitGrepFn(0,1,1,<f-args>)
+command! -nargs=* Ggpsw call GitGrepFn(1,1,0,<f-args>)
+command! -nargs=* Ggpsi call GitGrepFn(1,0,1,<f-args>)
+command! -nargs=* Ggpwi call GitGrepFn(0,1,1,<f-args>)
 
-command! -nargs=+ Ggpswi call GitGrepFn(1,1,1,<f-args>)
+command! -nargs=* Ggpswi call GitGrepFn(1,1,1,<f-args>)
 
 nnoremap gwii <Esc>:<C-U>Ggp
 nnoremap gwic <Esc>:<C-U>Ggp expand("<cword>")
