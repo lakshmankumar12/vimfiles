@@ -199,8 +199,8 @@ gG                         (Bound to tags_*)
   gGV                                tags_v
   gGD                                tags_d
   gGE                                tags_e (defines or enum)
-  gGG                      GitGrepFn
-  gGH                      Args
+  gGG                      GitGrepFn / also mapped to visual-mode
+  gGH                      GitGrep with args
 gH                         (Bound to :lprev)
 gK
 gL                         (Bound to :lnext)
