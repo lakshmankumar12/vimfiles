@@ -414,7 +414,7 @@ endfunction
 
 
 " functions
-nmap gGG          <Esc>:call PanosTags("tags_f")<CR>
+nmap gGF          <Esc>:call PanosTags("tags_f")<CR>
 " struct/typedef
 nmap gGS          <Esc>:call PanosTags("tags_s")<CR>
 nmap gGT          <Esc>:call PanosTags("tags_s")<CR>
@@ -790,6 +790,23 @@ command! -nargs=* Ggpswi call GitGrepFn(1,1,1,<f-args>)
 nnoremap gwii <Esc>:<C-U>Ggp
 nnoremap gwic <Esc>:<C-U>Ggp expand("<cword>")
 nnoremap gwir <Esc>:<C-U>Ggp /rse/<Left><Left><Left><Left><Left><Left>
+
+function TransferDefRegToG()
+    execute "normal mY"
+    silent execute setreg("g", getreg('"'))
+    execute "normal `Y"
+    call GitGrepFn(0,0,0)
+endfunction
+nnoremap gGG <Esc>:call TransferDefRegToG()<CR>
+
+function TransferArgsToG(...)
+    execute "normal mY"
+    silent execute setreg("g", join(a:000, " "))
+    execute "normal `Y"
+    call GitGrepFn(0,0,0)
+endfunction
+command! -nargs=+ Ggph call TransferArgsToG(<f-args>)
+nnoremap gGH <Esc>:<C-u>Ggph
 
 " use the vimgrepperutil.sh in quick-utils repo.
 "   grep <pattern> <pattern-to-filter-files> <file-with-filenames>

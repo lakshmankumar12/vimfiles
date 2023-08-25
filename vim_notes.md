@@ -192,13 +192,15 @@ gA                         (Free)
 gB                         (Bound to FzfBuffers)
 gC                         (Paste from tmux buffer)
 gG                         (Bound to tags_*)
-  gGG                                tags_f
+  gGF                                tags_f
   gGS                                tags_s
   gGT                                tags_s (typedef or struct)
   gGM                                tags_m
   gGV                                tags_v
   gGD                                tags_d
   gGE                                tags_e (defines or enum)
+  gGG                      GitGrepFn
+  gGH                      Args
 gH                         (Bound to :lprev)
 gK
 gL                         (Bound to :lnext)
