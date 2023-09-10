@@ -200,7 +200,10 @@ gG                         (Bound to tags_*)
   gGD                                tags_d
   gGE                                tags_e (defines or enum)
   gGG                      GitGrepFn / also mapped to visual-mode
+  gG/                      GitGrepFn contents of / register
   gGH                      GitGrep with args
+  gG^                      lvimgrep all lines with non-white first char
+  gGt                      tag pop
 gH                         (Bound to :lprev)
 gK
 gL                         (Bound to :lnext)

@@ -221,6 +221,17 @@ function! ChompedSystem( ...  )
   return substitute(call('system', a:000), '\n\+$', '', '')
 endfunction
 
+" source: https://vi.stackexchange.com/a/29063
+fu! StartsWith(longer, shorter) abort
+  return a:longer[0:len(a:shorter)-1] ==# a:shorter
+endfunction
+fu! EndsWith(longer, shorter) abort
+  return a:longer[len(a:longer)-len(a:shorter):] ==# a:shorter
+endfunction
+fu! Contains(longer, shorter) abort
+  return stridx(a:longer, a:short) >= 0
+endfunction
+
 " Take from: https://stackoverflow.com/a/4479072/2587153
 function! Strip(input_string)
     return substitute(a:input_string, '^\s*\(.\{-}\)\s*$', '\1', '')
@@ -738,6 +749,7 @@ nnoremap gyt <Esc>:lclose\|Toc<CR>
 
 function! GitGrepFn(stayInLoc,encloseword,ignoreCase,...)
     execute "normal mZ"
+    let l:pos = [bufnr()] + getcurpos()[1:]
     let l:grepArg = get(a:,1,"")
     let l:pathSpecArg = get(a:,2,"")
     let l:cmd = "lgrep! --no-pager grep -nH "
@@ -745,17 +757,17 @@ function! GitGrepFn(stayInLoc,encloseword,ignoreCase,...)
         let l:cmd = l:cmd . "-i "
     endif
     let l:cmd = l:cmd . "'"
-    if a:encloseword
-        let l:cmd = l:cmd . '\b'
-    endif
     if !empty(l:grepArg) && l:grepArg != "."
-        let l:cmd = l:cmd . l:grepArg
+        let l:tosearch = l:grepArg
     else
-        let l:cmd = l:cmd . getreg("g")
+        let l:tosearch = getreg("g")
     endif
     if a:encloseword
-        let l:cmd = l:cmd . '\b'
+        let l:tosearch = '\b' . l:tosearch . '\b'
     endif
+    let l:cmd = l:cmd . l:tosearch
+    let l:newtag = [{'tagname': l:tosearch, 'from': l:pos}]
+    call settagstack(winnr(), {'items': l:newtag}, 'a')
     let l:cmd = l:cmd . "'"
     if !empty(l:pathSpecArg)
         let l:cmd = l:cmd . " -- '*" . l:pathSpecArg . "*'"
@@ -787,26 +799,51 @@ command! -nargs=* Ggpwi call GitGrepFn(0,1,1,<f-args>)
 
 command! -nargs=* Ggpswi call GitGrepFn(1,1,1,<f-args>)
 
-nnoremap gwii <Esc>:<C-U>Ggp
-nnoremap gwic <Esc>:<C-U>Ggp expand("<cword>")
-nnoremap gwir <Esc>:<C-U>Ggp /rse/<Left><Left><Left><Left><Left><Left>
-
 function TransferDefRegToG()
-    execute "normal mY"
-    silent execute setreg("g", getreg('"'))
-    execute "normal `Y"
+    let save_cursor = getcurpos()
+    let tosearch = getreg('"')
+    silent execute setreg("g", tosearch)
+    call setpos('.', save_cursor)
     call GitGrepFn(0,0,0)
 endfunction
 nnoremap gGG <Esc>:call TransferDefRegToG()<CR>
 
-function TransferArgsToG(...)
-    execute "normal mY"
-    silent execute setreg("g", join(a:000, " "))
-    execute "normal `Y"
-    call GitGrepFn(0,0,0)
+function TransferSearchRegToG()
+    let save_cursor = getcurpos()
+    let tosearch = getreg('/')
+    let word = 0
+    if StartsWith(tosearch, "\\<")
+        let word = 1
+        let tosearch = tosearch[2:]
+        let tosearch = tosearch[:-3]
+        silent execute setreg("g", tosearch)
+    else
+        silent execute setreg("g", tosearch)
+    endif
+    call setpos('.', save_cursor)
+    call GitGrepFn(0,word,0)
 endfunction
-command! -nargs=+ Ggph call TransferArgsToG(<f-args>)
+nnoremap gG/ <Esc>:call TransferSearchRegToG()<CR>
+
+function TransferArgsToG(stayInLoc,encloseword,ignoreCase,...)
+    let tosearch = join(a:000, " ")
+    call GitGrepFn(a:stayInLoc,a:encloseword,a:ignoreCase,tosearch)
+endfunction
+command! -nargs=+ Ggph call TransferArgsToG(0,0,0,<f-args>)
+command! -nargs=+ Ggphs call TransferArgsToG(1,0,0,<f-args>)
+command! -nargs=+ Ggphw call TransferArgsToG(0,1,0,<f-args>)
+command! -nargs=+ Ggphi call TransferArgsToG(0,0,1,<f-args>)
 nnoremap gGH <Esc>:<C-u>Ggph
+nnoremap gwii <Esc>:<C-U>Ggph
+
+function TransferArgsToGWithDir(stayInLoc,encloseword,ignoreCase,dir,...)
+    let tosearch = join(a:000, " ")
+    call GitGrepFn(a:stayInLoc,a:encloseword,a:ignoreCase,tosearch,a:dir)
+endfunction
+command! -nargs=+ Ggphd call TransferArgsToGWithDir(0,0,0,<f-args>)
+command! -nargs=+ Ggphds call TransferArgsToGWithDir(1,0,0,<f-args>)
+command! -nargs=+ Ggphdw call TransferArgsToGWithDir(0,1,0,<f-args>)
+command! -nargs=+ Ggphdi call TransferArgsToGWithDir(0,0,1,<f-args>)
 
 " source: https://stackoverflow.com/a/6271254
 function! GetVisualSelection()
@@ -823,12 +860,19 @@ function! GetVisualSelection()
 endfunction
 
 function TransferVisualToG()
-    execute "normal mY"
-    silent execute setreg("g", GetVisualSelection())
-    execute "normal `Y"
+    let save_cursor = getcurpos()
+    let pos = [bufnr()] + getcurpos()[1:]
+    let tosearch = GetVisualSelection()
+    let newtag = [{'tagname': tosearch, 'from': pos}]
+    silent execute setreg("g", tosearch)
+    call setpos('.', save_cursor)
+    call settagstack(winnr(), {'items': newtag}, 'a')
     call GitGrepFn(0,0,0)
 endfunction
 vnoremap gGG <Esc>:call TransferVisualToG()<CR>
+
+nnoremap gG^ <Esc>:lvimgrep /^\S/ %<CR>
+nnoremap gGt <Esc>:pop<CR>
 
 " use the vimgrepperutil.sh in quick-utils repo.
 "   grep <pattern> <pattern-to-filter-files> <file-with-filenames>
