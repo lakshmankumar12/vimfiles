@@ -456,19 +456,19 @@ function! GotoTagLastName()
   execute "tag ".g:last_name
 endfunction
 
-function! OpenArayakaFile(line)
+function! OpenGitRepoFile(line)
     execute ":edit " . a:line
 endfunction
 
 "list_files_aryaka.sh is in quick_utility_scripts repo
-function! AryakaFileOpen()
+function! GitRepoFilesOpen()
   call fzf#run({
-  \   'source': "list_files_aryaka.sh",
+  \   'source': "git_repo_files_list.sh",
   \   'options' : '--exact' ,
   \   'down'  : '20%',
-  \   'sink':   function('OpenArayakaFile')})
+  \   'sink':   function('OpenGitRepoFile')})
 endfunction
-nmap gloo        <Esc>:call AryakaFileOpen()<CR>
+nmap gloo        <Esc>:call GitRepoFilesOpen()<CR>
 
 if !exists("*ReloadConfigs")
   "The above safeguard is necessary as otherwise
@@ -861,18 +861,39 @@ endfunction
 
 function TransferVisualToG()
     let save_cursor = getcurpos()
-    let pos = [bufnr()] + getcurpos()[1:]
     let tosearch = GetVisualSelection()
-    let newtag = [{'tagname': tosearch, 'from': pos}]
-    silent execute setreg("g", tosearch)
     call setpos('.', save_cursor)
-    call settagstack(winnr(), {'items': newtag}, 'a')
-    call GitGrepFn(0,0,0)
+    call GitGrepFn(0,0,0,tosearch)
 endfunction
 vnoremap gGG <Esc>:call TransferVisualToG()<CR>
 
 nnoremap gG^ <Esc>:lvimgrep /^\S/ %<CR>
 nnoremap gGt <Esc>:pop<CR>
+
+function! TransferVisualToLvimGrep()
+    let save_cursor = getcurpos()
+    let tosearch = GetVisualSelection()
+    let l:cmd = 'lvimgrep /' . tosearch . '/ % | lopen'
+    silent! execute l:cmd
+endfunction
+vnoremap gK <Esc>:call TransferVisualToLvimGrep()<CR>
+
+function TransferSearchRegToLVimGrep()
+    let save_cursor = getcurpos()
+    let tosearch = getreg('/')
+    call setpos('.', save_cursor)
+    let l:cmd = 'lvimgrep /' . tosearch . '/ % | lopen'
+    silent! execute l:cmd
+endfunction
+nnoremap gK/ <Esc>:call TransferSearchRegToLVimGrep()<CR>
+
+function TransferArgToLVimGrep(...)
+    let tosearch = join(a:000, " ")
+    let l:cmd = 'lvimgrep /' . tosearch . '/ % | lopen'
+    silent! execute l:cmd
+endfunction
+command! -nargs=+ ArgsToLvimGrep call TransferArgToLVimGrep(<f-args>)
+nnoremap gKa <Esc>:<C-u> ArgsToLvimGrep
 
 " use the vimgrepperutil.sh in quick-utils repo.
 "   grep <pattern> <pattern-to-filter-files> <file-with-filenames>
@@ -917,6 +938,13 @@ function! SearchOnVimBuffers(stayInLoc,encloseword,ignoreCase,grepArg)
     call FileGrepper(a:stayInLoc,a:encloseword,a:ignoreCase,a:grepArg,'.',l:tempfile)
     call system('rm ' . l:tempfile)
 endfunction
+
+function! AddTagPoint()
+    let l:pos = [bufnr()] + getcurpos()[1:]
+    let l:newtag = [{'tagname': getline('.'), 'from': l:pos}]
+    call settagstack(winnr(), {'items': l:newtag}, 'a')
+endfunction
+nnoremap gGA <Esc>:<C-u>call AddTagPoint()<CR>
 
 function! StripColorCodes()
     execute "%s/\\\\033.\\{-}m//g"

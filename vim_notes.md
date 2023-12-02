@@ -117,7 +117,7 @@ gh - enter select mode              (Rebound to unitish operations)
   ghD                             easy-clip dd
 gl - none                           (Bound to FZF)
   gll                             FZF (files in the curr folder)
-  gloo                            AryakaFileOpen (git ls files)
+  gloo                            GitRepoFilesOpen (git ls files)
   glb                             buffers
   gl/                             BufferLines
 gw - format motion.
@@ -204,9 +204,11 @@ gG                         (Bound to tags_*)
   gGH                      GitGrep with args
   gG^                      lvimgrep all lines with non-white first char
   gGt                      tag pop
-gH                         (Bound to :lprev)
-gK
-gL                         (Bound to :lnext)
+  gGA                      add a tag stack point
+gH                         (Bound to :cprev)
+gK/                        TransferSearchRegToLVimGrep
+gKa                        TransferArgToLVimGrep
+gL                         (Bound to :cnext)
 gMA                        make-arayka acemon
 gMM                        (Bound to last-tab)
 gMR                        make-arayka rse
