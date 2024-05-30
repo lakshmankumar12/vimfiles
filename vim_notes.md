@@ -1,3 +1,13 @@
+# command line args of vim
+
+```sh
+-R   readonly
+-d   diffmode
+-f   foreground (only relevant for GUI version)
+-c <cmd>  run vim-cmd when firing vim.
+
+```
+
 # Normal key functions
 
 [set ignorecase before searching!]
@@ -208,6 +218,7 @@ gG                         (Bound to tags_*)
 gH                         (Bound to :cprev)
 gK/                        TransferSearchRegToLVimGrep
 gKa                        TransferArgToLVimGrep
+gKd                        Glistmod lakshman_a lakshman_b
 gL                         (Bound to :cnext)
 gMA                        make-arayka acemon
 gMM                        (Bound to last-tab)
@@ -544,7 +555,7 @@ call deoplete#enable()
 ## QFGrep:
 
 ```
-(In quickfix/location-lsit)
+(In quickfix/location-list)
 <Leader>g  - grep and show matches
 <Leader>v  - grep and show non-matches
 <Leader>q  - reset
@@ -612,6 +623,8 @@ GoCallees
 GoCallStack
 
 GoDescribe        " gives all methods of a type -- amazing
+
+##tag pop when in go - gGt
 
 ```
 
@@ -1119,6 +1132,20 @@ For indent-lines, use this:
 IndentLinesToggle
 
 ```
+
+## go to the nth char in the file
+
+```
+/\%^\_.\{270}/e
+
+Explanation:
+/...whatever.../e   search anything and go the end
+\%^  -- in a pattern will match from the beginning of the file
+\_.  -- match any character including new-lines
+\{number} -- n times match
+```
+
+
 
 
 # vimscript

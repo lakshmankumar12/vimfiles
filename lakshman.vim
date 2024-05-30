@@ -895,6 +895,8 @@ endfunction
 command! -nargs=+ ArgsToLvimGrep call TransferArgToLVimGrep(<f-args>)
 nnoremap gKa <Esc>:<C-u> ArgsToLvimGrep
 
+nnoremap gKd <Esc>:Glistmod lakshman_a lakshman_b<CR>
+
 " use the vimgrepperutil.sh in quick-utils repo.
 "   grep <pattern> <pattern-to-filter-files> <file-with-filenames>
 function! FileGrepper(stayInLoc,encloseword,ignoreCase,grepArg,pathSpecArg,fileArg)
