@@ -9,6 +9,7 @@ nnoremap <silent> <Leader>gl :call g:DiffOffWhenListMod()<CR>
 command! -nargs=* Glistmod call g:ListModified(<f-args>)
 command! Gbase call g:ListModified("base","--")
 command! Gedited call g:ListModified("HEAD","--")
+command! -nargs=1 Gacommit call g:ListModified(<f-args> . "~1", <f-args>)
 
 function! g:LoadFilesListCmd()
     let old_makeprg=&makeprg
