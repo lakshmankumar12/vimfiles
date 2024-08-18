@@ -142,6 +142,7 @@ if has('nvim')
   nnoremap <M-r>      <Esc>:terminal<CR>
 
   tnoremap kj     <C-\><C-n>
+  tnoremap gT     <C-\><C-n>gT
   tnoremap <expr> <C-\><C-R> '<C-\><C-N>"'.nr2char(getchar()).'pi'
   tnoremap <expr> <M-[> '<C-\><C-N>"'.nr2char(getchar()).'pi'
 
