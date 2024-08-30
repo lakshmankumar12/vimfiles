@@ -21,6 +21,10 @@ nmap gww          <Esc>:update<CR>
 
 nmap gO           <ESC>:AddressBar<CR>
 
+" new line without leaving normal mode
+nmap oo o<Esc>k
+nmap OO O<Esc>j
+
 "window movements
 nmap gwh          <C-w>h
 nmap gwj          <C-w>j
@@ -193,6 +197,8 @@ nmap gc           <Esc>:read !tmux saveb -<CR>
 nmap gyc          <Esc>:read /home/lakshman/host_c/Users/laksh/Documents/cliptest.txt<CR>
 "enter digraph without hurting little finger
 imap lh           <C-k>
+"boy we seem to type localhost a lot!
+imap lhos         lhos
 "in visual-line mode, i need to select lines, and i keep pressing J
 vmap J            j
 "scroll preview window from another window
