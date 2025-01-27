@@ -875,6 +875,7 @@ endfunction
 vnoremap gGG <Esc>:call TransferVisualToG()<CR>
 
 nnoremap gG^ <Esc>:lvimgrep /^\S/ %<CR>
+"search: stack wind-back ctrl-t
 nnoremap gGt <Esc>:pop<CR>
 
 function! TransferVisualToLvimGrep()
