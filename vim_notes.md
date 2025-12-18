@@ -220,12 +220,8 @@ gK/                        TransferSearchRegToLVimGrep
 gKa                        TransferArgToLVimGrep
 gKd                        Glistmod lakshman_a lakshman_b
 gL                         (Bound to :cnext)
-gMA                        make-arayka acemon
 gMM                        (Bound to last-tab)
-gMR                        make-arayka rse
-gMT                        make-arayka tcp
-gMP                        make-arayka pss
-gMX                        make-arayka ask
+gMg                        make gxc
 gO                         :Addressbar
 gP                         (clip-board paste)
 gS                         (Bound to MoveToDefintionOfMember)
@@ -798,11 +794,17 @@ i.e name space* ( space* word+ space+ word+ .* ,
 :set hidden  # option enables the non-saving of files while switching (unnecessary swap files)
 echo &hidden # is a way to see the current setting.
 
-## markdown File handling
+swap file location for nvim - $HOME/.local/state/nvim/swap/
 
-Search: md
+## markdown file handling
 
-* See table of content - gyt
+Search: md toc headings
+
+* Toc See table of content - gyt
+* snippets
+    ```
+    cbl<tab>   - for code blocks
+    ```
 
 ## Colors in vim:
 
@@ -1175,9 +1177,7 @@ Look for snippets in - https://github.com/honza/vim-snippets -> UltiSnips
 ### Useful snippets:
 
 * markdown
-    ```
-    cbl<tab>   - for code blocks
-    ```
+    * see under markdown file handling
 
 * python
     * ifmain

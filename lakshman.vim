@@ -201,6 +201,8 @@ imap lh           <C-k>
 imap lhos         lhos
 "in visual-line mode, i need to select lines, and i keep pressing J
 vmap J            j
+" to cater for my topos
+cmap e1<CR>       edit!<CR>
 "scroll preview window from another window
 nnoremap <Leader>pd   <Esc>:wincmd P<CR><C-D>:wincmd p<CR>
 nnoremap <Leader>pu   <Esc>:wincmd P<CR><C-U>:wincmd p<CR>
@@ -630,12 +632,8 @@ function! MakePlainAryakaFn(which, folder)
 endfunction
 
 command! -nargs=* MakePlainAryaka call MakePlainAryakaFn(<f-args>)
-nnoremap gMR <Esc>:MakePlainAryaka mkplain rse<CR>
-nnoremap gMA <Esc>:MakePlainAryaka mkplain am<CR>
-nnoremap gMT <Esc>:MakePlainAryaka mkplainpop tcp<CR>
-nnoremap gMP <Esc>:MakePlainAryaka mkplainpop pss<CR>
-nnoremap gMX <Esc>:MakePlainAryaka mkplain
 
+nnoremap gMg <Esc>:lmake -f .cache/lakshman_private/Makefile<CR>
 
 function! LoadCurrPositions(...)
     let a:dontOpen = get(a:,1,"")
@@ -1077,6 +1075,15 @@ function! RestoreCurrFormatOptions()
         let g:formatoptoinsaved=0
     end
 endfunction
+
+
+function! GrepAPSerialFn(serial)
+  let pattern = '\[' . a:serial . '\] state transition from\|\[SERIAL:' . a:serial . '\] Neighbor Tables: '
+  execute 'lvimgrep /' . pattern . '/ %'
+  execute 'lopen'
+endfunction
+command! -nargs=1 GrepAPSerial call GrepAPSerialFn(<f-args>)
+
 
 
 " DONT TYPE ANYTHING HERE SO THAT CENTOS-BRANCH CAN
