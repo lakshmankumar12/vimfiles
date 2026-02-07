@@ -660,6 +660,24 @@ nnoremap gMg <Esc>:lmake -f .cache/lakshman_private/Makefile<CR>
 nnoremap gMd <Esc>:call RetainPath('dirname')<CR>
 nnoremap gMf <Esc>:call RetainPath('basename')<CR>
 
+function! RetainPathBoth()
+    let line = getline('.')
+
+    if line !~ '/'
+        " No directory component, do nothing
+        return
+    endif
+
+    let dirname = fnamemodify(line, ':h') . '/'
+    let basename = fnamemodify(line, ':t')
+
+    " Replace current line with dirname
+    call setline('.', dirname)
+    " Add empty line, basename, and separator
+    call append('.', ['', basename, '---'])
+endfunction
+
+nnoremap gMb <Esc>:call RetainPathBoth()<CR>
 
 function! LoadCurrPositions(...)
     let a:dontOpen = get(a:,1,"")
