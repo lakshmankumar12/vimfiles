@@ -633,7 +633,33 @@ endfunction
 
 command! -nargs=* MakePlainAryaka call MakePlainAryakaFn(<f-args>)
 
+
+function! RetainPath(component)
+    let line = getline('.')
+
+    if line !~ '/'
+        " No directory component, do nothing
+        return
+    endif
+
+    if a:component == 'dirname'
+        let result = fnamemodify(line, ':h') . '/'
+    elseif a:component == 'basename'
+        let result = fnamemodify(line, ':t')
+    else
+        echohl ErrorMsg
+        echo "Invalid argument: use 'dirname' or 'basename'"
+        echohl None
+        return
+    endif
+
+    call setline('.', result)
+endfunction
+
 nnoremap gMg <Esc>:lmake -f .cache/lakshman_private/Makefile<CR>
+nnoremap gMd <Esc>:call RetainPath('dirname')<CR>
+nnoremap gMf <Esc>:call RetainPath('basename')<CR>
+
 
 function! LoadCurrPositions(...)
     let a:dontOpen = get(a:,1,"")
