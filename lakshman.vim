@@ -192,8 +192,22 @@ imap jk           <Esc>
 cmap jk           <Esc>
 nmap gp           <Esc>p`[
 nmap gP           <Esc>"+P
-nmap gC           <Esc>:execute ":normal a" . system("tmux saveb -")<CR>
-nmap gc           <Esc>:read !tmux saveb -<CR>
+" Paste from tmux buffer with size check (max 5000 chars)
+function! TmuxPaste(mode)
+  let l:size = str2nr(system("tmux list-buffers -F '#{buffer_size}' | head -1"))
+  if l:size > 5000
+    echohl WarningMsg | echo "Tmux buffer too large: " . l:size . " bytes (max 5000)" | echohl None
+    return
+  endif
+  let l:buf = system("tmux saveb -")
+  if a:mode == 'inline'
+    execute ":normal a" . l:buf
+  else
+    put =l:buf
+  endif
+endfunction
+nmap gC           <Esc>:call TmuxPaste('inline')<CR>
+nmap gc           <Esc>:call TmuxPaste('read')<CR>
 nmap gyc          <Esc>:read /home/lakshman/host_c/Users/laksh/Documents/cliptest.txt<CR>
 "enter digraph without hurting little finger
 imap lh           <C-k>

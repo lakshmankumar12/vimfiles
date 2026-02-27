@@ -502,6 +502,9 @@ au FileType markdown setlocal formatlistpat=^\\s*\\d\\+[.\)]\\s\\+\\\|^\\s*[*+~-
 "scratch.vim
 let g:scratch_autohide = 0
 
+"smoother scroll
+set virtualedit=all
+
 " DONT TYPE ANYTHING HERE SO THAT CENTOS-BRANCH CAN
 " SAFELY ADD ITS OVERRIDES WITHOUT ISSUES
 
