@@ -136,6 +136,7 @@ gw - format motion.
    gwc                              ( close window)
    gwd                              diffoff
    gwe                              (NerdTreeFind)
+   gwE                              e!
    gwf                              ( Bound to control-f <page-down> )
    gwg                              (Bound to gitGuttter disable)
    gwh                              ( gw h,j,k,l -> window movements)

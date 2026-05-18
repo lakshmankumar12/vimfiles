@@ -199,7 +199,13 @@ endfunction
 function! DumpCurrentFileToTmuxClip()
   call system("tmux loadb -", expand("%"))
 endfunction
-map gwu   <Esc>:call DumpCurrentFileToTmuxClip()<CR>
+map gwU   <Esc>:call DumpCurrentFileToTmuxClip()<CR>
+
+function! SaveCurrentLineNumberAndFileName()
+  let @t = "line number " . line(".") . " in file " . expand("%")
+  call system("tmux loadb -", expand("%"))
+endfunction
+map gwu   <Esc>:call SaveCurrentLineNumberAndFileName()<CR>
 
 function! DumpToClipBoard()
   if s:uname == "Darwin"
@@ -282,6 +288,7 @@ endif
 " NerdTree
 map <C-n> :NERDTreeToggle<CR>
 map gwe :NERDTreeFind<CR>
+map gwE :e!<CR>
 
 au! Filetype qf setlocal statusline="%t%{exists('w:quickfix_title')? ' '.w:quickfix_title : ''} win:%{WindowNumber()}%=%-15(%l,%c%V%) %P"
 

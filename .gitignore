@@ -1,3 +1,6 @@
 .*swp
 bundle
 *.pyc
+claude_input*
+.claude*
+..claude*
