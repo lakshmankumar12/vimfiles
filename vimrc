@@ -288,7 +288,6 @@ endif
 " NerdTree
 map <C-n> :NERDTreeToggle<CR>
 map gwe :NERDTreeFind<CR>
-map gwE :e!<CR>
 
 au! Filetype qf setlocal statusline="%t%{exists('w:quickfix_title')? ' '.w:quickfix_title : ''} win:%{WindowNumber()}%=%-15(%l,%c%V%) %P"
 

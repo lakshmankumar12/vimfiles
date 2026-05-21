@@ -1142,6 +1142,47 @@ function! GrepAPSerialFn(serial)
 endfunction
 command! -nargs=1 GrepAPSerial call GrepAPSerialFn(<f-args>)
 
+function! PrependLog()
+  write
+
+  let l:currfile = expand('%:p')
+  let l:dir = expand('%:p:h')
+  let l:base = expand('%:t:r')
+  let l:ext = expand('%:e')
+
+  if l:ext != ''
+    let l:histfile = l:dir . '/.' . l:base . '_history.' . l:ext
+  else
+    let l:histfile = l:dir . '/.' . l:base . '_history'
+  endif
+
+  " Back up current file
+  call system('cp ' . shellescape(l:currfile) . ' ' . shellescape(l:dir . '/.' . expand('%:t') . '.back'))
+
+  " Back up histfile if it exists
+  if filereadable(l:histfile)
+    let l:hbase = fnamemodify(l:histfile, ':t')
+    if l:hbase[0] == '.'
+      let l:histbackup = fnamemodify(l:histfile, ':h') . '/' . l:hbase . '.back'
+    else
+      let l:histbackup = fnamemodify(l:histfile, ':h') . '/.' . l:hbase . '.back'
+    endif
+    call system('cp ' . shellescape(l:histfile) . ' ' . shellescape(l:histbackup))
+  endif
+
+  let l:hist_content = filereadable(l:histfile) ? readfile(l:histfile) : []
+  let l:new_content = ['Date: ' . strftime('%c'), ''] + readfile(l:currfile) + ['', '---', ''] + l:hist_content
+  call writefile(l:new_content, l:histfile)
+
+  " Clear current file
+  %delete _
+  write
+
+  echo 'Prepended ' . expand('%:t') . ' to ' . fnamemodify(l:histfile, ':t')
+endfunction
+command! PrependLog call PrependLog()
+map gwE :PrependLog<CR>
+
 
 
 " DONT TYPE ANYTHING HERE SO THAT CENTOS-BRANCH CAN
