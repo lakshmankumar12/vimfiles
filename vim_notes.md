@@ -134,6 +134,7 @@ gw - format motion.
    gwa                              ( Bound to control-b <page-up> )
    gwb                              Show SVN Curr Diff
    gwc                              ( close window)
+   gwC                              insert a code block in the next line
    gwd                              diffoff
    gwe                              (NerdTreeFind)
    gwE                              PrependLog

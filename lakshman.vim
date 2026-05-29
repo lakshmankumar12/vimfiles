@@ -1135,12 +1135,16 @@ function! RestoreCurrFormatOptions()
 endfunction
 
 
-function! GrepAPSerialFn(serial)
-  let pattern = '\[' . a:serial . '\] state transition from\|\[SERIAL:' . a:serial . '\] Neighbor Tables: '
+function! GrepAPSerialFn(...)
+  let serial = a:1
+  let pattern = '\[' . serial . '\] state transition from\|\[SERIAL:' . serial . '\] Neighbor Tables: '
+  for i in range(1, a:0 - 1)
+    let pattern .= '\|' . a:{i + 1}
+  endfor
   execute 'lvimgrep /' . pattern . '/ %'
   execute 'lopen'
 endfunction
-command! -nargs=1 GrepAPSerial call GrepAPSerialFn(<f-args>)
+command! -nargs=+ GrepAPSerial call GrepAPSerialFn(<f-args>)
 
 function! PrependLog()
   write
@@ -1182,6 +1186,13 @@ function! PrependLog()
 endfunction
 command! PrependLog call PrependLog()
 map gwE :PrependLog<CR>
+
+function! StartCodeBlock()
+  call append(line('.'), '```')
+  normal! j$
+  startinsert!
+endfunction
+nmap gwC :call StartCodeBlock()<CR>
 
 
 
