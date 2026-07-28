@@ -739,6 +739,9 @@ My customized:
 
 ```
 :%s/\\033.\{-}m//g
+
+## for nvim
+:%s/\%o33.\{-}m//g
 ```
 
 # Paste just the matched pattern

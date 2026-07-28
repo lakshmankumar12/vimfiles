@@ -192,20 +192,101 @@ function! DumpFullPathToTmuxClipBoard()
 endfunction
 map gwq   <Esc>:call DumpFullPathToTmuxClipBoard()<CR>
 
+function! DumpLineNumAndFullPathToTmuxClipBoard()
+  call system("tmux loadb -", "line " . line(".") . " in " . expand("%:p"))
+endfunction
+map gwQ   <Esc>:call DumpLineNumAndFullPathToTmuxClipBoard()<CR>
+
 function! DumpTagToTmuxClip()
     call system("tmux loadb -", tagbar#currenttag('%s', 'No current tag'))
 endfunction
 
 function! DumpCurrentFileToTmuxClip()
   call system("tmux loadb -", expand("%"))
+  let @t = expand("%")
 endfunction
 map gwU   <Esc>:call DumpCurrentFileToTmuxClip()<CR>
 
 function! SaveCurrentLineNumberAndFileName()
   let @t = "line number " . line(".") . " in file " . expand("%")
-  call system("tmux loadb -", expand("%"))
 endfunction
 map gwu   <Esc>:call SaveCurrentLineNumberAndFileName()<CR>
+
+" gwuu: line/file (relative) -> reg-t + tmux-clip
+function! SaveLineFileToRegAndTmux()
+  let l:info = "line number " . line(".") . " in file " . expand("%")
+  let @t = l:info
+  call system("tmux loadb -", l:info)
+endfunction
+map gwuu  <Esc>:call SaveLineFileToRegAndTmux()<CR>
+
+" gwuU: just file (relative) -> reg-t + tmux-clip
+function! SaveFileToRegAndTmux()
+  let l:info = expand("%")
+  let @t = l:info
+  call system("tmux loadb -", l:info)
+endfunction
+map gwuU  <Esc>:call SaveFileToRegAndTmux()<CR>
+
+" gwuq: full path -> reg-t + tmux-clip
+function! SaveFullPathToRegAndTmux()
+  let l:info = expand("%:p")
+  let @t = l:info
+  call system("tmux loadb -", l:info)
+endfunction
+map gwuq  <Esc>:call SaveFullPathToRegAndTmux()<CR>
+
+" gwuQ: line/full-path -> reg-t + tmux-clip
+function! SaveLineFullPathToRegAndTmux()
+  let l:info = "line " . line(".") . " in " . expand("%:p")
+  let @t = l:info
+  call system("tmux loadb -", l:info)
+endfunction
+map gwuQ  <Esc>:call SaveLineFullPathToRegAndTmux()<CR>
+
+" gwuh: line/file of LEFT buffer -> reg-t + tmux-clip
+function! SaveLeftBufferLineFile()
+  let l:cur_win = winnr()
+  wincmd h
+  let l:info = "line number " . line(".") . " in file " . expand("%")
+  exe l:cur_win . 'wincmd w'
+  let @t = l:info
+  call system("tmux loadb -", l:info)
+endfunction
+map gwuh  <Esc>:call SaveLeftBufferLineFile()<CR>
+
+" gwuH: just file of LEFT buffer -> reg-t + tmux-clip
+function! SaveLeftBufferFile()
+  let l:cur_win = winnr()
+  wincmd h
+  let l:info = expand("%")
+  exe l:cur_win . 'wincmd w'
+  let @t = l:info
+  call system("tmux loadb -", l:info)
+endfunction
+map gwuH  <Esc>:call SaveLeftBufferFile()<CR>
+
+" gwul: line/file of RIGHT buffer -> reg-t + tmux-clip
+function! SaveRightBufferLineFile()
+  let l:cur_win = winnr()
+  wincmd l
+  let l:info = "line number " . line(".") . " in file " . expand("%")
+  exe l:cur_win . 'wincmd w'
+  let @t = l:info
+  call system("tmux loadb -", l:info)
+endfunction
+map gwul  <Esc>:call SaveRightBufferLineFile()<CR>
+
+" gwuL: just file of RIGHT buffer -> reg-t + tmux-clip
+function! SaveRightBufferFile()
+  let l:cur_win = winnr()
+  wincmd l
+  let l:info = expand("%")
+  exe l:cur_win . 'wincmd w'
+  let @t = l:info
+  call system("tmux loadb -", l:info)
+endfunction
+map gwuL  <Esc>:call SaveRightBufferFile()<CR>
 
 function! DumpToClipBoard()
   if s:uname == "Darwin"

@@ -1187,12 +1187,16 @@ endfunction
 command! PrependLog call PrependLog()
 map gwE :PrependLog<CR>
 
-function! StartCodeBlock()
+function! StartCodeBlock(...)
+  let l:stay_normal = a:0 > 0 && a:1
   call append(line('.'), '```')
-  normal! j$
-  startinsert!
+  if !l:stay_normal
+    normal! j$
+    startinsert!
+  endif
 endfunction
-nmap gwC :call StartCodeBlock()<CR>
+nmap gwI :call StartCodeBlock()<CR>
+nmap gwC :call StartCodeBlock(1)<CR>
 
 
 
