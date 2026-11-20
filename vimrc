@@ -81,8 +81,8 @@ else
   Plugin 'sjl/clam.vim'                       " Clam shellcmd
   Plugin 'vim-scripts/OmniCppComplete'        " c-based language auto-complete
 endif
-Plugin 'SirVer/ultisnips'                     " snippets engine
-Plugin 'honza/vim-snippets'                   " snippets repo
+"Plugin 'SirVer/ultisnips'                     " snippets engine
+"Plugin 'honza/vim-snippets'                   " snippets repo
 Plugin 'file://' . $HOME . '/github/vimfiles', {'rtp': 'tdef/'}         " my tdef file
 Plugin 'vim-scripts/align'                    "  pre-req for vim-dragvisuals
 Plugin 'vim-scripts/cecutil'                  "  pre-req for vim-dragvisuals
